@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.InitialConfiguration">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.initialconfig.InitialConfiguration">
    <children>
       <Pane layoutY="75.0" prefHeight="319.0" prefWidth="260.0">
          <children>
@@ -18,9 +18,9 @@
                   <Text layoutX="13.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Seed" />
                   <ButtonBar layoutX="11.0" layoutY="45.0" prefHeight="40.0" prefWidth="200.0">
                      <buttons>
-                        <JFXButton text="Corn" />
-                        <JFXButton alignment="CENTER" text="Potato" />
-                        <JFXButton alignment="CENTER_RIGHT" text="Tomato" />
+                        <JFXButton style="-fx-border-color: gray;" text="Corn" />
+                        <JFXButton alignment="CENTER" style="-fx-border-color: gray;" text="Potato" />
+                        <JFXButton alignment="CENTER_RIGHT" style="-fx-border-color: gray;" text="Tomato" />
                      </buttons>
                   </ButtonBar>
                </children>
@@ -30,9 +30,9 @@
                   <Text layoutX="13.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty Level" />
                   <ButtonBar layoutX="11.0" layoutY="45.0" prefHeight="40.0" prefWidth="200.0">
                      <buttons>
-                        <JFXButton text="Casual" />
-                        <JFXButton alignment="CENTER" text="Normal" />
-                        <JFXButton alignment="CENTER_RIGHT" text="Veteran" />
+                        <JFXButton style="-fx-border-color: gray;" text="Casual" />
+                        <JFXButton alignment="CENTER" style="-fx-border-color: gray;" text="Normal" />
+                        <JFXButton alignment="CENTER_RIGHT" style="-fx-border-color: gray;" text="Veteran" />
                      </buttons>
                   </ButtonBar>
                </children>
@@ -58,7 +58,7 @@
       </Pane>
       <Pane layoutX="300.0" layoutY="75.0" prefHeight="319.0" prefWidth="299.0">
          <children>
-            <JFXButton layoutX="188.0" layoutY="272.0" text="Create Game" />
+            <JFXButton layoutX="188.0" layoutY="272.0" style="-fx-border-color: gray;" text="Create Game" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="72.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../dependencies/images/SpringBig.png" />
