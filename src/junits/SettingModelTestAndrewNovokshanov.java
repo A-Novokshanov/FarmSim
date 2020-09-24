@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  * @author Andrew Novokshanov anovokshanov3@gatech.edu
  * @version 1.0
  */
-public class SettingsModelTestAndrewNovokshanov {
+public class SettingModelTestAndrewNovokshanov {
     private List<AnimalModel> desirableAnimals;
     private List<CropModel> desirableCrop;
     private SeasonModel spring;
