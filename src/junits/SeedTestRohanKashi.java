@@ -10,18 +10,18 @@ public class SeedTestRohanKashi {
     private SeedModel seedModel;
     @Before
     public void setup() {
-        this.seedModel = new SeedModel("seedModel");
+        this.seedModel = new SeedModel("bannana");
     }
 
     @Test
     public void testGetSeedType() {
-        assertEquals("seedModel", this.seedModel.getSeedType());
+        assertEquals("bannana", this.seedModel.getSeedType());
     }
 
     @Test
     public void testSetSeedType() {
-        this.seedModel.setSeedType("something");
-        assertEquals("something", this.seedModel.getSeedType());
+        this.seedModel.setSeedType("apple");
+        assertEquals("apple", this.seedModel.getSeedType());
     }
 
 }
