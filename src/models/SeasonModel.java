@@ -17,14 +17,15 @@ public class SeasonModel {
     private List<CropModel> desirableCrops;
 
     /**
-     * This 4-parameter constructor initializes the instance variables to the constructor parameters.
+     * This 4-parameter constructor initializes the instance variables to the parameters.
      *
      * @param plantGrowthModifier The modifier to for plant growth.
      * @param seasonType          The type of season; Spring, Winter, Fall etc.
      * @param desirableAnimals    The desirable animals to be added to a particular season.
      * @param desirableCrops      The desirable crops to be added to a particular season.
      */
-    public SeasonModel(String plantGrowthModifier, String seasonType, List<AnimalModel> desirableAnimals, List<CropModel> desirableCrops) {
+    public SeasonModel(String plantGrowthModifier, String seasonType,
+                       List<AnimalModel> desirableAnimals, List<CropModel> desirableCrops) {
         this.plantGrowthModifier = plantGrowthModifier;
         this.seasonType = seasonType;
         this.desirableAnimals = desirableAnimals;
