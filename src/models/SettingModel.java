@@ -9,7 +9,7 @@ package models;
  */
 public class SettingModel {
     /**
-     * @param Represents the type of the setting.
+     *  Represents the type of the setting.
      */
     private SeasonModel startingSeason;
     private SeedModel startingSeedType;
@@ -24,7 +24,8 @@ public class SettingModel {
      * @param startingDifficulty The starting difficulty of the game
      * @param playerName         The player's starting name
      */
-    public SettingModel(SeasonModel startingSeason, SeedModel startingSeedType, String startingDifficulty, String playerName) {
+    public SettingModel(SeasonModel startingSeason, SeedModel startingSeedType,
+                        String startingDifficulty, String playerName) {
         this.startingSeason = startingSeason;
         this.startingSeedType = startingSeedType;
         this.startingDifficulty = startingDifficulty;
@@ -57,7 +58,8 @@ public class SettingModel {
     /**
      * Sets the startingSeedType attribute of a settingModel object.
      *
-     * @param startingSeedType is the new desired startingSeedType attribute of a settingModel object.
+     * @param startingSeedType is the new desired startingSeedType attribute of a
+     *                         settingModel object.
      */
     public void setStartingSeedType(SeedModel startingSeedType) {
         this.startingSeedType = startingSeedType;
@@ -73,7 +75,8 @@ public class SettingModel {
     /**
      * Sets the startingDifficulty attribute of a settingModel object.
      *
-     * @param startingDifficulty is the new desired startingDifficulty attribute of a settingModel object.
+     * @param startingDifficulty is the new desired startingDifficulty attribute
+     *                           of a settingModel object.
      */
     public void setStartingDifficulty(String startingDifficulty) {
         this.startingDifficulty = startingDifficulty;
