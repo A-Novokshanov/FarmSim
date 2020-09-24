@@ -31,7 +31,7 @@ public class SettingModelTestAndrewNovokshanov {
     //Test getter method for SeasonModel
     @Test
     public void testGetterSeasonModel() {
-        assertEquals(spring, settingModelTest.getStartingSeason());
+        assertEquals(settingModelTest.getStartingSeason() ,spring);
     }
     //Test setter method for SeasonModel's plantGrowthModifier
     @Test
@@ -42,7 +42,7 @@ public class SettingModelTestAndrewNovokshanov {
     //Test getter method for SeedModel
     @Test
     public void testGetterSeedModel() {
-        assertEquals(tomato, settingModelTest.getStartingSeedType());
+        assertEquals(settingModelTest.getStartingSeedType(), tomato);
     }
     //Test setter method for SeedModel's seedType
     @Test
