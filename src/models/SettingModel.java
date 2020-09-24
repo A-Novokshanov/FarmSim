@@ -7,7 +7,7 @@ package models;
  * @author Andrew Novokshanov
  * @version 1.0
  */
-public class settingModel {
+public class SettingModel {
     /**
      * @param Represents the type of the setting.
      */
@@ -24,7 +24,7 @@ public class settingModel {
      * @param startingDifficulty The starting difficulty of the game
      * @param playerName         The player's starting name
      */
-    public settingModel(SeasonModel startingSeason, SeedModel startingSeedType, String startingDifficulty, String playerName) {
+    public SettingModel(SeasonModel startingSeason, SeedModel startingSeedType, String startingDifficulty, String playerName) {
         this.startingSeason = startingSeason;
         this.startingSeedType = startingSeedType;
         this.startingDifficulty = startingDifficulty;

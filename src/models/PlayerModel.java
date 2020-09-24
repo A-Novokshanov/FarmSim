@@ -5,10 +5,10 @@ package models;
  * @author Andrew Novokshanov
  * @version 1.0
  */
-public class playerModel {
+public class PlayerModel {
     /** Constructs a player object.
      */
-    public playerModel() {
+    public PlayerModel() {
     }
 }
 

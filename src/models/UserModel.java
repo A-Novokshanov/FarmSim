@@ -5,14 +5,14 @@ package models;
  * @author Andrew Novokshanov
  * @version 1.0
  */
-public class userModel {
+public class UserModel {
     /** @param Represents the type of the user. */
     private String type;
 
     /** Constructs a User object with specified Type.
      @param type The type of user
      */
-    public userModel(String type) {
+    public UserModel(String type) {
         this.type = type;
     }
 
