@@ -14,11 +14,11 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 public class SettingsModelTestAndrewNovokshanov {
-    List<AnimalModel> desirableAnimals;
-    List<CropModel> desirableCrop;
-    SeasonModel spring;
-    SeedModel tomato;
-    SettingModel settingModelTest;
+    private List<AnimalModel> desirableAnimals;
+    private List<CropModel> desirableCrop;
+    private SeasonModel spring;
+    private SeedModel tomato;
+    private SettingModel settingModelTest;
     @Before
     public void setup() {
         desirableAnimals = new ArrayList<AnimalModel>();
