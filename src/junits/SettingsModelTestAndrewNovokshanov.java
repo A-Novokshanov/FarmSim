@@ -18,83 +18,58 @@ public class SettingsModelTestAndrewNovokshanov {
     List<CropModel> desirableCrop;
     SeasonModel spring;
     SeedModel tomato;
-    SettingModel SettingModelTest;
+    SettingModel settingModelTest;
     @Before
     public void setup() {
         desirableAnimals = new ArrayList<AnimalModel>();
         desirableCrop = new ArrayList<CropModel>();
         spring = new SeasonModel(100,"Spring", desirableAnimals, desirableCrop);
         tomato = new SeedModel("Tomato Seed");
-        SettingModelTest = new SettingModel(spring, tomato, "Normal", "Andrew N");
+        settingModelTest = new SettingModel(spring, tomato, "Normal", "Andrew N");
     }
 
     //Test getter method for SeasonModel
     @Test
-    public void addPos123PosAnd456() {
-
-        assertEquals(spring, SettingModelTest.getStartingSeason());
+    public void testGetterSeasonModel() {
+        assertEquals(spring, settingModelTest.getStartingSeason());
     }
+    //Test setter method for SeasonModel's plantGrowthModifier
     @Test
-    public void addNeg10AndNeg20() {
-
-        assertEquals(builtInAdd, person2Add);
+    public void testSetterSeasonModelPlantGrowthModifier() {
+        spring.setPlantGrowthModifier(150);
+        assertEquals(spring.getPlantGrowthModifier(), 150);
     }
+    //Test getter method for SeedModel
     @Test
-    public void addNeg301AndPos50() {
-
-        assertEquals(builtInAdd, person2Add);
+    public void testGetterSeedModel() {
+        assertEquals(tomato, settingModelTest.getStartingSeedType());
     }
-    //Test subtraction cases with positive numbers, negative numbers, and positive and negative numbers.
+    //Test setter method for SeedModel's seedType
     @Test
-    public void subtractPos123PosAnd456() {
-
-        assertEquals(builtInSubtract, person2Subtract);
+    public void testSetterSeedModelSeedType() {
+        tomato.setSeedType("Corn Seed");
+        assertEquals(tomato.getSeedType(), "Corn Seed");
     }
+    //Test getter method for startingDifficulty
     @Test
-    public void subtractNeg10AndNeg20() {
-
-        assertEquals(builtInSubtract, person2Subtract);
+    public void testGetterStartingDifficulty() {
+        assertEquals(settingModelTest.getStartingDifficulty(), "Normal");
     }
+    //Test setter method for startingDifficulty
     @Test
-    public void subtractNeg301AndPos50() {
-
-        assertEquals(builtInSubtract, person2Subtract);
+    public void testSetterStartingDifficulty() {
+        settingModelTest.setStartingDifficulty("Veteran");
+        assertEquals(settingModelTest.getStartingDifficulty(), "Veteran");
     }
-    //Test multiplication cases with positive numbers, negative numbers, and positive and negative numbers.
+    //Test getter method for playerName
     @Test
-    public void multiplyPos123PosAnd456() {
-
-        assertEquals(builtInMultiply, person2Multiply);
+    public void testGetterPlayerName() {
+        assertEquals(settingModelTest.getPlayerName(), "Andrew N");
     }
+    //Test setter method for playerName
     @Test
-    public void multiplyNeg10AndNeg20() {
-
-        assertEquals(builtInMultiply, person2Multiply);
-    }
-    @Test
-    public void multiplyNeg301AndPos50() {
-
-        assertEquals(builtInMultiply, person2Multiply);
-    }
-    //Test division cases with positive numbers, negative numbers, positive and negative numbers, and division by 0.
-    @Test
-    public void dividePos123PosAnd456() {
-
-        assertEquals(builtInDivide, person2Divide);
-    }
-    @Test
-    public void divideNeg10AndNeg20() {
-
-        assertEquals(builtInDivide, person2Divide);
-    }
-    @Test
-    public void divideNeg301AndPos50() {
-
-        assertEquals(builtInDivide, person2Divide);
-    }
-    @Test(expected = IllegalArgumentException.class)
-    public void divideBy0() {
-
-        assertEquals(builtInDivide, person2Divide);
+    public void testSetterPlayerName() {
+        settingModelTest.setPlayerName("Aibek Musaev");
+        assertEquals(settingModelTest.getPlayerName(), "Aibek Musaev");
     }
 }
