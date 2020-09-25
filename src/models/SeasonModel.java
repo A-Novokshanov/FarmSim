@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class SeasonModel {
 
-    private String plantGrowthModifier;
+    private int plantGrowthModifier;
     private String seasonType;
     private List<AnimalModel> desirableAnimals;
     private List<CropModel> desirableCrops;
@@ -24,7 +24,7 @@ public class SeasonModel {
      * @param desirableAnimals    The desirable animals to be added to a particular season.
      * @param desirableCrops      The desirable crops to be added to a particular season.
      */
-    public SeasonModel(String plantGrowthModifier, String seasonType,
+    public SeasonModel(int plantGrowthModifier, String seasonType,
                        List<AnimalModel> desirableAnimals, List<CropModel> desirableCrops) {
         this.plantGrowthModifier = plantGrowthModifier;
         this.seasonType = seasonType;
@@ -37,7 +37,7 @@ public class SeasonModel {
      *
      * @param plantGrowthModifier The plant growth modifier to be set.
      */
-    public void setPlantGrowthModifier(String plantGrowthModifier) {
+    public void setPlantGrowthModifier(int plantGrowthModifier) {
         this.plantGrowthModifier = plantGrowthModifier;
     }
 
@@ -46,7 +46,7 @@ public class SeasonModel {
      *
      * @return The plant growth modifier of the season.
      */
-    public String getPlantGrowthModifier() {
+    public int getPlantGrowthModifier() {
         return this.plantGrowthModifier;
     }
 
