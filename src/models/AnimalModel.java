@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Time;
 
 /**
  * This model class keeps track of an animal's attributes.
@@ -10,9 +9,9 @@ import java.sql.Time;
  */
 public class AnimalModel {
 
-    private double purchasePrice;
-    private double sellPrice;
-    private Time timeToGrow;
+    private int purchasePrice;
+    private int sellPrice;
+    private int timeToGrow;
     private String animalType;
 
     /**
@@ -23,7 +22,7 @@ public class AnimalModel {
      * @param timeToGrow    The time it takes for the animal to grow.
      * @param animalType    The type of animal.
      */
-    public AnimalModel(double purchasePrice, double sellPrice, Time timeToGrow, String animalType) {
+    public AnimalModel(int purchasePrice, int sellPrice, int timeToGrow, String animalType) {
         this.purchasePrice = purchasePrice;
         this.sellPrice = sellPrice;
         this.timeToGrow = timeToGrow;
@@ -35,7 +34,7 @@ public class AnimalModel {
      *
      * @return The purchase price attribute of the AnimalModel object.
      */
-    public double getPurchasePrice() {
+    public int getPurchasePrice() {
         return purchasePrice;
     }
 
@@ -44,7 +43,7 @@ public class AnimalModel {
      *
      * @param purchasePrice The price to purchase the animal at.
      */
-    public void setPurchasePrice(double purchasePrice) {
+    public void setPurchasePrice(int purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -53,7 +52,7 @@ public class AnimalModel {
      *
      * @return The sell price attribute of the AnimalModel object.
      */
-    public double getSellPrice() {
+    public int getSellPrice() {
         return sellPrice;
     }
 
@@ -62,7 +61,7 @@ public class AnimalModel {
      *
      * @param sellPrice The price to sell the animal at.
      */
-    public void setSellPrice(double sellPrice) {
+    public void setSellPrice(int sellPrice) {
         this.sellPrice = sellPrice;
     }
 
@@ -71,7 +70,7 @@ public class AnimalModel {
      *
      * @return The time to grow attribute of the AnimalModel object.
      */
-    public Time getTimeToGrow() {
+    public int getTimeToGrow() {
         return timeToGrow;
     }
 
@@ -80,7 +79,7 @@ public class AnimalModel {
      *
      * @param timeToGrow The time it takes for the animal to grow.
      */
-    public void setTimeToGrow(Time timeToGrow) {
+    public void setTimeToGrow(int timeToGrow) {
         this.timeToGrow = timeToGrow;
     }
 
