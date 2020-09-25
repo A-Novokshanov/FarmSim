@@ -20,55 +20,44 @@
                      <font>
                         <Font size="30.0" />
                      </font></Text>
-                  <JFXButton alignment="CENTER" layoutX="58.0" layoutY="70.0" style="-fx-border-color: gray;" text="Corn">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="232.0" layoutY="71.0" style="-fx-border-color: gray;" text="Potato">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="426.0" layoutY="71.0" style="-fx-border-color: gray;" text="Tomato">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </Pane>
-            <Pane layoutX="11.0" layoutY="110.0" prefHeight="54.0" prefWidth="619.0">
-               <children>
-                  <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Password">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <JFXTextField labelFloat="true" layoutX="340.0" layoutY="1.0" promptText="Optional Password">
+                  <JFXRadioButton layoutX="75.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" text="Corn">
                      <font>
                         <Font size="20.0" />
                      </font>
-                  </JFXTextField>
+                  </JFXRadioButton>
+                  <JFXRadioButton layoutX="225.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" text="Potato">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton layoutX="400.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" text="Tomato">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXRadioButton>
                </children>
             </Pane>
-            <Pane layoutX="11.0" layoutY="223.0" prefHeight="210.0" prefWidth="619.0">
+            <Pane layoutX="11.0" layoutY="181.0" prefHeight="210.0" prefWidth="619.0">
                <children>
                   <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty Level">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <JFXButton alignment="CENTER" layoutX="232.0" layoutY="71.0" style="-fx-border-color: gray;" text="Normal">
+                  <JFXRadioButton layoutX="75.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Casual">
                      <font>
-                        <Font size="26.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton alignment="CENTER" layoutX="426.0" layoutY="71.0" style="-fx-border-color: gray;" text="Veteran">
+                        <Font size="20.0" />
+                     </font></JFXRadioButton>
+                  <JFXRadioButton layoutX="400.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Veteran">
                      <font>
-                        <Font size="26.0" />
+                        <Font size="20.0" />
                      </font>
-                  </JFXButton>
-                  <JFXRadioButton layoutX="73.0" layoutY="88.0" prefWidth="63.0" text="Casual" />
+                  </JFXRadioButton>
+                  <JFXRadioButton layoutX="225.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Normal">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXRadioButton>
                </children>
             </Pane>
             <Pane layoutX="11.0" layoutY="23.0" prefHeight="54.0" prefWidth="619.0">
@@ -78,7 +67,7 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <JFXTextField labelFloat="true" layoutX="340.0" layoutY="1.0" promptText="Enter your name">
+                  <JFXTextField fx:id="txtFldName" labelFloat="true" layoutX="340.0" layoutY="1.0" promptText="Enter your name">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -90,7 +79,7 @@
       <Pane layoutX="102.0" layoutY="26.0" prefHeight="33.0" prefWidth="396.0" />
       <Pane layoutX="648.0" layoutY="89.0" prefHeight="655.0" prefWidth="625.0">
          <children>
-            <JFXButton layoutX="415.0" layoutY="571.0" style="-fx-border-color: gray;" text="Create Game">
+            <JFXButton fx:id="btnCreateGame" layoutX="415.0" layoutY="571.0" onMouseClicked="#createGame" style="-fx-border-color: gray;" text="Create Game">
                <font>
                   <Font size="26.0" />
                </font></JFXButton>
@@ -98,31 +87,47 @@
                <font>
                   <Font size="30.0" />
                </font></Text>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="76.0" layoutY="422.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../dependencies/images/SpringBig.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="213.0" layoutY="422.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../dependencies/images/SummerBig.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="352.0" layoutY="422.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../dependencies/images/Fall.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="485.0" layoutY="422.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../dependencies/images/Winter.png" />
-               </image>
-            </ImageView>
+            <JFXButton layoutX="82.0" layoutY="417.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../dependencies/images/SpringBig.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton layoutX="211.0" layoutY="417.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../dependencies/images/SummerBig.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton layoutX="336.0" layoutY="417.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Fall.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
             <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="158.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../dependencies/images/SpringBig.png" />
                </image>
             </ImageView>
+            <JFXButton layoutX="467.0" layoutY="417.0" text=" ">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Winter.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
       <Text layoutX="488.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Configuration">
