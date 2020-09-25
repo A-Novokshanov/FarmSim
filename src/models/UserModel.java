@@ -11,7 +11,7 @@ public class UserModel {
     /** Constructs a UserModel object with specified Type.
      @param type The type of user
      */
-    public UserModel(PlayerModel type, int currentMoney) {
+    public UserModel(PlayerModel type) {
         this.type = type;
     }
 
