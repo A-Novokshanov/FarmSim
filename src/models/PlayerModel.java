@@ -6,9 +6,24 @@ package models;
  * @version 1.0
  */
 public class PlayerModel {
-    /** Constructs a player object.
+    private int currentMoney;
+    /** Constructs a PlayerModel object.
+     * @param currentMoney The playerModels current money
      */
-    public PlayerModel() {
+    public PlayerModel(int currentMoney) {
+        this.currentMoney = currentMoney;
+    }
+
+    /** @return Gets and returns the currentMoney attribute of a PlayerModel object. */
+    public int getUserCurrentMoney() {
+        return this.currentMoney;
+    }
+
+    /** Sets the type of a PlayerModel.
+     @param currentMoney is the new desired currentMoney of a PlayerModel object.
+     */
+    public void setUserCurrentMoney(int currentMoney) {
+        this.currentMoney = currentMoney;
     }
 }
 
