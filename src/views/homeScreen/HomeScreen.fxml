@@ -22,12 +22,12 @@
                   <Image url="@../../dependencies/images/unnamed.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnNewGame" layoutX="1104.0" layoutY="584.0" onMouseClicked="#newGame" text="New Game">
+            <JFXButton fx:id="btnContinue" layoutX="1120.0" layoutY="523.0" onMouseClicked="#continueGame" style="-fx-border-color: Gray; -jfx-disable-visual-focus: True;" text="Continue">
                <font>
                   <Font size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnContinue" layoutX="1120.0" layoutY="523.0" onMouseClicked="#continueGame" text="Continue">
+            <JFXButton fx:id="btnNewGame" layoutX="1104.0" layoutY="593.0" onMouseClicked="#newGame" style="-fx-border-color: Gray;" text="New Game">
                <font>
                   <Font size="20.0" />
                </font>

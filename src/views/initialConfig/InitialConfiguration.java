@@ -56,7 +56,7 @@ public class InitialConfiguration {
         Stage stage = (Stage) btnCreateGame.getScene().getWindow();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../farmUI/farmUI.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error");
             e.printStackTrace();
