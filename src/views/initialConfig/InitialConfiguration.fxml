@@ -20,17 +20,17 @@
                      <font>
                         <Font size="30.0" />
                      </font></Text>
-                  <JFXRadioButton layoutX="75.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" style="-jfx-disable-visual-focus: true;" text="Corn">
+                  <JFXRadioButton fx:id="btnCorn" layoutX="75.0" layoutY="83.0" onMouseClicked="#setCorn" prefHeight="26.0" prefWidth="100.0" selected="true" style="-jfx-disable-visual-focus: true;" text="Corn">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXRadioButton>
-                  <JFXRadioButton layoutX="225.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" text="Potato">
+                  <JFXRadioButton fx:id="btnPotato" layoutX="225.0" layoutY="83.0" onMouseClicked="#setPotato" prefHeight="26.0" prefWidth="100.0" selected="false" text="Potato">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXRadioButton>
-                  <JFXRadioButton layoutX="400.0" layoutY="83.0" prefHeight="26.0" prefWidth="100.0" text="Tomato">
+                  <JFXRadioButton fx:id="btnTomato" layoutX="400.0" layoutY="83.0" onMouseClicked="#setTomato" prefHeight="26.0" prefWidth="100.0" selected="false" text="Tomato">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -44,16 +44,16 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <JFXRadioButton layoutX="75.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Casual">
+                  <JFXRadioButton fx:id="btnCasual" layoutX="75.0" layoutY="88.0" onMouseClicked="#setCasual" prefHeight="26.0" prefWidth="100.0" selected="false" text="Casual">
                      <font>
                         <Font size="20.0" />
                      </font></JFXRadioButton>
-                  <JFXRadioButton layoutX="400.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Veteran">
+                  <JFXRadioButton fx:id="btnVeteran" layoutX="400.0" layoutY="88.0" onMouseClicked="#setVeteran" prefHeight="26.0" prefWidth="100.0" selected="false" text="Veteran">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXRadioButton>
-                  <JFXRadioButton layoutX="225.0" layoutY="88.0" prefHeight="26.0" prefWidth="100.0" text="Normal">
+                  <JFXRadioButton fx:id="btnNormal" layoutX="225.0" layoutY="88.0" onMouseClicked="#setNormal" prefHeight="26.0" prefWidth="100.0" selected="true" text="Normal">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -87,7 +87,7 @@
                <font>
                   <Font size="30.0" />
                </font></Text>
-            <JFXButton layoutX="82.0" layoutY="417.0" text=" ">
+            <JFXButton fx:id="btnSpring" layoutX="82.0" layoutY="417.0" onMouseClicked="#setSpring" text=" ">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
                      <image>
@@ -96,7 +96,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton layoutX="211.0" layoutY="417.0" text=" ">
+            <JFXButton fx:id="btnSummer" layoutX="211.0" layoutY="417.0" onMouseClicked="#setSummer" text=" ">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
                      <image>
@@ -105,7 +105,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton layoutX="336.0" layoutY="417.0" text=" ">
+            <JFXButton fx:id="btnAutumn" layoutX="336.0" layoutY="417.0" onMouseClicked="#setAutumn" text=" ">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
                      <image>
@@ -114,12 +114,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="158.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../dependencies/images/SpringBig.png" />
-               </image>
-            </ImageView>
-            <JFXButton layoutX="467.0" layoutY="417.0" text=" ">
+            <JFXButton fx:id="btnWinter" layoutX="467.0" layoutY="417.0" onMouseClicked="#setWinter" text=" ">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
                      <image>
@@ -128,6 +123,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="imgSeasonSelected" fitHeight="300.0" fitWidth="400.0" layoutX="158.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dependencies/images/SpringBig.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Text layoutX="488.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Configuration">
