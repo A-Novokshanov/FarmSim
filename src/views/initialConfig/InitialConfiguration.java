@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
@@ -22,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitialConfiguration {
-    Image springImage = new Image("@../../dependencies/images/SpringBig.png", 400.0, 300.0, true, false);
-    Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg",400.0, 300.0, true, true);
-    Image autumnImage = new Image("@../../dependencies/images/Fall.png", 400.0, 300.0, true, true);
-    Image winterImage = new Image("@../../dependencies/images/Winter.png", 400.0, 300.0, true, true);
+    private Image springImage = new Image("@../../dependencies/images/SpringBig.png", 400.0, 300.0, true, false);
+    private Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg", 400.0, 300.0, true, true);
+    private Image autumnImage = new Image("@../../dependencies/images/Fall.png", 400.0, 300.0, true, true);
+    private Image winterImage = new Image("@../../dependencies/images/Winter.png", 400.0, 300.0, true, true);
 
     @FXML
     private JFXTextField txtFldName;
@@ -54,6 +56,9 @@ public class InitialConfiguration {
     private JFXButton btnWinter;
     @FXML
     private ImageView imgSeasonSelected;
+    @FXML
+    private Text txtNameError;
+    private boolean validNameEntered = false;
 
 
     public void setSeasonAndSeed() {
@@ -65,12 +70,18 @@ public class InitialConfiguration {
     }
 
     public void setNewName() {
-        try {
+        if (txtFldName.getText().isBlank()) {
+            txtNameError.setVisible(true);
+            txtFldName.setUnFocusColor(Color.RED);
+            txtFldName.setFocusColor(Color.RED);
+            txtFldName.setStyle("-fx-prompt-text-fill: RED");
+            txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
+                txtFldName.setStyle("-fx-prompt-text-fill: black");
+                txtFldName.setUnFocusColor(Color.BLACK);
+            });
+        } else {
             txtFldName.textProperty().bind(settings.getPlayerName());
-        } catch (NullPointerException e) {
-            // return message on screen
-
-            // turn text field color to red
+            validNameEntered = true;
         }
     }
 
@@ -83,17 +94,19 @@ public class InitialConfiguration {
         setNewName();
         setDifficulty();
         // btn1 = create button id
-        Stage stage = (Stage) btnCreateGame.getScene().getWindow();
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
-        } catch (IOException e) {
-            System.out.println("Loader error");
-            e.printStackTrace();
+        if (validNameEntered) {
+            Stage stage = (Stage) btnCreateGame.getScene().getWindow();
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
+            } catch (IOException e) {
+                System.out.println("Loader error");
+                e.printStackTrace();
+            }
+            stage.setTitle("Hello World");
+            stage.setScene(new Scene(root, 1280, 720));
+            stage.show();
         }
-        stage.setTitle("Hello World");
-        stage.setScene(new Scene(root, 1280, 720));
-        stage.show();
     }
 
     public void setCasual(MouseEvent mouseEvent) {

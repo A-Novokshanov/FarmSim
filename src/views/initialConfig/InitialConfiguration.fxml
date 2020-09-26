@@ -74,6 +74,11 @@
                   </JFXTextField>
                </children>
             </Pane>
+            <Text fx:id="txtNameError" fill="#eb0909" layoutX="352.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a valid name" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane layoutX="102.0" layoutY="26.0" prefHeight="33.0" prefWidth="396.0" />
@@ -83,10 +88,6 @@
                <font>
                   <Font size="26.0" />
                </font></JFXButton>
-            <Text layoutX="144.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Season: [Season]">
-               <font>
-                  <Font size="30.0" />
-               </font></Text>
             <JFXButton fx:id="btnSpring" layoutX="82.0" layoutY="417.0" onMouseClicked="#setSpring" text=" ">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
@@ -128,6 +129,11 @@
                   <Image url="@../../dependencies/images/SpringBig.png" />
                </image>
             </ImageView>
+            <Text layoutX="205.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Season">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Text layoutX="488.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initial Configuration">
