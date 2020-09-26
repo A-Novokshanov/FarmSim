@@ -1,4 +1,4 @@
-package views.initialconfig;
+package views.initialConfig;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class InitialConfigRunner extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("InitialConfiguration.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1000, 1000));
+        primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
 

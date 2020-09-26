@@ -11,7 +11,7 @@ public class UserTestRohanKashi {
 
     @Before
     public void setup() {
-        this.userModel = new UserModel("admin");
+        this.userModel = new UserModel("admin", 2);
     }
 
     //Test getter method for SeedModel
