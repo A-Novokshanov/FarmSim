@@ -40,7 +40,7 @@ public class InitialConfiguration {
         } catch (NullPointerException e) {
             // return message on screen
 
-            // turn textfield color to red
+            // turn text field color to red
         }
     }
 
