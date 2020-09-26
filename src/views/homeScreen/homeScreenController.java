@@ -13,6 +13,8 @@ import java.io.IOException;
 public class homeScreenController {
     @FXML
     private JFXButton btnNewGame;
+    @FXML
+    private JFXButton btnContinue;
 
     /*
      *Starts up initial configuration windows to create new game.
@@ -24,6 +26,25 @@ public class homeScreenController {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("../initialConfig/InitialConfiguration.fxml"));
+        } catch (IOException e) {
+            System.out.println("Loader error.");
+            e.printStackTrace();
+        }
+        stage.setTitle("Hello World");
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.show();
+    }
+
+    /*
+     *Continues game on Farm UI screen.
+     *
+     * @param mouseEvent On click, moves player to farm UI screen.
+     */
+    public void continueGame(MouseEvent mouseEvent) {
+        Stage stage = (Stage) btnContinue.getScene().getWindow();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../farmUI/farmUI.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error.");
             e.printStackTrace();
