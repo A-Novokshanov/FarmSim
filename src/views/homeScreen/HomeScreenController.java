@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class homeScreenController {
+public class HomeScreenController {
     @FXML
     private JFXButton btnNewGame;
     @FXML
