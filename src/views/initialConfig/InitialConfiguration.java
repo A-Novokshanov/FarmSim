@@ -1,4 +1,4 @@
-package views.initialconfig;
+package views.initialConfig;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -56,7 +56,7 @@ public class InitialConfiguration {
         Stage stage = (Stage) btnCreateGame.getScene().getWindow();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../farmui/farmui.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../farmUI/farmUI.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error");
             e.printStackTrace();
