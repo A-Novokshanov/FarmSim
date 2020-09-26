@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class HomeScreenRunner extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("homeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
