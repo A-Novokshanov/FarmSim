@@ -1,4 +1,4 @@
-package junits;
+package junits.milestone2;
 
 import models.*;
 import org.junit.Before;

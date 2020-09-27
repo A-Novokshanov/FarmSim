@@ -1,4 +1,4 @@
-package junits;
+package junits.milestone2;
 
 import models.AnimalModel;
 import models.CropModel;
