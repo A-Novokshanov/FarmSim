@@ -16,7 +16,7 @@ public class HomeScreenController {
     @FXML
     private JFXButton btnContinue;
 
-    /*
+    /**
      *Starts up initial configuration windows to create new game.
      *
      * @param mouseEvent On click, moves player to initial configuration screen.
@@ -35,7 +35,7 @@ public class HomeScreenController {
         stage.show();
     }
 
-    /*
+    /**
      *Continues game on Farm UI screen.
      *
      * @param mouseEvent On click, moves player to farm UI screen.

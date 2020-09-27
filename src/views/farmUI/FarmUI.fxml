@@ -32,14 +32,14 @@
                   <Image url="@../../dependencies/images/85249200-stock-vector-barn-house-icon-or-sign-isolated-on-white-background-vector-illustration-of-red-farm-house-.jpg" />
                </image>
             </ImageView>
-            <Text layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0" wrappingWidth="150.0">
+            <Text fx:id="money" layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0" wrappingWidth="150.0">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text layoutX="1181.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Day 1">
+            <Text fx:id="dayNum" layoutX="1174.0" layoutY="78.0" onMouseClicked="#updateDay" strokeType="OUTSIDE" strokeWidth="0.0" text="Day 1">
                <font>
-                  <Font size="28.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
          </children>
