@@ -16,15 +16,9 @@ import models.SettingModel;
 public class SettingViewModel {
 
     private StringProperty playerName = new SimpleStringProperty();
-    private StringProperty startingDifficulty = new SimpleStringProperty();
-    private SeedModel startingSeedType;
-    private SeasonModel startingSeasonType;
-
-    /**
-     * This constructor is a default constructor.
-     */
-    public SettingViewModel() {
-    }
+    private StringProperty difficulty = new SimpleStringProperty();
+    private SeedModel seedType;
+    private SeasonModel seasonType;
 
     /**
      * This constructor takes in the seedModel and seasonModel for the particular user.
@@ -33,8 +27,8 @@ public class SettingViewModel {
      * @param seasonModel The season model object of the user.
      */
     public SettingViewModel(SeedModel seedModel, SeasonModel seasonModel) {
-        this.startingSeedType = seedModel;
-        this.startingSeasonType = seasonModel;
+        this.seedType = seedModel;
+        this.seasonType = seasonModel;
     }
 
     /**
@@ -51,8 +45,8 @@ public class SettingViewModel {
      *
      * @return The player's starting difficulty string property.
      */
-    public StringProperty getStartingDifficulty() {
-        return this.startingDifficulty;
+    public StringProperty getDifficulty() {
+        return this.difficulty;
     }
 
     /**
@@ -61,7 +55,7 @@ public class SettingViewModel {
      */
     public void addSettingsToDatabase() {
         // TODO Add user settings to the database.
-        SettingModel settingModel = new SettingModel(startingSeasonType,
-                startingSeedType, startingDifficulty.toString(), playerName.toString());
+        SettingModel settingModel = new SettingModel(seasonType,
+                seedType, difficulty.toString(), playerName.toString());
     }
 }

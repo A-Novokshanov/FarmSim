@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Matthew Farias Email: mfarias6@gatech.edu
+ * @author Shaun Jacob Email: sjacob31@gatech.edu
+ * @version 1.0
+ */
 public class HomeScreenController {
     @FXML
     private JFXButton btnNewGame;

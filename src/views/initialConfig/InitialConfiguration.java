@@ -25,6 +25,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Matthew Farias Email: mfarias6@gatech.edu
+ * @author Shaun Jacob Email: sjacob31@gatech.edu
+ * @version 1.0
+ */
 public class InitialConfiguration {
     private Image springImage = new Image("@../../dependencies/images/SpringBig.png",
             400.0, 300.0, true, false);
@@ -103,7 +109,7 @@ public class InitialConfiguration {
      *Sets difficulty in a Setting view model.
      */
     public void setDifficulty() {
-        curDifficulty.bind(settings.getStartingDifficulty());
+        curDifficulty.bind(settings.getDifficulty());
     }
 
     /**

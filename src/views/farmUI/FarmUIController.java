@@ -5,6 +5,11 @@ import javafx.scene.text.Text;
 import javafx.scene.input.MouseEvent;
 import viewmodels.SettingViewModel;
 
+/**
+ * @author Matthew Farias Email: mfarias6@gatech.edu
+ * @author Shaun Jacob Email: sjacob31@gatech.edu
+ * @version 1.0
+ */
 public class FarmUIController {
     @FXML
     private Text money;
@@ -18,8 +23,8 @@ public class FarmUIController {
      * @param curDifficulty Inputted difficulty in initial configuration screen.
      */
     public void setMoney(String curDifficulty) {
-        SettingViewModel settings = new SettingViewModel();
-        switch (settings.getStartingDifficulty().toString()) {
+        SettingViewModel settings = new SettingViewModel(null, null);
+        switch (settings.getDifficulty().toString()) {
         case "Casual":
             money.setText("$" + 10000);
             break;
