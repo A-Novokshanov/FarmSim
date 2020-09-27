@@ -37,20 +37,22 @@ public class SettingViewModel {
      * @param playerName         The name of the player.
      * @param startingDifficulty The starting difficulty the player chooses.
      */
-    public void setPlayerDetails(SeedModel seedModel, SeasonModel seasonModel, String playerName, String startingDifficulty) {
+    public void setPlayerDetails(SeedModel seedModel, SeasonModel seasonModel,
+                                 String playerName, String startingDifficulty) {
 
         this.startingSeedType = seedModel;
         this.startingSeasonType = seasonModel;
         this.playerName = playerName;
         this.startingDifficulty = startingDifficulty;
 
-        this.settingModel = new SettingModel(seasonModel, seedModel, startingDifficulty, playerName);
+        this.settingModel = new SettingModel(seasonModel, seedModel,
+                startingDifficulty, playerName);
     }
 
     /**
      * Returns the populated setting model object.
      *
-     * @return The setting model object.l
+     * @return The setting model object.
      */
     public SettingModel getPlayerSettings() {
         return this.settingModel;

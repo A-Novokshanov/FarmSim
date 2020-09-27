@@ -125,7 +125,8 @@ public class InitialConfiguration {
                 e.printStackTrace();
             }
 
-            settings.setPlayerDetails(seed, season, txtFldName.textProperty().getValue(), curDifficulty);
+            settings.setPlayerDetails(seed, season,
+                    txtFldName.textProperty().getValue(), curDifficulty);
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(settings);
 

@@ -29,17 +29,17 @@ public class FarmUIController {
      */
     public void setMoney() {
         switch (settingViewModel.getPlayerSettings().getStartingDifficulty()) {
-            case "Casual":
-                money.setText("$" + 10000);
-                break;
-            case "Normal":
-                money.setText("$" + 1000);
-                break;
-            case "Veteran":
-                money.setText("$" + 100);
-                break;
-            default:
-                money.setText("$" + 0);
+        case "Casual":
+            money.setText("$" + 10000);
+            break;
+        case "Normal":
+            money.setText("$" + 1000);
+            break;
+        case "Veteran":
+            money.setText("$" + 100);
+            break;
+        default:
+            money.setText("$" + 0);
         }
     }
 
