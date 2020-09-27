@@ -1,4 +1,4 @@
-package views.initialconfig;
+package views.initialConfig;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
