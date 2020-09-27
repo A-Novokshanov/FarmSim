@@ -58,7 +58,6 @@ public class InitialConfiguration {
     private ImageView imgSeasonSelected;
     @FXML
     private Text txtNameError;
-    private boolean validNameEntered = false;
 
 
     public void setSeasonAndSeed() {

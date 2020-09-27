@@ -4,7 +4,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import models.SeasonModel;
 import models.SeedModel;
+import models.SettingModel;
 
+/**
+ * This view-model class acts as an intermediary for the settings view, settings model,
+ * and the settings service classes.
+ *
+ * @author Aditya Varun Pratap
+ * @version 1.0l
+ */
 public class SettingViewModel {
 
     private StringProperty playerName = new SimpleStringProperty();
@@ -47,6 +55,7 @@ public class SettingViewModel {
      */
     public void addSettingsToDatabase() {
         // TODO Add user settings to the database.
+        SettingModel settingModel = new SettingModel(startingSeasonType,
+                startingSeedType, startingDifficulty.toString(), playerName.toString());
     }
-
 }
