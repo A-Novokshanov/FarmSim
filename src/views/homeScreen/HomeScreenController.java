@@ -36,7 +36,7 @@ public class HomeScreenController {
             System.out.println("Loader error.");
             e.printStackTrace();
         }
-        stage.setTitle("Hello World");
+        stage.setTitle("Initial Configuration");
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
     }

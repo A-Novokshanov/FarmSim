@@ -133,7 +133,7 @@ public class InitialConfiguration {
             Stage currentStage = (Stage) txtFldName.getScene().getWindow();
             currentStage.close();
 
-            stage.setTitle("Hello World");
+            stage.setTitle("Farm");
             stage.show();
         }
     }
