@@ -26,8 +26,9 @@ public class UserTestRohanKashi {
     //Test setter method for UserModel
     @Test
     public void testSetUserType() {
-        typePlayer.setUserCurrentMoney(500);
-        assertEquals(500, this.userTest.getPlayerModel().getUserCurrentMoney());
+        PlayerModel newPlayer = new PlayerModel(3);
+        userTest.setPlayerModel(newPlayer);
+        assertEquals(newPlayer, this.userTest.getPlayerModel());
     }
 
 }
