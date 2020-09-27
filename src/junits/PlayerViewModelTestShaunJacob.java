@@ -9,9 +9,9 @@ import static org.junit.Assert.assertEquals;
 import viewmodels.PlayerViewModel;
 
 public class PlayerViewModelTestShaunJacob {
-    PlayerViewModel playerViewModel;
-    PlayerModel player;
-    UserModel user;
+    private PlayerViewModel playerViewModel;
+    private PlayerModel player;
+    private UserModel user;
 
     @Before
     public void setUp() {
@@ -22,6 +22,7 @@ public class PlayerViewModelTestShaunJacob {
 
     @Test
     public void testGetPlayer() {
-        assertEquals(playerViewModel.getPlayerDetails().getPlayerModel().getUserCurrentMoney(), 120);
+        assertEquals(playerViewModel.getPlayerDetails().getPlayerModel().getUserCurrentMoney(),
+                120);
     }
 }

@@ -25,7 +25,8 @@ public class HomeScreenController {
         Stage stage = (Stage) btnNewGame.getScene().getWindow();
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../initialConfig/InitialConfiguration.fxml"));
+            root = FXMLLoader.load(getClass().
+                                    getResource("../initialConfig/InitialConfiguration.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error.");
             e.printStackTrace();
