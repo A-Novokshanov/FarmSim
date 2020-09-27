@@ -135,7 +135,7 @@ public class InitialConfiguration {
             stage.setTitle("Hello World");
             stage.show();
         }
-    }l
+    }
 
     /**
      * Sets difficulty to Casual.
