@@ -1,17 +1,19 @@
 package viewmodels;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import models.PlayerModel;
-
 import models.UserModel;
 
+/**
+ * This view-model class will aid accessing certain types of players.
+ * This view-model will act as an intermediary for Player and Game Admin.
+ *
+ * @author Rohan Kashiviswanathan
+ * @version 1.0
+ */
 public class PlayerViewModel {
-    private StringProperty playerName = new SimpleStringProperty();
-    private StringProperty startingDifficulty = new SimpleStringProperty();
 
-    PlayerModel player;
-    UserModel user;
+    private PlayerModel player;
+    private UserModel user;
 
     /**
      * Gets the player's details.
