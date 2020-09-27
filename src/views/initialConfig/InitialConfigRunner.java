@@ -11,7 +11,7 @@ public class InitialConfigRunner extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("InitialConfiguration.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Initial Configuration");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
