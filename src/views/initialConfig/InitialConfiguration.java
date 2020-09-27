@@ -5,13 +5,13 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.AnimalModel;
 import models.CropModel;
@@ -70,19 +70,7 @@ public class InitialConfiguration {
     }
 
     public void setNewName() {
-        if (txtFldName.getText().isBlank()) {
-            txtNameError.setVisible(true);
-            txtFldName.setUnFocusColor(Color.RED);
-            txtFldName.setFocusColor(Color.RED);
-            txtFldName.setStyle("-fx-prompt-text-fill: RED");
-            txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
-                txtFldName.setStyle("-fx-prompt-text-fill: black");
-                txtFldName.setUnFocusColor(Color.BLACK);
-            });
-        } else {
-            txtFldName.textProperty().bind(settings.getPlayerName());
-            validNameEntered = true;
-        }
+        txtFldName.textProperty().bind(settings.getPlayerName());
     }
 
     public void setDifficulty() {
@@ -90,23 +78,48 @@ public class InitialConfiguration {
     }
 
     public void createGame(MouseEvent mouseEvent) {
-        setSeasonAndSeed();
-        setNewName();
-        setDifficulty();
-        // btn1 = create button id
-        if (validNameEntered) {
-            Stage stage = (Stage) btnCreateGame.getScene().getWindow();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
-            } catch (IOException e) {
-                System.out.println("Loader error");
-                e.printStackTrace();
-            }
-            stage.setTitle("Hello World");
-            stage.setScene(new Scene(root, 1280, 720));
-            stage.show();
+
+        if (validateName()) {
+            setSeasonAndSeed();
+            setNewName();
+            setDifficulty();
+            openHomeScreen();
         }
+
+    }
+
+    private void openHomeScreen() {
+
+        Stage stage = (Stage) btnCreateGame.getScene().getWindow();
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
+        } catch (IOException e) {
+            System.out.println("Loader error");
+            e.printStackTrace();
+        }
+        stage.setTitle("Home Screen");
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.show();
+    }
+
+    private boolean validateName() {
+        if (txtFldName.getText().trim().isEmpty()) {
+            txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
+                txtFldName.setStyle("-fx-prompt-text-fill: BLACK");
+                txtFldName.setUnFocusColor(Color.BLACK);
+                txtFldName.setFocusColor(Color.BLACK);
+                txtNameError.setVisible(false);
+
+            });
+            txtNameError.setVisible(true);
+            txtFldName.setUnFocusColor(Color.RED);
+            txtFldName.setStyle("-fx-prompt-text-fill: RED");
+
+            return false;
+        }
+
+        return true;
     }
 
     public void setCasual(MouseEvent mouseEvent) {
