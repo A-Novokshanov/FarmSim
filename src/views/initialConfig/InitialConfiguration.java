@@ -69,7 +69,9 @@ public class InitialConfiguration {
     private StringProperty curSeed = new SimpleStringProperty("Corn");
     private StringProperty curSeason = new SimpleStringProperty("Spring");
 
-
+    /**
+     *Sets Season and Seed in a Setting view model.
+     */
     public void setSeasonAndSeed() {
         SeedModel seed = new SeedModel(curSeed.toString());
         List<AnimalModel> animals = new ArrayList<>();
@@ -78,6 +80,9 @@ public class InitialConfiguration {
         settings = new SettingViewModel(seed, season);
     }
 
+    /**
+     *Sets name in a Setting view model.
+     */
     public void setNewName() {
         if (txtFldName.getText().isBlank()) {
             txtNameError.setVisible(true);
@@ -94,10 +99,18 @@ public class InitialConfiguration {
         }
     }
 
+    /**
+     *Sets difficulty in a Setting view model.
+     */
     public void setDifficulty() {
         curDifficulty.bind(settings.getStartingDifficulty());
     }
 
+    /**
+     *Creates new game based on selected settings
+     *
+     * @param mouseEvent Game created on mouse click.
+     */
     public void createGame(MouseEvent mouseEvent) {
         setSeasonAndSeed();
         setNewName();
@@ -118,6 +131,11 @@ public class InitialConfiguration {
         }
     }
 
+    /**
+     *Sets difficulty to Casual.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setCasual(MouseEvent mouseEvent) {
         btnCasual.setSelected(true);
         btnNormal.setSelected(false);
@@ -125,6 +143,11 @@ public class InitialConfiguration {
         curDifficulty.set("Casual");
     }
 
+    /**
+     *Sets difficulty to Normal.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setNormal(MouseEvent mouseEvent) {
         btnCasual.setSelected(false);
         btnNormal.setSelected(true);
@@ -132,6 +155,11 @@ public class InitialConfiguration {
         curDifficulty.set("Normal");
     }
 
+    /**
+     *Sets difficulty to Veteran.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setVeteran(MouseEvent mouseEvent) {
         btnCasual.setSelected(false);
         btnNormal.setSelected(false);
@@ -139,6 +167,11 @@ public class InitialConfiguration {
         curDifficulty.set("Veteran");
     }
 
+    /**
+     *Sets starting seed type to Corn.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setCorn(MouseEvent mouseEvent) {
         btnCorn.setSelected(true);
         btnPotato.setSelected(false);
@@ -146,6 +179,11 @@ public class InitialConfiguration {
         curSeed.set("Corn");
     }
 
+    /**
+     *Sets starting seed type to Potato.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setPotato(MouseEvent mouseEvent) {
         btnCorn.setSelected(false);
         btnPotato.setSelected(true);
@@ -153,6 +191,11 @@ public class InitialConfiguration {
         curSeed.set("Potato");
     }
 
+    /**
+     *Sets starting seed type to Tomato.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setTomato(MouseEvent mouseEvent) {
         btnCorn.setSelected(false);
         btnPotato.setSelected(false);
@@ -160,21 +203,41 @@ public class InitialConfiguration {
         curSeed.set("Tomato");
     }
 
+    /**
+     *Sets season to Spring.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setSpring(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(springImage);
         curSeason.set("Spring");
     }
 
+    /**
+     *Sets season to Summer.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setSummer(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(summerImage);
         curSeason.set("Summer");
     }
 
+    /**
+     *Sets season to Autumn.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setAutumn(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(autumnImage);
         curSeason.set("Autumn");
     }
 
+    /**
+     *Sets season to Winter.
+     *
+     * @param mouseEvent Button selected on mouse click.
+     */
     public void setWinter(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(winterImage);
         curSeason.set("Winter");
