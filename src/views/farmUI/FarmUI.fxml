@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,6 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.farmUI.FarmUIController">
   <children>
@@ -17,16 +17,6 @@
             <Line endX="-100.0" endY="-640.0" layoutX="1316.0" layoutY="779.0" startX="-100.0" startY="-108.0" />
             <Circle fill="#ebff1f" layoutX="1216.0" layoutY="159.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fill="DODGERBLUE" layoutX="1215.0" layoutY="68.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="1178.0" layoutY="47.0" text="Day #">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Label>
-            <Label layoutX="21.0" layoutY="25.0" text="\$$$$$$">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9b7653" height="150.0" layoutX="245.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9b7653" height="150.0" layoutX="245.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9b7653" height="150.0" layoutX="245.0" layoutY="475.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
@@ -42,6 +32,16 @@
                   <Image url="@../../dependencies/images/85249200-stock-vector-barn-house-icon-or-sign-isolated-on-white-background-vector-illustration-of-red-farm-house-.jpg" />
                </image>
             </ImageView>
+            <Text fx:id="money" layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0" wrappingWidth="150.0">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="dayNum" layoutX="1174.0" layoutY="78.0" onMouseClicked="#updateDay" strokeType="OUTSIDE" strokeWidth="0.0" text="Day 1">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
          </children>
     </AnchorPane>
   </children>

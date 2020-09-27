@@ -21,6 +21,12 @@ public class SettingViewModel {
     private SeasonModel startingSeasonType;
 
     /**
+     * This constructor is a default constructor.
+     */
+    public SettingViewModel() {
+    }
+
+    /**
      * This constructor takes in the seedModel and seasonModel for the particular user.
      *
      * @param seedModel   The seed model object of the user.
