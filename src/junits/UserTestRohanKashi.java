@@ -19,15 +19,16 @@ public class UserTestRohanKashi {
 
     //Test getter method for UserModel
     @Test
-    public void testGetSeedType() {
+    public void testGetUserType() {
         assertEquals(typePlayer, this.userTest.getPlayerModel());
     }
 
     //Test setter method for UserModel
     @Test
-    public void testSetSeedType() {
-        typePlayer.setUserCurrentMoney(500);
-        assertEquals(500, this.userTest.getPlayerModel().getUserCurrentMoney());
+    public void testSetUserType() {
+        PlayerModel newPlayer = new PlayerModel(3);
+        userTest.setPlayerModel(newPlayer);
+        assertEquals(newPlayer, this.userTest.getPlayerModel());
     }
 
 }
