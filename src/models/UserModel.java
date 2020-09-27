@@ -1,6 +1,6 @@
 package models;
 /**
- The userModel class represents the model class of the User
+ The UserModel class represents the model class of the User
  holding the instance variables and associating methods.
  * @author Andrew Novokshanov
  * @version 1.0

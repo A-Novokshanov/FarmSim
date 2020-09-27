@@ -1,6 +1,6 @@
 package models;
 /**
- The playerModel class represents the model class of the Player
+ The PlayerModel class represents the model class of the Player
  holding the instance variables and associating methods.
  * @author Andrew Novokshanov
  * @version 1.0
