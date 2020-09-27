@@ -44,6 +44,7 @@ public class SeasonTestAdityaPratap {
         this.seasonModel = new SeasonModel(2, "Spring", animalModelList, cropModelList);
     }
 
+    //Test getter method for plantGrowthModifier
     @Test
     public void testGetPlantGrowthModifier() {
 
@@ -53,6 +54,7 @@ public class SeasonTestAdityaPratap {
         assertEquals(expected, actual);
     }
 
+    //Test getter method for testGetSeasonType
     @Test
     public void testGetSeasonType() {
 
@@ -62,6 +64,7 @@ public class SeasonTestAdityaPratap {
         assertEquals(expected, actual);
     }
 
+    //Test getter method for getDesirableAnimals
     @Test
     public void testGetDesirableAnimals() {
         List<AnimalModel> expectedList = new ArrayList<>();
@@ -80,6 +83,7 @@ public class SeasonTestAdityaPratap {
         assertEquals(expectedList.get(2).getTimeToGrow(), actualList.get(2).getTimeToGrow());
     }
 
+    //Test getter method for desirableCrops
     @Test
     public void testGetDesirableCrops() {
 
@@ -97,6 +101,7 @@ public class SeasonTestAdityaPratap {
 
     }
 
+    //Test setter method for plantGrowthModifier
     @Test
     public void testSetPlantGrowthModifier() {
         int plantGrowthModifier = 3;
@@ -107,6 +112,7 @@ public class SeasonTestAdityaPratap {
         assertEquals(plantGrowthModifier, actual);
     }
 
+    //Test setter method setSeasonType
     @Test
     public void testSetSeasonType() {
         String seasonType = "Winter";
@@ -117,6 +123,7 @@ public class SeasonTestAdityaPratap {
         assertSame(seasonType, actual);
     }
 
+    //Test setter method for desirableAnimals
     @Test
     public void testSetDesirableAnimals() {
 
@@ -133,6 +140,7 @@ public class SeasonTestAdityaPratap {
 
     }
 
+    //Test setter method for desirableCrops
     @Test
     public void testSetDesirableCrops() {
 
