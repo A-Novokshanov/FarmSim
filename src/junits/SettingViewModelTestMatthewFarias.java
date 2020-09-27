@@ -1,7 +1,5 @@
 package junits;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import models.SeasonModel;
 import models.SeedModel;
 import org.junit.Before;
@@ -16,13 +14,11 @@ import static org.junit.Assert.assertEquals;
  */
 public class SettingViewModelTestMatthewFarias {
     private SettingViewModel settingViewModel;
-    private SeedModel seedModel;
-    private SeasonModel seasonModel;
 
     @Before
     public void setup() {
-        seedModel  = new SeedModel("Corn");
-        seasonModel = new SeasonModel(1,"Spring", null, null);
+        SeedModel seedModel = new SeedModel("Corn");
+        SeasonModel seasonModel = new SeasonModel(1, "Spring", null, null);
         settingViewModel = new SettingViewModel(seedModel, seasonModel);
     }
 
