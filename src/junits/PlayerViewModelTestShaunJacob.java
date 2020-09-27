@@ -22,6 +22,6 @@ public class PlayerViewModelTestShaunJacob {
 
     @Test
     public void testGetPlayer() {
-        assertEquals(playerViewModel.getPlayerDetails(), user);
+        assertEquals(playerViewModel.getPlayerDetails().getPlayerModel().getUserCurrentMoney(), 120);
     }
 }
