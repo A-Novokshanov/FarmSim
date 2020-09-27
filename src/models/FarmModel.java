@@ -20,7 +20,7 @@ public class FarmModel {
     }
 
     /** Sets the date of a FarmModel.
-     @param date is the new desired currentMoney of a FarmModel object.
+     @param date is the new desired date of a FarmModel object.
      */
     public void setFarmDate(int date) {
         this.date = date;
