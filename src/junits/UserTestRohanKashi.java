@@ -13,7 +13,7 @@ public class UserTestRohanKashi {
 
     @Before
     public void setup() {
-        typePlayer = new PlayerModel();
+        typePlayer = new PlayerModel(100);
         this.userTest = new UserModel(typePlayer);
     }
 
@@ -26,7 +26,7 @@ public class UserTestRohanKashi {
     //Test setter method for UserModel
     @Test
     public void testSetUserType() {
-        PlayerModel newPlayer = new PlayerModel();
+        PlayerModel newPlayer = new PlayerModel(3);
         userTest.setPlayerModel(newPlayer);
         assertEquals(newPlayer, this.userTest.getPlayerModel());
     }

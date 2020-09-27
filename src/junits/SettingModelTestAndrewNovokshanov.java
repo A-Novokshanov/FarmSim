@@ -23,7 +23,7 @@ public class SettingModelTestAndrewNovokshanov {
     public void setup() {
         desirableAnimals = new ArrayList<AnimalModel>();
         desirableCrop = new ArrayList<CropModel>();
-        spring = new SeasonModel(100,"Spring", desirableAnimals, desirableCrop);
+        spring = new SeasonModel(100, "Spring", desirableAnimals, desirableCrop);
         tomato = new SeedModel("Tomato Seed");
         settingModelTest = new SettingModel(spring, tomato, "Normal", "Andrew N");
     }
@@ -31,7 +31,7 @@ public class SettingModelTestAndrewNovokshanov {
     //Test getter method for SeasonModel
     @Test
     public void testGetterSeasonModel() {
-        assertEquals(settingModelTest.getStartingSeason() ,spring);
+        assertEquals(settingModelTest.getStartingSeason(), spring);
     }
     //Test setter method for SeasonModel's plantGrowthModifier
     @Test

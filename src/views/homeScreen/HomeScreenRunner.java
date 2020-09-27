@@ -1,4 +1,4 @@
-package views.initialConfig;
+package views.homeScreen;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,12 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class InitialConfigRunner extends Application {
-
+public class HomeScreenRunner extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("InitialConfiguration.fxml"));
-        primaryStage.setTitle("Initial Configuration");
+        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        primaryStage.setTitle("Home Screen");
         primaryStage.setScene(new Scene(root, 1280, 720));
         primaryStage.show();
     }
