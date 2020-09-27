@@ -129,10 +129,13 @@ public class InitialConfiguration {
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(settings);
 
+            Stage currentStage = (Stage) txtFldName.getScene().getWindow();
+            currentStage.close();
+
             stage.setTitle("Hello World");
             stage.show();
         }
-    }
+    }l
 
     /**
      * Sets difficulty to Casual.
