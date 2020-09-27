@@ -1,4 +1,4 @@
-package views.initialConfig;
+package views.initialconfig;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
