@@ -16,7 +16,6 @@ public class PlayerViewModel {
 
     private PlayerModel player;
     private UserModel user;
-    private StringProperty currentMoney = new SimpleStringProperty();
 
     /**
      * Gets the player's details.
@@ -24,14 +23,14 @@ public class PlayerViewModel {
      * @return the user object.
      */
     public UserModel getPlayerDetails() {
-        // TODO: Get money from database
+
         player = new PlayerModel(120);
         user = new UserModel(player);
         return user;
     }
 
-    public StringProperty getPlayerMoney() {
-        return this.currentMoney;
+    public void setPlayerDetails() {
+
     }
 
 }

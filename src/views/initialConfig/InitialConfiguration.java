@@ -7,19 +7,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.AnimalModel;
 import models.CropModel;
 import models.SeasonModel;
 import models.SeedModel;
 import viewmodels.SettingViewModel;
+import views.farmUI.FarmUIController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +40,6 @@ public class InitialConfiguration {
     private JFXTextField txtFldName;
     @FXML
     private JFXButton btnCreateGame;
-    private SettingViewModel settings;
     @FXML
     private JFXRadioButton btnCasual;
     @FXML
@@ -64,26 +64,32 @@ public class InitialConfiguration {
     private ImageView imgSeasonSelected;
     @FXML
     private Text txtNameError;
-    private boolean validNameEntered = false;
-    private StringProperty curDifficulty = new SimpleStringProperty("Normal");
+
+    private SeedModel seed;
+    private SettingViewModel settings = new SettingViewModel();
+    private SeasonModel season;
+    private String curDifficulty = "Normal";
     private StringProperty curSeed = new SimpleStringProperty("Corn");
     private StringProperty curSeason = new SimpleStringProperty("Spring");
 
     /**
-     *Sets Season and Seed in a Setting view model.
+     * Sets Season and Seed in a Setting view model.
      */
     public void setSeasonAndSeed() {
-        SeedModel seed = new SeedModel(curSeed.toString());
+        seed = new SeedModel(curSeed.toString());
         List<AnimalModel> animals = new ArrayList<>();
         List<CropModel> crops = new ArrayList<>();
-        SeasonModel season = new SeasonModel(3, curSeason.toString(), animals, crops);
-        settings = new SettingViewModel(seed, season);
+        season = new SeasonModel(3, curSeason.toString(), animals, crops);
     }
 
+
     /**
-     *Sets name in a Setting view model.
+     * Validates or checks if name is entered correctly.
+     *
+     * @return A boolean representing if the name is entered correctly.
      */
-    public void setNewName() {
+    private boolean validateName() {
+
         if (txtFldName.getText().isBlank()) {
             txtNameError.setVisible(true);
             txtFldName.setUnFocusColor(Color.RED);
@@ -93,46 +99,43 @@ public class InitialConfiguration {
                 txtFldName.setStyle("-fx-prompt-text-fill: black");
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
-        } else {
-            txtFldName.textProperty().bind(settings.getPlayerName());
-            validNameEntered = true;
+
+            return false;
         }
+
+        return true;
     }
 
     /**
-     *Sets difficulty in a Setting view model.
-     */
-    public void setDifficulty() {
-        curDifficulty.bind(settings.getStartingDifficulty());
-    }
-
-    /**
-     *Creates new game based on selected settings
+     * Creates new game based on selected settings
      *
      * @param mouseEvent Game created on mouse click.
      */
     public void createGame(MouseEvent mouseEvent) {
         setSeasonAndSeed();
-        setNewName();
-        setDifficulty();
         // btn1 = create button id
-        if (validNameEntered) {
-            Stage stage = (Stage) btnCreateGame.getScene().getWindow();
-            Parent root = null;
+        if (validateName()) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+            Stage stage = new Stage(StageStyle.DECORATED);
             try {
-                root = FXMLLoader.load(getClass().getResource("../farmUI/FarmUI.fxml"));
+                stage.setScene(
+                        new Scene(loader.load())
+                );
             } catch (IOException e) {
-                System.out.println("Loader error");
                 e.printStackTrace();
             }
+
+            settings.setPlayerDetails(seed, season, txtFldName.textProperty().getValue(), curDifficulty);
+            FarmUIController farmUIController = loader.getController();
+            farmUIController.initData(settings);
+
             stage.setTitle("Hello World");
-            stage.setScene(new Scene(root, 1280, 720));
             stage.show();
         }
     }
 
     /**
-     *Sets difficulty to Casual.
+     * Sets difficulty to Casual.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -140,11 +143,11 @@ public class InitialConfiguration {
         btnCasual.setSelected(true);
         btnNormal.setSelected(false);
         btnVeteran.setSelected(false);
-        curDifficulty.set("Casual");
+        curDifficulty = "Casual";
     }
 
     /**
-     *Sets difficulty to Normal.
+     * Sets difficulty to Normal.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -152,11 +155,11 @@ public class InitialConfiguration {
         btnCasual.setSelected(false);
         btnNormal.setSelected(true);
         btnVeteran.setSelected(false);
-        curDifficulty.set("Normal");
+        curDifficulty = "Normal";
     }
 
     /**
-     *Sets difficulty to Veteran.
+     * Sets difficulty to Veteran.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -164,11 +167,11 @@ public class InitialConfiguration {
         btnCasual.setSelected(false);
         btnNormal.setSelected(false);
         btnVeteran.setSelected(true);
-        curDifficulty.set("Veteran");
+        curDifficulty = "Veteran";
     }
 
     /**
-     *Sets starting seed type to Corn.
+     * Sets starting seed type to Corn.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -180,7 +183,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets starting seed type to Potato.
+     * Sets starting seed type to Potato.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -192,7 +195,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets starting seed type to Tomato.
+     * Sets starting seed type to Tomato.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -204,7 +207,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets season to Spring.
+     * Sets season to Spring.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -214,7 +217,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets season to Summer.
+     * Sets season to Summer.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -224,7 +227,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets season to Autumn.
+     * Sets season to Autumn.
      *
      * @param mouseEvent Button selected on mouse click.
      */
@@ -234,7 +237,7 @@ public class InitialConfiguration {
     }
 
     /**
-     *Sets season to Winter.
+     * Sets season to Winter.
      *
      * @param mouseEvent Button selected on mouse click.
      */
