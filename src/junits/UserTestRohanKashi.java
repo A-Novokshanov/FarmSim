@@ -1,5 +1,6 @@
 package junits;
 
+import models.PlayerModel;
 import models.UserModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,24 +8,27 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class UserTestRohanKashi {
-    private UserModel userModel;
+    private PlayerModel typePlayer;
+    private UserModel userTest;
 
     @Before
     public void setup() {
-        this.userModel = new UserModel("admin");
+        typePlayer = new PlayerModel();
+        this.userTest = new UserModel(typePlayer);
     }
 
-    //Test getter method for SeedModel
+    //Test getter method for UserModel
     @Test
-    public void testGetSeedType() {
-        assertEquals("admin", this.userModel.getUserType());
+    public void testGetUserType() {
+        assertEquals(typePlayer, this.userTest.getPlayerModel());
     }
 
-    //Test setter method for SeedModel
+    //Test setter method for UserModel
     @Test
-    public void testSetSeedType() {
-        this.userModel.setUserType("player");
-        assertEquals("player", this.userModel.getUserType());
+    public void testSetUserType() {
+        PlayerModel newPlayer = new PlayerModel();
+        userTest.setPlayerModel(newPlayer);
+        assertEquals(newPlayer, this.userTest.getPlayerModel());
     }
 
 }

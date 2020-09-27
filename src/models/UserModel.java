@@ -6,39 +6,25 @@ package models;
  * @version 1.0
  */
 public class UserModel {
-    /** @param Represents the type of the user. */
-    private String type;
-    private int currentMoney;
+    private PlayerModel type;
 
-    /** Constructs a User object with specified Type.
+    /** Constructs a UserModel object with specified Type.
      @param type The type of user
      */
-    public UserModel(String type, int currentMoney) {
+    public UserModel(PlayerModel type) {
         this.type = type;
-        this.currentMoney = currentMoney;
     }
 
-    /** @return Gets and returns the Type attribute of a userModel object. */
-    public String getUserType() {
+    /** @return Gets and returns the Type attribute of a UserModel object. */
+    public PlayerModel getPlayerModel() {
         return this.type;
     }
 
-    /** Sets the type of a userModel.
-     @param type is the new desired type of a userModel object.
+    /** Sets the type of a UserModel.
+     @param type is the new desired type of a UerModel object.
      */
-    public void setUserType(String type) {
+    public void setPlayerModel(PlayerModel type) {
         this.type = type;
-    }
-    /** @return Gets and returns the currentMoney attribute of a userModel object. */
-    public int getUserCurrentMoney() {
-        return this.currentMoney;
-    }
-
-    /** Sets the type of a userModel.
-     @param currentMoney is the new desired currentMoney of a userModel object.
-     */
-    public void setUserCurrentMoney(int currentMoney) {
-        this.currentMoney = currentMoney;
     }
 }
 
