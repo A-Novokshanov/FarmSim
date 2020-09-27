@@ -1,5 +1,7 @@
 package viewmodels;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import models.PlayerModel;
 import models.UserModel;
 
@@ -14,6 +16,7 @@ public class PlayerViewModel {
 
     private PlayerModel player;
     private UserModel user;
+    private StringProperty currentMoney = new SimpleStringProperty();
 
     /**
      * Gets the player's details.
@@ -25,6 +28,10 @@ public class PlayerViewModel {
         player = new PlayerModel(100);
         user = new UserModel(player);
         return user;
+    }
+
+    public StringProperty getPlayerMoney() {
+        return this.currentMoney;
     }
 
 }
