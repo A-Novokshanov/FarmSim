@@ -25,7 +25,7 @@ public class PlayerViewModel {
      */
     public UserModel getPlayerDetails() {
         // TODO: Get money from database
-        player = new PlayerModel(100);
+        player = new PlayerModel(120);
         user = new UserModel(player);
         return user;
     }
