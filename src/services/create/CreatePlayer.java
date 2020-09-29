@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CreatePlayer {
-    private Connection dbConnection;
+    private final Connection dbConnection;
     private static final String CREATE_PLAYER_QUERY = "INSERT INTO player(name) VALUES(?)";
 
     /**

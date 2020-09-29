@@ -3,6 +3,7 @@ package viewmodels;
 import models.SeasonModel;
 import models.SeedModel;
 import models.SettingModel;
+import services.create.CreatePlayer;
 
 /**
  * This view-model class acts as an intermediary for the settings view, settings model,
@@ -23,10 +24,14 @@ public class SettingViewModel {
     /**
      * Packs the data into the SettingModel object and passes to the services package.
      * Then, deserializes the data and adds to the database.
+     *
+     * @param settingModel The model class that contains all player details.
      */
-    public void addSettingsToDatabase() {
-        this.settingModel = new SettingModel(startingSeasonType,
+    public void addSettingsToDatabase(SettingModel settingModel) {
+        settingModel = new SettingModel(startingSeasonType,
                 startingSeedType, startingDifficulty.toString(), playerName.toString());
+        CreatePlayer createPlayer = new CreatePlayer();
+        createPlayer.setPlayerDetails(settingModel);
     }
 
     /**
@@ -47,6 +52,9 @@ public class SettingViewModel {
 
         this.settingModel = new SettingModel(seasonModel, seedModel,
                 startingDifficulty, playerName);
+
+        this.addSettingsToDatabase(this.settingModel);
+
     }
 
     /**
