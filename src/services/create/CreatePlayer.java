@@ -1,6 +1,6 @@
 package services.create;
 
-import models.SettingModel;
+import models.PlayerModel;
 import services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -14,6 +14,7 @@ public class CreatePlayer {
     private static final String GET_PLAYER_ID = "SELECT a.id FROM player a WHERE a.name = ";
     private static final String CREATE_PLAYER_SETTINGS =
             "INSERT INTO setting(difficulty, season, seed, player) VALUES(?, ?, ?, ?)";
+    private ResultSet resultSet;
 
     /**
      * Constructor that establishes a connection to the database.
@@ -43,32 +44,39 @@ public class CreatePlayer {
     /**
      * Sets the player details in the database.
      *
-     * @param settingModel The model class that contains all player information.
+     * @param playerDetails The model class that contains all player information.
      */
-    public void setPlayerDetails(SettingModel settingModel) {
+    public void setPlayerDetails(PlayerModel playerDetails) {
         if (this.isDbConnected()) {
             try {
                 PreparedStatement preparedStatement = this.dbConnection.prepareStatement(CREATE_PLAYER_QUERY);
-                preparedStatement.setString(1, settingModel.getPlayerName());
+                preparedStatement.setString(1, playerDetails.getPlayerSettings().getPlayerName());
                 preparedStatement.executeUpdate();
 
-                String query = GET_PLAYER_ID + "\'" + settingModel.getPlayerName() + "\'";
+                String query = GET_PLAYER_ID + "\'" + playerDetails.getPlayerSettings().getPlayerName() + "\'";
                 preparedStatement = this.dbConnection.prepareStatement(query);
-                ResultSet resultSet = preparedStatement.executeQuery();
+                resultSet = preparedStatement.executeQuery();
 
                 int playerId = resultSet.getInt("id");
 
                 preparedStatement = this.dbConnection.prepareStatement(CREATE_PLAYER_SETTINGS);
-                preparedStatement.setString(1, settingModel.getStartingDifficulty());
-                preparedStatement.setString(2, settingModel.getStartingSeason().getSeasonType());
-                preparedStatement.setString(3, settingModel.getStartingSeedType().getSeedType());
+                preparedStatement.setString(1, playerDetails.getPlayerSettings().getStartingDifficulty());
+                preparedStatement.setString(2, playerDetails.getPlayerSettings().getStartingSeason().getSeasonType());
+                preparedStatement.setString(3, playerDetails.getPlayerSettings().getStartingSeedType().getSeedType());
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.executeUpdate();
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            } finally {
+                try {
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         }
     }
+
 }
 

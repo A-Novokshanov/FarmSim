@@ -17,7 +17,7 @@ import models.AnimalModel;
 import models.CropModel;
 import models.SeasonModel;
 import models.SeedModel;
-import viewmodels.SettingViewModel;
+import viewmodels.PlayerViewModel;
 import views.farmUI.FarmUIController;
 
 import java.io.IOException;
@@ -64,11 +64,12 @@ public class InitialConfiguration {
     private Text txtNameError;
 
     private SeedModel seed;
-    private SettingViewModel settings = new SettingViewModel();
+    private PlayerViewModel playerViewModel = new PlayerViewModel();
     private SeasonModel season;
     private String curDifficulty = "Normal";
     private String curSeed = "Corn";
     private String curSeason = "Spring";
+    private int currentMoney;
 
     /**
      * Sets Season and Seed in a Setting view model.
@@ -123,16 +124,36 @@ public class InitialConfiguration {
                 e.printStackTrace();
             }
 
-            settings.setPlayerDetails(seed, season,
-                    txtFldName.textProperty().getValue(), curDifficulty);
+            this.setMoney();
+            playerViewModel.setPlayerDetails(seed, season,
+                    txtFldName.textProperty().getValue(), curDifficulty, currentMoney);
             FarmUIController farmUIController = loader.getController();
-            farmUIController.initData(settings);
+            farmUIController.initData(playerViewModel);
 
             Stage currentStage = (Stage) txtFldName.getScene().getWindow();
             currentStage.close();
 
             stage.setTitle("Farm");
             stage.show();
+        }
+    }
+
+    /**
+     * Starting money amount based on difficulty.
+     */
+    public void setMoney() {
+        switch (curDifficulty) {
+            case "Casual":
+                currentMoney = 10000;
+                break;
+            case "Normal":
+                currentMoney = 1000;
+                break;
+            case "Veteran":
+                currentMoney = 100;
+                break;
+            default:
+                currentMoney = 0;
         }
     }
 
@@ -221,7 +242,7 @@ public class InitialConfiguration {
 
     /**
      * Sets season to Summer.
-     *  
+     *
      * @param mouseEvent Button selected on mouse click.
      */
     public void setSummer(MouseEvent mouseEvent) {
