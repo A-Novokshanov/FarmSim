@@ -4,8 +4,8 @@ import models.PlayerModel;
 import models.SeasonModel;
 import models.SeedModel;
 import models.SettingModel;
-import services.LoginPlayer;
-import services.create.CreatePlayer;
+import services.authentication.LoginPlayer;
+import services.authentication.CreatePlayer;
 
 /**
  * This view-model class will aid accessing certain types of players.

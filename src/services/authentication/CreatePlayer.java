@@ -1,4 +1,4 @@
-package services.create;
+package services.authentication;
 
 import models.PlayerModel;
 import services.DatabaseConnection;

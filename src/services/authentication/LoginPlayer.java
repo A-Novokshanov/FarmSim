@@ -1,4 +1,6 @@
-package services;
+package services.authentication;
+
+import services.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
