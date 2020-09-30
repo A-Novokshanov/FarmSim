@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String JDBC_URL = "jdbc:sqlite::resource:gamedatabase.db";
+    private static final String JDBC_URL = "jdbc:sqlite:gamedatabase.db";
 
     /***
      * Establishes connection to database
@@ -15,8 +15,9 @@ public class DatabaseConnection {
     public static Connection getDbConnection() {
         Connection connection = null;
         try {
+            Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(JDBC_URL);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
