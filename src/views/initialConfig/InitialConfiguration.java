@@ -85,9 +85,10 @@ public class InitialConfiguration {
     /**
      * Validates or checks if name is entered correctly.
      *
+     * @param name The name of the player trying to login.
      * @return A boolean representing if the name is entered correctly.
      */
-    private boolean validateName() {
+    private boolean validateName(String name) {
 
         if (txtFldName.getText().isBlank()) {
             txtNameError.setVisible(true);
@@ -99,6 +100,18 @@ public class InitialConfiguration {
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
 
+            return false;
+
+        } else if (playerViewModel.playerExists(name)) {
+            txtNameError.setText("The player already exists, please login");
+            txtNameError.setVisible(true);
+            txtFldName.setUnFocusColor(Color.RED);
+            txtFldName.setFocusColor(Color.RED);
+            txtFldName.setStyle("-fx-prompt-text-fill: RED");
+            txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
+                txtFldName.setStyle("-fx-prompt-text-fill: black");
+                txtFldName.setUnFocusColor(Color.BLACK);
+            });
             return false;
         }
 
@@ -113,7 +126,7 @@ public class InitialConfiguration {
     public void createGame(MouseEvent mouseEvent) {
         setSeasonAndSeed();
         // btn1 = create button id
-        if (validateName()) {
+        if (validateName(txtFldName.textProperty().getValue())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
             try {

@@ -4,6 +4,7 @@ import models.PlayerModel;
 import models.SeasonModel;
 import models.SeedModel;
 import models.SettingModel;
+import services.LoginPlayer;
 import services.create.CreatePlayer;
 
 /**
@@ -17,7 +18,6 @@ public class PlayerViewModel {
 
     private SettingModel settingModel;
     private PlayerModel playerModel;
-    private int currentMoney;
 
 
     /**
@@ -29,6 +29,17 @@ public class PlayerViewModel {
     public void addSettingsToDatabase(PlayerModel playerModel) {
         CreatePlayer createPlayer = new CreatePlayer();
         createPlayer.setPlayerDetails(playerModel);
+    }
+
+    /**
+     * This method checks if the user exists.
+     *
+     * @param name The name of the user.
+     * @return A boolean representing if the user already exists.
+     */
+    public boolean playerExists(String name) {
+        LoginPlayer loginPlayer = new LoginPlayer();
+        return loginPlayer.checkUserExists(name);
     }
 
     /**
