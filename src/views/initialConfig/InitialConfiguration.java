@@ -3,8 +3,6 @@ package views.initialConfig;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -69,8 +67,8 @@ public class InitialConfiguration {
     private SettingViewModel settings = new SettingViewModel();
     private SeasonModel season;
     private String curDifficulty = "Normal";
-    private StringProperty curSeed = new SimpleStringProperty("Corn");
-    private StringProperty curSeason = new SimpleStringProperty("Spring");
+    private String curSeed = "Corn";
+    private String curSeason = "Spring";
 
     /**
      * Sets Season and Seed in a Setting view model.
@@ -183,7 +181,7 @@ public class InitialConfiguration {
         btnCorn.setSelected(true);
         btnPotato.setSelected(false);
         btnTomato.setSelected(false);
-        curSeed.set("Corn");
+        curSeed = "Corn";
     }
 
     /**
@@ -195,7 +193,7 @@ public class InitialConfiguration {
         btnCorn.setSelected(false);
         btnPotato.setSelected(true);
         btnTomato.setSelected(false);
-        curSeed.set("Potato");
+        curSeed = "Potato";
     }
 
     /**
@@ -207,7 +205,8 @@ public class InitialConfiguration {
         btnCorn.setSelected(false);
         btnPotato.setSelected(false);
         btnTomato.setSelected(true);
-        curSeed.set("Tomato");
+        curSeed = "Tomato";
+        System.out.println(curSeed.toString());
     }
 
     /**
@@ -217,17 +216,17 @@ public class InitialConfiguration {
      */
     public void setSpring(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(springImage);
-        curSeason.set("Spring");
+        curSeason = "Spring";
     }
 
     /**
      * Sets season to Summer.
-     *
+     *  
      * @param mouseEvent Button selected on mouse click.
      */
     public void setSummer(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(summerImage);
-        curSeason.set("Summer");
+        curSeason = "Summer";
     }
 
     /**
@@ -237,7 +236,7 @@ public class InitialConfiguration {
      */
     public void setAutumn(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(autumnImage);
-        curSeason.set("Autumn");
+        curSeason = "Autumn";
     }
 
     /**
@@ -247,6 +246,6 @@ public class InitialConfiguration {
      */
     public void setWinter(MouseEvent mouseEvent) {
         imgSeasonSelected.setImage(winterImage);
-        curSeason.set("Winter");
+        curSeason = "Winter";
     }
 }
