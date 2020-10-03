@@ -6,16 +6,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="344.0" prefWidth="600.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.homeScreen.ContinueScreenController">
    <children>
-      <JFXTextField fx:id="txtFldUserName" focusColor="#eda678" layoutX="195.0" layoutY="188.0" prefHeight="25.0" prefWidth="210.0" promptText="Enter Username" styleClass="text-field" stylesheets="@../style_sheet.css" unFocusColor="WHITE" />
+      <JFXTextField fx:id="txtFldUserName" focusColor="#eda678" layoutX="195.0" layoutY="172.0" prefHeight="25.0" prefWidth="210.0" promptText="Enter Username" styleClass="text-field" stylesheets="@../style_sheet.css" unFocusColor="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXTextField>
       <Text fill="WHITE" layoutX="81.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enetr your username to continue" wrappingWidth="468.73583984375">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <JFXButton layoutX="447.0" layoutY="275.0" onMousePressed="#createGame" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Continue">
+      <JFXButton layoutX="447.0" layoutY="275.0" onAction="#continueGame" style="-fx-background-color: #eda678; -fx-border-radius: 5em; -fx-background-radius: 5em;" text="Continue">
          <font>
             <Font size="14.0" />
          </font>
