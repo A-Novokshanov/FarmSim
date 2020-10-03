@@ -69,7 +69,7 @@ public class InitialConfiguration {
     @FXML
     private Text txtNameError;
     @FXML
-    private JFXComboBox cmbBoxSeason;
+    private JFXComboBox<String> cmbBoxSeason;
 
     private SeedModel seed;
     private PlayerViewModel playerViewModel = new PlayerViewModel();
@@ -88,7 +88,6 @@ public class InitialConfiguration {
         this.txtFldName.setStyle("-fx-text-fill: white");
         this.cmbBoxSeason.setStyle("-fx-text-fill: white");
         this.cmbBoxSeason.setStyle("-fx-font-size: 18");
-
 
         ObservableList<String> seasons =
                 FXCollections.observableArrayList(
@@ -136,7 +135,7 @@ public class InitialConfiguration {
             txtFldName.setStyle("-fx-prompt-text-fill: RED");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
                 txtFldName.setStyle("-fx-prompt-text-fill:  white");
-                this.txtFldName.setStyle("-fx-text-fill: white");
+                txtFldName.setStyle("-fx-text-fill: white");
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
 
@@ -147,11 +146,13 @@ public class InitialConfiguration {
             txtNameError.setVisible(true);
             txtFldName.setUnFocusColor(Color.RED);
             txtFldName.setFocusColor(Color.RED);
-            txtFldName.setStyle("-fx-prompt-text-fill: RED");
+            txtFldName.setStyle("-fx-prompt-text-fill: red");
+            txtFldName.setStyle("-fx-text-fill: white");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
                 txtFldName.setStyle("-fx-prompt-text-fill: white");
-                this.txtFldName.setStyle("-fx-text-fill: white");
-                txtFldName.setUnFocusColor(Color.BLACK);
+                txtFldName.setStyle("-fx-text-fill: white");
+                txtNameError.setVisible(false);
+                txtFldName.setFocusColor(Color.WHITE);
             });
             return false;
         }
@@ -162,7 +163,7 @@ public class InitialConfiguration {
     /**
      * This method enables the dragging of a window pane.
      *
-     * @param event A mouse event.
+     * @param event The event that is clicking of the mouse.
      */
     public void dragInitialConfigScreen(MouseEvent event) {
 
@@ -175,9 +176,11 @@ public class InitialConfiguration {
 
 
     /**
-     * This method obtains the x and y co-ordinates of the mouse when pressed. These co-ordinates are then used in the dragged() method to configure the position of the window pane.
+     * This method obtains the x and y co-ordinates of the mouse when pressed.
+     * These co-ordinates are then used in the dragged() method to configure
+     * the position of the window pane.
      *
-     * @param event A mouse event.
+     * @param event The event that is clicking of the mouse.
      */
     public void pressedSignUpScreen(MouseEvent event) {
 
@@ -189,7 +192,7 @@ public class InitialConfiguration {
      * This event handler method corresponds to the minimize button on the screen.
      * The method minimizes the current screen.
      *
-     * @param event A mouse event.
+     * @param event The event that is clicking of the mouse.
      */
     public void windowMinimize(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
