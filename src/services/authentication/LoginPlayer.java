@@ -50,8 +50,8 @@ public class LoginPlayer {
         if (this.isDbConnected()) {
             try {
                 this.preparedStatement = this.dbConnection.prepareStatement(USER_EXISTS_QUERY);
-                preparedStatement.setString(1, name);
-                resultSet = preparedStatement.executeQuery();
+                this.preparedStatement.setString(1, name);
+                this.resultSet = this.preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
                     String playerName = resultSet.getString(1);

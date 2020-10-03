@@ -1,10 +1,16 @@
 package views.initialConfig;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,6 +68,8 @@ public class InitialConfiguration {
     private ImageView imgSeasonSelected;
     @FXML
     private Text txtNameError;
+    @FXML
+    private JFXComboBox cmbBoxSeason;
 
     private SeedModel seed;
     private PlayerViewModel playerViewModel = new PlayerViewModel();
@@ -70,6 +78,37 @@ public class InitialConfiguration {
     private String curSeed = "Corn";
     private String curSeason = "Spring";
     private int currentMoney;
+    private double x = 0;
+    private double y = 0;
+
+
+    @FXML
+    public void initialize() {
+        this.txtFldName.setStyle("-fx-prompt-text-fill: white");
+        this.txtFldName.setStyle("-fx-text-fill: white");
+        this.cmbBoxSeason.setStyle("-fx-text-fill: white");
+        this.cmbBoxSeason.setStyle("-fx-font-size: 18");
+
+
+        ObservableList<String> seasons =
+                FXCollections.observableArrayList(
+                        "Spring",
+                        "Summer",
+                        "Autumn",
+                        "Winter"
+                );
+        this.cmbBoxSeason.setItems(seasons);
+        this.cmbBoxSeason.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                cmbBoxSeason.setStyle("-fx-text-fill: white");
+                cmbBoxSeason.setStyle("-fx-highlight-text-fill: white");
+                cmbBoxSeason.setStyle("-fx-font-size: 18");
+                curSeason = cmbBoxSeason.getValue().toString();
+
+            }
+        });
+    }
 
     /**
      * Sets Season and Seed in a Setting view model.
@@ -96,7 +135,8 @@ public class InitialConfiguration {
             txtFldName.setFocusColor(Color.RED);
             txtFldName.setStyle("-fx-prompt-text-fill: RED");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
-                txtFldName.setStyle("-fx-prompt-text-fill: black");
+                txtFldName.setStyle("-fx-prompt-text-fill:  white");
+                this.txtFldName.setStyle("-fx-text-fill: white");
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
 
@@ -109,7 +149,8 @@ public class InitialConfiguration {
             txtFldName.setFocusColor(Color.RED);
             txtFldName.setStyle("-fx-prompt-text-fill: RED");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
-                txtFldName.setStyle("-fx-prompt-text-fill: black");
+                txtFldName.setStyle("-fx-prompt-text-fill: white");
+                this.txtFldName.setStyle("-fx-text-fill: white");
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
             return false;
@@ -117,6 +158,58 @@ public class InitialConfiguration {
 
         return true;
     }
+
+    /**
+     * This method enables the dragging of a window pane.
+     *
+     * @param event A mouse event.
+     */
+    public void dragInitialConfigScreen(MouseEvent event) {
+
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
+
+
+    /**
+     * This method obtains the x and y co-ordinates of the mouse when pressed. These co-ordinates are then used in the dragged() method to configure the position of the window pane.
+     *
+     * @param event A mouse event.
+     */
+    public void pressedSignUpScreen(MouseEvent event) {
+
+        x = event.getX();
+        y = event.getY();
+    }
+
+    /**
+     * This event handler method corresponds to the minimize button on the screen.
+     * The method minimizes the current screen.
+     *
+     * @param event A mouse event.
+     */
+    public void windowMinimize(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+
+    }
+
+
+    /**
+     * This event handler method corresponds to the close button on the screen.
+     * The method, when called, closes the current window.
+     *
+     * @param event A mouse event.
+     */
+    public void windowClose(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+
+    }
+
 
     /**
      * Creates new game based on selected settings
