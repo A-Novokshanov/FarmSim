@@ -4,10 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -82,32 +78,32 @@ public class InitialConfiguration {
     private double y = 0;
 
 
-//    @FXML
-//    public void initialize() {
-//        this.txtFldName.setStyle("-fx-prompt-text-fill: white");
-//        this.txtFldName.setStyle("-fx-text-fill: white");
-//        this.cmbBoxSeason.setStyle("-fx-text-fill: white");
-//        this.cmbBoxSeason.setStyle("-fx-font-size: 18");
-//
-//        ObservableList<String> seasons =
-//                FXCollections.observableArrayList(
-//                        "Spring",
-//                        "Summer",
-//                        "Autumn",
-//                        "Winter"
-//                );
-//        this.cmbBoxSeason.setItems(seasons);
-//        this.cmbBoxSeason.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                cmbBoxSeason.setStyle("-fx-text-fill: white");
-//                cmbBoxSeason.setStyle("-fx-highlight-text-fill: white");
-//                cmbBoxSeason.setStyle("-fx-font-size: 18");
-//                curSeason = cmbBoxSeason.getValue().toString();
-//
-//            }
-//        });
-//    }
+    //    @FXML
+    //    public void initialize() {
+    //        this.txtFldName.setStyle("-fx-prompt-text-fill: white");
+    //        this.txtFldName.setStyle("-fx-text-fill: white");
+    //        this.cmbBoxSeason.setStyle("-fx-text-fill: white");
+    //        this.cmbBoxSeason.setStyle("-fx-font-size: 18");
+    //
+    //        ObservableList<String> seasons =
+    //                FXCollections.observableArrayList(
+    //                        "Spring",
+    //                        "Summer",
+    //                        "Autumn",
+    //                        "Winter"
+    //                );
+    //        this.cmbBoxSeason.setItems(seasons);
+    //        this.cmbBoxSeason.setOnAction(new EventHandler<ActionEvent>() {
+    //            @Override
+    //            public void handle(ActionEvent actionEvent) {
+    //                cmbBoxSeason.setStyle("-fx-text-fill: white");
+    //                cmbBoxSeason.setStyle("-fx-highlight-text-fill: white");
+    //                cmbBoxSeason.setStyle("-fx-font-size: 18");
+    //                curSeason = cmbBoxSeason.getValue().toString();
+    //
+    //            }
+    //        });
+    //    }
 
     /**
      * Sets Season and Seed in a Setting view model.
@@ -237,7 +233,7 @@ public class InitialConfiguration {
             playerViewModel.setPlayerDetails(seed, season,
                     txtFldName.textProperty().getValue(), curDifficulty, currentMoney);
             FarmUIController farmUIController = loader.getController();
-            farmUIController.initData(playerViewModel);
+            farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
 
             Stage currentStage = (Stage) txtFldName.getScene().getWindow();
             currentStage.close();

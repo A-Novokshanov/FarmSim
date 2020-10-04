@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class CreatePlayer {
     private final Connection dbConnection;
-    private static final String CREATE_PLAYER_QUERY = "INSERT INTO player(name) VALUES(?)";
+    private static final String CREATE_PLAYER_QUERY = "INSERT INTO player(name, money) VALUES(?, ?)";
     private static final String GET_PLAYER_ID = "SELECT a.id FROM player a WHERE a.name = ";
     private static final String CREATE_PLAYER_SETTINGS =
             "INSERT INTO setting(difficulty, season, seed, player) VALUES(?, ?, ?, ?)";
@@ -51,6 +51,7 @@ public class CreatePlayer {
             try {
                 PreparedStatement preparedStatement = this.dbConnection.prepareStatement(CREATE_PLAYER_QUERY);
                 preparedStatement.setString(1, playerDetails.getPlayerSettings().getPlayerName());
+                preparedStatement.setInt(2, playerDetails.getUserCurrentMoney());
                 preparedStatement.executeUpdate();
 
                 String query = GET_PLAYER_ID + "\'" + playerDetails.getPlayerSettings().getPlayerName() + "\'";

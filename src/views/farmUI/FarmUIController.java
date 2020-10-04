@@ -18,9 +18,11 @@ public class FarmUIController {
      * Initializes data with the parameter
      *
      * @param playerViewModel Setting View Model to access player details.
+     * @param playerName      The name of the current player.
      */
-    public void initData(PlayerViewModel playerViewModel) {
+    public void initData(PlayerViewModel playerViewModel, String playerName) {
         this.playerViewModel = playerViewModel;
+        playerViewModel.getPlayerInformationFromDatabase(playerName);
         money.setText("$ " + this.playerViewModel.getPlayer().getUserCurrentMoney());
     }
 

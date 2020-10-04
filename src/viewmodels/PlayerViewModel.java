@@ -4,8 +4,8 @@ import models.PlayerModel;
 import models.SeasonModel;
 import models.SeedModel;
 import models.SettingModel;
-import services.authentication.LoginPlayer;
 import services.authentication.CreatePlayer;
+import services.authentication.LoginPlayer;
 
 /**
  * This view-model class will aid accessing certain types of players.
@@ -59,6 +59,16 @@ public class PlayerViewModel {
         this.playerModel = new PlayerModel(currentMoney, this.settingModel);
         this.addSettingsToDatabase(this.playerModel);
 
+    }
+
+    /**
+     * Gets the player information from the service class.
+     *
+     * @param playerName The name of the player to get the settings of.
+     */
+    public void getPlayerInformationFromDatabase(String playerName) {
+        LoginPlayer loginPlayer = new LoginPlayer();
+        this.playerModel = loginPlayer.getPlayerDetails(playerName);
     }
 
     /**

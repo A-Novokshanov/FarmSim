@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="344.0" prefWidth="600.0" style="-fx-background-color: #3D4956;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.homeScreen.ContinueScreenController">
    <children>
-      <JFXTextField fx:id="txtFldUserName" focusColor="#eda678" layoutX="195.0" layoutY="172.0" prefHeight="25.0" prefWidth="210.0" promptText="Enter Username" styleClass="text-field" stylesheets="@../style_sheet.css" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtFldUserName" focusColor="#eda678" labelFloat="true" layoutX="195.0" layoutY="172.0" prefHeight="25.0" prefWidth="210.0" promptText="Enter Username" styleClass="text-field" stylesheets="@../style_sheet.css" unFocusColor="WHITE">
          <font>
             <Font size="17.0" />
          </font>
@@ -23,5 +23,10 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
+      <Text fx:id="txtError" fill="RED" layoutX="157.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User does not exist, please create an account" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

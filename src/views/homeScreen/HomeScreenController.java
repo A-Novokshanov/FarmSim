@@ -100,22 +100,21 @@ public class HomeScreenController {
             e.printStackTrace();
         }
 
-
-//        Stage stage = new Stage();
-//        Stage currentStage = (Stage) btnNewGame.getScene().getWindow();
-//        Parent root = null;
-//        try {
-//            root = FXMLLoader.load(getClass().getResource("../initialConfig/InitialConfiguration2.fxml"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        stage.setTitle("Initial Configuration");
-//        stage.initStyle(StageStyle.TRANSPARENT);
-//        Scene scene = new Scene(root, 1280, 720);
-//        scene.setFill(Color.TRANSPARENT);
-//        stage.setScene(scene);
-//        currentStage.close();
-//        stage.show();
+        //        Stage stage = new Stage();
+        //        Stage currentStage = (Stage) btnNewGame.getScene().getWindow();
+        //        Parent root = null;
+        //        try {
+        //            root = FXMLLoader.load(getClass().getResource("../initialConfig/InitialConfiguration2.fxml"));
+        //        } catch (IOException e) {
+        //            e.printStackTrace();
+        //        }
+        //        stage.setTitle("Initial Configuration");
+        //        stage.initStyle(StageStyle.TRANSPARENT);
+        //        Scene scene = new Scene(root, 1280, 720);
+        //        scene.setFill(Color.TRANSPARENT);
+        //        stage.setScene(scene);
+        //        currentStage.close();
+        //        stage.show();
     }
 
     /**
@@ -125,6 +124,7 @@ public class HomeScreenController {
      */
     public void continueGame(MouseEvent mouseEvent) {
         Stage stage = new Stage();
+        Stage currentStage = (Stage) btnContinue.getScene().getWindow();
         stage.initStyle(StageStyle.DECORATED);
         Parent root = null;
         try {
@@ -135,6 +135,7 @@ public class HomeScreenController {
         }
         stage.setTitle("Hello World");
         stage.setScene(new Scene(root, 600, 344));
+        currentStage.close();
         stage.show();
     }
 }

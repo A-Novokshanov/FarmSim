@@ -1,5 +1,9 @@
 package services.authentication;
 
+import models.PlayerModel;
+import models.SeasonModel;
+import models.SeedModel;
+import models.SettingModel;
 import services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -10,6 +14,8 @@ import java.sql.SQLException;
 public class LoginPlayer {
     private final Connection dbConnection;
     private static final String USER_EXISTS_QUERY = "SELECT name from player where name=?";
+    private static final String GET_USER_ID_MONEY = "SELECT id, money from player where name=?";
+    private static final String GET_USER_SETTINGS = "SELECT difficulty, season, seed from setting where player = ?";
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
@@ -17,8 +23,8 @@ public class LoginPlayer {
      * Constructor that establishes a connection to the database.
      */
     public LoginPlayer() {
-        this.dbConnection = DatabaseConnection.getDbConnection();
-        if (this.dbConnection == null) {
+        dbConnection = DatabaseConnection.getDbConnection();
+        if (dbConnection == null) {
             System.exit(1);
         }
     }
@@ -49,9 +55,9 @@ public class LoginPlayer {
 
         if (this.isDbConnected()) {
             try {
-                this.preparedStatement = this.dbConnection.prepareStatement(USER_EXISTS_QUERY);
-                this.preparedStatement.setString(1, name);
-                this.resultSet = this.preparedStatement.executeQuery();
+                preparedStatement = this.dbConnection.prepareStatement(USER_EXISTS_QUERY);
+                preparedStatement.setString(1, name);
+                resultSet = preparedStatement.executeQuery();
 
                 while (resultSet.next()) {
                     String playerName = resultSet.getString(1);
@@ -66,6 +72,45 @@ public class LoginPlayer {
         }
         return userExistFlag;
 
+    }
+
+    /**
+     * Gets user details from the database and populates the models.
+     *
+     * @param playerName The name of the player to get the settings of.
+     * @return The player model class that holds player details.
+     */
+    public PlayerModel getPlayerDetails(String playerName) {
+        if (isDbConnected()) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(GET_USER_ID_MONEY);
+                preparedStatement.setString(1, playerName);
+                resultSet = preparedStatement.executeQuery();
+
+                int playerId = resultSet.getInt("id");
+                int currentMoney = resultSet.getInt("money");
+
+                preparedStatement = dbConnection.prepareStatement(GET_USER_SETTINGS);
+                preparedStatement.setInt(1, playerId);
+                resultSet = preparedStatement.executeQuery();
+
+                SeasonModel seasonModel = new SeasonModel(0, resultSet.getString("season"),
+                        null, null);
+
+                SeedModel seedModel = new SeedModel(resultSet.getString("seed"));
+                String difficulty = resultSet.getString("difficulty");
+                SettingModel settingModel = new SettingModel(seasonModel, seedModel, difficulty, playerName);
+
+                return new PlayerModel(currentMoney, settingModel);
+
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
+
+        return null;
     }
 }
 
