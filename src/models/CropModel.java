@@ -10,7 +10,6 @@ public class CropModel {
 
     private String cropName;
     private int cropQuantity;
-    private int daysOld;
     private double cropValue;
 
     /**
