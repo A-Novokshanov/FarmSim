@@ -13,7 +13,7 @@ import models.StorageModel;
  * @version 1.0
  */
 public class MarketViewModel {
-    private PlayerModel player;
+    private PlayerViewModel player;
     private StorageModel storage;
     private StorageViewModel storageViewModel;
     private MarketModel marketModel;
@@ -23,10 +23,10 @@ public class MarketViewModel {
      * @param player a PlayerModel
      * @param storage a StorageModel
      */
-    public MarketViewModel(PlayerModel player, StorageModel storage, MarketModel market){
+    public MarketViewModel(PlayerViewModel player, StorageModel storage, MarketModel market){
         this.player = player;
         this.storage = storage;
-        this.storageViewModel = new StorageViewModel(storage);
+        this.storageViewModel = new StorageViewModel(storage, player);
         this.marketModel = market;
     }
     /**
@@ -42,7 +42,7 @@ public class MarketViewModel {
         String difficulty = marketModel.getSettingModel().getStartingDifficulty();
         double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
         double currentPriceTotal = currentPriceIndividual * quantity;
-        return (!(player.getUserCurrentMoney() < currentPriceTotal))
+        return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))
                 && ((quantity + storage.getInventorySize()) <= storage.getCapacity());
     }
 
@@ -50,7 +50,7 @@ public class MarketViewModel {
      * Add crop to market after checking it is eligible to be added.
      * @param crop The crop to be added to the market.
      */
-    public void addCropsToStorage(CropModel crop, int quantity) {
+    public void purchaseItems(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
             storageViewModel.addToInventory(crop, quantity);
         }

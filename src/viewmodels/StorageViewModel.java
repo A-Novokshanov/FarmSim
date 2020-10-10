@@ -11,14 +11,17 @@ import models.StorageModel;
  */
 public class StorageViewModel {
     private StorageModel storageModel;
+    private PlayerViewModel player;
+
 
     /**
      * This constructor initializes the instance variables.
      *
      * @param storageModel The storage model object.l
      */
-    public StorageViewModel(StorageModel storageModel) {
+    public StorageViewModel(StorageModel storageModel, PlayerViewModel player) {
         this.storageModel = storageModel;
+        this.player = player;
     }
 
     /**
@@ -52,8 +55,12 @@ public class StorageViewModel {
                     if (storageModel.getEnoughToRemove(i, amount) == 1) {
                         if (storageModel.getEnoughToRemove(i, amount) == 1) {
                             storageModel.removeCropAmount(amount, i);
+                            player.getPlayer().setUserCurrentMoney((int) (player.getPlayer().getUserCurrentMoney()
+                                    + amount * (crop.getCropValue())));
                         } else {
                             storageModel.removeCrop(i);
+                            player.getPlayer().setUserCurrentMoney((int) (player.getPlayer().getUserCurrentMoney()
+                                    + amount * (crop.getCropValue())));
                         }
 
                     }
