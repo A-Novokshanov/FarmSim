@@ -33,17 +33,21 @@ public class StorageModel {
     }
 
     /**
-     * Looks to see if we have the crop in the storage and then adds a certain quantity, or it adds it to cropInventory.
+     * Adds to the current crop amount.
      *
-     *
+     * @param i the index our object is in.
      * @param quantity how much of the crop to add.
      */
     public void setNewCropAmount(int quantity, int i) {
         cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() + quantity);
-
-
     }
 
+    /**
+     * Sets up a new crop in our list if its
+     *
+     * @param crop the crop we want to add.
+     * @param quantity how much of the crop to add.
+     */
     public void setNewCrop(CropModel crop, int quantity) {
         cropInventory.set(cropInventory.size(), crop);
         crop.setCropQuantity(crop.getCropQuantity() + quantity);
@@ -62,10 +66,22 @@ public class StorageModel {
         cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
     }
 
+    /**
+     * Removes the crop from the inventory.
+     *
+     * @param i where its located in our list.
+     */
     public void removeCrop(int i) {
         cropInventory.remove(i);
     }
 
+    /**
+     * Checks to see if we have to remove from inventory, or just a certain amount.
+     *
+     * @param i location of crop.
+     * @param quantity amount to remove.
+     * @return what scenario to go with.
+     */
     public int getEnoughToRemove(int i, int quantity) {
         if (cropInventory.get(i).getCropQuantity() - quantity> 0) {
             return 1;
@@ -112,6 +128,11 @@ public class StorageModel {
         return cropInventory.get(index).getCropName().equals(crop2.getCropName());
     }
 
+    /**
+     * The capacity of our inventory.
+     *
+     * @return the capacity.
+     */
     public int getCapacity() {
         return 15;
     }
