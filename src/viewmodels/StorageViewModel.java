@@ -6,7 +6,7 @@ import models.StorageModel;
 /**
  * This view-model class keeps controls the logic flow of adding to a user's inventory.
  *
- * @author Aditya Varun Pratap
+ * @author Rohan Kashiviswanathan
  * @version 1.0
  */
 public class StorageViewModel {
