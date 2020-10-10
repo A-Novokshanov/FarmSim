@@ -4,35 +4,35 @@ package models;
 import java.util.ArrayList;
 
 /**
- * This class stores the data related to the inventory, and also adds and removes crops from inventory.
+ * This class stores the data related to the cropInventory, and also adds and removes crops from cropInventory.
  *
  * @author Rohan Kashiviswanathan
  * @version 1.0
  */
 public class StorageModel {
-    private ArrayList<CropModel> inventory;
+    private ArrayList<CropModel> cropInventory;
 
     /**
-     * Constructor for the inventory that creates the structure of the inventory and initializes it with starter crops.
+     * Constructor for the cropInventory that creates the structure of the cropInventory and initializes it with starter crops.
      */
     public StorageModel() {
-        inventory = new ArrayList<>(15);
-        inventory.add(new CropModel("Corn", 1, 0, 100.00));
-        inventory.add(new CropModel("Tomato", 1, 0, 100.00));
-        inventory.add(new CropModel("Potato", 1, 0, 100.00));
+        cropInventory = new ArrayList<>(15);
+        cropInventory.add(new CropModel("Corn", 1, 0, 100.00));
+        cropInventory.add(new CropModel("Tomato", 1, 0, 100.00));
+        cropInventory.add(new CropModel("Potato", 1, 0, 100.00));
     }
 
     /**
-     * Gets the inventory that the player currently has.
+     * Gets the cropInventory that the player currently has.
      *
-     * @return the inventory.
+     * @return the cropInventory.
      */
     public ArrayList<CropModel> getInventory() {
-        return inventory;
+        return cropInventory;
     }
 
     /**
-     * Looks to see if we have the crop in the storage and then adds a certain quantity, or it adds it to inventory.
+     * Looks to see if we have the crop in the storage and then adds a certain quantity, or it adds it to cropInventory.
      *
      * @param crop the crop we want to add.
      * @param quantity how much of the crop to add.
@@ -42,13 +42,13 @@ public class StorageModel {
             boolean added = false;
             for (int i = 0; i < getInventorySize(); i++) {
                 if (checkIfNameCorrect(i, crop)) {
-                    inventory.get(i).setCropQuantity(inventory.get(i).getCropQuantity() + quantity);
+                    cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() + quantity);
                     added = true;
                     break;
                 }
             }
             if (!added) {
-                inventory.set(inventory.size(), crop);
+                cropInventory.set(cropInventory.size(), crop);
                 crop.setCropQuantity(crop.getCropQuantity() + quantity);
             }
         }
@@ -60,15 +60,15 @@ public class StorageModel {
      * @param crop the crop we want to remove.
      * @param quantity how much of the crop to remove.
      */
-    public void sellCrop(CropModel crop, int quantity) {
+    public void removeCrop(CropModel crop, int quantity) {
         if (getInventorySize() > 0 && upForSale(crop)) {
             for (int i = 0; i < getInventorySize(); i++) {
                 if (checkIfNameCorrect(i, crop)) {
-                    if (inventory.get(i).getCropQuantity() - quantity > 0) {
-                        inventory.get(i).setCropQuantity(inventory.get(i).getCropQuantity() - quantity);
+                    if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
+                        cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
                         break;
-                    } else if (inventory.get(i).getCropQuantity() - quantity > -1){
-                        inventory.remove(i);
+                    } else if (cropInventory.get(i).getCropQuantity() - quantity > -1){
+                        cropInventory.remove(i);
                         break;
                     }
                 }
@@ -77,12 +77,12 @@ public class StorageModel {
     }
 
     /**
-     * Gets the current inventory size.
+     * Gets the current cropInventory size.
      *
-     * @return inventory size.
+     * @return cropInventory size.
      */
     public int getInventorySize() {
-        return inventory.size();
+        return cropInventory.size();
     }
 
     /**
@@ -102,16 +102,23 @@ public class StorageModel {
     }
 
     /**
-     * Tells if you want to exit out of inventory.
+     * Tells if you want to exit out of cropInventory.
      *
-     * @return true to leave inventory.
+     * @return true to leave cropInventory.
      */
     public boolean leaveInventory() {
         return true;
     }
 
+    /**
+     * Checks to see if the crop name matches with the current object in list.
+     *
+     * @param index the current index in the list
+     * @param crop2
+     * @return
+     */
     public boolean checkIfNameCorrect(int index, CropModel crop2) {
-        if (inventory.get(index).getCropName().equals(crop2.getCropName())) {
+        if (cropInventory.get(index).getCropName().equals(crop2.getCropName())) {
             return true;
         }
         return false;
