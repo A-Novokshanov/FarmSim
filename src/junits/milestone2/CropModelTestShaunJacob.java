@@ -10,7 +10,7 @@ public class CropModelTestShaunJacob {
 
     @Before
     public void setUp() {
-        cropModel = new CropModel("corn", 2, 4);
+        cropModel = new CropModel("corn", 2, 0, 4);
     }
 
     // Testing the crop name getter

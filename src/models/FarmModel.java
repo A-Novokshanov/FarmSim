@@ -1,6 +1,6 @@
 package models;
 /**
- The FarmModel class represents the model class of the Player
+ The FarmModel class represents the model class of the Farm
  holding the instance variables and associating methods.
  * @author Andrew Novokshanov
  * @version 1.0

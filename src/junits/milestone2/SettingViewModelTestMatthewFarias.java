@@ -31,7 +31,7 @@ public class SettingViewModelTestMatthewFarias {
         testAnimal = new AnimalModel(100, 100, 50, "TestAnimal");
         listAnimals = new ArrayList<>();
         listAnimals.add(testAnimal);
-        testCrop = new CropModel("testCrop", 2, 4);
+        testCrop = new CropModel("testCrop", 2, 0, 4);
         listCrops  = new ArrayList<>();
         listCrops.add(testCrop);
         seedModel  = new SeedModel("Corn");
