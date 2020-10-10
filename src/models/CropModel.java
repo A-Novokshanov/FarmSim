@@ -17,10 +17,9 @@ public class CropModel {
      *
      * @param cropName     The name of the crop.
      * @param cropQuantity The quantity of the specific crop.
-     * @param daysOld      The number of days old a specific crop is.
      * @param cropValue    The value of each crop.
      */
-    public CropModel(String cropName, int cropQuantity,int daysOld, double cropValue) {
+    public CropModel(String cropName, int cropQuantity, double cropValue) {
         this.cropName = cropName;
         this.cropQuantity = cropQuantity;
         this.cropValue = cropValue;

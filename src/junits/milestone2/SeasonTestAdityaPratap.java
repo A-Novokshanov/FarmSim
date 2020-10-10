@@ -29,8 +29,8 @@ public class SeasonTestAdityaPratap {
         this.chicken = new AnimalModel(50, 63, 28, "Chicken");
         this.cow = new AnimalModel(560, 846, 150, "Cow");
 
-        this.tomatoCrop = new CropModel("Tomato", 50, 0, 23.45);
-        this.cornCrop = new CropModel("Corn", 65, 0, 12.76);
+        this.tomatoCrop = new CropModel("Tomato", 50, 23.45);
+        this.cornCrop = new CropModel("Corn", 65, 12.76);
 
         this.animalModelList = new ArrayList<>();
         this.animalModelList.add(this.goat);
@@ -90,8 +90,8 @@ public class SeasonTestAdityaPratap {
         List<CropModel> expectedList = new ArrayList<>();
         List<CropModel> actualList = this.seasonModel.getDesirableCrops();
 
-        CropModel tomatoCrop = new CropModel("Tomato", 50, 0, 23.45);
-        CropModel cornCrop = new CropModel("Corn", 65, 0, 12.76);
+        CropModel tomatoCrop = new CropModel("Tomato", 50,  23.45);
+        CropModel cornCrop = new CropModel("Corn", 65, 12.76);
 
         expectedList.add(tomatoCrop);
         expectedList.add(cornCrop);
@@ -145,7 +145,7 @@ public class SeasonTestAdityaPratap {
     public void testSetDesirableCrops() {
 
         List<CropModel> crops = new ArrayList<>();
-        CropModel wheatCrop = new CropModel("Wheat", 70, 0, 15.00);
+        CropModel wheatCrop = new CropModel("Wheat", 70,  15.00);
 
         crops.add(wheatCrop);
         this.seasonModel.setDesirableCrops(crops);
