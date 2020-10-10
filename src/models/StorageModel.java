@@ -38,22 +38,19 @@ public class StorageModel {
      * @param crop     the crop we want to add.
      * @param quantity how much of the crop to add.
      */
-    public void addCrop(CropModel crop, int quantity) {
-        if (getInventorySize() < 15) {
-            boolean added = false;
-            for (int i = 0; i < getInventorySize(); i++) {
-                if (checkIfNameCorrect(i, crop)) {
-                    cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() + quantity);
-                    added = true;
-                    break;
-                }
-            }
-            if (!added) {
-                cropInventory.set(cropInventory.size(), crop);
-                crop.setCropQuantity(crop.getCropQuantity() + quantity);
-            }
-        }
+    public void setNewCropAmount(CropModel crop, int quantity, int i) {
+        cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() + quantity);
+
+
     }
+
+    public void setNewCrop(CropModel crop, int quantity) {
+        cropInventory.set(cropInventory.size(), crop);
+        crop.setCropQuantity(crop.getCropQuantity() + quantity);
+    }
+
+
+
 
     /**
      * Looks to see if we have the crop in the storage and then removes a certain quantity, if not all of it.
@@ -61,22 +58,23 @@ public class StorageModel {
      * @param crop     the crop we want to remove.
      * @param quantity how much of the crop to remove.
      */
-    public void removeCrop(CropModel crop, int quantity) {
-        if (getInventorySize() > 0 && upForSale(crop)) {
-            for (int i = 0; i < getInventorySize(); i++) {
-                if (checkIfNameCorrect(i, crop)) {
-                    if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
-                        cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
-                        break;
-                    } else if (cropInventory.get(i).getCropQuantity() - quantity > -1) {
-                        cropInventory.remove(i);
-                        break;
-                    }
-                }
-            }
-        }
+    public void removeCropAmount(CropModel crop, int quantity, int i) {
+        cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
     }
 
+    public void removeCrop(CropModel crop, int i) {
+        cropInventory.remove(i);
+    }
+
+    public int getEnoughToRemove(int i, CropModel crop, int quantity) {
+        if (cropInventory.get(i).getCropQuantity() - quantity> 0) {
+            return 1;
+        }
+        else if (cropInventory.get(i).getCropQuantity() - quantity == 0) {
+            return 2;
+        }
+        return 3;
+    }
     /**
      * Gets the current cropInventory size.
      *
@@ -103,15 +101,6 @@ public class StorageModel {
     }
 
     /**
-     * Tells if you want to exit out of cropInventory.
-     *
-     * @return true to leave cropInventory.
-     */
-    public boolean leaveInventory() {
-        return true;
-    }
-
-    /**
      * Checks to see if the crop name matches with the current object in list.
      *
      * @param index the current index in the list.
@@ -121,6 +110,10 @@ public class StorageModel {
      */
     public boolean checkIfNameCorrect(int index, CropModel crop2) {
         return cropInventory.get(index).getCropName().equals(crop2.getCropName());
+    }
+
+    public int getCapacity() {
+        return 15;
     }
 
 }
