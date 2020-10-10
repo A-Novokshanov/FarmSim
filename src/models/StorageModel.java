@@ -38,10 +38,10 @@ public class StorageModel {
      * @param quantity how much of the crop to add.
      */
     public void addCrop(CropModel crop, int quantity) {
-        if (getInventorySize() + quantity < 15) {
+        if (getInventorySize() < 15) {
             boolean added = false;
             for (int i = 0; i < getInventorySize(); i++) {
-                if (inventory.get(i).getCropName().equals(crop.getCropName())) {
+                if (checkIfNameCorrect(i, crop)) {
                     inventory.get(i).setCropQuantity(inventory.get(i).getCropQuantity() + quantity);
                     added = true;
                     break;
@@ -61,13 +61,15 @@ public class StorageModel {
      * @param quantity how much of the crop to remove.
      */
     public void sellCrop(CropModel crop, int quantity) {
-        if (getInventorySize() - quantity > -1 && upForSale(crop)) {
+        if (getInventorySize() > 0 && upForSale(crop)) {
             for (int i = 0; i < getInventorySize(); i++) {
-                if (inventory.get(i).getCropName().equals(crop.getCropName())) {
+                if (checkIfNameCorrect(i, crop)) {
                     if (inventory.get(i).getCropQuantity() - quantity > 0) {
                         inventory.get(i).setCropQuantity(inventory.get(i).getCropQuantity() - quantity);
-                    } else {
+                        break;
+                    } else if (inventory.get(i).getCropQuantity() - quantity > -1){
                         inventory.remove(i);
+                        break;
                     }
                 }
             }
@@ -87,7 +89,7 @@ public class StorageModel {
      * Checks to see if the crop passed in is valid to sell.
      *
      * @param crop the crop we want to check is valid to sell.
-     * @return if its valid to sell or not. 
+     * @return if its valid to sell or not.
      */
     public boolean upForSale(CropModel crop) {
         String[] cropArray = new String[]{"Tomato", "Potato", "Corn"};
@@ -95,6 +97,22 @@ public class StorageModel {
             if (i.equals(crop.getCropName())) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * Tells if you want to exit out of inventory.
+     *
+     * @return true to leave inventory.
+     */
+    public boolean leaveInventory() {
+        return true;
+    }
+
+    public boolean checkIfNameCorrect(int index, CropModel crop2) {
+        if (inventory.get(index).getCropName().equals(crop2.getCropName())) {
+            return true;
         }
         return false;
     }
