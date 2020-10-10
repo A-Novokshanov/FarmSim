@@ -25,7 +25,7 @@ public class StorageViewModel {
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 count += 1;
                 if (storageModel.checkIfNameCorrect(i, crop)) {
-                    storageModel.setNewCropAmount(crop, quantity, i);
+                    storageModel.setNewCropAmount(quantity, i);
                 }
             }
             if (count == storageModel.getInventorySize()) {
@@ -45,11 +45,11 @@ public class StorageViewModel {
             if (storageModel.getInventorySize() > 0 && storageModel.upForSale(crop)) {
                 for (int i = 0; i < storageModel.getInventorySize(); i++) {
                     if (storageModel.checkIfNameCorrect(i, crop)) {
-                        if (storageModel.getEnoughToRemove(i, crop, amount) == 1) {
-                            if (storageModel.getEnoughToRemove(i, crop, amount) == 1) {
-                                storageModel.removeCropAmount(crop, amount, i);
+                        if (storageModel.getEnoughToRemove(i, amount) == 1) {
+                            if (storageModel.getEnoughToRemove(i, amount) == 1) {
+                                storageModel.removeCropAmount(amount, i);
                             } else {
-                                storageModel.removeCrop(crop, i);
+                                storageModel.removeCrop(i);
                             }
 
                         }
