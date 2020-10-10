@@ -113,15 +113,13 @@ public class StorageModel {
     /**
      * Checks to see if the crop name matches with the current object in list.
      *
-     * @param index the current index in the list
-     * @param crop2
-     * @return
+     * @param index the current index in the list.
+     * @param crop2 the crop passed in to add to inventory.
+     *
+     * @return whether the names are equal.
      */
     public boolean checkIfNameCorrect(int index, CropModel crop2) {
-        if (cropInventory.get(index).getCropName().equals(crop2.getCropName())) {
-            return true;
-        }
-        return false;
+        return cropInventory.get(index).getCropName().equals(crop2.getCropName());
     }
 
 }
