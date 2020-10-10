@@ -3,7 +3,7 @@ package views.farmUI;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import viewmodels.SettingViewModel;
+import viewmodels.PlayerViewModel;
 
 public class FarmUIController {
     @FXML
@@ -12,36 +12,20 @@ public class FarmUIController {
     private Text dayNum;
     private int num = 1;
 
-    private SettingViewModel settingViewModel;
+    private PlayerViewModel playerViewModel;
 
     /**
      * Initializes data with the parameter
      *
-     * @param settingViewModel Setting View Model to access player details.
+     * @param playerViewModel Setting View Model to access player details.
+     * @param playerName      The name of the current player.
      */
-    public void initData(SettingViewModel settingViewModel) {
-        this.settingViewModel = settingViewModel;
-        setMoney();
+    public void initData(PlayerViewModel playerViewModel, String playerName) {
+        this.playerViewModel = playerViewModel;
+        playerViewModel.getPlayerInformationFromDatabase(playerName);
+        money.setText("$ " + this.playerViewModel.getPlayer().getUserCurrentMoney());
     }
 
-    /**
-     * Starting money amount based on difficulty.
-     */
-    public void setMoney() {
-        switch (settingViewModel.getPlayerSettings().getStartingDifficulty()) {
-        case "Casual":
-            money.setText("$" + 10000);
-            break;
-        case "Normal":
-            money.setText("$" + 1000);
-            break;
-        case "Veteran":
-            money.setText("$" + 100);
-            break;
-        default:
-            money.setText("$" + 0);
-        }
-    }
 
     /**
      * Updates day number.
