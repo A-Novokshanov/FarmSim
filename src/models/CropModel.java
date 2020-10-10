@@ -24,7 +24,6 @@ public class CropModel {
     public CropModel(String cropName, int cropQuantity,int daysOld, double cropValue) {
         this.cropName = cropName;
         this.cropQuantity = cropQuantity;
-        this.daysOld = daysOld;
         this.cropValue = cropValue;
     }
 
@@ -62,24 +61,6 @@ public class CropModel {
      */
     public void setCropQuantity(int cropQuantity) {
         this.cropQuantity = cropQuantity;
-    }
-
-    /**
-     * Gets the quantity of the daysOld.
-     *
-     * @return The daysOld attribute of the CropModel object.
-     */
-    public int getDaysOld() {
-        return daysOld;
-    }
-
-    /**
-     * Sets the quantity of daysOld.
-     *
-     * @param daysOld The quantity to be set to the daysOld attribute.
-     */
-    public void setDaysOld(int daysOld) {
-        this.daysOld = daysOld;
     }
 
     /**
