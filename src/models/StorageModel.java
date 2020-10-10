@@ -16,17 +16,10 @@ public class StorageModel {
      * Constructor for the cropInventory that creates the structure of the cropInventory and initializes it with starter crops.
      */
     public StorageModel() {
-<<<<<<< HEAD
         cropInventory = new ArrayList<>(15);
-        cropInventory.add(new CropModel("Corn", 1, 0, 100.00));
-        cropInventory.add(new CropModel("Tomato", 1, 0, 100.00));
-        cropInventory.add(new CropModel("Potato", 1, 0, 100.00));
-=======
-        inventory = new ArrayList<>(15);
-        inventory.add(new CropModel("Corn", 1,  100.00));
-        inventory.add(new CropModel("Tomato", 1,  100.00));
-        inventory.add(new CropModel("Potato", 1,  100.00));
->>>>>>> 89f6465e8fa5a3c35a498a375dcb1a67a833e9b7
+        cropInventory.add(new CropModel("Corn", 1, 100.00));
+        cropInventory.add(new CropModel("Tomato", 1, 100.00));
+        cropInventory.add(new CropModel("Potato", 1, 100.00));
     }
 
     /**
