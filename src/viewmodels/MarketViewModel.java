@@ -15,26 +15,19 @@ import models.StorageModel;
 public class MarketViewModel {
     private PlayerModel player;
     private StorageModel storage;
-    private CropModel corn;
-    private CropModel potato;
-    private CropModel tomato;
-    private CropModel[] marketList;
+    private StorageViewModel storageViewModel;
     private MarketModel marketModel;
 
     /**
      * This methods constructs a new instance of MarketViewModel
      * @param player a PlayerModel
      * @param storage a StorageModel
-     * @return A boolean representing if a user can purchase an item.l
      */
-    public MarketViewModel(PlayerModel player , StorageModel storage) {
+    public MarketViewModel(PlayerModel player, StorageModel storage, MarketModel market){
         this.player = player;
         this.storage = storage;
-        this.corn = new CropModel("Corn", 0, 10.0);
-        this.potato = new CropModel("Potato", 0, 8.0);
-        this.tomato = new CropModel("Tomato", 0, 6.0);
-        this.marketList = new CropModel[]{corn, potato, tomato};
-        this.marketModel = new MarketModel(marketList, player.getPlayerSettings());
+        this.storageViewModel = new StorageViewModel(storage);
+        this.marketModel = market;
     }
     /**
      * This methods checks if the user can purchase an item for the market
@@ -47,6 +40,36 @@ public class MarketViewModel {
      */
     public boolean checkPurchasable(double cropBasePrice, int quantity) {
         String difficulty = marketModel.getSettingModel().getStartingDifficulty();
+        double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
+        double currentPriceTotal = currentPriceIndividual * quantity;
+        return (!(player.getUserCurrentMoney() < currentPriceTotal))
+                && ((quantity + storage.getInventorySize()) <= storage.getCapacity());
+    }
+
+    /**
+     * Add crop to market after checking it is eligible to be added.
+     * @param crop The crop to be added to the market.
+     */
+    public void addCropsToStorage(CropModel crop, int quantity) {
+        if (checkPurchasable(crop.getCropValue(), quantity)) {
+            storageViewModel.addToInventory(crop, quantity);
+        }
+    }
+
+    /**
+     * Sell crop to market after checking it is eligible to be sold.
+     * @param crop The crop to be added to the market.
+     */
+    public void sellCrops(CropModel crop) {
+        //if ()
+    }
+
+    /**
+     * Get price of crop after taking account difficulty
+     * @param cropBasePrice Base price of a crop without taking into account the difficulty
+     * @param difficulty Current difficulty a player has set
+     */
+    public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
             case "Casual":
@@ -62,29 +85,7 @@ public class MarketViewModel {
                 difficultyMod = 0.0;
                 break;
         }
-        double currentPrice = difficultyMod * cropBasePrice * quantity;
-        if ((player.getUserCurrentMoney() < currentPrice) || ((quantity + storage.getInventorySize()) > storage.getCapacity())) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Add crop to market after checking it is eligible to be added.
-     * @param crop The crop to be added to the market.
-     */
-    public void addCropsToStorage(CropModel crop) {
-//        if (checkPurchasable(crop.getCropValue())) {
-//
-//        }
-    }
-
-    /**
-     * Add crop to market after checking it is eligible to be added.
-     * @param crop The crop to be added to the market.
-     */
-    public void addCropsToMarket(CropModel crop) {
-
+        double currentPrice = difficultyMod * cropBasePrice;
+        return currentPrice;
     }
 }
