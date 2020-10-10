@@ -51,7 +51,7 @@ public class CreatePlayer {
             try {
                 PreparedStatement preparedStatement = this.dbConnection.prepareStatement(CREATE_PLAYER_QUERY);
                 preparedStatement.setString(1, playerDetails.getPlayerSettings().getPlayerName());
-                preparedStatement.setInt(2, playerDetails.getUserCurrentMoney());
+                preparedStatement.setDouble(2, playerDetails.getUserCurrentMoney());
                 preparedStatement.executeUpdate();
 
                 String query = GET_PLAYER_ID + "\'" + playerDetails.getPlayerSettings().getPlayerName() + "\'";

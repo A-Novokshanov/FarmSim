@@ -8,7 +8,7 @@ package models;
  * @version 1.0
  */
 public class PlayerModel {
-    private int currentMoney;
+    private double currentMoney;
     private SettingModel playerSettings;
 
     /**
@@ -17,7 +17,7 @@ public class PlayerModel {
      * @param currentMoney The playerModels current money.
      * @param settingModel The player's current settings.
      */
-    public PlayerModel(int currentMoney, SettingModel settingModel) {
+    public PlayerModel(double currentMoney, SettingModel settingModel) {
         this.currentMoney = currentMoney;
         this.playerSettings = settingModel;
     }
@@ -25,7 +25,7 @@ public class PlayerModel {
     /**
      * @return Gets and returns the currentMoney attribute of a PlayerModel object.
      */
-    public int getUserCurrentMoney() {
+    public double getUserCurrentMoney() {
         return this.currentMoney;
     }
 
@@ -34,7 +34,7 @@ public class PlayerModel {
      *
      * @param currentMoney is the new desired currentMoney of a PlayerModel object.
      */
-    public void setUserCurrentMoney(int currentMoney) {
+    public void setUserCurrentMoney(double currentMoney) {
         this.currentMoney = currentMoney;
     }
 
