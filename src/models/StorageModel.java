@@ -20,6 +20,7 @@ public class StorageModel {
         cropInventory.add(new CropModel("Corn", 1, 100.00));
         cropInventory.add(new CropModel("Tomato", 1, 100.00));
         cropInventory.add(new CropModel("Potato", 1, 100.00));
+
     }
 
     /**
@@ -34,7 +35,7 @@ public class StorageModel {
     /**
      * Looks to see if we have the crop in the storage and then adds a certain quantity, or it adds it to cropInventory.
      *
-     * @param crop the crop we want to add.
+     * @param crop     the crop we want to add.
      * @param quantity how much of the crop to add.
      */
     public void addCrop(CropModel crop, int quantity) {
@@ -57,7 +58,7 @@ public class StorageModel {
     /**
      * Looks to see if we have the crop in the storage and then removes a certain quantity, if not all of it.
      *
-     * @param crop the crop we want to remove.
+     * @param crop     the crop we want to remove.
      * @param quantity how much of the crop to remove.
      */
     public void removeCrop(CropModel crop, int quantity) {
@@ -67,7 +68,7 @@ public class StorageModel {
                     if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
                         cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
                         break;
-                    } else if (cropInventory.get(i).getCropQuantity() - quantity > -1){
+                    } else if (cropInventory.get(i).getCropQuantity() - quantity > -1) {
                         cropInventory.remove(i);
                         break;
                     }
