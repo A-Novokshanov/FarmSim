@@ -53,7 +53,7 @@ public class MarketViewModel {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
             storageViewModel.addToInventory(crop, quantity);
             PlayerModel curPlayer = player.getPlayer();
-            curPlayer.setUserCurrentMoney(curPlayer.getUserCurrentMoney() -
+            player.getPlayer().setUserCurrentMoney(curPlayer.getUserCurrentMoney() -
                     calculateCropPrice(crop.getCropValue(), curPlayer.getPlayerSettings().getStartingDifficulty()));
         }
     }
