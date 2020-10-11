@@ -38,15 +38,12 @@ public class PlotViewModel {
      * Populates the plots with a chosen crop.
      *
      * @param cropInPlot The crop to plot.
-     * @param quantity   The quantity of the crop to plot.
      * @return The PlotModel object that has the crop.
      */
-    public PlotModel populatePlot(CropModel cropInPlot, int quantity) {
-        PlotModel plot = new PlotModel(cropInPlot, quantity);
+    public PlotModel populatePlot(CropModel cropInPlot) {
         Random random = new Random();
-        int daysOld = random.nextInt(11);
-        plot.setDaysOld(daysOld);
-
+        int daysOld = random.nextInt(15);
+        PlotModel plot = new PlotModel(cropInPlot, daysOld);
         return plot;
     }
 }
