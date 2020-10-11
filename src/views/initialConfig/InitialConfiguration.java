@@ -122,12 +122,7 @@ public class InitialConfiguration {
      * @param name The name of the player trying to login.
      * @return A boolean representing if the name is entered correctly.
      */
-<<<<<<< HEAD
     private boolean validateName(String name) {
-
-=======
-    private boolean validateName() {
->>>>>>> feature/Milestone3-UI
         if (txtFldName.getText().isBlank()) {
             txtNameError.setVisible(true);
             txtFldName.setUnFocusColor(Color.RED);
