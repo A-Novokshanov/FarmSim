@@ -125,13 +125,22 @@ public class MarketPlace {
     @FXML
     private Text p8Quantity;
 
-    public void initData(MouseEvent mouseEvent, PlayerViewModel player) {
+    public void initData(MouseEvent mouseEvent,
+                         PlayerViewModel player, StorageViewModel storageViewModel) {
         marketViewModel = new MarketViewModel(player);
-        storageViewModel = new StorageViewModel(player);
         budget.setText(String.valueOf(player.getPlayer().getUserCurrentMoney()));
-        p1Quantity.setText(String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
-        p2Quantity.setText(String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
-        p3Quantity.setText(String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        if (storageViewModel.userInventory().get(0) != null) {
+            p1Quantity.setText(
+                    String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
+        }
+        if (storageViewModel.userInventory().get(1) != null) {
+            p2Quantity.setText(
+                    String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
+        }
+        if (storageViewModel.userInventory().get(2) != null) {
+            p3Quantity.setText(
+                    String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        }
         sellSwap(mouseEvent);
     }
 

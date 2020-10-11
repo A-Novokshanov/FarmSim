@@ -93,7 +93,7 @@ public class FarmUIController {
         }
 
         MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel);
+        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel);
 
         stage.setTitle("Market");
         stage.show();
