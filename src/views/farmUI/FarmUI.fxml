@@ -45,7 +45,7 @@
                   <Font size="26.0" />
                </font>
             </Text>
-            <Pane fx:id="inventoryScreen" layoutX="150.0" layoutY="45.0" prefHeight="639.0" prefWidth="1001.0" style="visibility: false; -fx-background-color: gray;">
+            <Pane fx:id="inventoryScreen" layoutX="150.0" layoutY="45.0" prefHeight="639.0" prefWidth="1001.0" style="visibility: true; -fx-background-color: gray;">
                <children>
                   <JFXButton layoutX="673.0" layoutY="564.0" style="-fx-border-color: black;" text="Animals">
                      <font>
@@ -130,7 +130,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="838.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="838.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -140,7 +140,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="132.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="132.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -150,7 +150,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="362.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="362.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -160,7 +160,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="606.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="606.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -170,7 +170,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="838.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="838.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -180,7 +180,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="132.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="132.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -190,7 +190,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="362.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="362.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -200,7 +200,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="606.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="606.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -210,7 +210,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="838.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text layoutX="838.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
