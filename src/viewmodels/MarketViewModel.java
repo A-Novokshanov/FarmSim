@@ -2,6 +2,7 @@ package viewmodels;
 
 import models.CropModel;
 import models.MarketModel;
+import models.PlayerModel;
 import models.StorageModel;
 
 /**
