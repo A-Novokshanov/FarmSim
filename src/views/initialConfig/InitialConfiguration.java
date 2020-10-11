@@ -19,6 +19,7 @@ import models.AnimalModel;
 import models.CropModel;
 import models.SeasonModel;
 import models.SeedModel;
+import models.StorageModel;
 import viewmodels.PlayerViewModel;
 import views.farmUI.FarmUIController;
 
@@ -230,8 +231,9 @@ public class InitialConfiguration {
             }
 
             this.setMoney();
+            StorageModel userStorage = new StorageModel();
             playerViewModel.setPlayerDetails(seed, season,
-                    txtFldName.textProperty().getValue(), curDifficulty, currentMoney);
+                    txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
 

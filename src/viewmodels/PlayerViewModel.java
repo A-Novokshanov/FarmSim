@@ -4,6 +4,7 @@ import models.PlayerModel;
 import models.SeasonModel;
 import models.SeedModel;
 import models.SettingModel;
+import models.StorageModel;
 import services.authentication.CreatePlayer;
 import services.authentication.LoginPlayer;
 
@@ -50,13 +51,15 @@ public class PlayerViewModel {
      * @param playerName         The name of the player.
      * @param startingDifficulty The starting difficulty the player chooses.
      * @param currentMoney       The current money of the player.
+     * @param storageModel       The storage/inventory of the user
      */
     public void setPlayerDetails(SeedModel seedModel, SeasonModel seasonModel,
-                                 String playerName, String startingDifficulty, int currentMoney) {
+                                 String playerName, StorageModel storageModel, String startingDifficulty,
+                                 int currentMoney) {
 
         this.settingModel = new SettingModel(seasonModel, seedModel,
                 startingDifficulty, playerName);
-        this.playerModel = new PlayerModel(currentMoney, this.settingModel);
+        this.playerModel = new PlayerModel(currentMoney, this.settingModel, storageModel);
         this.addSettingsToDatabase(this.playerModel);
 
     }
