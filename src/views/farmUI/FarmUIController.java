@@ -1,12 +1,17 @@
 package views.farmUI;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
+import models.StorageModel;
 import viewmodels.PlayerViewModel;
+import viewmodels.StorageViewModel;
 
 public class FarmUIController {
     @FXML
@@ -21,12 +26,18 @@ public class FarmUIController {
     private Circle sun;
     @FXML
     private Line sunProgressBar;
+    @FXML
+    private Text numTomatoes;
+    @FXML
+    private Text numPotatoes;
+    @FXML
+    private Text numCorn;
 
     private int num = 1;
 
     private PlayerViewModel playerViewModel;
-
-
+    private StorageViewModel storageViewModel;
+    private StorageModel storageModel;
     /**
      * Initializes data with the parameter
      *
@@ -37,10 +48,20 @@ public class FarmUIController {
         this.playerViewModel = playerViewModel;
         playerViewModel.getPlayerInformationFromDatabase(playerName);
         money.setText("$ " + this.playerViewModel.getPlayer().getUserCurrentMoney());
+        storageModel = new StorageModel();
+        storageViewModel = new StorageViewModel(storageModel, playerViewModel);
+        numTomatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity())
+        );
+        numPotatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
+        );
+        numCorn.setText(String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
     }
 
     /**
      * Makes Inventory Screen Invisible if exit button is clicked
+     *
      * @param mouseEvent a mouse click on the exit button
      */
     public void toggleInventoryScreenVisibility(MouseEvent mouseEvent) {

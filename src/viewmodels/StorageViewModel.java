@@ -80,5 +80,4 @@ public class StorageViewModel {
         return storageModel.getInventory();
     }
 
-
 }
