@@ -1,7 +1,6 @@
 package viewmodels;
 
 import models.CropModel;
-import models.PlayerModel;
 import models.StorageModel;
 
 /**
@@ -18,13 +17,12 @@ public class MarketViewModel {
     /**
      * This methods constructs a new instance of MarketViewModel
      *
-     * @param player  a PlayerModel
-     * @param storage a StorageModel
+     * @param player a PlayerModel
      */
-    public MarketViewModel(PlayerViewModel player, StorageModel storage) {
+    public MarketViewModel(PlayerViewModel player) {
         this.player = player;
-        this.storage = storage;
-        this.storageViewModel = new StorageViewModel(storage, player);
+        this.storage = player.getPlayer().getUserStorage();
+        this.storageViewModel = new StorageViewModel(player);
     }
 
     /**
@@ -52,9 +50,9 @@ public class MarketViewModel {
     public void purchaseItems(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
             storageViewModel.addToInventory(crop, quantity);
-            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() -
-                    calculateCropPrice(crop.getCropValue(),
-                            player.getPlayer().getPlayerSettings().getStartingDifficulty()));
+            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                    - calculateCropPrice(crop.getCropValue(),
+                    player.getPlayer().getPlayerSettings().getStartingDifficulty()));
         }
     }
 

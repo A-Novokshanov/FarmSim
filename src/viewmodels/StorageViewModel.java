@@ -18,12 +18,10 @@ public class StorageViewModel {
 
     /**
      * This constructor initializes the instance variables.
-     *
-     * @param storageModel The storage model object.
-     */
-    public StorageViewModel(StorageModel storageModel, PlayerViewModel player) {
-        this.storageModel = storageModel;
+     **/
+    public StorageViewModel(PlayerViewModel player) {
         this.player = player;
+        this.storageModel = player.getPlayer().getUserStorage();
     }
 
     /**
