@@ -1,14 +1,11 @@
 package views.farmUI;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.util.StringConverter;
 import models.StorageModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
@@ -35,9 +32,9 @@ public class FarmUIController {
 
     private int num = 1;
 
-    private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private StorageModel storageModel;
+
     /**
      * Initializes data with the parameter
      *
@@ -45,11 +42,10 @@ public class FarmUIController {
      * @param playerName      The name of the current player.
      */
     public void initData(PlayerViewModel playerViewModel, String playerName) {
-        this.playerViewModel = playerViewModel;
-        playerViewModel.getPlayerInformationFromDatabase(playerName);
-        money.setText("$ " + this.playerViewModel.getPlayer().getUserCurrentMoney());
-        storageModel = new StorageModel();
+        //playerViewModel.getPlayerInformationFromDatabase(playerName);
+        money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         storageViewModel = new StorageViewModel(playerViewModel);
+        System.out.println("User Storage" + playerViewModel.getPlayer().getUserStorage());
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity())
         );

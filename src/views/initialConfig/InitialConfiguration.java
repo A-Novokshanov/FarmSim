@@ -233,6 +233,8 @@ public class InitialConfiguration {
             StorageModel userStorage = new StorageModel();
             playerViewModel.setPlayerDetails(seed, season,
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
+            playerViewModel.getPlayer().setPlayerStorage(userStorage);
+            System.out.println("Init Config Storage " + playerViewModel.getPlayer().getUserStorage());
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
 
