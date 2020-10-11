@@ -129,8 +129,8 @@ public class InitialConfiguration {
             txtFldName.setFocusColor(Color.RED);
             txtFldName.setStyle("-fx-prompt-text-fill: RED");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
-                txtFldName.setStyle("-fx-prompt-text-fill:  white");
-                txtFldName.setStyle("-fx-text-fill: white");
+                txtFldName.setStyle("-fx-prompt-text-fill:  black");
+                txtFldName.setStyle("-fx-text-fill: black");
                 txtFldName.setUnFocusColor(Color.BLACK);
             });
 
@@ -142,10 +142,10 @@ public class InitialConfiguration {
             txtFldName.setUnFocusColor(Color.RED);
             txtFldName.setFocusColor(Color.RED);
             txtFldName.setStyle("-fx-prompt-text-fill: red");
-            txtFldName.setStyle("-fx-text-fill: white");
+            txtFldName.setStyle("-fx-text-fill: black");
             txtFldName.textProperty().addListener((observable, oldValue, newValue) -> {
-                txtFldName.setStyle("-fx-prompt-text-fill: white");
-                txtFldName.setStyle("-fx-text-fill: white");
+                txtFldName.setStyle("-fx-prompt-text-fill: black");
+                txtFldName.setStyle("-fx-text-fill: black");
                 txtNameError.setVisible(false);
                 txtFldName.setFocusColor(Color.WHITE);
             });
