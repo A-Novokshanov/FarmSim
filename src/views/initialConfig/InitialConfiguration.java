@@ -89,7 +89,6 @@ public class InitialConfiguration {
      * @return A boolean representing if the name is entered correctly.
      */
     private boolean validateName() {
-
         if (txtFldName.getText().isBlank()) {
             txtNameError.setVisible(true);
             txtFldName.setUnFocusColor(Color.RED);
