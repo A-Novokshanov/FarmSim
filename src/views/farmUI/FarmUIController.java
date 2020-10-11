@@ -1,14 +1,22 @@
 package views.farmUI;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.StorageModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
+import views.marketPlace.MarketPlace;
+
+import java.io.IOException;
 
 public class FarmUIController {
     @FXML
@@ -32,6 +40,7 @@ public class FarmUIController {
 
     private int num = 1;
 
+    private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private StorageModel storageModel;
 
@@ -53,6 +62,7 @@ public class FarmUIController {
                 String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
         );
         numCorn.setText(String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        this.playerViewModel = playerViewModel;
     }
 
     /**
@@ -66,6 +76,27 @@ public class FarmUIController {
         dayNum.setVisible(!dayNum.isVisible());
         sun.setVisible(!sun.isVisible());
         sunProgressBar.setVisible(!sunProgressBar.isVisible());
+    }
+
+    /**
+     *
+     */
+    public void goToMarket(MouseEvent mouseEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../marketPlace/MarketPlace.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        try {
+            stage.setScene(
+                    new Scene(loader.load())
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        MarketPlace marketPlace = loader.getController();
+        marketPlace.initData(mouseEvent, playerViewModel);
+
+        stage.setTitle("Market");
+        stage.show();
     }
 
     /**

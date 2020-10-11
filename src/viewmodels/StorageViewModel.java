@@ -62,7 +62,6 @@ public class StorageViewModel {
                             player.getPlayer().setUserCurrentMoney((int) (player.getPlayer().getUserCurrentMoney()
                                     + amount * (crop.getCropValue())));
                         }
-
                     }
                 }
             }
