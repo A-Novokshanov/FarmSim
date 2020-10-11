@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,7 @@
 
 <VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.farmUI.FarmUIController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Line endX="-100.0" endY="-640.0" layoutX="1316.0" layoutY="779.0" startX="-100.0" startY="-108.0" />
             <Circle fill="#ebff1f" layoutX="1216.0" layoutY="159.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
@@ -56,16 +57,176 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="740.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="525.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="310.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="103.0" layoutY="320.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="103.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="310.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="525.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="740.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                  <Text layoutX="376.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="111.0" style="-fx-background-color: #1e90ff#1e90ff;" text="Exit">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+                  <Text layoutX="175.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(169, 164)" />
+                  <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="103.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
+            <ScrollPane layoutX="191.0" layoutY="143.0" prefHeight="444.0" prefWidth="924.0" style="-fx-background-color: gray;">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="876.0" prefWidth="903.0" style="-fx-background-color: gray;">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="720.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="488.0" layoutY="255.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="244.0" layoutY="255.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="14.0" layoutY="255.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="720.0" layoutY="255.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="14.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="244.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="488.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="720.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
+                        <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="244.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dependencies/images/placeholders/inventory_potato_PL.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="488.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="48.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="124.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="286.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="362.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="530.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="606.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="762.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="838.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="56.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="132.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="286.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="362.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="530.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="606.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="762.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="838.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="56.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="132.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="286.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="362.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="530.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="606.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="762.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="838.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
     </AnchorPane>
   </children>
