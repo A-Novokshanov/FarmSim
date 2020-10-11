@@ -1,6 +1,5 @@
 package views.farmUI;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -54,17 +53,10 @@ public class FarmUIController {
      */
     public void setMoney() {
         switch (settingViewModel.getPlayerSettings().getStartingDifficulty()) {
-        case "Casual":
-            money.setText("$" + 10000);
-            break;
-        case "Normal":
-            money.setText("$" + 1000);
-            break;
-        case "Veteran":
-            money.setText("$" + 100);
-            break;
-        default:
-            money.setText("$" + 0);
+            case "Casual" -> money.setText("$" + 10000);
+            case "Normal" -> money.setText("$" + 1000);
+            case "Veteran" -> money.setText("$" + 100);
+            default -> money.setText("$" + 0);
         }
     }
 
