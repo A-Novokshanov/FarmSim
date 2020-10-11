@@ -1,7 +1,6 @@
 package viewmodels;
 
 import models.CropModel;
-import models.MarketModel;
 import models.PlayerModel;
 import models.StorageModel;
 
@@ -15,7 +14,6 @@ public class MarketViewModel {
     private PlayerViewModel player;
     private StorageModel storage;
     private StorageViewModel storageViewModel;
-    private MarketModel marketModel;
 
     /**
      * This methods constructs a new instance of MarketViewModel
@@ -23,11 +21,10 @@ public class MarketViewModel {
      * @param player  a PlayerModel
      * @param storage a StorageModel
      */
-    public MarketViewModel(PlayerViewModel player, StorageModel storage, MarketModel market) {
+    public MarketViewModel(PlayerViewModel player, StorageModel storage) {
         this.player = player;
         this.storage = storage;
         this.storageViewModel = new StorageViewModel(storage, player);
-        this.marketModel = market;
     }
 
     /**
@@ -40,7 +37,7 @@ public class MarketViewModel {
      * @return A boolean representing if a user can purchase an item.l
      */
     public boolean checkPurchasable(double cropBasePrice, int quantity) {
-        String difficulty = marketModel.getSettingModel().getStartingDifficulty();
+        String difficulty = player.getPlayer().getPlayerSettings().getStartingDifficulty();
         double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
         double currentPriceTotal = currentPriceIndividual * quantity;
         return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))

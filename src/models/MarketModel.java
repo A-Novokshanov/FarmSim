@@ -7,14 +7,12 @@ package models;
  */
 public class MarketModel {
     private CropModel[] cropsInMarket;
-    private SettingModel settings;
 
     /** Constructs a MarketModel object.
      * @param cropsInMarket The list of Crops available in the market
      */
-    public MarketModel(CropModel[] cropsInMarket, SettingModel settings) {
+    public MarketModel(CropModel[] cropsInMarket) {
         this.cropsInMarket = cropsInMarket;
-        this.settings = settings;
     }
 
     /** @return Gets and returns the list of crops in a MarketModel object. */
@@ -27,17 +25,5 @@ public class MarketModel {
      */
     public void setCropsInMarket(CropModel[] cropsInMarket) {
         this.cropsInMarket = cropsInMarket;
-    }
-
-    /** @return Gets and returns the SettingModel of a MarketModel object. */
-    public SettingModel getSettingModel() {
-        return this.settings;
-    }
-
-    /** Sets the SettingModel of a MarketModel object.
-     @param settings is the new desired SettingModel of a MarketModel object.
-     */
-    public void setSettingModel(SettingModel settings) {
-        this.settings = settings;
     }
 }
