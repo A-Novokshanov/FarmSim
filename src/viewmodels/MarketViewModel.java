@@ -60,14 +60,6 @@ public class MarketViewModel {
     }
 
     /**
-     * Sell crop to market after checking it is eligible to be sold.
-     * @param crop The crop to be added to the market.
-     */
-    public void sellCrops(CropModel crop) {
-        //if ()
-    }
-
-    /**
      * Get price of crop after taking account difficulty
      * @param cropBasePrice Base price of a crop without taking into account the difficulty
      * @param difficulty Current difficulty a player has set
