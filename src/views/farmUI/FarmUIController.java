@@ -2,6 +2,9 @@ package views.farmUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import viewmodels.SettingViewModel;
 
@@ -10,6 +13,15 @@ public class FarmUIController {
     private Text money;
     @FXML
     private Text dayNum;
+    @FXML
+    private Pane inventoryScreen;
+    @FXML
+    private Circle dayCounter;
+    @FXML
+    private Circle sun;
+    @FXML
+    private Line sunProgressBar;
+
     private int num = 1;
 
     private SettingViewModel settingViewModel;
@@ -25,21 +37,26 @@ public class FarmUIController {
     }
 
     /**
+     * Makes Inventory Screen Invisible if exit button is clicked
+     * @param mouseEvent a mouse click on the exit button
+     */
+    public void toggleInventoryScreenVisibility(MouseEvent mouseEvent) {
+        inventoryScreen.setVisible(!inventoryScreen.isVisible());
+        dayCounter.setVisible(!dayCounter.isVisible());
+        dayNum.setVisible(!dayNum.isVisible());
+        sun.setVisible(!sun.isVisible());
+        sunProgressBar.setVisible(!sunProgressBar.isVisible());
+    }
+
+    /**
      * Starting money amount based on difficulty.
      */
     public void setMoney() {
         switch (settingViewModel.getPlayerSettings().getStartingDifficulty()) {
-        case "Casual":
-            money.setText("$" + 10000);
-            break;
-        case "Normal":
-            money.setText("$" + 1000);
-            break;
-        case "Veteran":
-            money.setText("$" + 100);
-            break;
-        default:
-            money.setText("$" + 0);
+            case "Casual" -> money.setText("$" + 10000);
+            case "Normal" -> money.setText("$" + 1000);
+            case "Veteran" -> money.setText("$" + 100);
+            default -> money.setText("$" + 0);
         }
     }
 
