@@ -49,7 +49,7 @@ public class FarmUIController {
         playerViewModel.getPlayerInformationFromDatabase(playerName);
         money.setText("$ " + this.playerViewModel.getPlayer().getUserCurrentMoney());
         storageModel = new StorageModel();
-        storageViewModel = new StorageViewModel(storageModel, playerViewModel);
+        storageViewModel = new StorageViewModel(playerViewModel);
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity())
         );
