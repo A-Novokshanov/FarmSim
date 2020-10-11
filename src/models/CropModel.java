@@ -19,7 +19,7 @@ public class CropModel {
      * @param cropQuantity The quantity of the specific crop.
      * @param cropValue    The value of each crop.
      */
-    public CropModel(String cropName, int cropQuantity, int cropValue) {
+    public CropModel(String cropName, int cropQuantity, double cropValue) {
         this.cropName = cropName;
         this.cropQuantity = cropQuantity;
         this.cropValue = cropValue;
