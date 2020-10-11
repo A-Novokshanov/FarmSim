@@ -2,113 +2,110 @@ package views.marketPlace;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarketPlace {
+
+    private boolean buyState = true;
 
     @FXML
     private JFXButton btnSeeds;
     @FXML
     private JFXButton btnAnimals;
     @FXML
-    private JFXButton buySellSwap;
+    private JFXButton btnSwap;
     @FXML
-    private JFXButton returnFarm;
+    private JFXButton btnFarm;
+    @FXML
+    private Text budget;
 
 
     @FXML
-    private ImageView panel1Img;
+    private ImageView p1Img;
     @FXML
-    private JFXButton panel1Plus;
+    private JFXButton p1Action;
     @FXML
-    private JFXButton panel1Minus;
+    private Text p1Value;
     @FXML
-    private JFXButton panel1Action;
-    @FXML
-    private Text panel1Value;
+    private Text p1Price;
 
     @FXML
-    private ImageView panel2Img;
+    private ImageView p2Img;
     @FXML
-    private JFXButton panel2Plus;
+    private JFXButton p2Action;
     @FXML
-    private JFXButton panel2Minus;
+    private Text p2Value;
     @FXML
-    private JFXButton panel2Action;
-    @FXML
-    private Text panel2Value;
+    private Text p2Price;
 
     @FXML
-    private ImageView panel3Img;
+    private ImageView p3Img;
     @FXML
-    private JFXButton panel3Plus;
+    private JFXButton p3Action;
     @FXML
-    private JFXButton panel3Minus;
+    private Text p3Value;
     @FXML
-    private JFXButton panel3Action;
-    @FXML
-    private Text panel3Value;
+    private Text p3Price;
 
     @FXML
-    private ImageView panel4Img;
+    private ImageView p4Img;
     @FXML
-    private JFXButton panel4Plus;
+    private JFXButton p4Action;
     @FXML
-    private JFXButton panel4Minus;
+    private Text p4Value;
     @FXML
-    private JFXButton panel4Action;
-    @FXML
-    private Text panel4Value;
+    private Text p4Price;
 
     @FXML
-    private ImageView panel5Img;
+    private ImageView p5Img;
     @FXML
-    private JFXButton panel5Plus;
+    private JFXButton p5Action;
     @FXML
-    private JFXButton panel5Minus;
+    private Text p5Value;
     @FXML
-    private JFXButton panel5Action;
-    @FXML
-    private Text panel5Value;
+    private Text p5Price;
 
     @FXML
-    private ImageView panel6Img;
+    private ImageView p6Img;
     @FXML
-    private JFXButton panel6Plus;
+    private JFXButton p6Action;
     @FXML
-    private JFXButton panel6Minus;
+    private Text p6Value;
     @FXML
-    private JFXButton panel6Action;
-    @FXML
-    private Text panel6Value;
+    private Text p6Price;
 
     @FXML
-    private ImageView panel7Img;
+    private ImageView p7Img;
     @FXML
-    private JFXButton panel7Plus;
+    private JFXButton p7Action;
     @FXML
-    private JFXButton panel7Minus;
+    private Text p7Value;
     @FXML
-    private JFXButton panel7Action;
-    @FXML
-    private Text panel7Value;
+    private Text p7Price;
 
     @FXML
-    private ImageView panel8Img;
+    private ImageView p8Img;
     @FXML
-    private JFXButton panel8Plus;
+    private JFXButton p8Action;
     @FXML
-    private JFXButton panel8Minus;
+    private Text p8Value;
     @FXML
-    private JFXButton panel8Action;
-    @FXML
-    private Text panel8Value;
+    private Text p8Price;
+
+    public void InitData(MouseEvent mouseEvent) {
+        sellSwap(mouseEvent);
+    }
 
     private void upValue(Text value) {
         int num = Integer.parseInt(value.getText());
@@ -117,7 +114,7 @@ public class MarketPlace {
         }
         String str;
         if (num < 10) {
-            str = "0" + String.valueOf(num);
+            str = "0" + num;
         } else {
             str = String.valueOf(num);
         }
@@ -131,75 +128,203 @@ public class MarketPlace {
         }
         String str;
         if (num < 10) {
-            str = "0" + String.valueOf(num);
+            str = "0" + num;
         } else {
             str = String.valueOf(num);
         }
         value.setText(str);
     }
 
-    public void upValue1(MouseEvent mouseEvent) {
-        upValue(panel1Value);
+    private void buyValue(Text value) {
+        int num = Integer.parseInt(value.getText());
+        int budgetCheck = Integer.parseInt(this.budget.getText());
+        if (num > budgetCheck) {
+
+        }
     }
 
-    public void downValue1(MouseEvent mouseEvent) {
-        downValue(panel1Value);
+    private void sellValue(Text value) {
+
     }
 
-    public void upValue2(MouseEvent mouseEvent) {
-        upValue(panel2Value);
+    public void buySwap(MouseEvent mouseEvent) {
+        buyState = false;
+        btnAnimals.setVisible(false);
+        btnSeeds.setVisible(false);
+        setActionLabel("Sell");
+        resetValues();
+        btnSwap.setText("Buy Crops");
+        btnSwap.setOnMouseClicked(this::sellSwap);
     }
 
-    public void downValue2(MouseEvent mouseEvent) {
-        downValue(panel2Value);
+    public void sellSwap(MouseEvent mouseEvent) {
+        buyState = true;
+        btnAnimals.setVisible(true);
+        btnSeeds.setVisible(true);
+        setActionLabel("Buy");
+        resetValues();
+        btnSwap.setText("Sell Crops");
+        btnSwap.setOnMouseClicked(this::buySwap);
     }
 
-    public void upValue3(MouseEvent mouseEvent) {
-        upValue(panel3Value);
+    public void returnFarm() {
+
     }
 
-    public void downValue3(MouseEvent mouseEvent) {
-        downValue(panel3Value);
+    public void upValue1() {
+        upValue(p1Value);
     }
 
-    public void upValue4(MouseEvent mouseEvent) {
-        upValue(panel4Value);
+    public void downValue1() {
+        downValue(p1Value);
     }
 
-    public void downValue4(MouseEvent mouseEvent) {
-        downValue(panel4Value);
+    public void action1() {
+        if(buyState) {
+            buyValue(p1Value);
+        } else {
+            sellValue(p1Value);
+        }
     }
 
-    public void upValue5(MouseEvent mouseEvent) {
-        upValue(panel5Value);
+    public void upValue2() {
+        upValue(p2Value);
     }
 
-    public void downValue5(MouseEvent mouseEvent) {
-        downValue(panel5Value);
+    public void downValue2() {
+        downValue(p2Value);
     }
 
-    public void upValue6(MouseEvent mouseEvent) {
-        upValue(panel6Value);
+    public void action2() {
+        if(buyState) {
+            buyValue(p2Value);
+        } else {
+            sellValue(p2Value);
+        }
     }
 
-    public void downValue6(MouseEvent mouseEvent) {
-        downValue(panel6Value);
+    public void upValue3() {
+        upValue(p3Value);
     }
 
-    public void upValue7(MouseEvent mouseEvent) {
-        upValue(panel7Value);
+    public void downValue3() {
+        downValue(p3Value);
     }
 
-    public void downValue7(MouseEvent mouseEvent) {
-        downValue(panel7Value);
+    public void action3() {
+        if(buyState) {
+            buyValue(p3Value);
+        } else {
+            sellValue(p3Value);
+        }
     }
 
-    public void upValue8(MouseEvent mouseEvent) {
-        upValue(panel8Value);
+    public void upValue4() {
+        upValue(p4Value);
     }
 
-    public void downValue8(MouseEvent mouseEvent) {
-        downValue(panel8Value);
+    public void downValue4() {
+        downValue(p4Value);
+    }
+
+    public void action4() {
+        if(buyState) {
+            buyValue(p4Value);
+        } else {
+            sellValue(p4Value);
+        }
+    }
+
+    public void upValue5() {
+        upValue(p5Value);
+    }
+
+    public void downValue5() {
+        downValue(p5Value);
+    }
+
+    public void action5() {
+        if(buyState) {
+            buyValue(p5Value);
+        } else {
+            sellValue(p5Value);
+        }
+    }
+
+    public void upValue6() {
+        upValue(p6Value);
+    }
+
+    public void downValue6() {
+        downValue(p6Value);
+    }
+
+    public void action6() {
+        if(buyState) {
+            buyValue(p6Value);
+        } else {
+            sellValue(p6Value);
+        }
+    }
+
+    public void upValue7() {
+        upValue(p7Value);
+    }
+
+    public void downValue7() { downValue(p7Value); }
+
+    public void action7() {
+        if(buyState) {
+            buyValue(p7Value);
+        } else {
+            sellValue(p7Value);
+        }
+    }
+
+    public void upValue8() {
+        upValue(p8Value);
+    }
+
+    public void downValue8() { downValue(p8Value); }
+
+    public void action8() {
+        if(buyState) {
+            buyValue(p8Value);
+        } else {
+            sellValue(p8Value);
+        }
+    }
+
+    private void resetValues() {
+        p1Value.setText("01");
+        p2Value.setText("01");
+        p3Value.setText("01");
+        p4Value.setText("01");
+        p5Value.setText("01");
+        p6Value.setText("01");
+        p7Value.setText("01");
+        p8Value.setText("01");
+    }
+    private void setActionLabel(String str) {
+        p1Action.setText(str);
+        p2Action.setText(str);
+        p3Action.setText(str);
+        p4Action.setText(str);
+        p5Action.setText(str);
+        p6Action.setText(str);
+        p7Action.setText(str);
+        p8Action.setText(str);
+    }
+
+    private void setPrices(String str) {
+        p1Price.setText(str);
+        p2Price.setText(str);
+        p3Price.setText(str);
+        p4Price.setText(str);
+        p5Price.setText(str);
+        p6Price.setText(str);
+        p7Price.setText(str);
+        p8Price.setText(str);
     }
 }
 
