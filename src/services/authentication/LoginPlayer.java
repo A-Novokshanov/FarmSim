@@ -89,7 +89,6 @@ public class LoginPlayer {
 
                 int playerId = resultSet.getInt("id");
                 int currentMoney = resultSet.getInt("money");
-
                 preparedStatement = dbConnection.prepareStatement(GET_USER_SETTINGS);
                 preparedStatement.setInt(1, playerId);
                 resultSet = preparedStatement.executeQuery();
@@ -101,7 +100,8 @@ public class LoginPlayer {
                 String difficulty = resultSet.getString("difficulty");
                 SettingModel settingModel = new SettingModel(seasonModel, seedModel, difficulty, playerName);
 
-                return new PlayerModel(currentMoney, settingModel);
+                //TODO add storage to database first, and then get the value to replace the null.
+                return new PlayerModel(currentMoney, settingModel, null);
 
 
             } catch (SQLException throwables) {

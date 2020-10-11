@@ -10,16 +10,19 @@ package models;
 public class PlayerModel {
     private double currentMoney;
     private SettingModel playerSettings;
+    private StorageModel storageModel;
 
     /**
      * Constructs a PlayerModel object.
      *
      * @param currentMoney The playerModels current money.
      * @param settingModel The player's current settings.
+     * @param storageModel The storage/inventory of the user.
      */
-    public PlayerModel(double currentMoney, SettingModel settingModel) {
+    public PlayerModel(double currentMoney, SettingModel settingModel, StorageModel storageModel) {
         this.currentMoney = currentMoney;
         this.playerSettings = settingModel;
+        this.storageModel = storageModel;
     }
 
     /**
@@ -54,6 +57,24 @@ public class PlayerModel {
      */
     public SettingModel getPlayerSettings() {
         return this.playerSettings;
+    }
+
+    /**
+     * Sets the player's storage/inventory.
+     *
+     * @param storage The StorageModel object to be set.
+     */
+    public void setPlayerStorage(StorageModel storage) {
+        this.storageModel = storage;
+    }
+
+    /**
+     * Gets and returns the StorageModel object of the user.
+     *
+     * @return The StorageModel object that contains the user's storage.
+     */
+    public StorageModel getUserStorage() {
+        return this.storageModel;
     }
 }
 
