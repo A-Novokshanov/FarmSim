@@ -1,9 +1,7 @@
 package viewmodels;
 
-import com.sun.scenario.effect.Crop;
 import models.CropModel;
 import models.MarketModel;
-import models.PlayerModel;
 import models.StorageModel;
 
 /**
@@ -20,15 +18,17 @@ public class MarketViewModel {
 
     /**
      * This methods constructs a new instance of MarketViewModel
-     * @param player a PlayerModel
+     *
+     * @param player  a PlayerModel
      * @param storage a StorageModel
      */
-    public MarketViewModel(PlayerViewModel player, StorageModel storage, MarketModel market){
+    public MarketViewModel(PlayerViewModel player, StorageModel storage, MarketModel market) {
         this.player = player;
         this.storage = storage;
         this.storageViewModel = new StorageViewModel(storage, player);
         this.marketModel = market;
     }
+
     /**
      * This methods checks if the user can purchase an item for the market
      * <p>
@@ -48,6 +48,7 @@ public class MarketViewModel {
 
     /**
      * Add crop to market after checking it is eligible to be added.
+     *
      * @param crop The crop to be added to the market.
      */
     public void purchaseItems(CropModel crop, int quantity) {
@@ -57,17 +58,10 @@ public class MarketViewModel {
     }
 
     /**
-     * Sell crop to market after checking it is eligible to be sold.
-     * @param crop The crop to be added to the market.
-     */
-    public void sellCrops(CropModel crop) {
-        //if ()
-    }
-
-    /**
      * Get price of crop after taking account difficulty
+     *
      * @param cropBasePrice Base price of a crop without taking into account the difficulty
-     * @param difficulty Current difficulty a player has set
+     * @param difficulty    Current difficulty a player has set
      */
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
@@ -88,4 +82,6 @@ public class MarketViewModel {
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;
     }
+
+
 }

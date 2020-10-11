@@ -3,6 +3,8 @@ package viewmodels;
 import models.CropModel;
 import models.StorageModel;
 
+import java.util.ArrayList;
+
 /**
  * This view-model class keeps controls the logic flow of adding to a user's inventory.
  *
@@ -67,6 +69,15 @@ public class StorageViewModel {
                 }
             }
         }
+    }
+
+    /**
+     * Gets and returns the user's inventory.
+     *
+     * @return The inventory arrayList of the user.
+     */
+    public ArrayList<CropModel> userInventory() {
+        return storageModel.getInventory();
     }
 
 
