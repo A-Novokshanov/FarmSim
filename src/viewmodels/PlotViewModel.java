@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * This view-model class controls the logic and flow of harvesting from the plot.
  *
- * @author Aditya Varun Pratap
+ * @author Aditya Varun Pratap, Andrew Novokshanov
  * @version 1.0
  */
 public class PlotViewModel {
@@ -45,5 +45,14 @@ public class PlotViewModel {
         int daysOld = random.nextInt(15);
         PlotModel plot = new PlotModel(cropInPlot, daysOld);
         return plot;
+    }
+
+    /**
+     * Increments the daysOld of a PlotModel.
+     *
+     * @param plotToIncrement The plot whose daysOld to increment.
+     */
+    public void incrementPlotDaysOld(PlotModel plotToIncrement) {
+        plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
     }
 }
