@@ -110,8 +110,8 @@ public class MarketPlace {
     @FXML
     private Text panel8Value;
 
-    public void upValue1(MouseEvent mouseEvent) {
-        int num = Integer.parseInt(panel1Value.getText());
+    private void upValue(Text value) {
+        int num = Integer.parseInt(value.getText());
         if (num < 15) {
             num++;
         }
@@ -121,11 +121,11 @@ public class MarketPlace {
         } else {
             str = String.valueOf(num);
         }
-        panel1Value.setText(str);
+        value.setText(str);
     }
 
-    public void downValue1(MouseEvent mouseEvent) {
-        int num = Integer.parseInt(panel1Value.getText());
+    private void downValue(Text value) {
+        int num = Integer.parseInt(value.getText());
         if (num > 1) {
             num--;
         }
@@ -135,7 +135,71 @@ public class MarketPlace {
         } else {
             str = String.valueOf(num);
         }
-        panel1Value.setText(str);
+        value.setText(str);
+    }
+
+    public void upValue1(MouseEvent mouseEvent) {
+        upValue(panel1Value);
+    }
+
+    public void downValue1(MouseEvent mouseEvent) {
+        downValue(panel1Value);
+    }
+
+    public void upValue2(MouseEvent mouseEvent) {
+        upValue(panel2Value);
+    }
+
+    public void downValue2(MouseEvent mouseEvent) {
+        downValue(panel2Value);
+    }
+
+    public void upValue3(MouseEvent mouseEvent) {
+        upValue(panel3Value);
+    }
+
+    public void downValue3(MouseEvent mouseEvent) {
+        downValue(panel3Value);
+    }
+
+    public void upValue4(MouseEvent mouseEvent) {
+        upValue(panel4Value);
+    }
+
+    public void downValue4(MouseEvent mouseEvent) {
+        downValue(panel4Value);
+    }
+
+    public void upValue5(MouseEvent mouseEvent) {
+        upValue(panel5Value);
+    }
+
+    public void downValue5(MouseEvent mouseEvent) {
+        downValue(panel5Value);
+    }
+
+    public void upValue6(MouseEvent mouseEvent) {
+        upValue(panel6Value);
+    }
+
+    public void downValue6(MouseEvent mouseEvent) {
+        downValue(panel6Value);
+    }
+
+    public void upValue7(MouseEvent mouseEvent) {
+        upValue(panel7Value);
+    }
+
+    public void downValue7(MouseEvent mouseEvent) {
+        downValue(panel7Value);
+    }
+
+    public void upValue8(MouseEvent mouseEvent) {
+        upValue(panel8Value);
+    }
+
+    public void downValue8(MouseEvent mouseEvent) {
+        downValue(panel8Value);
     }
 }
 

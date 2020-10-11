@@ -93,7 +93,7 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton fx:id="panel2Plus" maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton fx:id="panel2Plus" maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -107,7 +107,7 @@
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton fx:id="panel2Minus" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton fx:id="panel2Minus" onMouseClicked="#downValue2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -148,21 +148,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel3Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -199,21 +199,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel4Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -250,21 +250,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel5Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -301,21 +301,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel6Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -352,21 +352,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel7Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -403,21 +403,21 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel8Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downValue8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
