@@ -15,7 +15,8 @@ public class LoginPlayer {
     private final Connection dbConnection;
     private static final String USER_EXISTS_QUERY = "SELECT name from player where name=?";
     private static final String GET_USER_ID_MONEY = "SELECT id, money from player where name=?";
-    private static final String GET_USER_SETTINGS = "SELECT difficulty, season, seed from setting where player = ?";
+    private static final String GET_USER_SETTINGS = "SELECT difficulty, season, "
+            + "seed from setting where player = ?";
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
@@ -98,7 +99,8 @@ public class LoginPlayer {
 
                 SeedModel seedModel = new SeedModel(resultSet.getString("seed"));
                 String difficulty = resultSet.getString("difficulty");
-                SettingModel settingModel = new SettingModel(seasonModel, seedModel, difficulty, playerName);
+                SettingModel settingModel = new SettingModel(seasonModel,
+                        seedModel, difficulty, playerName);
 
                 //TODO add storage to database first, and then get the value to replace the null.
                 return new PlayerModel(currentMoney, settingModel, null);

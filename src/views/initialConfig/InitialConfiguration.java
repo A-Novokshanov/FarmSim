@@ -234,7 +234,8 @@ public class InitialConfiguration {
             playerViewModel.setPlayerDetails(seed, season,
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             playerViewModel.getPlayer().setPlayerStorage(userStorage);
-            System.out.println("Init Config Storage " + playerViewModel.getPlayer().getUserStorage());
+            System.out.println("Init Config Storage "
+                    + playerViewModel.getPlayer().getUserStorage());
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
 
@@ -251,17 +252,17 @@ public class InitialConfiguration {
      */
     public void setMoney() {
         switch (curDifficulty) {
-            case "Casual":
-                currentMoney = 10000;
-                break;
-            case "Normal":
-                currentMoney = 1000;
-                break;
-            case "Veteran":
-                currentMoney = 100;
-                break;
-            default:
-                currentMoney = 0;
+        case "Casual":
+            currentMoney = 10000;
+            break;
+        case "Normal":
+            currentMoney = 1000;
+            break;
+        case "Veteran":
+            currentMoney = 100;
+            break;
+        default:
+            currentMoney = 0;
         }
     }
 
