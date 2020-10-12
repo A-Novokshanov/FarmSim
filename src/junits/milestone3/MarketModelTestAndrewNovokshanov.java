@@ -12,54 +12,47 @@ import static org.junit.Assert.assertEquals;
  */
 public class MarketModelTestAndrewNovokshanov {
 
+    private MarketModel marketModelTest;
+    private CropModel[] cropsInMarketSummer;
+    private CropModel corn;
+    private CropModel potato;
+    private CropModel tomato;
+    private CropModel orange;
 
     @Before
     public void setup() {
-
+        corn = new CropModel("Corn", 1, 100.0);
+        potato = new CropModel("Potato", 15, 3.0);
+        tomato = new CropModel("Tomato", 131, 55.0);
+        orange = new CropModel("Orange", 0, 1500.3);
+        CropModel[] cropsInMarket = new CropModel[]{corn, potato, tomato};
+        cropsInMarketSummer = new CropModel[]{corn, potato, orange};
+        marketModelTest = new MarketModel(cropsInMarket);
     }
 
-    //Test getter method for purchasePrice
+    //Test getter method for getCropsInMarket
     @Test
-    public void testGetterPurchasePrice() {
-        assertEquals(animalModelTest.getPurchasePrice(), purchasePrice);
+    public void testGetterCropsInMarket() {
+        assertEquals(marketModelTest.getCropsInMarket()[0], corn);
+        assertEquals(marketModelTest.getCropsInMarket()[0].getCropName(), "Corn");
+        assertEquals(marketModelTest.getCropsInMarket()[0].getCropQuantity(), 1);
+        assertEquals(marketModelTest.getCropsInMarket()[0].getCropValue(), 100.0, 0.0);
+        assertEquals(marketModelTest.getCropsInMarket()[1], potato);
+        assertEquals(marketModelTest.getCropsInMarket()[1].getCropName(), "Potato");
+        assertEquals(marketModelTest.getCropsInMarket()[1].getCropQuantity(), 15);
+        assertEquals(marketModelTest.getCropsInMarket()[1].getCropValue(), 3.0, 0.0);
+        assertEquals(marketModelTest.getCropsInMarket()[2], tomato);
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropName(), "Tomato");
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropQuantity(), 131);
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropValue(), 55.0, 0.0);
     }
-    //Test setter method for purchasePrice
+    //Test setter method for getCropsInMarket
     @Test
-    public void testSetterPurchasePrice() {
-        animalModelTest.setPurchasePrice(150);
-        assertEquals(animalModelTest.getPurchasePrice(), 150);
-    }
-    //Test getter method for sellPrice
-    @Test
-    public void testGetterSellPrice() {
-        assertEquals(animalModelTest.getSellPrice(), sellPrice);
-    }
-    //Test setter method for sellPrice
-    @Test
-    public void testSetterSellPrice() {
-        animalModelTest.setSellPrice(50);
-        assertEquals(animalModelTest.getSellPrice(), 50);
-    }
-    //Test getter method for timeToGrow
-    @Test
-    public void testGetterTimeToGrow() {
-        assertEquals(animalModelTest.getTimeToGrow(), timeToGrow);
-    }
-    //Test setter method for timeToGrow
-    @Test
-    public void testSetterTimeToGrow() {
-        animalModelTest.setTimeToGrow(500);
-        assertEquals(animalModelTest.getTimeToGrow(), 500);
-    }
-    //Test getter method for animalType
-    @Test
-    public void testGetterAnimalType() {
-        assertEquals(animalModelTest.getAnimalType(), animalType);
-    }
-    //Test setter method for animalType
-    @Test
-    public void testSetterAnimalType() {
-        animalModelTest.setAnimalType("Cow");
-        assertEquals(animalModelTest.getAnimalType(), "Cow");
+    public void testSetterCropsInMarket() {
+        marketModelTest.setCropsInMarket(cropsInMarketSummer);
+        assertEquals(marketModelTest.getCropsInMarket()[2], orange);
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropName(), "Orange");
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropQuantity(), 0);
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropValue(), 1500.3,0.0);
     }
 }
