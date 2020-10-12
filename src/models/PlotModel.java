@@ -11,6 +11,7 @@ public class PlotModel {
 
     /** Constructs a PlotModel object.
      * @param cropInPlot The type of crop in the PlotModel
+     * @param daysOld how long its been since crop planted
      */
     public PlotModel(CropModel cropInPlot, int daysOld) {
         this.cropInPlot = cropInPlot;

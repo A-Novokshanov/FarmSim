@@ -101,10 +101,12 @@ public class HomeScreenController {
         }
 
         //        Stage stage = new Stage();
-        //        Stage currentStage = (Stage) btnNewGame.getScene().getWindow();
+        //        Stage currentStage = (Stage) btnNewGame.
+        //        getScene().getWindow();
         //        Parent root = null;
         //        try {
-        //            root = FXMLLoader.load(getClass().getResource("../initialConfig/InitialConfiguration2.fxml"));
+        //            root = FXMLLoader.load(getClass().
+        //            getResource("../initialConfig/InitialConfiguration2.fxml"));
         //        } catch (IOException e) {
         //            e.printStackTrace();
         //        }

@@ -18,6 +18,8 @@ public class StorageViewModel {
 
     /**
      * This constructor initializes the instance variables.
+     *
+     * @param player is the player view model object
      **/
     public StorageViewModel(PlayerViewModel player) {
         this.player = player;
@@ -26,6 +28,9 @@ public class StorageViewModel {
 
     /**
      * Add the item purchased to the inventory.
+     *
+     * @param crop     is the crop model object
+     * @param quantity is the amount of crops to add
      */
     public void addToInventory(CropModel crop, int quantity) {
         if (storageModel.getInventorySize() < 15) {
@@ -55,11 +60,13 @@ public class StorageViewModel {
                     if (storageModel.getEnoughToRemove(i, amount) == 1) {
                         if (storageModel.getEnoughToRemove(i, amount) == 1) {
                             storageModel.removeCropAmount(amount, i);
-                            player.getPlayer().setUserCurrentMoney((int) (player.getPlayer().getUserCurrentMoney()
+                            player.getPlayer().setUserCurrentMoney((int) (
+                                    player.getPlayer().getUserCurrentMoney()
                                     + amount * (crop.getCropValue())));
                         } else {
                             storageModel.removeCrop(i);
-                            player.getPlayer().setUserCurrentMoney((int) (player.getPlayer().getUserCurrentMoney()
+                            player.getPlayer().setUserCurrentMoney((int) (
+                                    player.getPlayer().getUserCurrentMoney()
                                     + amount * (crop.getCropValue())));
                         }
                     }

@@ -2,22 +2,15 @@ package views.marketPlace;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import models.CropModel;
+
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MarketPlace {
 
@@ -156,7 +149,7 @@ public class MarketPlace {
             str = String.valueOf(num);
         }
         value.setText(str);
-        setPrice(price, crop ,value);
+        setPrice(price, crop, value);
     }
 
     private void downValue(Text value, Text price, int crop) {
@@ -171,7 +164,7 @@ public class MarketPlace {
             str = String.valueOf(num);
         }
         value.setText(str);
-        setPrice(price, crop ,value);
+        setPrice(price, crop, value);
     }
 
     private void setPrice(Text price, int crop, Text value) {
@@ -183,7 +176,7 @@ public class MarketPlace {
         int num = Integer.parseInt(value.getText());
         double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
         double budgetCheck = Integer.parseInt(this.budget.getText());
-        if (num * basePrice  > budgetCheck && crop <= 2) {
+        if (num * basePrice > budgetCheck && crop <= 2) {
             marketViewModel.purchaseItems(storageViewModel.userInventory().get(crop), num);
             quantity.setText(String.valueOf(num));
         }
@@ -226,7 +219,7 @@ public class MarketPlace {
     }
 
     public void action1() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p1Value, 0, p1Quantity);
         } else {
             sellValue(p1Value);
@@ -242,7 +235,7 @@ public class MarketPlace {
     }
 
     public void action2() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p2Value, 1, p2Quantity);
         } else {
             sellValue(p2Value);
@@ -258,7 +251,7 @@ public class MarketPlace {
     }
 
     public void action3() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p3Value, 2, p3Quantity);
         } else {
             sellValue(p3Value);
@@ -274,7 +267,7 @@ public class MarketPlace {
     }
 
     public void action4() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p4Value, 3, p4Quantity);
         } else {
             sellValue(p4Value);
@@ -290,7 +283,7 @@ public class MarketPlace {
     }
 
     public void action5() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p5Value, 4, p5Quantity);
         } else {
             sellValue(p5Value);
@@ -306,7 +299,7 @@ public class MarketPlace {
     }
 
     public void action6() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p6Value, 5, p6Quantity);
         } else {
             sellValue(p6Value);
@@ -317,10 +310,12 @@ public class MarketPlace {
         upValue(p7Value, p7Price, 6);
     }
 
-    public void downValue7() { downValue(p7Value, p7Price, 6); }
+    public void downValue7() {
+        downValue(p7Value, p7Price, 6);
+    }
 
     public void action7() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p7Value, 6, p7Quantity);
         } else {
             sellValue(p7Value);
@@ -331,10 +326,12 @@ public class MarketPlace {
         upValue(p8Value, p8Price, 7);
     }
 
-    public void downValue8() { downValue(p8Value, p8Price, 7); }
+    public void downValue8() {
+        downValue(p8Value, p8Price, 7);
+    }
 
     public void action8() {
-        if(buyState) {
+        if (buyState) {
             buyValue(p8Value, 7, p8Quantity);
         } else {
             sellValue(p8Value);
@@ -351,6 +348,7 @@ public class MarketPlace {
         p7Value.setText("01");
         p8Value.setText("01");
     }
+
     private void setActionLabel(String str) {
         p1Action.setText(str);
         p2Action.setText(str);

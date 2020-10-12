@@ -2,7 +2,6 @@ package views.farmUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -79,10 +78,11 @@ public class FarmUIController {
     }
 
     /**
-     *
+     * @param mouseEvent is the mouse trigger event
      */
     public void goToMarket(MouseEvent mouseEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../marketPlace/MarketPlace.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().
+                getResource("../marketPlace/MarketPlace.fxml"));
         Stage stage = new Stage(StageStyle.DECORATED);
         try {
             stage.setScene(
