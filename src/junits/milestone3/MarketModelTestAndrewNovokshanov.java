@@ -53,6 +53,6 @@ public class MarketModelTestAndrewNovokshanov {
         assertEquals(marketModelTest.getCropsInMarket()[2], orange);
         assertEquals(marketModelTest.getCropsInMarket()[2].getCropName(), "Orange");
         assertEquals(marketModelTest.getCropsInMarket()[2].getCropQuantity(), 0);
-        assertEquals(marketModelTest.getCropsInMarket()[2].getCropValue(), 1500.3,0.0);
+        assertEquals(marketModelTest.getCropsInMarket()[2].getCropValue(), 1500.3, 0.0);
     }
 }
