@@ -54,7 +54,8 @@ public class PlayerViewModel {
      * @param storageModel       The storage/inventory of the user
      */
     public void setPlayerDetails(SeedModel seedModel, SeasonModel seasonModel,
-                                 String playerName, StorageModel storageModel, String startingDifficulty,
+                                 String playerName,
+                                 StorageModel storageModel, String startingDifficulty,
                                  int currentMoney) {
 
         this.settingModel = new SettingModel(seasonModel, seedModel,

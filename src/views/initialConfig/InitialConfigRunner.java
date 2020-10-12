@@ -12,7 +12,7 @@ public class InitialConfigRunner extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("InitialConfiguration2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("InitialConfiguration.fxml"));
         primaryStage.setTitle("Initial Configuration");
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(root, 1280, 720);

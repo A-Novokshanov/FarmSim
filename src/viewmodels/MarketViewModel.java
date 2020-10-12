@@ -32,11 +32,13 @@ public class MarketViewModel {
      * 1. Check if the user has enough money.
      * 2. Check if user has enough enough storage space.
      * </p>
-     *
-     * @return A boolean representing if a user can purchase an item.l
+     * @param cropBasePrice price of crop
+     * @param quantity amount of crop
+     * @return A boolean representing if a user can purchase an item.
      */
     public boolean checkPurchasable(double cropBasePrice, int quantity) {
-        String difficulty = player.getPlayer().getPlayerSettings().getStartingDifficulty();
+        String difficulty = player.getPlayer().getPlayerSettings()
+                .getStartingDifficulty();
         double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
         double currentPriceTotal = currentPriceIndividual * quantity;
         return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))
@@ -47,6 +49,7 @@ public class MarketViewModel {
      * Add crop to market after checking it is eligible to be added.
      *
      * @param crop The crop to be added to the market.
+     * @param quantity amount of crop.
      */
     public void purchaseItems(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
@@ -63,22 +66,23 @@ public class MarketViewModel {
      *
      * @param cropBasePrice Base price of a crop without taking into account the difficulty
      * @param difficulty    Current difficulty a player has set
+     * @return current price of crop.
      */
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
-            case "Casual":
-                difficultyMod = 0.8;
-                break;
-            case "Normal":
-                difficultyMod = 1.0;
-                break;
-            case "Veteran":
-                difficultyMod = 1.2;
-                break;
-            default:
-                difficultyMod = 0.0;
-                break;
+        case "Casual":
+            difficultyMod = 0.8;
+            break;
+        case "Normal":
+            difficultyMod = 1.0;
+            break;
+        case "Veteran":
+            difficultyMod = 1.2;
+            break;
+        default:
+            difficultyMod = 0.0;
+            break;
         }
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;

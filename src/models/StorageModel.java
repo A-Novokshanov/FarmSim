@@ -4,7 +4,8 @@ package models;
 import java.util.ArrayList;
 
 /**
- * This class stores the data related to the cropInventory, and also adds and removes crops from cropInventory.
+ * This class stores the data related to the cropInventory,
+ * and also adds and removes crops from cropInventory.
  *
  * @author Rohan Kashiviswanathan
  * @version 1.0
@@ -13,7 +14,8 @@ public class StorageModel {
     private ArrayList<CropModel> cropInventory;
 
     /**
-     * Constructor for the cropInventory that creates the structure of the cropInventory and initializes it with starter crops.
+     * Constructor for the cropInventory that creates the
+     * structure of the cropInventory and initializes it with starter crops.
      */
     public StorageModel() {
         cropInventory = new ArrayList<>(15);
@@ -35,7 +37,7 @@ public class StorageModel {
     /**
      * Adds to the current crop amount.
      *
-     * @param i the index our object is in.
+     * @param i        the index our object is in.
      * @param quantity how much of the crop to add.
      */
     public void setNewCropAmount(int quantity, int i) {
@@ -45,7 +47,7 @@ public class StorageModel {
     /**
      * Sets up a new crop in our list if its
      *
-     * @param crop the crop we want to add.
+     * @param crop     the crop we want to add.
      * @param quantity how much of the crop to add.
      */
     public void setNewCrop(CropModel crop, int quantity) {
@@ -54,13 +56,12 @@ public class StorageModel {
     }
 
 
-
-
     /**
-     * Looks to see if we have the crop in the storage and then removes a certain quantity, if not all of it.
-     *
+     * Looks to see if we have the crop in the storage and then
+     * removes a certain quantity, if not all of it.
      *
      * @param quantity how much of the crop to remove.
+     * @param i        is the location of crop in inventory
      */
     public void removeCropAmount(int quantity, int i) {
         cropInventory.get(i).setCropQuantity(cropInventory.get(i).getCropQuantity() - quantity);
@@ -78,19 +79,19 @@ public class StorageModel {
     /**
      * Checks to see if we have to remove from inventory, or just a certain amount.
      *
-     * @param i location of crop.
+     * @param i        location of crop.
      * @param quantity amount to remove.
      * @return what scenario to go with.
      */
     public int getEnoughToRemove(int i, int quantity) {
-        if (cropInventory.get(i).getCropQuantity() - quantity> 0) {
+        if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
             return 1;
-        }
-        else if (cropInventory.get(i).getCropQuantity() - quantity == 0) {
+        } else if (cropInventory.get(i).getCropQuantity() - quantity == 0) {
             return 2;
         }
         return 3;
     }
+
     /**
      * Gets the current cropInventory size.
      *
@@ -121,7 +122,6 @@ public class StorageModel {
      *
      * @param index the current index in the list.
      * @param crop2 the crop passed in to add to inventory.
-     *
      * @return whether the names are equal.
      */
     public boolean checkIfNameCorrect(int index, CropModel crop2) {
