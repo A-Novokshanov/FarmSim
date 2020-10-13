@@ -19,9 +19,9 @@ public class StorageModel {
      */
     public StorageModel() {
         cropInventory = new ArrayList<>(15);
-        cropInventory.add(new CropModel("Corn", 1, 100.00));
-        cropInventory.add(new CropModel("Tomato", 1, 80.00));
-        cropInventory.add(new CropModel("Potato", 1, 60.00));
+        cropInventory.add(new CropModel("Corn", 5, 100.00));
+        cropInventory.add(new CropModel("Tomato", 7, 80.00));
+        cropInventory.add(new CropModel("Potato", 9, 60.00));
 
     }
 
