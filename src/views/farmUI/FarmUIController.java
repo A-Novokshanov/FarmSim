@@ -2,6 +2,7 @@ package views.farmUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,7 @@ public class FarmUIController {
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private StorageModel storageModel;
+    private String name;
 
     /**
      * Initializes data with the parameter
@@ -62,6 +64,7 @@ public class FarmUIController {
         );
         numCorn.setText(String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
         this.playerViewModel = playerViewModel;
+        this.name = playerName;
     }
 
     /**
@@ -83,6 +86,8 @@ public class FarmUIController {
     public void goToMarket(MouseEvent mouseEvent) {
         FXMLLoader loader = new FXMLLoader(getClass().
                 getResource("../marketPlace/MarketPlace.fxml"));
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
         Stage stage = new Stage(StageStyle.DECORATED);
         try {
             stage.setScene(
@@ -93,7 +98,7 @@ public class FarmUIController {
         }
 
         MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel);
+        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, name);
 
         stage.setTitle("Market");
         stage.show();

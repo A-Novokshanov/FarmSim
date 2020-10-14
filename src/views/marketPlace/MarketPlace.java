@@ -2,21 +2,29 @@ package views.marketPlace;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
+import views.farmUI.FarmUIController;
 
+import java.io.IOException;
 
 public class MarketPlace {
 
     private boolean buyState = true;
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
+    private PlayerViewModel playerViewModel;
+    private String playerName;
 
     @FXML
     private JFXButton btnSeeds;
@@ -119,8 +127,10 @@ public class MarketPlace {
     private Text p8Quantity;
 
     public void initData(MouseEvent mouseEvent,
-                         PlayerViewModel player, StorageViewModel storageViewModel) {
+                         PlayerViewModel player, StorageViewModel storageViewModel, String name) {
         marketViewModel = new MarketViewModel(player);
+        playerViewModel = player;
+        playerName = name;
         budget.setText(String.valueOf(player.getPlayer().getUserCurrentMoney()));
         if (storageViewModel.userInventory().get(0) != null) {
             p1Quantity.setText(
@@ -206,8 +216,24 @@ public class MarketPlace {
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
-    public void returnFarm() {
+    public void returnFarm(MouseEvent mouseEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        currentStage.close();
+        try {
+            stage.setScene(
+                    new Scene(loader.load())
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        FarmUIController farmUIController = loader.getController();
+        farmUIController.initData(this.playerViewModel, playerName);
+
+        stage.setTitle("Farm");
+        stage.show();
     }
 
     public void upValue1() {
