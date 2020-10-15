@@ -57,8 +57,8 @@ public class StorageViewModel {
         if (storageModel.getTotalCropAmount() > 0 && storageModel.upForSale(crop)) {
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 if (storageModel.checkIfNameCorrect(i, crop)) {
-                    if (storageModel.getEnoughToRemove(i, amount) == 1 || storageModel.getEnoughToRemove(i, amount) == 2) {
-                        System.out.println("The if in sellItemFromInventory was reached");
+                    if (storageModel.getEnoughToRemove(i, amount) == 1
+                            || storageModel.getEnoughToRemove(i, amount) == 2) {
                         storageModel.removeCropAmount(amount, i);
                         player.getPlayer().setUserCurrentMoney((int) (
                                 player.getPlayer().getUserCurrentMoney()

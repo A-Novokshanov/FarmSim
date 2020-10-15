@@ -134,7 +134,6 @@ public class StorageModel {
      * @return whether the names are equal.
      */
     public boolean checkIfNameCorrect(int index, CropModel crop2) {
-        System.out.println("Index of checkNameCorrect: " + index);
         return cropInventory.get(index).getCropName().equals(crop2.getCropName());
     }
 

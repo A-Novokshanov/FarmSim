@@ -74,7 +74,6 @@ public class PlayerModel {
      * @return The StorageModel object that contains the user's storage.
      */
     public StorageModel getUserStorage() {
-        System.out.println("Storage Model " + this.storageModel);
         return this.storageModel;
     }
 }

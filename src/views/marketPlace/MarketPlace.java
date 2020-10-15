@@ -284,7 +284,7 @@ public class MarketPlace {
     }
 
     public void upQuantity6() {
-         upQuantity(panel6Value, 5, panel6Price);
+        upQuantity(panel6Value, 5, panel6Price);
     }
 
     public void downQuantity6() {

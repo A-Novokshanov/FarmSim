@@ -234,8 +234,6 @@ public class InitialConfiguration {
             playerViewModel.setPlayerDetails(seed, season,
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             playerViewModel.getPlayer().setPlayerStorage(userStorage);
-            System.out.println("Init Config Storage "
-                    + playerViewModel.getPlayer().getUserStorage());
             FarmUIController farmUIController = loader.getController();
             farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
 
@@ -336,7 +334,6 @@ public class InitialConfiguration {
         btnPotato.setSelected(false);
         btnTomato.setSelected(true);
         curSeed = "Tomato";
-        System.out.println(curSeed.toString());
     }
 
     /**
