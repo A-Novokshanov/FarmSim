@@ -20,19 +20,15 @@ public class PlotViewModel {
      * @param player        The player harvesting the plot.
      */
     public void harvestPlot(PlotModel harvestedPlot, PlayerViewModel player) {
-        StorageViewModel storageViewModel = new StorageViewModel(player);
-        if (harvestedPlot == null) {
-            throw new IllegalArgumentException("The plot is null");
-        }
-        if (harvestedPlot.getDaysOld() >= 10
-                && player.getPlayer().getUserStorage().getTotalCropAmount()
-                        >= harvestedPlot.getCropInPlot().getCropQuantity()) {
-
-            storageViewModel.addToInventory(harvestedPlot.getCropInPlot(),
-                    harvestedPlot.getCropInPlot().getCropQuantity());
+        StorageViewModel storageVM = new StorageViewModel(player);
+        int toAdd = 0;
+        if (harvestedPlot.getDaysOld() >= 10) {
+            while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
+                storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
+                toAdd++;
+            }
             harvestedPlot.setCropInPlot(null);
         }
-
     }
 
     /**
@@ -44,8 +40,7 @@ public class PlotViewModel {
     public PlotModel populatePlot(CropModel cropInPlot) {
         Random random = new Random();
         int daysOld = random.nextInt(15);
-        PlotModel plot = new PlotModel(cropInPlot, daysOld);
-        return plot;
+        return new PlotModel(cropInPlot, daysOld);
     }
 
     /**
