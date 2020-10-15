@@ -20,140 +20,140 @@
             <Line fx:id="sunProgressBar" endX="-100.0" endY="-640.0" layoutX="1316.0" layoutY="779.0" startX="-100.0" startY="-108.0" />
             <Circle fx:id="sun" fill="#ebff1f" layoutX="1216.0" layoutY="159.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="dayCounter" fill="DODGERBLUE" layoutX="1215.0" layoutY="68.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Pane layoutX="245.0" layoutY="125.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="245.0" layoutY="125.0" onMouseClicked="#harvestCropPlot1" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot1Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plotName1Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="125.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="890.0" layoutY="125.0" onMouseClicked="#harvestCropPlot2" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot2Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plotName2Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="245.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="245.0" layoutY="300.0" onMouseClicked="#harvestCropPlot3" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot3Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plotName3Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="460.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="460.0" layoutY="300.0" onMouseClicked="#harvestCropPlot4" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot4Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plotName4Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="675.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="675.0" layoutY="300.0" onMouseClicked="#harvestCropPlot5" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot5Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plotName5Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="890.0" layoutY="300.0" onMouseClicked="#harvestCropPlot6" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot6Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
+                  <ImageView fx:id="plotName6Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="245.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="245.0" layoutY="475.0" onMouseClicked="#harvestCropPlot7" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot7Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
+                  <ImageView fx:id="plotName7Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="460.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="460.0" layoutY="475.0" onMouseClicked="#harvestCropPlot8" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot8Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
+                  <ImageView fx:id="plotName8Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="675.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="675.0" layoutY="475.0" onMouseClicked="#harvestCropPlot9" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot9Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
+                  <ImageView fx:id="plotName9Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
+            <Pane layoutX="890.0" layoutY="475.0" onMouseClicked="#harvestCropPlot10" prefHeight="150.0" prefWidth="150.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="plot10Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/Dirt.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
+                  <ImageView fx:id="plotName10Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>

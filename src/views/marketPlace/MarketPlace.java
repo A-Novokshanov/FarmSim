@@ -11,21 +11,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import models.PlotModel;
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
 import views.farmUI.FarmUIController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MarketPlace {
-
-    private boolean buyState = true;
-    private MarketViewModel marketViewModel;
-    private StorageViewModel storageViewModel;
-    private PlayerViewModel playerViewModel;
-    private String playerName;
-
     @FXML
     private JFXButton btnSeeds;
     @FXML
@@ -126,12 +121,23 @@ public class MarketPlace {
     @FXML
     private Text panel8Quantity;
 
-    public void initData(MouseEvent mouseEvent,
-                         PlayerViewModel player, StorageViewModel storage, String name) {
+    private boolean buyState = true;
+    private MarketViewModel marketViewModel;
+    private StorageViewModel storageViewModel;
+    private PlayerViewModel playerViewModel;
+    private ArrayList<PlotModel> plotModels;
+    private ArrayList<ImageView> plotModelNames;
+    private String playerName;
+    private Text dayNum;
+
+    public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage,
+                         ArrayList<PlotModel> plotModels, String name, Text dayNum) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.playerName = name;
+        this.plotModels = plotModels;
+        this.dayNum = dayNum;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         if (storage.userInventory().get(0) != null) {
             setPrice(panel1Value, 0, panel1Price);
@@ -405,7 +411,7 @@ public class MarketPlace {
         }
 
         FarmUIController farmUIController = loader.getController();
-        farmUIController.initData(this.playerViewModel, playerName);
+        farmUIController.initData2(this.playerViewModel, playerName, plotModels, plotNameModels, dayNum);
 
         stage.setTitle("Farm");
         stage.show();
