@@ -197,7 +197,7 @@ public class FarmUIController {
         }
 
         MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, plotModels, name, dayNum);
+        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, plotModels, plotModelNames, name, dayNum);
 
         stage.setTitle("Market");
         stage.show();
