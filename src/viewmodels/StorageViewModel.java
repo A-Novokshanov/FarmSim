@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class StorageViewModel {
     private StorageModel storageModel;
     private PlayerViewModel player;
+    private MarketViewModel marketViewModel;
 
 
     /**
@@ -24,6 +25,7 @@ public class StorageViewModel {
     public StorageViewModel(PlayerViewModel player) {
         this.player = player;
         this.storageModel = player.getPlayer().getUserStorage();
+        this.marketViewModel = new MarketViewModel(player);
     }
 
     /**
@@ -62,7 +64,8 @@ public class StorageViewModel {
                         storageModel.removeCropAmount(amount, i);
                         player.getPlayer().setUserCurrentMoney((int) (
                                 player.getPlayer().getUserCurrentMoney()
-                                        + amount * (crop.getCropValue())));
+                                        + amount * (marketViewModel.calculateCropPrice(crop.getCropValue(),
+                                        player.getPlayer().getPlayerSettings().getStartingDifficulty()))));
                     }
                 }
             }
