@@ -27,7 +27,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p1Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p1Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -82,7 +82,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p2Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p2Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -137,7 +137,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p3Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p3Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -188,7 +188,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p4Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p4Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -239,7 +239,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p5Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p5Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -290,7 +290,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p6Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p6Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -341,7 +341,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p7Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p7Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -392,7 +392,7 @@
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p8Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+                        <Text fx:id="p8Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
