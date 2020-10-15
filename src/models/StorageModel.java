@@ -98,7 +98,12 @@ public class StorageModel {
      * @return cropInventory size.
      */
     public int getInventorySize() {
-        return cropInventory.size();
+        int count = 0;
+        for (CropModel crop : cropInventory) {
+            count += crop.getCropQuantity();
+        }
+        return count;
+
     }
 
     /**
