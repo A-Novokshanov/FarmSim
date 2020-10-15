@@ -17,14 +17,14 @@ public class SettingModelTestAndrewNovokshanov {
     private List<AnimalModel> desirableAnimals;
     private List<CropModel> desirableCrop;
     private SeasonModel spring;
-    private SeedModel tomato;
+    private CropModel tomato;
     private SettingModel settingModelTest;
     @Before
     public void setup() {
         desirableAnimals = new ArrayList<AnimalModel>();
         desirableCrop = new ArrayList<CropModel>();
         spring = new SeasonModel(100, "Spring", desirableAnimals, desirableCrop);
-        tomato = new SeedModel("Tomato Seed");
+        tomato = new CropModel("Tomato", 0, 10.0);
         settingModelTest = new SettingModel(spring, tomato, "Normal", "Andrew N");
     }
 
@@ -42,13 +42,13 @@ public class SettingModelTestAndrewNovokshanov {
     //Test getter method for SeedModel
     @Test
     public void testGetterSeedModel() {
-        assertEquals(settingModelTest.getStartingSeedType(), tomato);
+        assertEquals(settingModelTest.getStartingCropType(), tomato);
     }
     //Test setter method for SeedModel's seedType
     @Test
     public void testSetterSeedModelSeedType() {
-        tomato.setSeedType("Corn Seed");
-        assertEquals(tomato.getSeedType(), "Corn Seed");
+        tomato.setCropName("Corn");
+        assertEquals(tomato.getCropName(), "Corn");
     }
     //Test getter method for startingDifficulty
     @Test

@@ -90,7 +90,7 @@ public class SeasonTestAdityaPratap {
         List<CropModel> expectedList = new ArrayList<>();
         List<CropModel> actualList = this.seasonModel.getDesirableCrops();
 
-        CropModel tomatoCrop = new CropModel("Tomato", 50, 23.45);
+        CropModel tomatoCrop = new CropModel("Tomato", 50,  23.45);
         CropModel cornCrop = new CropModel("Corn", 65, 12.76);
 
         expectedList.add(tomatoCrop);
@@ -145,7 +145,7 @@ public class SeasonTestAdityaPratap {
     public void testSetDesirableCrops() {
 
         List<CropModel> crops = new ArrayList<>();
-        CropModel wheatCrop = new CropModel("Wheat", 70, 15.00);
+        CropModel wheatCrop = new CropModel("Wheat", 70,  15.00);
 
         crops.add(wheatCrop);
         this.seasonModel.setDesirableCrops(crops);

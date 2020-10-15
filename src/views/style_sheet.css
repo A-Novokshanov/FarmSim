@@ -1,0 +1,7 @@
+.combo-box .cell:selected {
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-prompt-text-fill: white;
+}
