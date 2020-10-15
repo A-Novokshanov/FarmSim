@@ -139,7 +139,6 @@ public class FarmUIController {
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
         createPlotModels();
-        createPlotModelImgs();
     }
 
     public void initData2(PlayerViewModel playerViewModel, String playerName, ArrayList<PlotModel> plotModels,
@@ -153,7 +152,6 @@ public class FarmUIController {
         this.name = playerName;
         setUpPlotModels(plotModels, plotModelImgs);
         createPlotModels();
-        createPlotModelImgs();
     }
 
     /**
@@ -192,6 +190,7 @@ public class FarmUIController {
             e.printStackTrace();
         }
 
+        createPlotModelImgs();
         MarketPlace marketPlace = loader.getController();
         marketPlace.initData(mouseEvent, playerViewModel, storageViewModel,
                 plotModels, plotModelImgs, name, dayNum.getText(), daysPassed);
