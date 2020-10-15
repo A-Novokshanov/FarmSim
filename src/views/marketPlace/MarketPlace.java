@@ -151,7 +151,7 @@ public class MarketPlace {
         sellSwap(mouseEvent);
     }
 
-    private void upValue(Text quantity, int crop, Text price) {
+    private void upQuantity(Text quantity, int crop, Text price) {
         int num = Integer.parseInt(quantity.getText());
         if (num < 15) {
             num++;
@@ -161,7 +161,7 @@ public class MarketPlace {
         setPrice(quantity, crop, price);
     }
 
-    private void downValue(Text quantity, int crop, Text price) {
+    private void downQuantity(Text quantity, int crop, Text price) {
         int num = Integer.parseInt(quantity.getText());
         if (num > 1) {
             num--;
@@ -179,7 +179,7 @@ public class MarketPlace {
         price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
     }
 
-    private void buyValue(Text quantity, int crop, Text iQuantity) {
+    private void buyQuantity(Text quantity, int crop, Text iQuantity) {
         int num = Integer.parseInt(quantity.getText());
         marketViewModel.purchaseItems(
                 storageViewModel.userInventory().get(crop), num);
@@ -188,7 +188,7 @@ public class MarketPlace {
         this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
     }
 
-    private void sellValue(Text quantity, int crop, Text iQuantity) {
+    private void sellQuantity(Text quantity, int crop, Text iQuantity) {
         int num = Integer.parseInt(quantity.getText());
         storageViewModel.sellItemFromInventory(
                 storageViewModel.userInventory().get(crop), num);
@@ -198,130 +198,130 @@ public class MarketPlace {
     }
 
     public void upQuantity1() {
-        upValue(panel1Value, 0, panel1Price);
+        upQuantity(panel1Value, 0, panel1Price);
     }
 
     public void downQuantity1() {
-        downValue(panel1Value, 0, panel1Price);
+        downQuantity(panel1Value, 0, panel1Price);
     }
 
     public void panel1BuySell() {
         if (buyState) {
-            buyValue(panel1Value, 0, panel1Quantity);
+            buyQuantity(panel1Value, 0, panel1Quantity);
         } else {
-            sellValue(panel1Value, 0, panel1Quantity);
+            sellQuantity(panel1Value, 0, panel1Quantity);
         }
     }
 
     public void upQuantity2() {
-        upValue(panel2Value, 1, panel2Price);
+        upQuantity(panel2Value, 1, panel2Price);
     }
 
     public void downQuantity2() {
-        downValue(panel2Value, 1, panel2Price);
+        downQuantity(panel2Value, 1, panel2Price);
     }
 
     public void panel2BuySell() {
         if (buyState) {
-            buyValue(panel2Value, 1, panel2Quantity);
+            buyQuantity(panel2Value, 1, panel2Quantity);
         } else {
-            sellValue(panel2Value, 1, panel2Quantity);
+            sellQuantity(panel2Value, 1, panel2Quantity);
         }
     }
 
     public void upQuantity3() {
-        upValue(panel3Value, 2, panel3Price);
+        upQuantity(panel3Value, 2, panel3Price);
     }
 
     public void downQuantity3() {
-        downValue(panel3Value, 2, panel3Price);
+        downQuantity(panel3Value, 2, panel3Price);
     }
 
     public void panel3BuySell() {
         if (buyState) {
-            buyValue(panel3Value, 2, panel3Quantity);
+            buyQuantity(panel3Value, 2, panel3Quantity);
         } else {
-            sellValue(panel3Value, 2, panel3Quantity);
+            sellQuantity(panel3Value, 2, panel3Quantity);
         }
     }
 
     public void upQuantity4() {
-        upValue(panel4Value, 3, panel4Price);
+        upQuantity(panel4Value, 3, panel4Price);
     }
 
     public void downQuantity4() {
-        downValue(panel4Value, 3, panel4Price);
+        downQuantity(panel4Value, 3, panel4Price);
     }
 
     public void panel4BuySell() {
         if (buyState) {
-            buyValue(panel4Value, 3, panel4Quantity);
+            buyQuantity(panel4Value, 3, panel4Quantity);
         } else {
-            sellValue(panel4Value, 3, panel4Quantity);
+            sellQuantity(panel4Value, 3, panel4Quantity);
         }
     }
 
     public void upQuantity5() {
-        upValue(panel5Value, 4, panel5Price);
+        upQuantity(panel5Value, 4, panel5Price);
     }
 
     public void downQuantity5() {
-        downValue(panel5Value, 4, panel5Price);
+        downQuantity(panel5Value, 4, panel5Price);
     }
 
     public void panel5BuySell() {
         if (buyState) {
-            buyValue(panel5Value, 4, panel5Quantity);
+            buyQuantity(panel5Value, 4, panel5Quantity);
         } else {
-            sellValue(panel5Value, 4, panel5Quantity);
+            sellQuantity(panel5Value, 4, panel5Quantity);
         }
     }
 
     public void upQuantity6() {
-        upValue(panel6Value, 5, panel6Price);
+        upQuantity(panel6Value, 5, panel6Price);
     }
 
     public void downQuantity6() {
-        downValue(panel6Value, 5, panel6Price);
+        downQuantity(panel6Value, 5, panel6Price);
     }
 
     public void panel6BuySell() {
         if (buyState) {
-            buyValue(panel6Value, 5, panel6Quantity);
+            buyQuantity(panel6Value, 5, panel6Quantity);
         } else {
-            sellValue(panel6Value, 5, panel6Quantity);
+            sellQuantity(panel6Value, 5, panel6Quantity);
         }
     }
 
     public void upQuantity7() {
-        upValue(panel7Value, 6, panel7Price);
+        upQuantity(panel7Value, 6, panel7Price);
     }
 
     public void downQuantity7() {
-        downValue(panel7Value, 6, panel7Price);
+        downQuantity(panel7Value, 6, panel7Price);
     }
 
     public void panel7BuySell() {
         if (buyState) {
-            buyValue(panel7Value, 6, panel7Quantity);
+            buyQuantity(panel7Value, 6, panel7Quantity);
         } else {
-            sellValue(panel7Value, 6, panel7Quantity);
+            sellQuantity(panel7Value, 6, panel7Quantity);
         }
     }
 
     public void upQuantity8() {
-        upValue(panel8Value, 7, panel8Price);
+        upQuantity(panel8Value, 7, panel8Price);
     }
 
     public void downQuantity8() {
-        downValue(panel8Value, 7, panel8Price);
+        downQuantity(panel8Value, 7, panel8Price);
     }
 
     public void panel8BuySell() {
         if (buyState) {
-            buyValue(panel8Value, 7, panel8Quantity);
+            buyQuantity(panel8Value, 7, panel8Quantity);
         } else {
-            sellValue(panel8Value, 7, panel8Quantity);
+            sellQuantity(panel8Value, 7, panel8Quantity);
         }
     }
 
