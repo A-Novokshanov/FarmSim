@@ -122,6 +122,7 @@ public class FarmUIController {
     private PlotViewModel plotViewModel;
     private ArrayList<PlotModel> plotModels = new ArrayList<>(10);
     private ArrayList<Image> plotModelImgs = new ArrayList<>(10);
+    private ArrayList<String> transferString = new ArrayList<>(2);
     private String name;
 
     /**
@@ -141,16 +142,16 @@ public class FarmUIController {
         createPlotModels();
     }
 
-    public void initData2(PlayerViewModel playerViewModel,
-                          String playerName, ArrayList<PlotModel> plotModels,
-                          ArrayList<Image> plotModelImgs, String dayNum, int daysPassed) {
+    public void initData2(PlayerViewModel playerViewModel, ArrayList<PlotModel> plotModels,
+                          ArrayList<Image> plotModelImgs, ArrayList<String> transferString,
+                          int daysPassed) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.plotViewModel = new PlotViewModel();
         this.playerViewModel = playerViewModel;
-        this.dayNum.setText(dayNum);
+        this.name = transferString.get(0);
+        this.dayNum.setText(transferString.get(1));
         this.daysPassed = daysPassed;
-        this.name = playerName;
         setUpPlotModels(plotModels, plotModelImgs);
         createPlotModels();
     }
@@ -192,9 +193,11 @@ public class FarmUIController {
         }
 
         createPlotModelImgs();
+        transferString.add(name);
+        transferString.add(dayNum.getText());
         MarketPlace marketPlace = loader.getController();
         marketPlace.initData(mouseEvent, playerViewModel, storageViewModel,
-                plotModels, plotModelImgs, name, dayNum.getText(), daysPassed);
+                plotModels, plotModelImgs, transferString, daysPassed);
 
         stage.setTitle("Market");
         stage.show();
