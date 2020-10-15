@@ -193,6 +193,10 @@ public class FarmUIController {
         plot10 = plotViewModel.populatePlot(cropModel);
     }
 
+    public void setUpPlotImages() {
+
+    }
+
     public void incrementAllPlotDays() {
         plotViewModel.incrementPlotDaysOld(plot1);
         plotViewModel.incrementPlotDaysOld(plot2);
@@ -204,5 +208,9 @@ public class FarmUIController {
         plotViewModel.incrementPlotDaysOld(plot8);
         plotViewModel.incrementPlotDaysOld(plot9);
         plotViewModel.incrementPlotDaysOld(plot10);
+    }
+
+    public void checkMaturity(PlotModel plotModel) {
+        
     }
 }
