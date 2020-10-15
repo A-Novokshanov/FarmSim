@@ -19,9 +19,9 @@ public class StorageModel {
      */
     public StorageModel() {
         cropInventory = new ArrayList<>(15);
-        cropInventory.add(new CropModel("Corn", 1, 100.00));
-        cropInventory.add(new CropModel("Tomato", 1, 80.00));
-        cropInventory.add(new CropModel("Potato", 1, 60.00));
+        cropInventory.add(new CropModel("Corn", 5, 100.00));
+        cropInventory.add(new CropModel("Tomato", 7, 80.00));
+        cropInventory.add(new CropModel("Potato", 9, 60.00));
 
     }
 
@@ -51,7 +51,7 @@ public class StorageModel {
      * @param quantity how much of the crop to add.
      */
     public void setNewCrop(CropModel crop, int quantity) {
-        cropInventory.set(cropInventory.size() - 1, crop);
+        cropInventory.add(cropInventory.size(), crop);
         crop.setCropQuantity(crop.getCropQuantity() + quantity);
     }
 
@@ -98,7 +98,12 @@ public class StorageModel {
      * @return cropInventory size.
      */
     public int getInventorySize() {
-        return cropInventory.size();
+        int count = 0;
+        for (CropModel crop : cropInventory) {
+            count += crop.getCropQuantity();
+        }
+        return count;
+
     }
 
     /**
