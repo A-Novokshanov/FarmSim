@@ -42,7 +42,7 @@ public class SettingModelTestAndrewNovokshanov {
     //Test getter method for SeedModel
     @Test
     public void testGetterSeedModel() {
-        assertEquals(settingModelTest.getStartingSeedType(), tomato);
+        assertEquals(settingModelTest.getStartingCropType(), tomato);
     }
     //Test setter method for SeedModel's seedType
     @Test

@@ -12,7 +12,7 @@ public class SettingModel {
      *  Represents the type of the setting.
      */
     private SeasonModel startingSeason;
-    private SeedModel startingSeedType;
+    private CropModel startingCropType;
     private String startingDifficulty;
     private String playerName;
 
@@ -20,14 +20,14 @@ public class SettingModel {
      * Constructs a settings object with specified Type.
      *
      * @param startingSeason     The starting season of the game
-     * @param startingSeedType   The starting seed type of the game
+     * @param startingCropType   The starting crop type of the game
      * @param startingDifficulty The starting difficulty of the game
      * @param playerName         The player's starting name
      */
-    public SettingModel(SeasonModel startingSeason, SeedModel startingSeedType,
+    public SettingModel(SeasonModel startingSeason, CropModel startingCropType,
                         String startingDifficulty, String playerName) {
         this.startingSeason = startingSeason;
-        this.startingSeedType = startingSeedType;
+        this.startingCropType = startingCropType;
         this.startingDifficulty = startingDifficulty;
         this.playerName = playerName;
     }
@@ -51,18 +51,18 @@ public class SettingModel {
     /**
      * @return Gets and returns the startingSeedType attribute of a settingModel object.
      */
-    public SeedModel getStartingSeedType() {
-        return this.startingSeedType;
+    public CropModel getStartingCropType() {
+        return this.startingCropType;
     }
 
     /**
      * Sets the startingSeedType attribute of a settingModel object.
      *
-     * @param startingSeedType is the new desired startingSeedType attribute of a
+     * @param startingCropType is the new desired startingSeedType attribute of a
      *                         settingModel object.
      */
-    public void setStartingSeedType(SeedModel startingSeedType) {
-        this.startingSeedType = startingSeedType;
+    public void setStartingCropType(CropModel startingCropType) {
+        this.startingCropType = startingCropType;
     }
 
     /**

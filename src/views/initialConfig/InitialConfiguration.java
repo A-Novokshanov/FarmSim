@@ -68,7 +68,7 @@ public class InitialConfiguration {
     @FXML
     private JFXComboBox<String> cmbBoxSeason;
 
-    private SeedModel seed;
+    private CropModel crop;
     private PlayerViewModel playerViewModel = new PlayerViewModel();
     private SeasonModel season;
     private String curDifficulty = "Normal";
@@ -110,7 +110,7 @@ public class InitialConfiguration {
      * Sets Season and Seed in a Setting view model.
      */
     public void setSeasonAndSeed() {
-        seed = new SeedModel(curSeed.toString());
+        crop = new CropModel(curSeed.toString());
         List<AnimalModel> animals = new ArrayList<>();
         List<CropModel> crops = new ArrayList<>();
         season = new SeasonModel(3, curSeason.toString(), animals, crops);
@@ -231,7 +231,7 @@ public class InitialConfiguration {
 
             this.setMoney();
             StorageModel userStorage = new StorageModel();
-            playerViewModel.setPlayerDetails(seed, season,
+            playerViewModel.setPlayerDetails(crop, season,
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             playerViewModel.getPlayer().setPlayerStorage(userStorage);
             FarmUIController farmUIController = loader.getController();
