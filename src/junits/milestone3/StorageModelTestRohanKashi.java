@@ -22,7 +22,6 @@ public class StorageModelTestRohanKashi {
     private CropModel tomato;
 
 
-
     @Before
     public void setup() {
         storageModelTest = new StorageModel();
@@ -92,9 +91,9 @@ public class StorageModelTestRohanKashi {
     @Test
     public void testRemoveCrop() {
         storageModelTest.removeCrop(2);
-        assertEquals(storageModelTest.getInventorySize(), 2);
+        assertEquals(storageModelTest.getInventorySize(), 12);
         storageModelTest.removeCrop(1);
-        assertEquals(storageModelTest.getInventorySize(), 1);
+        assertEquals(storageModelTest.getInventorySize(), 5);
         storageModelTest.removeCrop(0);
         assertEquals(storageModelTest.getInventorySize(), 0);
 
@@ -117,10 +116,10 @@ public class StorageModelTestRohanKashi {
 
     @Test
     public void testGetInventorySize() {
-        assertEquals(storageModelTest.getInventorySize(), 3);
+        assertEquals(storageModelTest.getInventorySize(), 21);
         orange = new CropModel("Orange", 0, 1500.3);
         storageModelTest.setNewCrop(orange, 4);
-        assertEquals(storageModelTest.getInventorySize(), 4);
+        assertEquals(storageModelTest.getInventorySize(), 25);
 
     }
 
