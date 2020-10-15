@@ -82,7 +82,7 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="720.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
                               <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                                    <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="244.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -92,7 +92,7 @@
                               </ImageView>
                               <ImageView fitHeight="164.0" fitWidth="169.0" layoutX="488.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
+                                    <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
                                  </image>
                               </ImageView>
                               <Text layoutX="48.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
@@ -100,7 +100,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="numTomatoes" layoutX="124.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text fx:id="numCorn" layoutX="124.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -110,7 +110,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="numPotatoes" layoutX="362.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text fx:id="numPotatoes" layoutX="362.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
@@ -120,7 +120,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="numCorn" layoutX="606.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+                              <Text fx:id="numTomatoes" layoutX="606.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>

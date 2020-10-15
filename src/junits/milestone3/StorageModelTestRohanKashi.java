@@ -91,11 +91,11 @@ public class StorageModelTestRohanKashi {
     @Test
     public void testRemoveCrop() {
         storageModelTest.removeCrop(2);
-        assertEquals(storageModelTest.getInventorySize(), 12);
+        assertEquals(storageModelTest.getTotalCropAmount(), 12);
         storageModelTest.removeCrop(1);
-        assertEquals(storageModelTest.getInventorySize(), 5);
+        assertEquals(storageModelTest.getTotalCropAmount(), 5);
         storageModelTest.removeCrop(0);
-        assertEquals(storageModelTest.getInventorySize(), 0);
+        assertEquals(storageModelTest.getTotalCropAmount(), 0);
 
     }
 
@@ -116,10 +116,10 @@ public class StorageModelTestRohanKashi {
 
     @Test
     public void testGetInventorySize() {
-        assertEquals(storageModelTest.getInventorySize(), 21);
+        assertEquals(storageModelTest.getTotalCropAmount(), 21);
         orange = new CropModel("Orange", 0, 1500.3);
         storageModelTest.setNewCrop(orange, 4);
-        assertEquals(storageModelTest.getInventorySize(), 25);
+        assertEquals(storageModelTest.getTotalCropAmount(), 25);
 
     }
 

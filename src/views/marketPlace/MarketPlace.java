@@ -172,29 +172,35 @@ public class MarketPlace {
     }
 
     private void setPrice(Text quantity, int crop, Text price) {
-        double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
-        String curDifficulty =
-                playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
-        double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
-        price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
+        if (crop < 3) {
+            double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
+            String curDifficulty =
+                    playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+            double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+            price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
+        }
     }
 
     private void buyQuantity(Text quantity, int crop, Text iQuantity) {
         int num = Integer.parseInt(quantity.getText());
-        marketViewModel.purchaseItems(
-                storageViewModel.userInventory().get(crop), num);
-        iQuantity.setText(doubleDigitString(
-                storageViewModel.userInventory().get(crop).getCropQuantity()));
-        this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        if (crop < 3) {
+            marketViewModel.purchaseItems(
+                    storageViewModel.userInventory().get(crop), num);
+            iQuantity.setText(doubleDigitString(
+                    storageViewModel.userInventory().get(crop).getCropQuantity()));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        }
     }
 
     private void sellQuantity(Text quantity, int crop, Text iQuantity) {
-        int num = Integer.parseInt(quantity.getText());
-        storageViewModel.sellItemFromInventory(
-                storageViewModel.userInventory().get(crop), num);
-        iQuantity.setText(doubleDigitString(
-                storageViewModel.userInventory().get(crop).getCropQuantity()));
-        this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        if (crop < 3) {
+            int num = Integer.parseInt(quantity.getText());
+            storageViewModel.sellItemFromInventory(
+                    storageViewModel.userInventory().get(crop), num);
+            iQuantity.setText(doubleDigitString(
+                    storageViewModel.userInventory().get(crop).getCropQuantity()));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        }
     }
 
     public void upQuantity1() {
@@ -262,7 +268,7 @@ public class MarketPlace {
     }
 
     public void upQuantity5() {
-        upQuantity(panel5Value, 4, panel5Price);
+        // upQuantity(panel5Value, 4, panel5Price);
     }
 
     public void downQuantity5() {
@@ -278,7 +284,7 @@ public class MarketPlace {
     }
 
     public void upQuantity6() {
-        upQuantity(panel6Value, 5, panel6Price);
+         upQuantity(panel6Value, 5, panel6Price);
     }
 
     public void downQuantity6() {

@@ -25,7 +25,7 @@ public class PlotViewModel {
             throw new IllegalArgumentException("The plot is null");
         }
         if (harvestedPlot.getDaysOld() >= 10
-                && player.getPlayer().getUserStorage().getInventorySize()
+                && player.getPlayer().getUserStorage().getTotalCropAmount()
                         >= harvestedPlot.getCropInPlot().getCropQuantity()) {
 
             storageViewModel.addToInventory(harvestedPlot.getCropInPlot(),

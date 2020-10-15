@@ -42,7 +42,7 @@ public class MarketViewModel {
         double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
         double currentPriceTotal = currentPriceIndividual * quantity;
         return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))
-                && ((quantity + storage.getInventorySize()) <= storage.getCapacity());
+                && ((quantity + storage.getTotalCropAmount()) <= storage.getCapacity());
     }
 
     /**
@@ -57,7 +57,7 @@ public class MarketViewModel {
             PlayerModel curPlayer = player.getPlayer();
             player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
                     - calculateCropPrice(crop.getCropValue(),
-                    player.getPlayer().getPlayerSettings().getStartingDifficulty()));
+                    player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity);
         }
     }
 

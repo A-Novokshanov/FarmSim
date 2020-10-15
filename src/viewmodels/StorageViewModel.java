@@ -33,7 +33,7 @@ public class StorageViewModel {
      * @param quantity is the amount of crops to add
      */
     public void addToInventory(CropModel crop, int quantity) {
-        if (storageModel.getInventorySize() < 15) {
+        if (storageModel.getTotalCropAmount() < 15) {
             int count = 0;
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 count += 1;
@@ -41,7 +41,7 @@ public class StorageViewModel {
                     storageModel.setNewCropAmount(quantity, i);
                 }
             }
-            if (count == storageModel.getInventorySize()) {
+            if (count == storageModel.getTotalCropAmount()) {
                 storageModel.setNewCrop(crop, quantity);
             }
         }
@@ -54,21 +54,15 @@ public class StorageViewModel {
      * @param amount The amount of crop the user is trying to sell.
      */
     public void sellItemFromInventory(CropModel crop, int amount) {
-        if (storageModel.getInventorySize() > 0 && storageModel.upForSale(crop)) {
+        if (storageModel.getTotalCropAmount() > 0 && storageModel.upForSale(crop)) {
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 if (storageModel.checkIfNameCorrect(i, crop)) {
-                    if (storageModel.getEnoughToRemove(i, amount) == 1) {
-                        if (storageModel.getEnoughToRemove(i, amount) == 1) {
-                            storageModel.removeCropAmount(amount, i);
-                            player.getPlayer().setUserCurrentMoney((int) (
-                                    player.getPlayer().getUserCurrentMoney()
-                                    + amount * (crop.getCropValue())));
-                        } else {
-                            storageModel.removeCrop(i);
-                            player.getPlayer().setUserCurrentMoney((int) (
-                                    player.getPlayer().getUserCurrentMoney()
-                                    + amount * (crop.getCropValue())));
-                        }
+                    if (storageModel.getEnoughToRemove(i, amount) == 1 || storageModel.getEnoughToRemove(i, amount) == 2) {
+                        System.out.println("The if in sellItemFromInventory was reached");
+                        storageModel.removeCropAmount(amount, i);
+                        player.getPlayer().setUserCurrentMoney((int) (
+                                player.getPlayer().getUserCurrentMoney()
+                                        + amount * (crop.getCropValue())));
                     }
                 }
             }

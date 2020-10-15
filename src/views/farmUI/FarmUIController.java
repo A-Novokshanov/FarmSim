@@ -57,12 +57,12 @@ public class FarmUIController {
         storageViewModel = new StorageViewModel(playerViewModel);
         System.out.println("User Storage" + playerViewModel.getPlayer().getUserStorage());
         numTomatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity())
+                String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity())
         );
         numPotatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
         );
-        numCorn.setText(String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        numCorn.setText(String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
         this.playerViewModel = playerViewModel;
         this.name = playerName;
     }
