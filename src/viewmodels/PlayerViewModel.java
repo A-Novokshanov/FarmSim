@@ -2,7 +2,7 @@ package viewmodels;
 
 import models.PlayerModel;
 import models.SeasonModel;
-import models.SeedModel;
+import models.CropModel;
 import models.SettingModel;
 import models.StorageModel;
 import services.authentication.CreatePlayer;
@@ -46,19 +46,19 @@ public class PlayerViewModel {
     /**
      * Sets the players details/ initial configurations.
      *
-     * @param seedModel          The seed type the player chooses.
+     * @param cropModel          The crop type the player chooses.
      * @param seasonModel        The season player chooses.
      * @param playerName         The name of the player.
      * @param startingDifficulty The starting difficulty the player chooses.
      * @param currentMoney       The current money of the player.
      * @param storageModel       The storage/inventory of the user
      */
-    public void setPlayerDetails(SeedModel seedModel, SeasonModel seasonModel,
+    public void setPlayerDetails(CropModel cropModel, SeasonModel seasonModel,
                                  String playerName,
                                  StorageModel storageModel, String startingDifficulty,
                                  int currentMoney) {
 
-        this.settingModel = new SettingModel(seasonModel, seedModel,
+        this.settingModel = new SettingModel(seasonModel, cropModel,
                 startingDifficulty, playerName);
         this.playerModel = new PlayerModel(currentMoney, this.settingModel, storageModel);
         this.addSettingsToDatabase(this.playerModel);

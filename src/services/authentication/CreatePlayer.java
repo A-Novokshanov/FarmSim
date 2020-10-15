@@ -73,7 +73,7 @@ public class CreatePlayer {
                 preparedStatement.setString(2,
                         playerDetails.getPlayerSettings().getStartingSeason().getSeasonType());
                 preparedStatement.setString(3,
-                        playerDetails.getPlayerSettings().getStartingSeedType().getSeedType());
+                        playerDetails.getPlayerSettings().getStartingCropType().getCropName());
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.executeUpdate();
 

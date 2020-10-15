@@ -18,7 +18,6 @@ import javafx.stage.StageStyle;
 import models.AnimalModel;
 import models.CropModel;
 import models.SeasonModel;
-import models.SeedModel;
 import models.StorageModel;
 import viewmodels.PlayerViewModel;
 import views.farmUI.FarmUIController;
@@ -68,11 +67,11 @@ public class InitialConfiguration {
     @FXML
     private JFXComboBox<String> cmbBoxSeason;
 
-    private SeedModel seed;
+    private CropModel crop;
     private PlayerViewModel playerViewModel = new PlayerViewModel();
     private SeasonModel season;
     private String curDifficulty = "Normal";
-    private String curSeed = "Corn";
+    private String curCrop = "Corn";
     private String curSeason = "Spring";
     private int currentMoney;
     private double x = 0;
@@ -109,8 +108,8 @@ public class InitialConfiguration {
     /**
      * Sets Season and Seed in a Setting view model.
      */
-    public void setSeasonAndSeed() {
-        seed = new SeedModel(curSeed.toString());
+    public void setSeasonAndCrop() {
+        crop = new CropModel(curCrop.toString(), 1, 100.0);
         List<AnimalModel> animals = new ArrayList<>();
         List<CropModel> crops = new ArrayList<>();
         season = new SeasonModel(3, curSeason.toString(), animals, crops);
@@ -216,7 +215,7 @@ public class InitialConfiguration {
      * @param mouseEvent Game created on mouse click.
      */
     public void createGame(MouseEvent mouseEvent) {
-        setSeasonAndSeed();
+        setSeasonAndCrop();
         // btn1 = create button id
         if (validateName(txtFldName.textProperty().getValue())) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
@@ -231,7 +230,7 @@ public class InitialConfiguration {
 
             this.setMoney();
             StorageModel userStorage = new StorageModel();
-            playerViewModel.setPlayerDetails(seed, season,
+            playerViewModel.setPlayerDetails(crop, season,
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             playerViewModel.getPlayer().setPlayerStorage(userStorage);
             FarmUIController farmUIController = loader.getController();
@@ -309,7 +308,7 @@ public class InitialConfiguration {
         btnCorn.setSelected(true);
         btnPotato.setSelected(false);
         btnTomato.setSelected(false);
-        curSeed = "Corn";
+        curCrop = "Corn";
     }
 
     /**
@@ -321,7 +320,7 @@ public class InitialConfiguration {
         btnCorn.setSelected(false);
         btnPotato.setSelected(true);
         btnTomato.setSelected(false);
-        curSeed = "Potato";
+        curCrop = "Potato";
     }
 
     /**
@@ -333,7 +332,7 @@ public class InitialConfiguration {
         btnCorn.setSelected(false);
         btnPotato.setSelected(false);
         btnTomato.setSelected(true);
-        curSeed = "Tomato";
+        curCrop = "Tomato";
     }
 
     /**
