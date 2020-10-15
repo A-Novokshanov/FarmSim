@@ -49,16 +49,16 @@ public class SettingModel {
     }
 
     /**
-     * @return Gets and returns the startingSeedType attribute of a settingModel object.
+     * @return Gets and returns the startingCropType attribute of a settingModel object.
      */
     public CropModel getStartingCropType() {
         return this.startingCropType;
     }
 
     /**
-     * Sets the startingSeedType attribute of a settingModel object.
+     * Sets the startingCropType attribute of a settingModel object.
      *
-     * @param startingCropType is the new desired startingSeedType attribute of a
+     * @param startingCropType is the new desired startingCropType attribute of a
      *                         settingModel object.
      */
     public void setStartingCropType(CropModel startingCropType) {
