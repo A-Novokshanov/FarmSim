@@ -141,7 +141,8 @@ public class FarmUIController {
         createPlotModels();
     }
 
-    public void initData2(PlayerViewModel playerViewModel, String playerName, ArrayList<PlotModel> plotModels,
+    public void initData2(PlayerViewModel playerViewModel,
+                          String playerName, ArrayList<PlotModel> plotModels,
                           ArrayList<Image> plotModelImgs, String dayNum, int daysPassed) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);

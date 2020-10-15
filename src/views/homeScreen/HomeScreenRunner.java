@@ -12,7 +12,7 @@ public class HomeScreenRunner extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-        primaryStage.setTitle("Initial Configuration");
+        primaryStage.setTitle("Welcome Screen");
         primaryStage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root, 1280, 720);
         primaryStage.setScene(scene);

@@ -43,7 +43,7 @@ public class PlotModelMatthewFarias {
 
     @Test
     public void testGetDaysOld() {
-       assertEquals(plotModelTest.getDaysOld(), 3);
+        assertEquals(plotModelTest.getDaysOld(), 3);
     }
 
     @Test
