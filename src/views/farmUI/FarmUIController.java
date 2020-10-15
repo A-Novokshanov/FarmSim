@@ -171,11 +171,11 @@ public class FarmUIController {
         sunProgressBar.setVisible(!sunProgressBar.isVisible());
         numCorn.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
-        numPotatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
-        );
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity())
+        );
+        numPotatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
         );
     }
 
