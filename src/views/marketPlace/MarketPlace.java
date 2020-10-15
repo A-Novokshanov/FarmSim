@@ -35,333 +35,322 @@ public class MarketPlace {
     @FXML
     private JFXButton btnFarm;
     @FXML
-    private Text budget;
+    private Text txtBudget;
 
 
     @FXML
-    private ImageView p1Img;
+    private ImageView panel1Img;
     @FXML
-    private JFXButton p1Action;
+    private JFXButton panel1Action;
     @FXML
-    private Text p1Value;
+    private Text panel1Value;
     @FXML
-    private Text p1Price;
+    private Text panel1Price;
     @FXML
-    private Text p1Quantity;
+    private Text panel1Quantity;
 
     @FXML
-    private ImageView p2Img;
+    private ImageView panel2Img;
     @FXML
-    private JFXButton p2Action;
+    private JFXButton panel2Action;
     @FXML
-    private Text p2Value;
+    private Text panel2Value;
     @FXML
-    private Text p2Price;
+    private Text panel2Price;
     @FXML
-    private Text p2Quantity;
+    private Text panel2Quantity;
 
     @FXML
-    private ImageView p3Img;
+    private ImageView panel3Img;
     @FXML
-    private JFXButton p3Action;
+    private JFXButton panel3Action;
     @FXML
-    private Text p3Value;
+    private Text panel3Value;
     @FXML
-    private Text p3Price;
+    private Text panel3Price;
     @FXML
-    private Text p3Quantity;
+    private Text panel3Quantity;
 
     @FXML
-    private ImageView p4Img;
+    private ImageView panel4Img;
     @FXML
-    private JFXButton p4Action;
+    private JFXButton panel4Action;
     @FXML
-    private Text p4Value;
+    private Text panel4Value;
     @FXML
-    private Text p4Price;
+    private Text panel4Price;
     @FXML
-    private Text p4Quantity;
+    private Text panel4Quantity;
 
     @FXML
-    private ImageView p5Img;
+    private ImageView panel5Img;
     @FXML
-    private JFXButton p5Action;
+    private JFXButton panel5Action;
     @FXML
-    private Text p5Value;
+    private Text panel5Value;
     @FXML
-    private Text p5Price;
+    private Text panel5Price;
     @FXML
-    private Text p5Quantity;
+    private Text panel5Quantity;
 
     @FXML
-    private ImageView p6Img;
+    private ImageView panel6Img;
     @FXML
-    private JFXButton p6Action;
+    private JFXButton panel6Action;
     @FXML
-    private Text p6Value;
+    private Text panel6Value;
     @FXML
-    private Text p6Price;
+    private Text panel6Price;
     @FXML
-    private Text p6Quantity;
+    private Text panel6Quantity;
 
     @FXML
-    private ImageView p7Img;
+    private ImageView panel7Img;
     @FXML
-    private JFXButton p7Action;
+    private JFXButton panel7Action;
     @FXML
-    private Text p7Value;
+    private Text panel7Value;
     @FXML
-    private Text p7Price;
+    private Text panel7Price;
     @FXML
-    private Text p7Quantity;
+    private Text panel7Quantity;
 
     @FXML
-    private ImageView p8Img;
+    private ImageView panel8Img;
     @FXML
-    private JFXButton p8Action;
+    private JFXButton panel8Action;
     @FXML
-    private Text p8Value;
+    private Text panel8Value;
     @FXML
-    private Text p8Price;
+    private Text panel8Price;
     @FXML
-    private Text p8Quantity;
+    private Text panel8Quantity;
 
     public void initData(MouseEvent mouseEvent,
-                         PlayerViewModel player, StorageViewModel storageViewModel, String name) {
+                         PlayerViewModel player, StorageViewModel storage, String name) {
         this.marketViewModel = new MarketViewModel(player);
-        this.storageViewModel = storageViewModel;
+        this.storageViewModel = storage;
         this.playerViewModel = player;
         this.playerName = name;
-        this.budget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
-        if (storageViewModel.userInventory().get(0) != null) {
-            setPrice(p1Value, 0, p1Price);
-            p1Quantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(0).getCropQuantity()));
+        this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
+        if (storage.userInventory().get(0) != null) {
+            setPrice(panel1Value, 0, panel1Price);
+            panel1Quantity.setText(doubleDigitString(
+                    storage.userInventory().get(0).getCropQuantity()));
         }
-        if (storageViewModel.userInventory().get(1) != null) {
-            setPrice(p2Value, 1, p2Price);
-            p2Quantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(1).getCropQuantity()));
+        if (storage.userInventory().get(1) != null) {
+            setPrice(panel2Value, 1, panel2Price);
+            panel2Quantity.setText(doubleDigitString(
+                    storage.userInventory().get(1).getCropQuantity()));
         }
-        if (storageViewModel.userInventory().get(2) != null) {
-            setPrice(p3Value, 2, p3Price);
-            p3Quantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(2).getCropQuantity()));
+        if (storage.userInventory().get(2) != null) {
+            setPrice(panel3Value, 2, panel3Price);
+            panel3Quantity.setText(doubleDigitString(
+                    storage.userInventory().get(2).getCropQuantity()));
         }
         sellSwap(mouseEvent);
     }
 
-    private void upValue(Text value, int crop, Text price, Text quantity) {
-        int num = Integer.parseInt(value.getText());
+    private void upValue(Text quantity, int crop, Text price) {
+        int num = Integer.parseInt(quantity.getText());
         if (num < 15) {
             num++;
         }
         String str = doubleDigitString(num);
-        value.setText(str);
-        setPrice(value, crop, price);
+        quantity.setText(str);
+        setPrice(quantity, crop, price);
     }
 
-    private void downValue(Text value, int crop, Text price, Text quantity) {
-        int num = Integer.parseInt(value.getText());
+    private void downValue(Text quantity, int crop, Text price) {
+        int num = Integer.parseInt(quantity.getText());
         if (num > 1) {
             num--;
         }
         String str = doubleDigitString(num);
-        value.setText(str);
-        setPrice(value, crop, price);
+        quantity.setText(str);
+        setPrice(quantity, crop, price);
     }
 
-    private void setPrice(Text value, int crop, Text price) {
+    private void setPrice(Text quantity, int crop, Text price) {
         double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
         String curDifficulty =
                 playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
         double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
-        price.setText("$" + (calPrice * Integer.parseInt(value.getText())));
+        price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
     }
 
-    private void buyValue(Text value, int crop, Text quantity) {
-        int num = Integer.parseInt(value.getText());
-        int iNum = Integer.parseInt(quantity.getText());
-        double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
-        double budgetCheck = playerViewModel.getPlayer().getUserCurrentMoney();
-        if(crop <= 2) {
-            if (num * basePrice <= budgetCheck) {
-                marketViewModel.purchaseItems(storageViewModel.userInventory().get(crop), num);
-                quantity.setText(doubleDigitString(
-                        storageViewModel.userInventory().get(crop).getCropQuantity()));
-                this.budget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
-            }
-        }
+    private void buyValue(Text quantity, int crop, Text iQuantity) {
+        int num = Integer.parseInt(quantity.getText());
+        marketViewModel.purchaseItems(
+                storageViewModel.userInventory().get(crop), num);
+        iQuantity.setText(doubleDigitString(
+                storageViewModel.userInventory().get(crop).getCropQuantity()));
+        this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
     }
 
-    private void sellValue(Text value, int crop, Text quantity) {
-        int num = Integer.parseInt(value.getText());
-        int iNum = Integer.parseInt(quantity.getText());
-        if (crop <= 2) {
-            if(iNum > 0) {
-                storageViewModel.sellItemFromInventory(
-                        storageViewModel.userInventory().get(crop), num);
-                quantity.setText(doubleDigitString(
-                        storageViewModel.userInventory().get(crop).getCropQuantity()));
-                this.budget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
-            }
-        }
+    private void sellValue(Text quantity, int crop, Text iQuantity) {
+        int num = Integer.parseInt(quantity.getText());
+        storageViewModel.sellItemFromInventory(
+                storageViewModel.userInventory().get(crop), num);
+        iQuantity.setText(doubleDigitString(
+                storageViewModel.userInventory().get(crop).getCropQuantity()));
+        this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
     }
 
-    public void upValue1() {
-        upValue(p1Value, 0, p1Price, p1Quantity);
+    public void upQuantity1() {
+        upValue(panel1Value, 0, panel1Price);
     }
 
-    public void downValue1() {
-        downValue(p1Value, 0, p1Price, p1Quantity);
+    public void downQuantity1() {
+        downValue(panel1Value, 0, panel1Price);
     }
 
-    public void action1() {
+    public void panel1BuySell() {
         if (buyState) {
-            buyValue(p1Value, 0, p1Quantity);
+            buyValue(panel1Value, 0, panel1Quantity);
         } else {
-            sellValue(p1Value, 0, p1Quantity);
+            sellValue(panel1Value, 0, panel1Quantity);
         }
     }
 
-    public void upValue2() {
-        upValue(p2Value, 1, p2Price, p2Quantity);
+    public void upQuantity2() {
+        upValue(panel2Value, 1, panel2Price);
     }
 
-    public void downValue2() {
-        downValue(p2Value, 1, p2Price, p2Quantity);
+    public void downQuantity2() {
+        downValue(panel2Value, 1, panel2Price);
     }
 
-    public void action2() {
+    public void panel2BuySell() {
         if (buyState) {
-            buyValue(p2Value, 1, p2Quantity);
+            buyValue(panel2Value, 1, panel2Quantity);
         } else {
-            sellValue(p2Value, 1, p2Quantity);
+            sellValue(panel2Value, 1, panel2Quantity);
         }
     }
 
-    public void upValue3() {
-        upValue(p3Value, 2, p3Price, p3Quantity);
+    public void upQuantity3() {
+        upValue(panel3Value, 2, panel3Price);
     }
 
-    public void downValue3() {
-        downValue(p3Value, 2, p3Price, p3Quantity);
+    public void downQuantity3() {
+        downValue(panel3Value, 2, panel3Price);
     }
 
-    public void action3() {
+    public void panel3BuySell() {
         if (buyState) {
-            buyValue(p3Value, 2, p3Quantity);
+            buyValue(panel3Value, 2, panel3Quantity);
         } else {
-            sellValue(p3Value, 2, p3Quantity);
+            sellValue(panel3Value, 2, panel3Quantity);
         }
     }
 
-    public void upValue4() {
-        upValue(p4Value, 3, p4Price, p4Quantity);
+    public void upQuantity4() {
+        upValue(panel4Value, 3, panel4Price);
     }
 
-    public void downValue4() {
-        downValue(p4Value, 3, p4Price, p4Quantity);
+    public void downQuantity4() {
+        downValue(panel4Value, 3, panel4Price);
     }
 
-    public void action4() {
+    public void panel4BuySell() {
         if (buyState) {
-            buyValue(p4Value, 3, p4Quantity);
+            buyValue(panel4Value, 3, panel4Quantity);
         } else {
-            sellValue(p4Value, 3, p4Quantity);
+            sellValue(panel4Value, 3, panel4Quantity);
         }
     }
 
-    public void upValue5() {
-        upValue(p5Value, 4, p5Price, p5Quantity);
+    public void upQuantity5() {
+        upValue(panel5Value, 4, panel5Price);
     }
 
-    public void downValue5() {
-        downValue(p5Value, 4, p5Price, p5Quantity);
+    public void downQuantity5() {
+        downValue(panel5Value, 4, panel5Price);
     }
 
-    public void action5() {
+    public void panel5BuySell() {
         if (buyState) {
-            buyValue(p5Value, 4, p5Quantity);
+            buyValue(panel5Value, 4, panel5Quantity);
         } else {
-            sellValue(p5Value, 4, p5Quantity);
+            sellValue(panel5Value, 4, panel5Quantity);
         }
     }
 
-    public void upValue6() {
-        upValue(p6Value, 5, p6Price, p6Quantity);
+    public void upQuantity6() {
+        upValue(panel6Value, 5, panel6Price);
     }
 
-    public void downValue6() {
-        downValue(p6Value, 5, p6Price, p6Quantity);
+    public void downQuantity6() {
+        downValue(panel6Value, 5, panel6Price);
     }
 
-    public void action6() {
+    public void panel6BuySell() {
         if (buyState) {
-            buyValue(p6Value, 5, p6Quantity);
+            buyValue(panel6Value, 5, panel6Quantity);
         } else {
-            sellValue(p6Value, 5, p6Quantity);
+            sellValue(panel6Value, 5, panel6Quantity);
         }
     }
 
-    public void upValue7() {
-        upValue(p7Value, 6, p7Price, p7Quantity);
+    public void upQuantity7() {
+        upValue(panel7Value, 6, panel7Price);
     }
 
-    public void downValue7() {
-        downValue(p7Value, 6, p7Price, p7Quantity);
+    public void downQuantity7() {
+        downValue(panel7Value, 6, panel7Price);
     }
 
-    public void action7() {
+    public void panel7BuySell() {
         if (buyState) {
-            buyValue(p7Value, 6, p7Quantity);
+            buyValue(panel7Value, 6, panel7Quantity);
         } else {
-            sellValue(p7Value, 6, p7Quantity);
+            sellValue(panel7Value, 6, panel7Quantity);
         }
     }
 
-    public void upValue8() {
-        upValue(p8Value, 7, p8Price, p8Quantity);
+    public void upQuantity8() {
+        upValue(panel8Value, 7, panel8Price);
     }
 
-    public void downValue8() {
-        downValue(p8Value, 7, p8Price, p8Quantity);
+    public void downQuantity8() {
+        downValue(panel8Value, 7, panel8Price);
     }
 
-    public void action8() {
+    public void panel8BuySell() {
         if (buyState) {
-            buyValue(p8Value, 7, p8Quantity);
+            buyValue(panel8Value, 7, panel8Quantity);
         } else {
-            sellValue(p8Value, 7, p8Quantity);
+            sellValue(panel8Value, 7, panel8Quantity);
         }
     }
 
     private void setActionLabel(String str) {
-        p1Action.setText(str);
-        p2Action.setText(str);
-        p3Action.setText(str);
-        p4Action.setText(str);
-        p5Action.setText(str);
-        p6Action.setText(str);
-        p7Action.setText(str);
-        p8Action.setText(str);
+        panel1Action.setText(str);
+        panel2Action.setText(str);
+        panel3Action.setText(str);
+        panel4Action.setText(str);
+        panel5Action.setText(str);
+        panel6Action.setText(str);
+        panel7Action.setText(str);
+        panel8Action.setText(str);
     }
 
     private void resetValues() {
-        p1Value.setText("01");
-        p2Value.setText("01");
-        p3Value.setText("01");
-        p4Value.setText("01");
-        p5Value.setText("01");
-        p6Value.setText("01");
-        p7Value.setText("01");
-        p8Value.setText("01");
+        panel1Value.setText("01");
+        panel2Value.setText("01");
+        panel3Value.setText("01");
+        panel4Value.setText("01");
+        panel5Value.setText("01");
+        panel6Value.setText("01");
+        panel7Value.setText("01");
+        panel8Value.setText("01");
     }
 
     private void resetPrices() {
-        setPrice(p1Value, 0, p1Price);
-        setPrice(p2Value, 1, p2Price);
-        setPrice(p3Value, 2, p3Price);
+        setPrice(panel1Value, 0, panel1Price);
+        setPrice(panel2Value, 1, panel2Price);
+        setPrice(panel3Value, 2, panel3Price);
     }
 
     private String doubleDigitString(int num) {

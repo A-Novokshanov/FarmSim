@@ -15,19 +15,19 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p1Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="panel1Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/market_corn_PL.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="p1Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <Text fx:id="panel1Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p1Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel1Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -38,28 +38,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue1" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black; -jfx-disable-visual-focus: True;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity1" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black; -jfx-disable-visual-focus: True;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p1Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel1Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue1" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity1" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p1Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action1" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel1Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel1BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -70,19 +70,19 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p2Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="panel2Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/market_potato_PL.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="p2Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <Text fx:id="panel2Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p2Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel2Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -93,28 +93,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p2Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel2Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity2" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p2Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action2" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel2Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel2BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -125,19 +125,19 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p3Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="panel3Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/market_tomato_PL.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="p3Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <Text fx:id="panel3Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p3Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel3Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -148,28 +148,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p3Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel3Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity3" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p3Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action3" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel3Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel3BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -180,15 +180,15 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p4Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="p4Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <ImageView fx:id="panel4Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="panel4Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p4Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel4Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -199,28 +199,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p4Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel4Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p4Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action4" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel4Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel4BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -231,15 +231,15 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p5Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="p5Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <ImageView fx:id="panel5Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="panel5Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p5Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel5Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -250,28 +250,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p5Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel5Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p5Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action5" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel5Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel5BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -282,15 +282,15 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p6Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="p6Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <ImageView fx:id="panel6Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="panel6Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p6Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel6Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -301,28 +301,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p6Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel6Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action6" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -333,15 +333,15 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p7Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="p7Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <ImageView fx:id="panel7Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="panel7Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p7Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel7Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -352,28 +352,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p7Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel7Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p7Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action7" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel7Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel7BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -384,15 +384,15 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="p8Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="p8Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
+                  <ImageView fx:id="panel8Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="panel8Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p8Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
+                        <Text fx:id="panel8Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -403,28 +403,28 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upValue8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="p8Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
+                        <Text fx:id="panel8Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downValue8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="p8Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#action8" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel8Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel8BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -451,7 +451,7 @@
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <Text fx:id="budget" layoutX="1050.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget: $0">
+      <Text fx:id="txtBudget" layoutX="1050.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Budget: $0">
          <font>
             <Font size="28.0" />
          </font>
