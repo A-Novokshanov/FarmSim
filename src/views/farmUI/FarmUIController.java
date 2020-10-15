@@ -1,5 +1,6 @@
 package views.farmUI;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,6 +38,8 @@ public class FarmUIController {
     private Text numPotatoes;
     @FXML
     private Text numCorn;
+    @FXML
+    private JFXButton btnBarn;
 
     private int num = 1;
 
