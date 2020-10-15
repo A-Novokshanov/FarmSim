@@ -1,9 +1,6 @@
 package services.authentication;
 
-import models.PlayerModel;
-import models.SeasonModel;
-import models.SeedModel;
-import models.SettingModel;
+import models.*;
 import services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -16,7 +13,7 @@ public class LoginPlayer {
     private static final String USER_EXISTS_QUERY = "SELECT name from player where name=?";
     private static final String GET_USER_ID_MONEY = "SELECT id, money from player where name=?";
     private static final String GET_USER_SETTINGS = "SELECT difficulty, season, "
-            + "seed from setting where player = ?";
+            + "crop from setting where player = ?";
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
@@ -97,10 +94,11 @@ public class LoginPlayer {
                 SeasonModel seasonModel = new SeasonModel(0, resultSet.getString("season"),
                         null, null);
 
-                SeedModel seedModel = new SeedModel(resultSet.getString("seed"));
+                CropModel cropModel = new CropModel(resultSet.getString("crop"),
+                        resultSet.getInt("quantity"), resultSet.getDouble("value"));
                 String difficulty = resultSet.getString("difficulty");
                 SettingModel settingModel = new SettingModel(seasonModel,
-                        seedModel, difficulty, playerName);
+                        cropModel, difficulty, playerName);
 
                 //TODO add storage to database first, and then get the value to replace the null.
                 return new PlayerModel(currentMoney, settingModel, null);
