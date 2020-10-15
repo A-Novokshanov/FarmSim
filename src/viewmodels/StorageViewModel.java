@@ -64,7 +64,7 @@ public class StorageViewModel {
                         storageModel.removeCropAmount(amount, i);
                         player.getPlayer().setUserCurrentMoney((int) (
                                 player.getPlayer().getUserCurrentMoney()
-                                        + amount * (marketViewModel.calculateCropPrice(crop.getCropValue(),
+                                        + amount * (calculateCropPrice(crop.getCropValue(),
                                         player.getPlayer().getPlayerSettings().getStartingDifficulty()))));
                     }
                 }
@@ -81,4 +81,30 @@ public class StorageViewModel {
         return storageModel.getInventory();
     }
 
+    /**
+     * Get price of crop after taking account difficulty
+     *
+     * @param cropBasePrice Base price of a crop without taking into account the difficulty
+     * @param difficulty    Current difficulty a player has set
+     * @return current price of crop.
+     */
+    public double calculateCropPrice(double cropBasePrice, String difficulty) {
+        double difficultyMod;
+        switch (difficulty) {
+            case "Casual":
+                difficultyMod = 0.8;
+                break;
+            case "Normal":
+                difficultyMod = 1.0;
+                break;
+            case "Veteran":
+                difficultyMod = 1.2;
+                break;
+            default:
+                difficultyMod = 0.0;
+                break;
+        }
+        double currentPrice = difficultyMod * cropBasePrice;
+        return currentPrice;
+    }
 }
