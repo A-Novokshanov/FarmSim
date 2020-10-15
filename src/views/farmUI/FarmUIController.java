@@ -115,13 +115,13 @@ public class FarmUIController {
     private final Image tomatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Tomato.png",
             400.0, 300.0, true, false);
 
-    private int num = 1;
+    private int daysPassed = 1;
 
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private PlotViewModel plotViewModel;
-    private ArrayList<PlotModel> plotModels = new ArrayList<PlotModel>(10);
-    private ArrayList<ImageView> plotModelNames = new ArrayList<ImageView>(10);
+    private ArrayList<PlotModel> plotModels = new ArrayList<>(10);
+    private ArrayList<Image> plotModelImgs = new ArrayList<>(10);
     private String name;
 
     /**
@@ -131,7 +131,6 @@ public class FarmUIController {
      * @param playerName      The name of the current player.
      */
     public void initData(PlayerViewModel playerViewModel, String playerName) {
-        //playerViewModel.getPlayerInformationFromDatabase(playerName);
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.plotViewModel = new PlotViewModel();
@@ -140,22 +139,21 @@ public class FarmUIController {
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
         createPlotModels();
-        createPlotModelNames();
+        createPlotModelImgs();
     }
 
-    public void initData2(PlayerViewModel playerViewModel, String playerName,
-                          ArrayList<PlotModel> plotModels, ArrayList<ImageView> plotModelNames, Text dayNum) {
-        //playerViewModel.getPlayerInformationFromDatabase(playerName);
+    public void initData2(PlayerViewModel playerViewModel, String playerName, ArrayList<PlotModel> plotModels,
+                          ArrayList<Image> plotModelImgs, String dayNum, int daysPassed) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.plotViewModel = new PlotViewModel();
         this.playerViewModel = playerViewModel;
-        this.dayNum = dayNum;
+        this.dayNum.setText(dayNum);
+        this.daysPassed = daysPassed;
         this.name = playerName;
-        setUpPlotModels(plotModels, plotModelNames,
-                playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
+        setUpPlotModels(plotModels, plotModelImgs);
         createPlotModels();
-        createPlotModelNames();
+        createPlotModelImgs();
     }
 
     /**
@@ -171,12 +169,10 @@ public class FarmUIController {
         sunProgressBar.setVisible(!sunProgressBar.isVisible());
         numCorn.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
-        numTomatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity())
-        );
         numPotatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity())
-        );
+                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
+        numTomatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
     }
 
     /**
@@ -197,7 +193,8 @@ public class FarmUIController {
         }
 
         MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, plotModels, plotModelNames, name, dayNum);
+        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel,
+                plotModels, plotModelImgs, name, dayNum.getText(), daysPassed);
 
         stage.setTitle("Market");
         stage.show();
@@ -209,32 +206,22 @@ public class FarmUIController {
      * @param mouseEvent (Prototype) Clicking on a day switches the current day number.
      */
     public void updateDay(MouseEvent mouseEvent) {
-        num++;
-        dayNum.setText("Day " + num);
+        daysPassed++;
+        dayNum.setText("Day " + doubleDigitString(daysPassed));
         incrementAllPlotDays();
     }
 
     public void setUpPlotModels(CropModel cropModel) {
         plot1 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot1, plot1Img);
         plot2 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot2, plot2Img);
         plot3 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot3, plot3Img);
         plot4 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot4, plot4Img);
         plot5 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot5, plot5Img);
         plot6 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot6, plot6Img);
         plot7 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot7, plot7Img);
         plot8 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot8, plot8Img);
         plot9 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot9, plot9Img);
         plot10 = plotViewModel.populatePlot(cropModel);
-        checkMaturity(plot10, plot10Img);
         setUpPlotName(plotName1Img, cropModel.getCropName());
         setUpPlotName(plotName2Img, cropModel.getCropName());
         setUpPlotName(plotName3Img, cropModel.getCropName());
@@ -245,9 +232,10 @@ public class FarmUIController {
         setUpPlotName(plotName8Img, cropModel.getCropName());
         setUpPlotName(plotName9Img, cropModel.getCropName());
         setUpPlotName(plotName10Img, cropModel.getCropName());
+        checkAllMaturity();
     }
 
-    public void setUpPlotModels(ArrayList<PlotModel> plotModels, ArrayList<ImageView> plotModelNames, CropModel cropModel) {
+    public void setUpPlotModels(ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs) {
         plot1 = plotModels.get(0);
         plot2 = plotModels.get(1);
         plot3 = plotModels.get(2);
@@ -258,49 +246,31 @@ public class FarmUIController {
         plot8 = plotModels.get(7);
         plot9 = plotModels.get(8);
         plot10 = plotModels.get(9);
-        plotName1Img = plotModelNames.get(0);
-        plotName2Img = plotModelNames.get(1);
-        plotName3Img = plotModelNames.get(2);
-        plotName4Img = plotModelNames.get(3);
-        plotName5Img = plotModelNames.get(4);
-        plotName6Img = plotModelNames.get(5);
-        plotName7Img = plotModelNames.get(6);
-        plotName8Img = plotModelNames.get(7);
-        plotName9Img = plotModelNames.get(8);
-        plotName10Img = plotModelNames.get(9);
-        checkMaturity(plot1, plot1Img);
-        checkMaturity(plot2, plot2Img);
-        checkMaturity(plot3, plot3Img);
-        checkMaturity(plot4, plot4Img);
-        checkMaturity(plot5, plot5Img);
-        checkMaturity(plot6, plot6Img);
-        checkMaturity(plot7, plot7Img);
-        checkMaturity(plot8, plot8Img);
-        checkMaturity(plot9, plot9Img);
-        checkMaturity(plot10, plot10Img);
+        plotName1Img.setImage(plotModelImgs.get(0));
+        plotName2Img.setImage(plotModelImgs.get(1));
+        plotName3Img.setImage(plotModelImgs.get(2));
+        plotName4Img.setImage(plotModelImgs.get(3));
+        plotName5Img.setImage(plotModelImgs.get(4));
+        plotName6Img.setImage(plotModelImgs.get(5));
+        plotName7Img.setImage(plotModelImgs.get(6));
+        plotName8Img.setImage(plotModelImgs.get(7));
+        plotName9Img.setImage(plotModelImgs.get(8));
+        plotName10Img.setImage(plotModelImgs.get(9));
+        checkAllMaturity();
     }
 
     public void incrementAllPlotDays() {
         plotViewModel.incrementPlotDaysOld(plot1);
-        checkMaturity(plot1, plot1Img);
         plotViewModel.incrementPlotDaysOld(plot2);
-        checkMaturity(plot2, plot2Img);
         plotViewModel.incrementPlotDaysOld(plot3);
-        checkMaturity(plot3, plot3Img);
         plotViewModel.incrementPlotDaysOld(plot4);
-        checkMaturity(plot4, plot4Img);
         plotViewModel.incrementPlotDaysOld(plot5);
-        checkMaturity(plot5, plot5Img);
         plotViewModel.incrementPlotDaysOld(plot6);
-        checkMaturity(plot6, plot6Img);
         plotViewModel.incrementPlotDaysOld(plot7);
-        checkMaturity(plot7, plot7Img);
         plotViewModel.incrementPlotDaysOld(plot8);
-        checkMaturity(plot8, plot8Img);
         plotViewModel.incrementPlotDaysOld(plot9);
-        checkMaturity(plot9, plot9Img);
         plotViewModel.incrementPlotDaysOld(plot10);
-        checkMaturity(plot10, plot10Img);
+        checkAllMaturity();
     }
 
     public void createPlotModels() {
@@ -316,17 +286,17 @@ public class FarmUIController {
         plotModels.add(plot10);
     }
 
-    public void createPlotModelNames() {
-        plotModelNames.add(plotName1Img);
-        plotModelNames.add(plotName2Img);
-        plotModelNames.add(plotName3Img);
-        plotModelNames.add(plotName4Img);
-        plotModelNames.add(plotName5Img);
-        plotModelNames.add(plotName6Img);
-        plotModelNames.add(plotName7Img);
-        plotModelNames.add(plotName8Img);
-        plotModelNames.add(plotName9Img);
-        plotModelNames.add(plotName10Img);
+    public void createPlotModelImgs() {
+        plotModelImgs.add(plotName1Img.getImage());
+        plotModelImgs.add(plotName2Img.getImage());
+        plotModelImgs.add(plotName3Img.getImage());
+        plotModelImgs.add(plotName4Img.getImage());
+        plotModelImgs.add(plotName5Img.getImage());
+        plotModelImgs.add(plotName6Img.getImage());
+        plotModelImgs.add(plotName7Img.getImage());
+        plotModelImgs.add(plotName8Img.getImage());
+        plotModelImgs.add(plotName9Img.getImage());
+        plotModelImgs.add(plotName10Img.getImage());
     }
 
     public void checkMaturity(PlotModel plotModel, ImageView plotImg) {
@@ -341,6 +311,19 @@ public class FarmUIController {
                 plotImg.setImage(matureImg);
             }
         }
+    }
+
+    public void checkAllMaturity() {
+        checkMaturity(plot1, plot1Img);
+        checkMaturity(plot2, plot2Img);
+        checkMaturity(plot3, plot3Img);
+        checkMaturity(plot4, plot4Img);
+        checkMaturity(plot5, plot5Img);
+        checkMaturity(plot6, plot6Img);
+        checkMaturity(plot7, plot7Img);
+        checkMaturity(plot8, plot8Img);
+        checkMaturity(plot9, plot9Img);
+        checkMaturity(plot10, plot10Img);
     }
 
     public void harvestCrop(PlotModel harvestedPlot,
@@ -400,5 +383,15 @@ public class FarmUIController {
         } else {
             plotName.setImage(tomatoNameImg);
         }
+    }
+
+    private String doubleDigitString(int num) {
+        String str;
+        if (num < 10) {
+            str = "0" + num;
+        } else {
+            str = String.valueOf(num);
+        }
+        return str;
     }
 }

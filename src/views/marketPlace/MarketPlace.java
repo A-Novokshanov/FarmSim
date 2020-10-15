@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -126,19 +127,22 @@ public class MarketPlace {
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
     private ArrayList<PlotModel> plotModels;
-    private ArrayList<ImageView> plotModelNames;
+    private ArrayList<Image> plotModelImgs;
     private String playerName;
-    private Text dayNum;
+    private String dayNum;
+    private int daysPassed;
 
     public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage,
-                         ArrayList<PlotModel> plotModels, ArrayList<ImageView> plotModelNames, String name, Text dayNum) {
+                         ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs,
+                         String name, String dayNum, int daysPassed) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.playerName = name;
         this.plotModels = plotModels;
-        this.plotModelNames = plotModelNames;
+        this.plotModelImgs = plotModelImgs;
         this.dayNum = dayNum;
+        this.daysPassed = daysPassed;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         if (storage.userInventory().get(0) != null) {
             setPrice(panel1Value, 0, panel1Price);
@@ -412,7 +416,7 @@ public class MarketPlace {
         }
 
         FarmUIController farmUIController = loader.getController();
-        farmUIController.initData2(this.playerViewModel, playerName, plotModels, plotModelNames, dayNum);
+        farmUIController.initData2(this.playerViewModel, playerName, plotModels, plotModelImgs, dayNum, daysPassed);
 
         stage.setTitle("Farm");
         stage.show();
