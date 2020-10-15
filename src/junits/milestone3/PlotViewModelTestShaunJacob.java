@@ -11,7 +11,7 @@ import viewmodels.PlotViewModel;
  * @author Shaun Jacob sjacob31@gatech.edu
  * @version 1.0
  */
-public class PlotViewModelTest {
+public class PlotViewModelTestShaunJacob {
     private PlotModel harvestedPlot;
     private CropModel cropInPlot;
     private PlotViewModel plotViewModel;
