@@ -30,9 +30,9 @@ public class StorageModelTestRohanKashi {
     @Test
     public void testGetInventory() {
         cropInventory = new ArrayList<>(15);
-        cropInventory.add(new CropModel("Corn", 5, 100.00));
-        cropInventory.add(new CropModel("Tomato", 7, 80.00));
-        cropInventory.add(new CropModel("Potato", 9, 60.00));
+        cropInventory.add(new CropModel("Corn", 1, 100.00));
+        cropInventory.add(new CropModel("Potato", 1, 80.00));
+        cropInventory.add(new CropModel("Tomato", 1, 60.00));
         assertEquals(storageModelTest.getInventory().get(0).getCropName(),
                 cropInventory.get(0).getCropName());
         assertEquals(storageModelTest.getInventory().get(1).getCropName(),
@@ -51,11 +51,11 @@ public class StorageModelTestRohanKashi {
     @Test
     public void testSetNewCropAmount() {
         storageModelTest.setNewCropAmount(5, 0);
-        assertEquals(storageModelTest.getInventory().get(0).getCropQuantity(), 10);
+        assertEquals(storageModelTest.getInventory().get(0).getCropQuantity(), 6);
         storageModelTest.setNewCropAmount(2, 1);
-        assertEquals(storageModelTest.getInventory().get(1).getCropQuantity(), 9);
+        assertEquals(storageModelTest.getInventory().get(1).getCropQuantity(), 3);
         storageModelTest.setNewCropAmount(5, 2);
-        assertEquals(storageModelTest.getInventory().get(2).getCropQuantity(), 14);
+        assertEquals(storageModelTest.getInventory().get(2).getCropQuantity(), 6);
     }
 
     @Test
@@ -81,19 +81,19 @@ public class StorageModelTestRohanKashi {
     @Test
     public void testRemoveCropAmount() {
         storageModelTest.removeCropAmount(1, 0);
-        assertEquals(storageModelTest.getInventory().get(0).getCropQuantity(), 4);
-        storageModelTest.removeCropAmount(2, 1);
-        assertEquals(storageModelTest.getInventory().get(1).getCropQuantity(), 5);
-        storageModelTest.removeCropAmount(3, 2);
-        assertEquals(storageModelTest.getInventory().get(2).getCropQuantity(), 6);
+        assertEquals(storageModelTest.getInventory().get(0).getCropQuantity(), 0);
+        storageModelTest.removeCropAmount(1, 1);
+        assertEquals(storageModelTest.getInventory().get(1).getCropQuantity(), 0);
+        storageModelTest.removeCropAmount(1, 2);
+        assertEquals(storageModelTest.getInventory().get(2).getCropQuantity(), 0);
     }
 
     @Test
     public void testRemoveCrop() {
         storageModelTest.removeCrop(2);
-        assertEquals(storageModelTest.getTotalCropAmount(), 12);
+        assertEquals(storageModelTest.getTotalCropAmount(), 2);
         storageModelTest.removeCrop(1);
-        assertEquals(storageModelTest.getTotalCropAmount(), 5);
+        assertEquals(storageModelTest.getTotalCropAmount(), 1);
         storageModelTest.removeCrop(0);
         assertEquals(storageModelTest.getTotalCropAmount(), 0);
 
@@ -101,8 +101,8 @@ public class StorageModelTestRohanKashi {
 
     @Test
     public void testGetEnoughRemove() {
-        assertEquals(storageModelTest.getEnoughToRemove(0, 4), 1);
-        assertEquals(storageModelTest.getEnoughToRemove(1, 7), 2);
+        assertEquals(storageModelTest.getEnoughToRemove(0, 1), 2);
+        assertEquals(storageModelTest.getEnoughToRemove(1, 1), 2);
         assertEquals(storageModelTest.getEnoughToRemove(2, 12), 3);
     }
 
@@ -116,10 +116,10 @@ public class StorageModelTestRohanKashi {
 
     @Test
     public void testGetInventorySize() {
-        assertEquals(storageModelTest.getTotalCropAmount(), 21);
+        assertEquals(storageModelTest.getTotalCropAmount(), 3);
         orange = new CropModel("Orange", 0, 1500.3);
         storageModelTest.setNewCrop(orange, 4);
-        assertEquals(storageModelTest.getTotalCropAmount(), 25);
+        assertEquals(storageModelTest.getTotalCropAmount(), 7);
 
     }
 
