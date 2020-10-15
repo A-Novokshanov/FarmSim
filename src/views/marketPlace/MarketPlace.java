@@ -183,22 +183,22 @@ public class MarketPlace {
         int num = Integer.parseInt(value.getText());
         int iNum = Integer.parseInt(quantity.getText());
         double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
-        double budgetCheck = playerViewModel.getPlayer().getUserCurrentMoney();
-        if(crop <= 2) {
-            if (num * basePrice <= budgetCheck) {
-                marketViewModel.purchaseItems(storageViewModel.userInventory().get(crop), num);
-                quantity.setText(doubleDigitString(
-                        storageViewModel.userInventory().get(crop).getCropQuantity()));
-                this.budget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
-            }
+        double currentMoney = playerViewModel.getPlayer().getUserCurrentMoney();
+        // if (crop <= 2) {
+        if (num * basePrice <= currentMoney) {
+            marketViewModel.purchaseItems(storageViewModel.userInventory().get(crop), num);
+            quantity.setText(doubleDigitString(
+                    storageViewModel.userInventory().get(crop).getCropQuantity()));
+            this.budget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
+        // }
     }
 
     private void sellValue(Text value, int crop, Text quantity) {
         int num = Integer.parseInt(value.getText());
         int iNum = Integer.parseInt(quantity.getText());
         if (crop <= 2) {
-            if(iNum > 0) {
+            if (iNum > 0) {
                 storageViewModel.sellItemFromInventory(
                         storageViewModel.userInventory().get(crop), num);
                 quantity.setText(doubleDigitString(

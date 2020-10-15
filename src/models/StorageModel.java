@@ -51,7 +51,7 @@ public class StorageModel {
      * @param quantity how much of the crop to add.
      */
     public void setNewCrop(CropModel crop, int quantity) {
-        cropInventory.set(cropInventory.size(), crop);
+        cropInventory.set(cropInventory.size() - 1, crop);
         crop.setCropQuantity(crop.getCropQuantity() + quantity);
     }
 
