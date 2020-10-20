@@ -8,6 +8,7 @@ package models;
 public class PlotModel {
     private CropModel cropInPlot;
     private int daysOld;
+    private int daysSinceWater;
 
     /** Constructs a PlotModel object.
      * @param cropInPlot The type of crop in the PlotModel
@@ -40,5 +41,18 @@ public class PlotModel {
      */
     public void setDaysOld(int daysOld) {
         this.daysOld = daysOld;
+    }
+
+    /** Gets and returns the daysSinceWater of a PlotModel object.
+     */
+    public int getDaysSinceWater() {
+        return this.daysSinceWater;
+    }
+
+    /** Sets the daysSinceWater of a PlotModel object.
+     @param daysSinceWater is the new desired daysSinceWater of a PlotModel object.
+     */
+    public void setDaysSinceWater(int daysSinceWater) {
+        this.daysSinceWater = daysSinceWater;
     }
 }
