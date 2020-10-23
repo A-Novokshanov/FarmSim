@@ -1,6 +1,9 @@
 package services.authentication;
 
-import models.*;
+import models.CropModel;
+import models.PlayerModel;
+import models.SeasonModel;
+import models.SettingModel;
 import services.DatabaseConnection;
 
 import java.sql.Connection;
@@ -106,6 +109,13 @@ public class LoginPlayer {
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
 
         }
