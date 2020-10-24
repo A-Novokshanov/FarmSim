@@ -22,7 +22,9 @@ public class PlotViewModel {
     public void harvestPlot(PlotModel harvestedPlot, PlayerViewModel player) {
         StorageViewModel storageVM = new StorageViewModel(player);
         int toAdd = 0;
-        if (harvestedPlot.getDaysOld() >= 10) {
+        if (harvestedPlot.getDaysSinceWater() > 5) {
+            harvestedPlot.setCropInPlot(null);
+        } else if (harvestedPlot.getDaysOld() >= 10) {
             while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
                 storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                 toAdd++;
@@ -44,11 +46,31 @@ public class PlotViewModel {
     }
 
     /**
+     * Waters the plot, setting daysSinceWater to 0.
+     *
+     * @param plotToWater The plot to water.
+     */
+    public void waterPlot(PlotModel plotToWater) {
+        plotToWater.setDaysSinceWater(0);
+    }
+
+    /**
      * Increments the daysOld of a PlotModel.
      *
      * @param plotToIncrement The plot whose daysOld to increment.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement) {
         plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
+        plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
+    }
+
+    /**
+     * Plants a crop into PlotModel.
+     *
+     * @param plotToPlant the plot which to plant a crop to.
+     * @param cropToPlant the crop to plant in the plot.
+     */
+    public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
+        plotToPlant.setCropInPlot(cropToPlant);
     }
 }
