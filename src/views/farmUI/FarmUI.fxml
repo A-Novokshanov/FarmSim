@@ -20,7 +20,7 @@
             <Line fx:id="sunProgressBar" endX="-100.0" endY="-640.0" layoutX="1316.0" layoutY="779.0" startX="-100.0" startY="-108.0" />
             <Circle fx:id="sun" fill="#ebff1f" layoutX="1216.0" layoutY="159.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="dayCounter" fill="DODGERBLUE" layoutX="1215.0" layoutY="68.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Pane layoutX="245.0" layoutY="125.0" onMouseClicked="#harvestCropPlot1" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane1" layoutX="245.0" layoutY="125.0" onMouseClicked="#harvestCropPlot1" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot1Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -32,9 +32,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="125.0" onMouseClicked="#harvestCropPlot2" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane2" layoutX="890.0" layoutY="125.0" onMouseClicked="#harvestCropPlot2" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot2Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,9 +51,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="12.0" layoutY="15.0" onMouseClicked="#waterPlot2" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="245.0" layoutY="300.0" onMouseClicked="#harvestCropPlot3" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane3" layoutX="245.0" layoutY="300.0" onMouseClicked="#harvestCropPlot3" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot3Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,9 +70,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot3" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="460.0" layoutY="300.0" onMouseClicked="#harvestCropPlot4" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane4" layoutX="460.0" layoutY="300.0" onMouseClicked="#harvestCropPlot4" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot4Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,9 +89,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="675.0" layoutY="300.0" onMouseClicked="#harvestCropPlot5" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane5" layoutX="675.0" layoutY="300.0" onMouseClicked="#harvestCropPlot5" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot5Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -88,9 +108,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="16.0" onMouseClicked="#waterPlot5" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="300.0" onMouseClicked="#harvestCropPlot6" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane6" layoutX="890.0" layoutY="300.0" onMouseClicked="#harvestCropPlot6" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot6Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,9 +127,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot6" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="245.0" layoutY="475.0" onMouseClicked="#harvestCropPlot7" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane7" layoutX="245.0" layoutY="475.0" onMouseClicked="#harvestCropPlot7" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot7Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -116,9 +146,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="460.0" layoutY="475.0" onMouseClicked="#harvestCropPlot8" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane8" layoutX="460.0" layoutY="475.0" onMouseClicked="#harvestCropPlot8" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot8Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -130,9 +165,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot8" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="675.0" layoutY="475.0" onMouseClicked="#harvestCropPlot9" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane9" layoutX="675.0" layoutY="475.0" onMouseClicked="#harvestCropPlot9" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot9Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -144,9 +184,14 @@
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot9" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="890.0" layoutY="475.0" onMouseClicked="#harvestCropPlot10" prefHeight="150.0" prefWidth="150.0">
+            <Pane fx:id="pane10" layoutX="890.0" layoutY="475.0" onMouseClicked="#harvestCropPlot10" prefHeight="150.0" prefWidth="150.0">
                <children>
                   <ImageView fx:id="plot10Img" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -156,6 +201,11 @@
                   <ImageView fx:id="plotName10Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
                      <image>
                         <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#waterPlot10" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
                </children>
@@ -240,107 +290,62 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="762.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                              <Text layoutX="868.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="838.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                              <Text layoutX="155.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="56.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                              <Text layoutX="391.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="132.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                              <Text layoutX="630.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="286.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                              <Text layoutX="863.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="362.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                              <Text layoutX="155.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="530.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                              <Text layoutX="390.0" layoutY="503.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="606.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                              <Text layoutX="629.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="762.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
+                              <Text layoutX="862.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Text layoutX="838.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="56.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="132.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="286.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="362.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="530.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="606.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="762.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Text layoutX="838.0" layoutY="665.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <JFXButton layoutX="43.0" layoutY="191.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                              <JFXButton fx:id="btnCornPlant" layoutX="43.0" layoutY="191.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton layoutX="273.0" layoutY="193.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                              <JFXButton fx:id="btnPotatoPlant" layoutX="273.0" layoutY="193.0" onMouseClicked="#choosePotato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton layoutX="517.0" layoutY="191.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                              <JFXButton fx:id="btnTomatoPlant" layoutX="517.0" layoutY="191.0" onMouseClicked="#chooseTomato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -359,5 +364,10 @@
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
          </children>
     </AnchorPane>
+      <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dependencies/images/Watering_Can.jpg" />
+         </image>
+      </ImageView>
   </children>
 </VBox>

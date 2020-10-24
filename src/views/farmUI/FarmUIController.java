@@ -1,5 +1,6 @@
 package views.farmUI;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -44,6 +45,27 @@ public class FarmUIController {
     private Text numCorn;
 
     @FXML
+    private Pane pane1;
+    @FXML
+    private Pane pane2;
+    @FXML
+    private Pane pane3;
+    @FXML
+    private Pane pane4;
+    @FXML
+    private Pane pane5;
+    @FXML
+    private Pane pane6;
+    @FXML
+    private Pane pane7;
+    @FXML
+    private Pane pane8;
+    @FXML
+    private Pane pane9;
+    @FXML
+    private Pane pane10;
+
+    @FXML
     private ImageView plot1Img;
     @FXML
     private ImageView plot2Img;
@@ -85,6 +107,13 @@ public class FarmUIController {
     @FXML
     private ImageView plotName10Img;
 
+    @FXML
+    private JFXButton btnCornPlant;
+    @FXML
+    private JFXButton btnPotatoPlant;
+    @FXML
+    private JFXButton btnTomatoPlant;
+
     private PlotModel plot1;
     private PlotModel plot2;
     private PlotModel plot3;
@@ -106,6 +135,8 @@ public class FarmUIController {
             400.0, 300.0, true, false);
     private final Image matureImg = new Image("@../../dependencies/images/Mature.png",
             400.0, 300.0, true, false);
+    private final Image witheredImg = new Image("@../../dependencies/images/Withered.png",
+            400.0, 300.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
             400.0, 300.0, true, false);
     private final Image cornNameImg = new Image("@../../dependencies/images/Crop_Bar_Corn.png",
@@ -120,10 +151,15 @@ public class FarmUIController {
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private PlotViewModel plotViewModel;
-    private ArrayList<PlotModel> plotModels = new ArrayList<>(10);
-    private ArrayList<Image> plotModelImgs = new ArrayList<>(10);
-    private ArrayList<String> transferString = new ArrayList<>(2);
+    private final ArrayList<PlotModel> plotModels = new ArrayList<>(10);
+    private final ArrayList<Image> plotModelImgs = new ArrayList<>(10);
+    private final ArrayList<String> transferString = new ArrayList<>(2);
     private String name;
+    private PlotModel plantingPlot;
+    private ImageView plantedPlotImg;
+    private ImageView plantedPlotNameImg;
+    private Pane plantingPane;
+    private int plantedPlotNum;
 
     /**
      * Initializes data with the parameter
@@ -157,11 +193,9 @@ public class FarmUIController {
     }
 
     /**
-     * Makes Inventory Screen Invisible if exit button is clicked
-     *
-     * @param mouseEvent a mouse click on the exit button
+     * Makes Inventory Screen Invisible if exit button is clicked.
      */
-    public void toggleInventoryScreenVisibility(MouseEvent mouseEvent) {
+    public void toggleInventoryScreenVisibility() {
         inventoryScreen.setVisible(!inventoryScreen.isVisible());
         dayCounter.setVisible(!dayCounter.isVisible());
         dayNum.setVisible(!dayNum.isVisible());
@@ -173,6 +207,15 @@ public class FarmUIController {
                 String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        btnCornPlant.setVisible(false);
+        btnPotatoPlant.setVisible(false);
+        btnTomatoPlant.setVisible(false);
+    }
+
+    public void turnOnPlantBtnVisibility() {
+        btnCornPlant.setVisible(true);
+        btnPotatoPlant.setVisible(true);
+        btnTomatoPlant.setVisible(true);
     }
 
     /**
@@ -205,10 +248,8 @@ public class FarmUIController {
 
     /**
      * Updates day number.
-     *
-     * @param mouseEvent (Prototype) Clicking on a day switches the current day number.
      */
-    public void updateDay(MouseEvent mouseEvent) {
+    public void updateDay() {
         daysPassed++;
         dayNum.setText("Day " + doubleDigitString(daysPassed));
         incrementAllPlotDays();
@@ -303,7 +344,9 @@ public class FarmUIController {
     }
 
     public void checkMaturity(PlotModel plotModel, ImageView plotImg) {
-        if (plotModel.getCropInPlot() != null) {
+        if (plotModel.getDaysSinceWater() > 5) {
+            plotImg.setImage(witheredImg);
+        } else if (plotModel.getCropInPlot() != null) {
             if (plotModel.getDaysOld() < 2) {
                 plotImg.setImage(seedImg);
             } else if (plotModel.getDaysOld() < 6) {
@@ -329,53 +372,264 @@ public class FarmUIController {
         checkMaturity(plot10, plot10Img);
     }
 
-    public void harvestCrop(PlotModel harvestedPlot,
-                            ImageView harvestedPlotImg, ImageView harvestedPlotNameImg) {
+    public void plantingInventory(PlotModel plantingPlot, ImageView plantedPlotImg,
+                                  ImageView plantedPlotNameImg, Pane pane, int plantedPlotNum) {
+        toggleInventoryScreenVisibility();
+        turnOnPlantBtnVisibility();
+        this.plantingPlot = plantingPlot;
+        this.plantedPlotImg = plantedPlotImg;
+        this.plantedPlotNameImg = plantedPlotNameImg;
+        this.plantingPane = pane;
+        this.plantedPlotNum = plantedPlotNum;
+    }
+
+    public void plantCrop(PlotModel plantingPlot, ImageView plantedPlotImg, ImageView plantedPlotNameImg,
+                          CropModel crop, Pane pane, int plantedPlotNum) {
+        this.plotViewModel.plantPlot(plantingPlot, crop);
+        plantedPlotImg.setImage(seedImg);
+        plantedPlotNameImg.setImage(chooseCropImage(crop));
+        switchPlantHarvest(pane, plantedPlotNum, true);
+    }
+
+    public Image chooseCropImage(CropModel crop) {
+        switch(crop.getCropName()) {
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
+        }
+    }
+
+    public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
+                            ImageView harvestedPlotNameImg, Pane pane, int harvestedPlotNum) {
         if (harvestedPlot.getDaysOld() >= 10) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             harvestedPlotImg.setImage(dirtImg);
             harvestedPlotNameImg.setImage(emptyNameImg);
+            switchPlantHarvest(pane, harvestedPlotNum, false);
         }
     }
 
-    public void harvestCropPlot1() {
-        harvestCrop(plot1, plot1Img, plotName1Img);
+    public void waterCrop(PlotModel plotModel) {
+        if (plotModel != null) {
+            if (plotModel.getDaysSinceWater() <= 5) {
+                this.plotViewModel.waterPlot(plotModel);
+            }
+        }
     }
 
-    public void harvestCropPlot2() {
-        harvestCrop(plot2, plot2Img, plotName2Img);
+    public void switchPlantHarvest(Pane pane, int i, boolean isPlant) {
+        switch(i) {
+            case 1:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot1);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot1);
+                }
+                break;
+            case 2:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot2);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot2);
+                }
+                break;
+            case 3:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot3);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot3);
+                }
+                break;
+            case 4:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot4);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot4);
+                }
+                break;
+            case 5:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot5);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot5);
+                }
+                break;
+            case 6:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot6);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot6);
+                }
+                break;
+            case 7:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot7);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot7);
+                }
+                break;
+            case 8:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot8);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot8);
+                }
+                break;
+            case 9:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot9);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot9);
+                }
+                break;
+            case 10:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot10);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot10);
+                }
+                break;
+        }
     }
 
-    public void harvestCropPlot3() {
-        harvestCrop(plot3, plot3Img, plotName3Img);
+    public void plantCropPlot1(MouseEvent mouseEvent) {
+        plantingInventory(plot1, plot1Img, plotName1Img, pane1, 2);
     }
 
-    public void harvestCropPlot4() {
-        harvestCrop(plot4, plot4Img, plotName4Img);
+    public void plantCropPlot2(MouseEvent mouseEvent) {
+        plantingInventory(plot2, plot2Img, plotName2Img, pane2, 2);
     }
 
-    public void harvestCropPlot5() {
-        harvestCrop(plot5, plot5Img, plotName5Img);
+    public void plantCropPlot3(MouseEvent mouseEvent) {
+        plantingInventory(plot3, plot3Img, plotName3Img, pane3, 3);
     }
 
-    public void harvestCropPlot6() {
-        harvestCrop(plot6, plot6Img, plotName6Img);
+    public void plantCropPlot4(MouseEvent mouseEvent) {
+        plantingInventory(plot4, plot4Img, plotName4Img, pane4, 4);
     }
 
-    public void harvestCropPlot7() {
-        harvestCrop(plot7, plot7Img, plotName7Img);
+    public void plantCropPlot5(MouseEvent mouseEvent) {
+        plantingInventory(plot5, plot5Img, plotName5Img, pane5, 5);
     }
 
-    public void harvestCropPlot8() {
-        harvestCrop(plot8, plot8Img, plotName8Img);
+    public void plantCropPlot6(MouseEvent mouseEvent) {
+        plantingInventory(plot6, plot6Img, plotName6Img, pane6, 6);
     }
 
-    public void harvestCropPlot9() {
-        harvestCrop(plot9, plot9Img, plotName9Img);
+    public void plantCropPlot7(MouseEvent mouseEvent) {
+        plantingInventory(plot7, plot7Img, plotName7Img, pane7, 7);
     }
 
-    public void harvestCropPlot10() {
-        harvestCrop(plot10, plot10Img, plotName10Img);
+    public void plantCropPlot8(MouseEvent mouseEvent) {
+        plantingInventory(plot8, plot8Img, plotName8Img, pane8, 8);
+    }
+
+    public void plantCropPlot9(MouseEvent mouseEvent) {
+        plantingInventory(plot9, plot9Img, plotName9Img, pane9, 9);
+    }
+
+    public void plantCropPlot10(MouseEvent mouseEvent) {
+        plantingInventory(plot10, plot10Img, plotName10Img, pane10, 10);
+    }
+
+    public void chooseCorn() {
+        plantCrop(plantingPlot, plantedPlotImg, plantedPlotNameImg,
+                storageViewModel.userInventory().get(0), plantingPane, plantedPlotNum);
+    }
+
+    public void choosePotato() {
+        plantCrop(plantingPlot, plantedPlotImg, plantedPlotNameImg,
+                storageViewModel.userInventory().get(1), plantingPane, plantedPlotNum);
+    }
+
+    public void chooseTomato() {
+        plantCrop(plantingPlot, plantedPlotImg, plantedPlotNameImg,
+                storageViewModel.userInventory().get(2), plantingPane, plantedPlotNum);
+    }
+
+    public void harvestCropPlot1(MouseEvent mouseEvent) {
+        harvestCrop(plot1, plot1Img, plotName1Img, pane1, 1);
+    }
+
+    public void harvestCropPlot2(MouseEvent mouseEvent) {
+        harvestCrop(plot2, plot2Img, plotName2Img, pane2, 2);
+    }
+
+    public void harvestCropPlot3(MouseEvent mouseEvent) {
+        harvestCrop(plot3, plot3Img, plotName3Img, pane3, 3);
+    }
+
+    public void harvestCropPlot4(MouseEvent mouseEvent) {
+        harvestCrop(plot4, plot4Img, plotName4Img, pane4, 4);
+    }
+
+    public void harvestCropPlot5(MouseEvent mouseEvent) {
+        harvestCrop(plot5, plot5Img, plotName5Img, pane5, 5);
+    }
+
+    public void harvestCropPlot6(MouseEvent mouseEvent) {
+        harvestCrop(plot6, plot6Img, plotName6Img, pane6, 6);
+    }
+
+    public void harvestCropPlot7(MouseEvent mouseEvent) {
+        harvestCrop(plot7, plot7Img, plotName7Img, pane7, 7);
+    }
+
+    public void harvestCropPlot8(MouseEvent mouseEvent) {
+        harvestCrop(plot8, plot8Img, plotName8Img, pane8, 8);
+    }
+
+    public void harvestCropPlot9(MouseEvent mouseEvent) {
+        harvestCrop(plot9, plot9Img, plotName9Img, pane9, 9);
+    }
+
+    public void harvestCropPlot10(MouseEvent mouseEvent) {
+        harvestCrop(plot10, plot10Img, plotName10Img, pane10, 10);
+    }
+
+    public void waterPlot1() {
+        waterCrop(plot1);
+    }
+
+    public void waterPlot2() {
+        waterCrop(plot2);
+    }
+
+    public void waterPlot3() {
+        waterCrop(plot3);
+    }
+
+    public void waterPlot4() {
+        waterCrop(plot4);
+    }
+
+    public void waterPlot5() {
+        waterCrop(plot5);
+    }
+
+    public void waterPlot6() {
+        waterCrop(plot6);
+    }
+
+    public void waterPlot7() {
+        waterCrop(plot7);
+    }
+
+    public void waterPlot8() {
+        waterCrop(plot8);
+    }
+
+    public void waterPlot9() {
+        waterCrop(plot9);
+    }
+
+    public void waterPlot10() {
+        waterCrop(plot10);
     }
 
     public void setUpPlotName(ImageView plotName, String str) {
