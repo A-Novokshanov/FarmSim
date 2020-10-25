@@ -4,13 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import models.CropModel;
@@ -22,6 +22,7 @@ import views.marketPlace.MarketPlace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FarmUIController {
     @FXML
@@ -134,8 +135,8 @@ public class FarmUIController {
     public void initData(PlayerViewModel playerViewModel, String playerName) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
-        this.plotViewModel = new PlotViewModel();
         this.playerViewModel = playerViewModel;
+        this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.name = playerName;
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
@@ -147,8 +148,8 @@ public class FarmUIController {
                           int daysPassed) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
-        this.plotViewModel = new PlotViewModel();
         this.playerViewModel = playerViewModel;
+        this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.name = transferString.get(0);
         this.dayNum.setText(transferString.get(1));
         this.daysPassed = daysPassed;
@@ -215,16 +216,27 @@ public class FarmUIController {
     }
 
     public void setUpPlotModels(CropModel cropModel) {
+        List<PlotModel> plotModelList = new ArrayList<>();
         plot1 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot1);
         plot2 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot2);
         plot3 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot3);
         plot4 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot4);
         plot5 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot5);
         plot6 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot6);
         plot7 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot7);
         plot8 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot8);
         plot9 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot9);
         plot10 = plotViewModel.populatePlot(cropModel);
+        plotModelList.add(plot10);
         setUpPlotName(plotName1Img, cropModel.getCropName());
         setUpPlotName(plotName2Img, cropModel.getCropName());
         setUpPlotName(plotName3Img, cropModel.getCropName());
@@ -236,6 +248,9 @@ public class FarmUIController {
         setUpPlotName(plotName9Img, cropModel.getCropName());
         setUpPlotName(plotName10Img, cropModel.getCropName());
         checkAllMaturity();
+
+        plotViewModel.addPlayerPlotsToDatabase(plotModelList,
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
     }
 
     public void setUpPlotModels(ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs) {
@@ -273,6 +288,9 @@ public class FarmUIController {
         plotViewModel.incrementPlotDaysOld(plot8);
         plotViewModel.incrementPlotDaysOld(plot9);
         plotViewModel.incrementPlotDaysOld(plot10);
+        plotViewModel.updatePlotMaturity(plot1.getCropInPlot().getCropName(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
         checkAllMaturity();
     }
 

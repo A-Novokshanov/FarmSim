@@ -1,8 +1,11 @@
 package viewmodels;
 
 import models.CropModel;
+import models.PlayerModel;
 import models.PlotModel;
+import services.player.PlayerPlotService;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,6 +15,13 @@ import java.util.Random;
  * @version 1.0
  */
 public class PlotViewModel {
+
+    private PlayerPlotService playerPlotService = new PlayerPlotService();
+    private PlayerModel playerModel;
+
+    public PlotViewModel(PlayerModel playerModel) {
+        this.playerModel = playerModel;
+    }
 
     /**
      * Harvest a plot and store the crops in storage/inventory.
@@ -72,5 +82,19 @@ public class PlotViewModel {
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
         plotToPlant.setCropInPlot(cropToPlant);
+    }
+
+    /**
+     * Saves the plots from the users game when they click continue.
+     *
+     * @param plots      is list of all 8 plots the user has, each having a certain state.
+     * @param playerName the user name we are specifically pulling from the database for.
+     */
+    public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
+        playerPlotService.addPlayerPlots(plots, playerName);
+    }
+
+    public void updatePlotMaturity(String cropName, String playerName) {
+        playerPlotService.adjustPlotDaysOld(cropName, playerName);
     }
 }
