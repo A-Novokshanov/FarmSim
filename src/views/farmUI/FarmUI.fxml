@@ -37,6 +37,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater1" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane2" layoutX="890.0" layoutY="125.0" onMouseClicked="#harvestCropPlot2" prefHeight="150.0" prefWidth="150.0">
@@ -56,6 +61,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater2" layoutX="116.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane3" layoutX="245.0" layoutY="300.0" onMouseClicked="#harvestCropPlot3" prefHeight="150.0" prefWidth="150.0">
@@ -75,6 +85,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater3" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane4" layoutX="460.0" layoutY="300.0" onMouseClicked="#harvestCropPlot4" prefHeight="150.0" prefWidth="150.0">
@@ -94,6 +109,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater4" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane5" layoutX="675.0" layoutY="300.0" onMouseClicked="#harvestCropPlot5" prefHeight="150.0" prefWidth="150.0">
@@ -113,6 +133,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater5" layoutX="116.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane6" layoutX="890.0" layoutY="300.0" onMouseClicked="#harvestCropPlot6" prefHeight="150.0" prefWidth="150.0">
@@ -132,6 +157,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater6" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane7" layoutX="245.0" layoutY="475.0" onMouseClicked="#harvestCropPlot7" prefHeight="150.0" prefWidth="150.0">
@@ -151,6 +181,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater7" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane8" layoutX="460.0" layoutY="475.0" onMouseClicked="#harvestCropPlot8" prefHeight="150.0" prefWidth="150.0">
@@ -170,6 +205,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater8" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane9" layoutX="675.0" layoutY="475.0" onMouseClicked="#harvestCropPlot9" prefHeight="150.0" prefWidth="150.0">
@@ -189,6 +229,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater9" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <Pane fx:id="pane10" layoutX="890.0" layoutY="475.0" onMouseClicked="#harvestCropPlot10" prefHeight="150.0" prefWidth="150.0">
@@ -208,6 +253,11 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
+                  <Text fx:id="txtDaysSinceWater10" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </Pane>
             <ImageView fitHeight="215.0" fitWidth="244.0" layoutX="533.0" layoutY="52.0" onMouseClicked="#toggleInventoryScreenVisibility" pickOnBounds="true" preserveRatio="true">
