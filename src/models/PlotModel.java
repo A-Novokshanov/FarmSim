@@ -44,6 +44,7 @@ public class PlotModel {
     }
 
     /** Gets and returns the daysSinceWater of a PlotModel object.
+     * @return Returns a number based on days watered.
      */
     public int getDaysSinceWater() {
         return this.daysSinceWater;

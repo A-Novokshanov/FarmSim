@@ -209,11 +209,11 @@ public class FarmUIController {
     /**
      * Initializes data from the Market screen transfer.
      *
-     * @param playerViewModel
-     * @param plotModels
-     * @param plotModelImgs
-     * @param transferString
-     * @param daysPassed
+     * @param playerViewModel Placeholder
+     * @param plotModels      Placeholder
+     * @param plotModelImgs   Placeholder
+     * @param transferString  Placeholder
+     * @param daysPassed      Placeholder
      */
     public void initData2(PlayerViewModel playerViewModel, ArrayList<PlotModel> plotModels,
                           ArrayList<Image> plotModelImgs, ArrayList<String> transferString,
@@ -300,7 +300,7 @@ public class FarmUIController {
     /**
      * Sets up all the plot models with the initial config data.
      *
-     * @param cropModel
+     * @param cropModel Placeholder
      */
     public void setUpPlotModels(CropModel cropModel) {
         plot1 = plotViewModel.populatePlot(cropModel);
@@ -327,10 +327,10 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     *
-     * @param plotModels
-     * @param plotModelImgs
+     * @param plotModels    Placeholder
+     * @param plotModelImgs Placeholder
      */
     public void setUpPlotModels(ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs) {
         plot1 = plotModels.get(0);
@@ -376,6 +376,7 @@ public class FarmUIController {
 
     /**
      *
+     * @param days Placeholder
      */
     private void updateDaysSinceWater(Text days) {
         int num = Integer.parseInt(days.getText());
@@ -417,7 +418,7 @@ public class FarmUIController {
     }
 
     /**
-     *
+     * Placeholder
      */
     public void createPlotModelImgs() {
         plotModelImgs.add(plotName1Img.getImage());
@@ -433,9 +434,11 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param plotModel
-     * @param plotImg
+     * @param plotModel Placeholder
+     * @param plotImg   Placeholder
+     * @param waterDays Placeholder
      */
     public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterDays) {
         if (plotModel.getDaysSinceWater() > 5) {
@@ -455,7 +458,7 @@ public class FarmUIController {
     }
 
     /**
-     *
+     * Placeholder
      */
     public void checkAllMaturity() {
         checkMaturity(plot1, plot1Img, txtDaysSinceWater1);
@@ -471,16 +474,18 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param plantingPlot
-     * @param plantedPlotImg
-     * @param plantedPlotNameImg
-     * @param pane
-     * @param plantedPlotNum
-     * @param plantedWaterDaysText
+     * @param plantingPlot         Placeholder
+     * @param plantedPlotImg       Placeholder
+     * @param plantedPlotNameImg   Placeholder
+     * @param pane                 Placeholder
+     * @param plantedPlotNum       Placeholder
+     * @param plantedWaterDaysText Placeholder
      */
-    public void plantingInventory(PlotModel plantingPlot, ImageView plantedPlotImg, ImageView plantedPlotNameImg,
-                                  Pane pane, int plantedPlotNum, Text plantedWaterDaysText) {
+    public void plantingInventory(PlotModel plantingPlot, ImageView plantedPlotImg,
+                                  ImageView plantedPlotNameImg, Pane pane,
+                                  int plantedPlotNum, Text plantedWaterDaysText) {
         toggleInventoryScreenVisibility();
         turnOnPlantBtnVisibility();
         this.plantingPlot = plantingPlot;
@@ -501,25 +506,26 @@ public class FarmUIController {
     }
 
     public Image chooseCropImage(CropModel crop) {
-        switch(crop.getCropName()) {
-            case "Corn":
-                return this.cornNameImg;
-            case "Potato":
-                return this.potatoNameImg;
-            case "Tomato":
-                return this.tomatoNameImg;
-            default:
-                return this.emptyNameImg;
+        switch (crop.getCropName()) {
+        case "Corn":
+            return this.cornNameImg;
+        case "Potato":
+            return this.potatoNameImg;
+        case "Tomato":
+            return this.tomatoNameImg;
+        default:
+            return this.emptyNameImg;
         }
     }
 
     /**
+     * Placeholder
      *
-     * @param harvestedPlot
-     * @param harvestedPlotImg
-     * @param harvestedPlotNameImg
-     * @param pane
-     * @param harvestedPlotNum
+     * @param harvestedPlot        Placeholder
+     * @param harvestedPlotImg     Placeholder
+     * @param harvestedPlotNameImg Placeholder
+     * @param pane                 Placeholder
+     * @param harvestedPlotNum     Placeholder
      */
     public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
                             ImageView harvestedPlotNameImg, Pane pane, int harvestedPlotNum) {
@@ -532,8 +538,9 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param plotModel
+     * @param plotModel Placeholder
      */
     public void waterCrop(PlotModel plotModel) {
         if (plotModel != null) {
@@ -544,13 +551,14 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param pane
-     * @param i
-     * @param isPlant
+     * @param pane    Placeholder
+     * @param i       Placeholder
+     * @param isPlant Placeholder
      */
     public void switchPlantHarvest(Pane pane, int i, boolean isPlant) {
-        switch(i) {
+        switch (i) {
         case 1:
             if (isPlant) {
                 pane.setOnMouseClicked(this::plantCropPlot1);
@@ -620,6 +628,8 @@ public class FarmUIController {
             } else {
                 pane.setOnMouseClicked(this::harvestCropPlot10);
             }
+            break;
+        default:
             break;
         }
     }
@@ -757,9 +767,10 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param plotName
-     * @param str
+     * @param plotName Placeholder
+     * @param str      Placeholder
      */
     public void setUpPlotName(ImageView plotName, String str) {
         if (str.equals("Corn")) {
@@ -772,9 +783,10 @@ public class FarmUIController {
     }
 
     /**
+     * Placeholder
      *
-     * @param num
-     * @return
+     * @param num Placeholder
+     * @return Placeholder
      */
     private String doubleDigitString(int num) {
         String str;

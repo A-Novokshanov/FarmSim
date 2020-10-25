@@ -52,7 +52,8 @@ public class PlotViewModelTestAndrewNovokshanov {
     }
 
     @Test
-    //Test incrementPlotDaysOld() method to make sure plots' daysOld and daysSinceWater were being incremented correctly
+    //Test incrementPlotDaysOld() method to make sure plots' daysOld
+    //and daysSinceWater were being incremented correctly
     public void testIncrementPlotDaysOld() {
         plotViewModel.incrementPlotDaysOld(harvestedPlotAlive);
         assertEquals(5, harvestedPlotAlive.getDaysOld());
