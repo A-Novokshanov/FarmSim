@@ -1,12 +1,13 @@
 package viewmodels;
 
+import models.CropModel;
 import models.PlayerModel;
 import models.SeasonModel;
-import models.CropModel;
 import models.SettingModel;
 import models.StorageModel;
 import services.authentication.CreatePlayer;
 import services.authentication.LoginPlayer;
+import services.player.PlayerInventoryService;
 
 /**
  * This view-model class will aid accessing certain types of players.
@@ -30,6 +31,10 @@ public class PlayerViewModel {
     public void addSettingsToDatabase(PlayerModel playerModel) {
         CreatePlayer createPlayer = new CreatePlayer();
         createPlayer.setPlayerDetails(playerModel);
+
+        PlayerInventoryService playerInventoryService = new PlayerInventoryService();
+        playerInventoryService.addPlayerCrops(playerModel.getPlayerSettings().getPlayerName(),
+                playerModel.getUserStorage().getInventory());
     }
 
     /**

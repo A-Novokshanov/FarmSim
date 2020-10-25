@@ -3,6 +3,7 @@ package viewmodels;
 import models.CropModel;
 import models.PlayerModel;
 import models.StorageModel;
+import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
 
 /**
@@ -16,6 +17,7 @@ public class MarketViewModel {
     private StorageModel storage;
     private StorageViewModel storageViewModel;
     private PlayerSettingsService playerInfoDatabase;
+    private PlayerInventoryService playerInventoryService;
 
     /**
      * This methods constructs a new instance of MarketViewModel
@@ -27,6 +29,7 @@ public class MarketViewModel {
         this.storage = player.getPlayer().getUserStorage();
         this.storageViewModel = new StorageViewModel(player);
         this.playerInfoDatabase = new PlayerSettingsService();
+        this.playerInventoryService = new PlayerInventoryService();
     }
 
     /**
@@ -66,6 +69,9 @@ public class MarketViewModel {
 
             this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());
+
+            this.playerInventoryService.adjustCropQuantity(crop.getCropName(), quantity,
+                    this.player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
 

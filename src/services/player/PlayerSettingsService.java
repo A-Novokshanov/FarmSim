@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * @author Aditya Varun Pratap
+ * @version 1.0
+ */
 public class PlayerSettingsService {
 
-    //Global variable Connection
-    private final Connection dbConnection;
     private static final String PLAYER_UPDATE_MONEY_QUERY =
             "UPDATE player SET money = money + ? WHERE name = ?";
     private PreparedStatement preparedStatement;
@@ -18,8 +20,9 @@ public class PlayerSettingsService {
      * Establish connection to the database.
      */
     public PlayerSettingsService() {
-        this.dbConnection = DatabaseConnection.getDbConnection();
-        if (this.dbConnection == null) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        dbConnection = DatabaseConnection.getDbConnection();
+        if (dbConnection == null) {
             System.exit(1);
         }
     }
@@ -27,11 +30,12 @@ public class PlayerSettingsService {
     /**
      * Checks if the database is connected to run queries.
      *
+     * @param dbConnection The connection to check.
      * @return A boolean indicating if the database is connected.
      */
-    public boolean isDbConnected() {
+    public boolean isDbConnected(Connection dbConnection) {
         try {
-            return !this.dbConnection.isClosed();
+            return !dbConnection.isClosed();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,9 +49,10 @@ public class PlayerSettingsService {
      * @param playerName The name of the player whose money needs to be updated.
      */
     public void updatePlayerMoney(double money, String playerName) {
-        if (isDbConnected()) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
             try {
-                preparedStatement = this.dbConnection.prepareStatement(PLAYER_UPDATE_MONEY_QUERY);
+                preparedStatement = dbConnection.prepareStatement(PLAYER_UPDATE_MONEY_QUERY);
                 preparedStatement.setDouble(1, money);
                 preparedStatement.setString(2, playerName);
                 preparedStatement.executeUpdate();

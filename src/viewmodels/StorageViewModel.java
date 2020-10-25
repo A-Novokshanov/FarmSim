@@ -2,6 +2,7 @@ package viewmodels;
 
 import models.CropModel;
 import models.StorageModel;
+import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class StorageViewModel {
     private StorageModel storageModel;
     private PlayerViewModel player;
     private PlayerSettingsService playerInfoDatabase;
+    private PlayerInventoryService playerInventoryService;
 
 
     /**
@@ -27,6 +29,7 @@ public class StorageViewModel {
         this.player = player;
         this.storageModel = player.getPlayer().getUserStorage();
         this.playerInfoDatabase = new PlayerSettingsService();
+        this.playerInventoryService = new PlayerInventoryService();
     }
 
     /**
@@ -72,6 +75,9 @@ public class StorageViewModel {
 
                         this.playerInfoDatabase.updatePlayerMoney(money, this.player.getPlayer()
                                 .getPlayerSettings().getPlayerName());
+
+                        this.playerInventoryService.adjustCropQuantity(crop.getCropName(), -amount,
+                                this.player.getPlayer().getPlayerSettings().getPlayerName());
                     }
                 }
             }
