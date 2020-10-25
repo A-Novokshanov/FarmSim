@@ -56,7 +56,7 @@ public class PlayerViewModel {
     public void setPlayerDetails(CropModel cropModel, SeasonModel seasonModel,
                                  String playerName,
                                  StorageModel storageModel, String startingDifficulty,
-                                 int currentMoney) {
+                                 double currentMoney) {
 
         this.settingModel = new SettingModel(seasonModel, cropModel,
                 startingDifficulty, playerName);
