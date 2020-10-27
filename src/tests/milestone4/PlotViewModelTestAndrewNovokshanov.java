@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @author Andrew Novokshanov anovokshanov3@gatech.edu
@@ -40,7 +41,8 @@ public class PlotViewModelTestAndrewNovokshanov {
         SettingModel playerSetting = new SettingModel(season, cropInPlot, "Casual", "Andrew");
         StorageModel playerStorage = new StorageModel();
         PlayerModel player = new PlayerModel(100.00, playerSetting, playerStorage);
-        playerViewModel.setPlayerDetails(cropInPlot, season, playerSetting.getPlayerName(),
+        playerViewModel = new PlayerViewModel();
+        playerViewModel.setPlayerDetails(playerSetting.getStartingCropType(), season, playerSetting.getPlayerName(),
                 playerStorage, playerSetting.getStartingDifficulty(), player.getUserCurrentMoney());
     }
 
@@ -59,7 +61,7 @@ public class PlotViewModelTestAndrewNovokshanov {
         assertEquals(5, harvestedPlotAlive.getDaysOld());
         assertEquals(4, harvestedPlotAlive.getDaysSinceWater());
         plotViewModel.incrementPlotDaysOld(harvestedPlotDead);
-        assertEquals(11, harvestedPlotAlive.getDaysOld());
+        assertEquals(11, harvestedPlotDead.getDaysOld());
         assertEquals(7, harvestedPlotDead.getDaysSinceWater());
     }
 
@@ -67,23 +69,24 @@ public class PlotViewModelTestAndrewNovokshanov {
     //Test harvestPlot() method to make sure a PlotModel is correctly being harvested correctly,
     // depending on its stage of growth and days since its been watered.
     public void testHarvestPlot() {
+        harvestedPlotAlive.setDaysOld(10);
+        assertEquals("Potato", harvestedPlotAlive.getCropInPlot().getCropName());
         plotViewModel.harvestPlot(harvestedPlotAlive, playerViewModel);
-        assertEquals(harvestedPlotAlive.getCropInPlot(), "Potato");
-        assertEquals(playerViewModel.getPlayer().getUserStorage().getInventory().get(1), 4);
-        assertEquals(harvestedPlotAlive.getCropInPlot(), null);
-        assertEquals(harvestedPlotDead.getCropInPlot(), "Potato");
+        assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
+        assertNull(harvestedPlotAlive.getCropInPlot());
+        assertEquals("Potato", harvestedPlotDead.getCropInPlot().getCropName());
         plotViewModel.harvestPlot(harvestedPlotDead, playerViewModel);
-        assertEquals(playerViewModel.getPlayer().getUserStorage().getInventory().get(1), 4);
-        assertEquals(harvestedPlotDead.getCropInPlot(), null);
+        assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
+        assertNull(harvestedPlotDead.getCropInPlot());
     }
 
     @Test
     //Test waterPlot() method to make sure PlotModel was correctly having daysSinceWater set to 0
     public void testWaterPlot() {
         plotViewModel.waterPlot(harvestedPlotAlive);
-        assertEquals(harvestedPlotAlive.getDaysSinceWater(), 0);
+        assertEquals(0, harvestedPlotAlive.getDaysSinceWater());
         plotViewModel.waterPlot(harvestedPlotDead);
-        assertEquals(harvestedPlotDead.getDaysSinceWater(), 0);
+        assertEquals(0, harvestedPlotDead.getDaysSinceWater());
     }
 
     @Test
