@@ -39,7 +39,12 @@ public class PlotViewModel {
     public void harvestPlot(PlotModel harvestedPlot, PlayerViewModel player) {
         StorageViewModel storageVM = new StorageViewModel(player);
         int toAdd = 0;
+        /*
         if (harvestedPlot.getDaysSinceWater() > 5) {
+            harvestedPlot.setCropInPlot(null);
+        }
+        */
+        if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)){
             harvestedPlot.setCropInPlot(null);
         } else if (harvestedPlot.getDaysOld() >= 10) {
             while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
@@ -65,24 +70,30 @@ public class PlotViewModel {
     }
 
     /**
-     * Waters the plot, setting daysSinceWater to 0.
+     * Waters the plot, incrementing the value of waterLevel by 2.
      *
      * @param plotToWater The plot to water.
      */
     public void waterPlot(PlotModel plotToWater) {
+        /*
         if (plotToWater.getDaysSinceWater() <= 5) {
             plotToWater.setDaysSinceWater(0);
+        }
+        */
+        if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
+            plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
         }
     }
 
     /**
      * Increments the daysOld of a PlotModel.
      *
-     * @param plotToIncrement The plot whose daysOld to increment.
+     * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement) {
         plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
-        plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
+        //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
+        plotToIncrement.setDaysSinceWater(plotToIncrement.getWaterValue() - 1);
     }
 
     /**
