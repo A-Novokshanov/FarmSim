@@ -4,6 +4,7 @@ import models.CropModel;
 import models.PlayerModel;
 import models.PlotModel;
 import services.player.PlayerPlotService;
+import services.player.PlayerSettingsService;
 
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,7 @@ import java.util.Random;
 public class PlotViewModel {
 
     private PlayerPlotService playerPlotService = new PlayerPlotService();
+    private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
     private PlayerModel playerModel;
 
     /**
@@ -109,5 +111,6 @@ public class PlotViewModel {
      */
     public void updatePlotMaturity(String cropName, String playerName) {
         playerPlotService.adjustPlotDaysOld(cropName, playerName);
+        playerSettingsService.updatePlayerDay(1, playerName);
     }
 }

@@ -14,6 +14,7 @@ public class PlayerSettingsService {
 
     private static final String PLAYER_UPDATE_MONEY_QUERY =
             "UPDATE player SET money = money + ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_DAY = "UPDATE player SET days = days + ? WHERE name = ?";
     private PreparedStatement preparedStatement;
 
     /**
@@ -69,5 +70,33 @@ public class PlayerSettingsService {
             }
         }
 
+    }
+
+    /**
+     * This method updates the players day in the homescreen.
+     *
+     * @param day        The current day.
+     * @param playerName The name of the player whose day needs to be changed.
+     */
+    public void updatePlayerDay(int day, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_DAY);
+                preparedStatement.setDouble(1, day);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
     }
 }

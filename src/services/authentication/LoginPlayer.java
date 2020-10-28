@@ -17,7 +17,7 @@ import java.util.List;
 
 public class LoginPlayer {
     private static final String USER_EXISTS_QUERY = "SELECT name from player where name=?";
-    private static final String GET_USER_ID_MONEY = "SELECT id, money from player where name=?";
+    private static final String GET_USER_ID_MONEY = "SELECT id, money, days from player where name=?";
     private static final String GET_USER_SETTINGS = "SELECT difficulty, season, "
             + "seed from setting where player = ?";
     private static final String GET_USER_PLOTS = "SELECT * FROM plot where player=?";
@@ -154,6 +154,7 @@ public class LoginPlayer {
 
                 int playerId = resultSet.getInt("id");
                 int currentMoney = resultSet.getInt("money");
+                int days = resultSet.getInt("days");
                 preparedStatement = dbConnection.prepareStatement(GET_USER_SETTINGS);
                 preparedStatement.setInt(1, playerId);
                 resultSet = preparedStatement.executeQuery();
@@ -169,6 +170,7 @@ public class LoginPlayer {
 
                 //TODO add storage to database first, and then get the value to replace the null.
                 playerModel = new PlayerModel(currentMoney, settingModel, queryPlayerInventory(playerId));
+                playerModel.setDays(days);
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

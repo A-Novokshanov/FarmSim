@@ -197,7 +197,6 @@ public class FarmUIController {
      * @param playerName      The name of the current player.
      */
     public void initData(PlayerViewModel playerViewModel, String playerName) {
-        System.out.println("The player Money is " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.playerViewModel = playerViewModel;
@@ -225,7 +224,7 @@ public class FarmUIController {
         this.playerViewModel = playerViewModel;
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.name = transferString.get(0);
-        this.dayNum.setText(transferString.get(1));
+        this.dayNum.setText(transferString.get(playerViewModel.getPlayer().getDays()));
         this.daysPassed = daysPassed;
         setUpPlotModels(plotModels, plotModelImgs);
         createPlotModels();
@@ -394,7 +393,6 @@ public class FarmUIController {
     }
 
     /**
-     *
      * @param days Placeholder
      */
     private void updateDaysSinceWater(Text days) {
@@ -526,14 +524,14 @@ public class FarmUIController {
 
     public Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-        case "Corn":
-            return this.cornNameImg;
-        case "Potato":
-            return this.potatoNameImg;
-        case "Tomato":
-            return this.tomatoNameImg;
-        default:
-            return this.emptyNameImg;
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
         }
     }
 
@@ -578,78 +576,78 @@ public class FarmUIController {
      */
     public void switchPlantHarvest(Pane pane, int i, boolean isPlant) {
         switch (i) {
-        case 1:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot1);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot1);
-            }
-            break;
-        case 2:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot2);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot2);
-            }
-            break;
-        case 3:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot3);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot3);
-            }
-            break;
-        case 4:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot4);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot4);
-            }
-            break;
-        case 5:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot5);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot5);
-            }
-            break;
-        case 6:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot6);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot6);
-            }
-            break;
-        case 7:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot7);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot7);
-            }
-            break;
-        case 8:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot8);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot8);
-            }
-            break;
-        case 9:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot9);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot9);
-            }
-            break;
-        case 10:
-            if (isPlant) {
-                pane.setOnMouseClicked(this::plantCropPlot10);
-            } else {
-                pane.setOnMouseClicked(this::harvestCropPlot10);
-            }
-            break;
-        default:
-            break;
+            case 1:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot1);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot1);
+                }
+                break;
+            case 2:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot2);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot2);
+                }
+                break;
+            case 3:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot3);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot3);
+                }
+                break;
+            case 4:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot4);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot4);
+                }
+                break;
+            case 5:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot5);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot5);
+                }
+                break;
+            case 6:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot6);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot6);
+                }
+                break;
+            case 7:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot7);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot7);
+                }
+                break;
+            case 8:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot8);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot8);
+                }
+                break;
+            case 9:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot9);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot9);
+                }
+                break;
+            case 10:
+                if (isPlant) {
+                    pane.setOnMouseClicked(this::plantCropPlot10);
+                } else {
+                    pane.setOnMouseClicked(this::harvestCropPlot10);
+                }
+                break;
+            default:
+                break;
         }
     }
 
