@@ -43,13 +43,13 @@ public class PlotViewModelTestAndrewNovokshanov {
         List<AnimalModel> desAnim = new ArrayList<AnimalModel>();
         desAnim.add(animal);
         SeasonModel season = new SeasonModel(1, "Spring", desAnim, desCrop);
-        plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         SettingModel playerSetting = new SettingModel(season, cropInPlot, "Casual", "Andrew");
         StorageModel playerStorage = new StorageModel();
         PlayerModel player = new PlayerModel(100.00, playerSetting, playerStorage);
         playerViewModel = new PlayerViewModel();
         playerViewModel.setPlayerDetails(playerSetting.getStartingCropType(), season, playerSetting.getPlayerName(),
                 playerStorage, playerSetting.getStartingDifficulty(), player.getUserCurrentMoney());
+        plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
     }
 
     @Test
