@@ -52,27 +52,6 @@ public class FarmUIController {
     private Text numCorn;
 
     @FXML
-    private Pane pane1;
-    @FXML
-    private Pane pane2;
-    @FXML
-    private Pane pane3;
-    @FXML
-    private Pane pane4;
-    @FXML
-    private Pane pane5;
-    @FXML
-    private Pane pane6;
-    @FXML
-    private Pane pane7;
-    @FXML
-    private Pane pane8;
-    @FXML
-    private Pane pane9;
-    @FXML
-    private Pane pane10;
-
-    @FXML
     private ImageView plot1Img;
     @FXML
     private ImageView plot2Img;
@@ -293,9 +272,9 @@ public class FarmUIController {
      * Updates day number.
      */
     public void updateDay() {
-        int days = this.playerViewModel.getPlayer().getDays();
-        days++;
-        dayNum.setText("Day " + doubleDigitString(days));
+        this.playerViewModel.getPlayer().setDays(
+                this.playerViewModel.getPlayer().getDays() + 1);
+        dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         incrementAllPlotDays();
     }
 
@@ -396,10 +375,8 @@ public class FarmUIController {
     /**
      * @param waterValue Placeholder
      */
-    private void updateWaterValue(Text waterValue) {
-        int num = Integer.parseInt(waterValue.getText());
-        num--;
-        String str = doubleDigitString(num);
+    private void updateWaterValue(PlotModel plot, Text waterValue) {
+        String str = doubleDigitString(plot.getWaterValue());
         waterValue.setText(str);
     }
 
@@ -407,16 +384,16 @@ public class FarmUIController {
      *
      */
     private void updateWaterValueAll() {
-        updateWaterValue(txtWaterValue1);
-        updateWaterValue(txtWaterValue2);
-        updateWaterValue(txtWaterValue3);
-        updateWaterValue(txtWaterValue4);
-        updateWaterValue(txtWaterValue5);
-        updateWaterValue(txtWaterValue6);
-        updateWaterValue(txtWaterValue7);
-        updateWaterValue(txtWaterValue8);
-        updateWaterValue(txtWaterValue9);
-        updateWaterValue(txtWaterValue10);
+        updateWaterValue(plot1, txtWaterValue1);
+        updateWaterValue(plot2, txtWaterValue2);
+        updateWaterValue(plot3, txtWaterValue3);
+        updateWaterValue(plot4, txtWaterValue4);
+        updateWaterValue(plot5, txtWaterValue5);
+        updateWaterValue(plot6, txtWaterValue6);
+        updateWaterValue(plot7, txtWaterValue7);
+        updateWaterValue(plot8, txtWaterValue8);
+        updateWaterValue(plot9, txtWaterValue9);
+        updateWaterValue(plot10, txtWaterValue10);
     }
 
     /**
@@ -512,14 +489,20 @@ public class FarmUIController {
         this.plantedWaterValueText = plantedWaterDaysText;
     }
 
-    public void plantCrop(CropModel crop) {
-        toggleInventoryScreenVisibility();
-        this.plotViewModel.plantPlot(this.plantingPlot, crop);
-        this.plantedPlotImg.setImage(seedImg);
-        this.plantedPlotNameImg.setImage(chooseCropImage(crop));
-        updateWaterValue(this.plantedWaterValueText);
-        this.plantedWaterValueText.setVisible(true);
-        switchPlantHarvest(this.plantedPlotImg, this.plantedPlotNum, true);
+    public void plantCrop(int cropNum, CropModel crop) {
+        if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 0) {
+            storageViewModel.userInventory().get(cropNum).setCropQuantity(
+                    storageViewModel.userInventory().get(cropNum).getCropQuantity() - 1);
+            toggleInventoryScreenVisibility();
+            this.plantingPlot.setWaterValue(3);
+            this.plantingPlot.setDaysOld(0);
+            this.plotViewModel.plantPlot(this.plantingPlot, crop);
+            this.plantedPlotImg.setImage(seedImg);
+            this.plantedPlotNameImg.setImage(chooseCropImage(crop));
+            updateWaterValue(this.plantingPlot, this.plantedWaterValueText);
+            this.plantedWaterValueText.setVisible(true);
+            switchPlantHarvest(this.plantedPlotImg, this.plantedPlotNum, true);
+        }
     }
 
     public Image chooseCropImage(CropModel crop) {
@@ -695,15 +678,15 @@ public class FarmUIController {
     }
 
     public void chooseCorn() {
-        plantCrop(storageViewModel.userInventory().get(0));
+        plantCrop(0, storageViewModel.userInventory().get(0));
     }
 
     public void choosePotato() {
-        plantCrop(storageViewModel.userInventory().get(1));
+        plantCrop(1, storageViewModel.userInventory().get(1));
     }
 
     public void chooseTomato() {
-        plantCrop(storageViewModel.userInventory().get(2));
+        plantCrop(2, storageViewModel.userInventory().get(2));
     }
 
     public void harvestCropPlot1(MouseEvent mouseEvent) {
