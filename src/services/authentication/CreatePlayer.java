@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CreatePlayer {
     private final Connection dbConnection;
     private static final String CREATE_PLAYER_QUERY =
-            "INSERT INTO player(name, money, days) VALUES(? ,?, 0)";
+            "INSERT INTO player(name, money, days) VALUES(? ,?, 1)";
     private static final String GET_PLAYER_ID =
             "SELECT a.id FROM player a WHERE a.name = ";
     private static final String CREATE_PLAYER_SETTINGS =

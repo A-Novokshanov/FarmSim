@@ -5,6 +5,8 @@ import models.PlotModel;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.beans.BeanProperty;
+
 import static org.junit.Assert.assertEquals;
 
 /**

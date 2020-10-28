@@ -21,7 +21,7 @@ public class PlayerPlotService {
     private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
             + "WHERE crop = ? AND player = ?";
     private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
-    private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ?";
+    private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
 
 
     /**
@@ -56,7 +56,7 @@ public class PlayerPlotService {
      * @param playerName is the specific player we want.
      * @return the player id.
      */
-    private int getPlayerId(String playerName) {
+    public int getPlayerId(String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         if (isDbConnected(dbConnection)) {
             try {
@@ -80,14 +80,14 @@ public class PlayerPlotService {
         return -1;
     }
 
-
     /**
-     *Updates the player plot water value.
+     * Updates the player plot water value.
      *
      * @param waterValue the water value to update.
      * @param playerName the player who needs the update.
+     * @param identifier the plot we want.
      */
-    public void updateWaterValue(int waterValue, String playerName) {
+    public void updateWaterValue(int waterValue, String playerName, int identifier) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
         if (isDbConnected(dbConnection)) {
@@ -95,6 +95,7 @@ public class PlayerPlotService {
                 preparedStatement = dbConnection.prepareStatement(UPDATE_WATER_VALUE);
                 preparedStatement.setInt(1, waterValue);
                 preparedStatement.setInt(2, playerId);
+                preparedStatement.setInt(3, identifier);
                 preparedStatement.execute();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
