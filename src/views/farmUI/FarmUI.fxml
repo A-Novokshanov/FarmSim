@@ -385,17 +385,17 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <JFXButton fx:id="btnCornPlant" layoutX="43.0" layoutY="191.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
+                              <JFXButton fx:id="btnCornPlant" layoutX="43.0" layoutY="191.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnPotatoPlant" layoutX="273.0" layoutY="193.0" onMouseClicked="#choosePotato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
+                              <JFXButton fx:id="btnPotatoPlant" layoutX="273.0" layoutY="193.0" onMouseClicked="#choosePotato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="btnTomatoPlant" layoutX="517.0" layoutY="191.0" onMouseClicked="#chooseTomato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black; visibility: false;" text="Plant">
+                              <JFXButton fx:id="btnTomatoPlant" layoutX="517.0" layoutY="191.0" onMouseClicked="#chooseTomato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

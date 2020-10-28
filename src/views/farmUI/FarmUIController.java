@@ -240,6 +240,7 @@ public class FarmUIController {
                 String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        turnOffPlantBtnVisibility();
     }
 
     /**
@@ -249,6 +250,15 @@ public class FarmUIController {
         btnCornPlant.setVisible(true);
         btnPotatoPlant.setVisible(true);
         btnTomatoPlant.setVisible(true);
+    }
+
+    /**
+     * Makes "Plant" buttons on Inventory screen visible.
+     */
+    public void turnOffPlantBtnVisibility() {
+        btnCornPlant.setVisible(false);
+        btnPotatoPlant.setVisible(false);
+        btnTomatoPlant.setVisible(false);
     }
 
     /**
@@ -503,6 +513,7 @@ public class FarmUIController {
     }
 
     public void plantCrop(CropModel crop) {
+        toggleInventoryScreenVisibility();
         this.plotViewModel.plantPlot(this.plantingPlot, crop);
         this.plantedPlotImg.setImage(seedImg);
         this.plantedPlotNameImg.setImage(chooseCropImage(crop));
@@ -534,7 +545,8 @@ public class FarmUIController {
      */
     public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
                             ImageView harvestedPlotNameImg, int harvestedPlotNum, Text waterDays) {
-        if (harvestedPlot.getDaysOld() >= 10 || harvestedPlot.getDaysSinceWater() > 5) {
+        if (harvestedPlot.getDaysOld() >= 10 ||
+                harvestedPlot.getDaysSinceWater() > 6 || harvestedPlot.getDaysSinceWater() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             harvestedPlotImg.setImage(dirtImg);
             harvestedPlotNameImg.setImage(emptyNameImg);
