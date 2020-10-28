@@ -4,3 +4,6 @@
 /checkstyle-8.24-all.jar
 /out/
 /gamedatabase.db
+*.iml
+*.xml
+*.jar
