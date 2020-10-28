@@ -82,8 +82,18 @@ public class PlotViewModel {
         */
         if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
-            playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName(), plotToWater.getPlotIdentifier());
+            playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName(),
+                    plotToWater.getPlotIdentifier());
         }
+    }
+
+    /**
+     * Gets the players plots from the database.
+     *
+     * @return The list of players plots.
+     */
+    public List<PlotModel> getPlotsFromDatabase() {
+        return playerPlotService.queryPlayerPlots(playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**

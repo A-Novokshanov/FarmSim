@@ -1,5 +1,6 @@
 package services.player;
 
+import models.CropModel;
 import models.PlotModel;
 import services.DatabaseConnection;
 
@@ -22,10 +23,13 @@ public class PlayerPlotService {
             + "WHERE crop = ? AND player = ?";
     private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
     private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
+    private static final String GET_USER_PLOTS = "SELECT * FROM plot where player=?";
+
 
 
     /**
-     *
+
+*
      */
     public PlayerPlotService() {
         Connection dbConnection = DatabaseConnection.getDbConnection();
@@ -141,6 +145,56 @@ public class PlayerPlotService {
             }
         }
 
+    }
+
+     public List<PlotModel> queryPlayerPlots(String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        List<PlotModel> myList = new java.util.ArrayList<>();
+        int playerId = getPlayerId(playerName);
+        ResultSet resultSet = null;
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(GET_USER_PLOTS);
+                preparedStatement.setInt(1, playerId);
+                resultSet = preparedStatement.executeQuery();
+                // Populate a PlotModel for every row in the database
+                // add the plotModel to the list
+                // return the list
+                while (resultSet.next()) {
+                    int days = resultSet.getInt("days");
+                    int water = resultSet.getInt("water");
+                    String cropName = resultSet.getString("crop");
+                    double cropValue = 0;
+                    if (cropName.equals("Corn")) {
+                        cropValue = 100.00;
+                    } else if (cropName.equals("Tomato")) {
+                        cropValue = 60.00;
+                    } else if (cropName.equals("Potato")) {
+                        cropValue = 40.00;
+                    }
+                    int plotIdentifier = resultSet.getInt("identifier");
+
+                    CropModel crop = new CropModel(cropName, 1, cropValue);
+                    PlotModel plotModel = new PlotModel(crop, days);
+                    plotModel.setDaysSinceWater(water);
+                    plotModel.setPlotIdentifier(plotIdentifier);
+                    myList.add(plotModel);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                    assert resultSet != null;
+                    resultSet.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return myList;
     }
 
     /**
