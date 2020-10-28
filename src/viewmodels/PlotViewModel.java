@@ -61,7 +61,7 @@ public class PlotViewModel {
             plotToWater.setDaysSinceWater(0);
         }
         */
-        if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() < 6)) {
+        if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
         }
     }
