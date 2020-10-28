@@ -460,7 +460,7 @@ public class FarmUIController {
      */
     public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterDays) {
         if (plotModel.getCropInPlot() != null) {
-            if (plotModel.getDaysSinceWater() > 6 || plotModel.getDaysSinceWater() <= 0) {
+            if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
                 waterDays.setVisible(false);
             } else if (plotModel.getDaysOld() < 2) {
@@ -546,7 +546,7 @@ public class FarmUIController {
     public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
                             ImageView harvestedPlotNameImg, int harvestedPlotNum, Text waterDays) {
         if (harvestedPlot.getDaysOld() >= 10 ||
-                harvestedPlot.getDaysSinceWater() > 6 || harvestedPlot.getDaysSinceWater() <= 0) {
+                harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             harvestedPlotImg.setImage(dirtImg);
             harvestedPlotNameImg.setImage(emptyNameImg);
@@ -560,11 +560,12 @@ public class FarmUIController {
      *
      * @param plotModel Placeholder
      */
-    public void waterCrop(PlotModel plotModel, Text waterDays) {
+    public void waterCrop(PlotModel plotModel, ImageView plotModelImg, Text waterDays) {
         if (plotModel != null) {
-            if (plotModel.getDaysSinceWater() > 0 && plotModel.getDaysSinceWater() <= 6) {
+            if (plotModel.getWaterValue() > 0 && plotModel.getWaterValue() <= 6) {
                 this.plotViewModel.waterPlot(plotModel);
-                waterDays.setText(doubleDigitString(plotModel.getDaysSinceWater()));
+                waterDays.setText(doubleDigitString(plotModel.getWaterValue()));
+                checkMaturity(plotModel, plotModelImg, waterDays);
             }
         }
     }
@@ -746,43 +747,43 @@ public class FarmUIController {
     }
 
     public void waterPlot1() {
-        waterCrop(plot1, txtWaterValue1);
+        waterCrop(plot1, plot1Img, txtWaterValue1);
     }
 
     public void waterPlot2() {
-        waterCrop(plot2, txtWaterValue2);
+        waterCrop(plot2, plot2Img, txtWaterValue2);
     }
 
     public void waterPlot3() {
-        waterCrop(plot3, txtWaterValue3);
+        waterCrop(plot3, plot3Img, txtWaterValue3);
     }
 
     public void waterPlot4() {
-        waterCrop(plot4, txtWaterValue4);
+        waterCrop(plot4, plot4Img, txtWaterValue4);
     }
 
     public void waterPlot5() {
-        waterCrop(plot5, txtWaterValue5);
+        waterCrop(plot5, plot5Img, txtWaterValue5);
     }
 
     public void waterPlot6() {
-        waterCrop(plot6, txtWaterValue6);
+        waterCrop(plot6, plot6Img, txtWaterValue6);
     }
 
     public void waterPlot7() {
-        waterCrop(plot7, txtWaterValue7);
+        waterCrop(plot7, plot7Img, txtWaterValue7);
     }
 
     public void waterPlot8() {
-        waterCrop(plot8, txtWaterValue8);
+        waterCrop(plot8, plot8Img, txtWaterValue8);
     }
 
     public void waterPlot9() {
-        waterCrop(plot9, txtWaterValue9);
+        waterCrop(plot9, plot9Img, txtWaterValue9);
     }
 
     public void waterPlot10() {
-        waterCrop(plot10, txtWaterValue10);
+        waterCrop(plot10, plot10Img, txtWaterValue10);
     }
 
     /**
