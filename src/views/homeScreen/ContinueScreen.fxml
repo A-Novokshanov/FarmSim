@@ -13,7 +13,7 @@
             <Font size="17.0" />
          </font>
       </JFXTextField>
-      <Text fill="WHITE" layoutX="81.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enetr your username to continue" wrappingWidth="468.73583984375">
+      <Text fill="WHITE" layoutX="81.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your username to continue" wrappingWidth="468.73583984375">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
