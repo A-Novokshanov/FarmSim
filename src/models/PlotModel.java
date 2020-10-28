@@ -18,6 +18,7 @@ public class PlotModel {
     public PlotModel(CropModel cropInPlot, int daysOld) {
         this.cropInPlot = cropInPlot;
         this.daysOld = daysOld;
+        this.waterValue = 3;
     }
 
     /** @return Gets and returns the type of crop in a PlotModel object. */
