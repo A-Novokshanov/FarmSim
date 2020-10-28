@@ -15,12 +15,14 @@ import java.util.List;
  */
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
-    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier) "
-            + "VALUES(?, ?, ?, ?, ?)";
+    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
+            + "VALUES(?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
             + "WHERE crop = ? AND player = ?";
     private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
+    private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ?";
+
 
     /**
      *
@@ -78,6 +80,35 @@ public class PlayerPlotService {
         return -1;
     }
 
+
+    /**
+     *Updates the player plot water value.
+     *
+     * @param waterValue the water value to update.
+     * @param playerName the player who needs the update.
+     */
+    public void updateWaterValue(int waterValue, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_WATER_VALUE);
+                preparedStatement.setInt(1, waterValue);
+                preparedStatement.setInt(2, playerId);
+                preparedStatement.execute();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * Adds the player plots to the database.
      *
@@ -95,6 +126,7 @@ public class PlayerPlotService {
                 preparedStatement.setString(3, plot.getCropInPlot().getCropName());
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
+                preparedStatement.setInt(6, plot.getWaterValue());
                 preparedStatement.execute();
             }
         } catch (SQLException throwables) {
@@ -108,6 +140,41 @@ public class PlayerPlotService {
             }
         }
 
+    }
+
+    /**
+     * Adds a single plot for the player.
+     *
+     * @param plot       the plot we want to add.
+     * @param playerName the player who needs the plot added.
+     */
+    public void addPlot(PlotModel plot, String playerName) {
+
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(ADD_PLOTS_QUERY);
+                preparedStatement.setInt(1, plot.getDaysOld());
+                preparedStatement.setInt(2, plot.getDaysSinceWater());
+                preparedStatement.setString(3, plot.getCropInPlot().getCropName());
+                preparedStatement.setInt(4, playerId);
+                preparedStatement.setInt(5, plot.getPlotIdentifier());
+                preparedStatement.setInt(6, plot.getWaterValue());
+                preparedStatement.execute();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }
     }
 
     /**

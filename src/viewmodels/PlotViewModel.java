@@ -44,7 +44,7 @@ public class PlotViewModel {
             harvestedPlot.setCropInPlot(null);
         }
         */
-        if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)){
+        if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
         } else if (harvestedPlot.getDaysOld() >= 10) {
             while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
@@ -82,6 +82,7 @@ public class PlotViewModel {
         */
         if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
+            playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName());
         }
     }
 
@@ -103,7 +104,9 @@ public class PlotViewModel {
      * @param cropToPlant the crop to plant in the plot.
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
+
         plotToPlant.setCropInPlot(cropToPlant);
+        playerPlotService.addPlot(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
