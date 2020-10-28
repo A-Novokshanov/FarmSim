@@ -1,8 +1,12 @@
 package viewmodels;
 
 import models.CropModel;
+import models.PlayerModel;
 import models.PlotModel;
+import services.player.PlayerPlotService;
+import services.player.PlayerSettingsService;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -12,6 +16,19 @@ import java.util.Random;
  * @version 1.0
  */
 public class PlotViewModel {
+
+    private PlayerPlotService playerPlotService = new PlayerPlotService();
+    private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
+    private PlayerModel playerModel;
+
+    /**
+     * Constructor for plot view model/
+     *
+     * @param playerModel the player model who uses these plots.
+     */
+    public PlotViewModel(PlayerModel playerModel) {
+        this.playerModel = playerModel;
+    }
 
     /**
      * Harvest a plot and store the crops in storage/inventory.
@@ -34,6 +51,8 @@ public class PlotViewModel {
                 storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                 toAdd++;
             }
+            playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
+                    player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
         }
     }
@@ -85,5 +104,26 @@ public class PlotViewModel {
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
         plotToPlant.setCropInPlot(cropToPlant);
+    }
+
+    /**
+     * Saves the plots from the users game when they click continue.
+     *
+     * @param plots      is list of all 8 plots the user has, each having a certain state.
+     * @param playerName the user name we are specifically pulling from the database for.
+     */
+    public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
+        playerPlotService.addPlayerPlots(plots, playerName);
+    }
+
+    /**
+     * Updates the plot maturity by the time since planted.
+     *
+     * @param cropName   is the name of the crop.
+     * @param playerName is the name of the player.
+     */
+    public void updatePlotMaturity(String cropName, String playerName) {
+        playerPlotService.adjustPlotDaysOld(cropName, playerName);
+        playerSettingsService.updatePlayerDay(1, playerName);
     }
 }

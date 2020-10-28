@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CreatePlayer {
     private final Connection dbConnection;
     private static final String CREATE_PLAYER_QUERY =
-            "INSERT INTO player(name, money) VALUES(?, ?)";
+            "INSERT INTO player(name, money, days) VALUES(? ,?, 0)";
     private static final String GET_PLAYER_ID =
             "SELECT a.id FROM player a WHERE a.name = ";
     private static final String CREATE_PLAYER_SETTINGS =
@@ -52,6 +52,8 @@ public class CreatePlayer {
     public void setPlayerDetails(PlayerModel playerDetails) {
         if (this.isDbConnected()) {
             try {
+
+                //Insert into player table
                 PreparedStatement preparedStatement = this.
                         dbConnection.prepareStatement(CREATE_PLAYER_QUERY);
                 preparedStatement.setString(1,
@@ -60,6 +62,7 @@ public class CreatePlayer {
                         playerDetails.getUserCurrentMoney());
                 preparedStatement.executeUpdate();
 
+                //Get player id first
                 String query = GET_PLAYER_ID + "\'"
                         + playerDetails.getPlayerSettings().getPlayerName() + "\'";
                 preparedStatement = this.dbConnection.prepareStatement(query);
@@ -67,6 +70,7 @@ public class CreatePlayer {
 
                 int playerId = resultSet.getInt("id");
 
+                //Insert into setting table
                 preparedStatement = this.dbConnection.prepareStatement(CREATE_PLAYER_SETTINGS);
                 preparedStatement.setString(1,
                         playerDetails.getPlayerSettings().getStartingDifficulty());
@@ -81,6 +85,7 @@ public class CreatePlayer {
                 throwables.printStackTrace();
             } finally {
                 try {
+                    dbConnection.close();
                     resultSet.close();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

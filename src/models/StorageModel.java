@@ -25,6 +25,15 @@ public class StorageModel {
     }
 
     /**
+     * This method sets the inventory.
+     *
+     * @param cropInventory The list of crops to be set.
+     */
+    public void setCropInventory(ArrayList<CropModel> cropInventory) {
+        this.cropInventory = cropInventory;
+    }
+
+    /**
      * Gets the cropInventory that the player currently has.
      *
      * @return the cropInventory.

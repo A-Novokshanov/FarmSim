@@ -1,9 +1,13 @@
 package viewmodels;
 
+import com.sun.scenario.effect.Crop;
 import models.CropModel;
 import models.StorageModel;
+import services.player.PlayerInventoryService;
+import services.player.PlayerSettingsService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This view-model class keeps controls the logic flow of adding to a user's inventory.
@@ -14,6 +18,8 @@ import java.util.ArrayList;
 public class StorageViewModel {
     private StorageModel storageModel;
     private PlayerViewModel player;
+    private PlayerSettingsService playerInfoDatabase;
+    private PlayerInventoryService playerInventoryService;
 
 
     /**
@@ -24,6 +30,8 @@ public class StorageViewModel {
     public StorageViewModel(PlayerViewModel player) {
         this.player = player;
         this.storageModel = player.getPlayer().getUserStorage();
+        this.playerInfoDatabase = new PlayerSettingsService();
+        this.playerInventoryService = new PlayerInventoryService();
     }
 
     /**
@@ -43,7 +51,12 @@ public class StorageViewModel {
             }
             if (count == storageModel.getTotalCropAmount()) {
                 storageModel.setNewCrop(crop, quantity);
+                List<CropModel> crops = new ArrayList<>();
+                crops.add(crop);
+                playerInventoryService.addPlayerCrops(player.getPlayer().getPlayerSettings().getPlayerName(), crops);
             }
+            playerInventoryService.adjustCropQuantity(crop.getCropName(),
+                    quantity, player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
 
@@ -59,11 +72,19 @@ public class StorageViewModel {
                 if (storageModel.checkIfNameCorrect(i, crop)) {
                     if (storageModel.getEnoughToRemove(i, amount) == 1) {
                         storageModel.removeCropAmount(amount, i);
+
+                        double money = amount * (calculateCropPrice(crop.getCropValue(),
+                                player.getPlayer().getPlayerSettings()
+                                        .getStartingDifficulty()));
+
                         player.getPlayer().setUserCurrentMoney((int) (
-                                player.getPlayer().getUserCurrentMoney()
-                                        + amount * (calculateCropPrice(crop.getCropValue(),
-                                        player.getPlayer().getPlayerSettings()
-                                                .getStartingDifficulty()))));
+                                player.getPlayer().getUserCurrentMoney() + money));
+
+                        this.playerInfoDatabase.updatePlayerMoney(money, this.player.getPlayer()
+                                .getPlayerSettings().getPlayerName());
+
+                        this.playerInventoryService.adjustCropQuantity(crop.getCropName(), -amount,
+                                this.player.getPlayer().getPlayerSettings().getPlayerName());
                     }
                 }
             }
@@ -89,18 +110,18 @@ public class StorageViewModel {
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
-        case "Casual":
-            difficultyMod = 0.8;
-            break;
-        case "Normal":
-            difficultyMod = 1.0;
-            break;
-        case "Veteran":
-            difficultyMod = 1.2;
-            break;
-        default:
-            difficultyMod = 0.0;
-            break;
+            case "Casual":
+                difficultyMod = 0.8;
+                break;
+            case "Normal":
+                difficultyMod = 1.0;
+                break;
+            case "Veteran":
+                difficultyMod = 1.2;
+                break;
+            default:
+                difficultyMod = 0.0;
+                break;
         }
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;

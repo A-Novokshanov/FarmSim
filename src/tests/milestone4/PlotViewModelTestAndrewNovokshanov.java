@@ -1,6 +1,12 @@
 package tests.milestone4;
 
-import models.*;
+import models.AnimalModel;
+import models.CropModel;
+import models.PlayerModel;
+import models.PlotModel;
+import models.SeasonModel;
+import models.SettingModel;
+import models.StorageModel;
 import org.junit.Before;
 import org.junit.Test;
 import viewmodels.PlayerViewModel;
@@ -37,7 +43,7 @@ public class PlotViewModelTestAndrewNovokshanov {
         List<AnimalModel> desAnim = new ArrayList<AnimalModel>();
         desAnim.add(animal);
         SeasonModel season = new SeasonModel(1, "Spring", desAnim, desCrop);
-        plotViewModel = new PlotViewModel();
+        plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         SettingModel playerSetting = new SettingModel(season, cropInPlot, "Casual", "Andrew");
         StorageModel playerStorage = new StorageModel();
         PlayerModel player = new PlayerModel(100.00, playerSetting, playerStorage);

@@ -11,6 +11,7 @@ public class PlayerModel {
     private double currentMoney;
     private SettingModel playerSettings;
     private StorageModel storageModel;
+    private int days;
 
     /**
      * Constructs a PlayerModel object.
@@ -23,6 +24,15 @@ public class PlayerModel {
         this.currentMoney = currentMoney;
         this.playerSettings = settingModel;
         this.storageModel = storageModel;
+        this.days = 1;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
+    public int getDays() {
+        return this.days;
     }
 
     /**
