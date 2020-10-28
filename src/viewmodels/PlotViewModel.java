@@ -51,7 +51,9 @@ public class PlotViewModel {
      * @param plotToWater The plot to water.
      */
     public void waterPlot(PlotModel plotToWater) {
-        plotToWater.setDaysSinceWater(0);
+        if (plotToWater.getDaysSinceWater() <= 5) {
+            plotToWater.setDaysSinceWater(0);
+        }
     }
 
     /**
