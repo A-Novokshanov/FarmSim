@@ -202,6 +202,8 @@ public class FarmUIController {
         this.playerViewModel = playerViewModel;
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.name = playerName;
+        this.dayNum.setText(doubleDigitString(this.playerViewModel.getPlayer().getDays()));
+        this.daysPassed = this.playerViewModel.getPlayer().getDays();
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
         createPlotModels();
