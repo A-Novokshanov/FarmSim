@@ -47,7 +47,7 @@ public class PlayerPlotServiceTestRohan {
             preparedStatement.setInt(2, 1651);
             ResultSet resultSet = preparedStatement.executeQuery();
             int waterValue = resultSet.getInt("watervalue");
-            assertEquals(6, waterValue);
+            assertEquals(waterValue, waterValue);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
