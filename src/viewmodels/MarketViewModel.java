@@ -70,8 +70,6 @@ public class MarketViewModel {
             this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());
 
-            this.playerInventoryService.adjustCropQuantity(crop.getCropName(), quantity,
-                    this.player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
 

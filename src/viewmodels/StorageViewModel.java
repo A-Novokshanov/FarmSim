@@ -1,11 +1,13 @@
 package viewmodels;
 
+import com.sun.scenario.effect.Crop;
 import models.CropModel;
 import models.StorageModel;
 import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This view-model class keeps controls the logic flow of adding to a user's inventory.
@@ -49,7 +51,12 @@ public class StorageViewModel {
             }
             if (count == storageModel.getTotalCropAmount()) {
                 storageModel.setNewCrop(crop, quantity);
+                List<CropModel> crops = new ArrayList<>();
+                crops.add(crop);
+                playerInventoryService.addPlayerCrops(player.getPlayer().getPlayerSettings().getPlayerName(), crops);
             }
+            playerInventoryService.adjustCropQuantity(crop.getCropName(),
+                    quantity, player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
 

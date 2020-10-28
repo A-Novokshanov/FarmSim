@@ -19,6 +19,11 @@ public class PlotViewModel {
     private PlayerPlotService playerPlotService = new PlayerPlotService();
     private PlayerModel playerModel;
 
+    /**
+     * Constructor for plot view model/
+     *
+     * @param playerModel the player model who uses these plots.
+     */
     public PlotViewModel(PlayerModel playerModel) {
         this.playerModel = playerModel;
     }
@@ -39,6 +44,8 @@ public class PlotViewModel {
                 storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                 toAdd++;
             }
+            playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
+                    player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
         }
     }
@@ -94,6 +101,12 @@ public class PlotViewModel {
         playerPlotService.addPlayerPlots(plots, playerName);
     }
 
+    /**
+     * Updates the plot maturity by the time since planted.
+     *
+     * @param cropName   is the name of the crop.
+     * @param playerName is the name of the player.
+     */
     public void updatePlotMaturity(String cropName, String playerName) {
         playerPlotService.adjustPlotDaysOld(cropName, playerName);
     }

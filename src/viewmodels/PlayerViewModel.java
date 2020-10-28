@@ -77,7 +77,7 @@ public class PlayerViewModel {
      */
     public void getPlayerInformationFromDatabase(String playerName) {
         LoginPlayer loginPlayer = new LoginPlayer();
-        this.playerModel = loginPlayer.getPlayerDetails(playerName);
+        this.playerModel = loginPlayer.queryPlayerMoneyAndSettings(playerName);
     }
 
     /**

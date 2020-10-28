@@ -197,6 +197,7 @@ public class FarmUIController {
      * @param playerName      The name of the current player.
      */
     public void initData(PlayerViewModel playerViewModel, String playerName) {
+        System.out.println("The player Money is " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.playerViewModel = playerViewModel;

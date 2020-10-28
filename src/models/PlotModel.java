@@ -44,6 +44,10 @@ public class PlotModel {
         this.cropInPlot = cropInPlot;
     }
 
+    public void setPlotIdentifier(int identifer) {
+        this.plotIdentifier = identifer;
+    }
+
     /**
      * @return Gets and returns the daysOld of a PlotModel object.
      */

@@ -15,10 +15,12 @@ import java.util.List;
  */
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
-    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier) VALUES(?, ?, ?, ?, ?)";
+    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier) "
+            + "VALUES(?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
             + "WHERE crop = ? AND player = ?";
+    private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
 
     /**
      *
@@ -47,9 +49,10 @@ public class PlayerPlotService {
 
 
     /**
+     * This is to get player id.
      *
-     * @param playerName
-     * @return
+     * @param playerName is the specific player we want.
+     * @return the player id.
      */
     private int getPlayerId(String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
@@ -119,6 +122,33 @@ public class PlayerPlotService {
         try {
             preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_MATURITY);
             preparedStatement.setString(1, cropName);
+            preparedStatement.setInt(2, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Deletes a plot from the database when the player harvests a plot.
+     *
+     * @param plotIdentifier The unique identifier assigned to each plot for access.
+     * @param playerName     The name of the player whose plots need to be removed.
+     */
+    public void deletePlot(int plotIdentifier, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(REMOVE_PLOT_QUERY);
+            preparedStatement.setInt(1, plotIdentifier);
             preparedStatement.setInt(2, playerId);
             preparedStatement.execute();
 
