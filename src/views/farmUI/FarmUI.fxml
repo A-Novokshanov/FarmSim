@@ -37,7 +37,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater1" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue1" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater2" layoutX="116.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue2" layoutX="116.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -85,7 +85,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater3" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue3" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -109,7 +109,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater4" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue4" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -133,7 +133,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater5" layoutX="116.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue5" layoutX="116.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -157,7 +157,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater6" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue6" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -181,7 +181,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater7" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue7" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -205,7 +205,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater8" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue8" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -229,7 +229,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater9" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue9" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -253,7 +253,7 @@
                         <Image url="@../../dependencies/images/Watering_Can.jpg" />
                      </image>
                   </ImageView>
-                  <Text fx:id="txtDaysSinceWater10" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="txtWaterValue10" layoutX="116.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
                      <font>
                         <Font size="18.0" />
                      </font>
