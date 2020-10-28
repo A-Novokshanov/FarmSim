@@ -9,6 +9,7 @@ public class PlotModel {
     private CropModel cropInPlot;
     private int daysOld;
     private int daysSinceWater;
+    private int waterValue;
 
     /** Constructs a PlotModel object.
      * @param cropInPlot The type of crop in the PlotModel
@@ -55,5 +56,19 @@ public class PlotModel {
      */
     public void setDaysSinceWater(int daysSinceWater) {
         this.daysSinceWater = daysSinceWater;
+    }
+
+    /** Gets and returns the waterValue of a PlotModel object.
+     * @return Returns a number based on waterValue of a plot.
+     */
+    public int getWaterValue() {
+        return this.waterValue;
+    }
+
+    /** Sets the waterValue of a PlotModel object.
+     @param waterValue is the new desired waterValue of a plot.
+     */
+    public void setWaterValue(int waterValue) {
+        this.waterValue = waterValue;
     }
 }
