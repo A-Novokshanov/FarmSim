@@ -35,9 +35,9 @@ public class PlotViewModelTestAndrewNovokshanov {
         cropInPlot = new CropModel("Potato", 2, 1.50);
         AnimalModel animal = new AnimalModel(1, 1, 1, "Cow");
         harvestedPlotAlive = new PlotModel(cropInPlot, 4);
-        harvestedPlotAlive.setDaysSinceWater(3);
+        //harvestedPlotAlive.setDaysSinceWater(3);
         harvestedPlotDead = new PlotModel(cropInPlot, 10);
-        harvestedPlotDead.setDaysSinceWater(6);
+        //harvestedPlotDead.setDaysSinceWater(6);
         List<CropModel> desCrop = new ArrayList<CropModel>();
         desCrop.add(cropInPlot);
         List<AnimalModel> desAnim = new ArrayList<AnimalModel>();
@@ -63,12 +63,14 @@ public class PlotViewModelTestAndrewNovokshanov {
     //Test incrementPlotDaysOld() method to make sure plots' daysOld
     //and daysSinceWater were being incremented correctly
     public void testIncrementPlotDaysOld() {
+        assertEquals(3, harvestedPlotAlive.getWaterValue());
         plotViewModel.incrementPlotDaysOld(harvestedPlotAlive);
         assertEquals(5, harvestedPlotAlive.getDaysOld());
-        assertEquals(4, harvestedPlotAlive.getDaysSinceWater());
+        assertEquals(2, harvestedPlotAlive.getWaterValue());
+        assertEquals(3, harvestedPlotDead.getWaterValue());
         plotViewModel.incrementPlotDaysOld(harvestedPlotDead);
         assertEquals(11, harvestedPlotDead.getDaysOld());
-        assertEquals(7, harvestedPlotDead.getDaysSinceWater());
+        assertEquals(2, harvestedPlotDead.getWaterValue());
     }
 
     @Test
@@ -81,6 +83,7 @@ public class PlotViewModelTestAndrewNovokshanov {
         assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
         assertNull(harvestedPlotAlive.getCropInPlot());
         assertEquals("Potato", harvestedPlotDead.getCropInPlot().getCropName());
+        harvestedPlotDead.setWaterValue(10);
         plotViewModel.harvestPlot(harvestedPlotDead, playerViewModel);
         assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
         assertNull(harvestedPlotDead.getCropInPlot());
@@ -90,9 +93,10 @@ public class PlotViewModelTestAndrewNovokshanov {
     //Test waterPlot() method to make sure PlotModel was correctly having daysSinceWater set to 0
     public void testWaterPlot() {
         plotViewModel.waterPlot(harvestedPlotAlive);
-        assertEquals(0, harvestedPlotAlive.getDaysSinceWater());
+        assertEquals(5, harvestedPlotAlive.getWaterValue());
+        harvestedPlotDead.setWaterValue(-3);
         plotViewModel.waterPlot(harvestedPlotDead);
-        assertEquals(0, harvestedPlotDead.getDaysSinceWater());
+        assertEquals(-3, harvestedPlotDead.getWaterValue());
     }
 
     @Test
