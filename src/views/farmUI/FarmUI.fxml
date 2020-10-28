@@ -414,10 +414,5 @@
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
          </children>
     </AnchorPane>
-      <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../dependencies/images/Watering_Can.jpg" />
-         </image>
-      </ImageView>
   </children>
 </VBox>
