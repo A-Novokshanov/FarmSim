@@ -13,6 +13,7 @@ public class PlotModel {
     private CropModel cropInPlot;
     private int daysOld;
     private int daysSinceWater;
+    private int waterValue;
     private int plotIdentifier;
 
     /**
@@ -24,6 +25,7 @@ public class PlotModel {
     public PlotModel(CropModel cropInPlot, int daysOld) {
         this.cropInPlot = cropInPlot;
         this.daysOld = daysOld;
+        this.waterValue = 3;
         Random randomID = new Random();
         this.plotIdentifier = randomID.nextInt(100000);
     }
@@ -89,5 +91,19 @@ public class PlotModel {
      */
     public void setDaysSinceWater(int daysSinceWater) {
         this.daysSinceWater = daysSinceWater;
+    }
+
+    /** Gets and returns the waterValue of a PlotModel object.
+     * @return Returns a number based on waterValue of a plot.
+     */
+    public int getWaterValue() {
+        return this.waterValue;
+    }
+
+    /** Sets the waterValue of a PlotModel object.
+     @param waterValue is the new desired waterValue of a plot.
+     */
+    public void setWaterValue(int waterValue) {
+        this.waterValue = waterValue;
     }
 }
