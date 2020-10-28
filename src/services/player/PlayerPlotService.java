@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
-    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player) VALUES(?, ?, ?, ?)";
+    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier) VALUES(?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
             + "WHERE crop = ? AND player = ?";
@@ -47,6 +47,7 @@ public class PlayerPlotService {
 
 
     /**
+     *
      * @param playerName
      * @return
      */
@@ -90,6 +91,7 @@ public class PlayerPlotService {
                 preparedStatement.setInt(2, plot.getDaysSinceWater());
                 preparedStatement.setString(3, plot.getCropInPlot().getCropName());
                 preparedStatement.setInt(4, playerId);
+                preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.execute();
             }
         } catch (SQLException throwables) {
