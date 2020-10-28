@@ -441,11 +441,11 @@ public class FarmUIController {
      * @param waterDays Placeholder
      */
     public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterDays) {
-        if (plotModel.getDaysSinceWater() > 5) {
-            plotImg.setImage(witheredImg);
-            waterDays.setVisible(false);
-        } else if (plotModel.getCropInPlot() != null) {
-            if (plotModel.getDaysOld() < 2) {
+        if (plotModel.getCropInPlot() != null) {
+            if (plotModel.getDaysSinceWater() > 5) {
+                plotImg.setImage(witheredImg);
+                waterDays.setVisible(false);
+            } else if (plotModel.getDaysOld() < 2) {
                 plotImg.setImage(seedImg);
             } else if (plotModel.getDaysOld() < 6) {
                 plotImg.setImage(immature1Img);
@@ -528,12 +528,14 @@ public class FarmUIController {
      * @param harvestedPlotNum     Placeholder
      */
     public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
-                            ImageView harvestedPlotNameImg, Pane pane, int harvestedPlotNum) {
-        if (harvestedPlot.getDaysOld() >= 10) {
+                            ImageView harvestedPlotNameImg, Pane pane,
+                            int harvestedPlotNum, Text waterDays) {
+        if (harvestedPlot.getDaysOld() >= 10 || harvestedPlot.getDaysSinceWater() > 5) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             harvestedPlotImg.setImage(dirtImg);
             harvestedPlotNameImg.setImage(emptyNameImg);
             switchPlantHarvest(pane, harvestedPlotNum, false);
+            waterDays.setVisible(false);
         }
     }
 
@@ -542,10 +544,11 @@ public class FarmUIController {
      *
      * @param plotModel Placeholder
      */
-    public void waterCrop(PlotModel plotModel) {
+    public void waterCrop(PlotModel plotModel, Text waterDays) {
         if (plotModel != null) {
             if (plotModel.getDaysSinceWater() <= 5) {
                 this.plotViewModel.waterPlot(plotModel);
+                waterDays.setText("00");
             }
         }
     }
@@ -687,83 +690,83 @@ public class FarmUIController {
     }
 
     public void harvestCropPlot1(MouseEvent mouseEvent) {
-        harvestCrop(plot1, plot1Img, plotName1Img, pane1, 1);
+        harvestCrop(plot1, plot1Img, plotName1Img, pane1, 1, txtDaysSinceWater1);
     }
 
     public void harvestCropPlot2(MouseEvent mouseEvent) {
-        harvestCrop(plot2, plot2Img, plotName2Img, pane2, 2);
+        harvestCrop(plot2, plot2Img, plotName2Img, pane2, 2, txtDaysSinceWater2);
     }
 
     public void harvestCropPlot3(MouseEvent mouseEvent) {
-        harvestCrop(plot3, plot3Img, plotName3Img, pane3, 3);
+        harvestCrop(plot3, plot3Img, plotName3Img, pane3, 3, txtDaysSinceWater3);
     }
 
     public void harvestCropPlot4(MouseEvent mouseEvent) {
-        harvestCrop(plot4, plot4Img, plotName4Img, pane4, 4);
+        harvestCrop(plot4, plot4Img, plotName4Img, pane4, 4, txtDaysSinceWater4);
     }
 
     public void harvestCropPlot5(MouseEvent mouseEvent) {
-        harvestCrop(plot5, plot5Img, plotName5Img, pane5, 5);
+        harvestCrop(plot5, plot5Img, plotName5Img, pane5, 5, txtDaysSinceWater5);
     }
 
     public void harvestCropPlot6(MouseEvent mouseEvent) {
-        harvestCrop(plot6, plot6Img, plotName6Img, pane6, 6);
+        harvestCrop(plot6, plot6Img, plotName6Img, pane6, 6, txtDaysSinceWater6);
     }
 
     public void harvestCropPlot7(MouseEvent mouseEvent) {
-        harvestCrop(plot7, plot7Img, plotName7Img, pane7, 7);
+        harvestCrop(plot7, plot7Img, plotName7Img, pane7, 7, txtDaysSinceWater7);
     }
 
     public void harvestCropPlot8(MouseEvent mouseEvent) {
-        harvestCrop(plot8, plot8Img, plotName8Img, pane8, 8);
+        harvestCrop(plot8, plot8Img, plotName8Img, pane8, 8, txtDaysSinceWater8);
     }
 
     public void harvestCropPlot9(MouseEvent mouseEvent) {
-        harvestCrop(plot9, plot9Img, plotName9Img, pane9, 9);
+        harvestCrop(plot9, plot9Img, plotName9Img, pane9, 9, txtDaysSinceWater8);
     }
 
     public void harvestCropPlot10(MouseEvent mouseEvent) {
-        harvestCrop(plot10, plot10Img, plotName10Img, pane10, 10);
+        harvestCrop(plot10, plot10Img, plotName10Img, pane10, 10, txtDaysSinceWater10);
     }
 
     public void waterPlot1() {
-        waterCrop(plot1);
+        waterCrop(plot1, txtDaysSinceWater1);
     }
 
     public void waterPlot2() {
-        waterCrop(plot2);
+        waterCrop(plot2, txtDaysSinceWater2);
     }
 
     public void waterPlot3() {
-        waterCrop(plot3);
+        waterCrop(plot3, txtDaysSinceWater3);
     }
 
     public void waterPlot4() {
-        waterCrop(plot4);
+        waterCrop(plot4, txtDaysSinceWater4);
     }
 
     public void waterPlot5() {
-        waterCrop(plot5);
+        waterCrop(plot5, txtDaysSinceWater5);
     }
 
     public void waterPlot6() {
-        waterCrop(plot6);
+        waterCrop(plot6, txtDaysSinceWater6);
     }
 
     public void waterPlot7() {
-        waterCrop(plot7);
+        waterCrop(plot7, txtDaysSinceWater7);
     }
 
     public void waterPlot8() {
-        waterCrop(plot8);
+        waterCrop(plot8, txtDaysSinceWater8);
     }
 
     public void waterPlot9() {
-        waterCrop(plot9);
+        waterCrop(plot9, txtDaysSinceWater9);
     }
 
     public void waterPlot10() {
-        waterCrop(plot10);
+        waterCrop(plot10, txtDaysSinceWater10);
     }
 
     /**
