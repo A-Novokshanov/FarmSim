@@ -127,19 +127,17 @@ public class MarketPlace {
     private PlayerViewModel playerViewModel;
     private ArrayList<PlotModel> plotModels;
     private ArrayList<Image> plotModelImgs;
-    private ArrayList<String> transferString;
-    private int daysPassed;
+    private String name;
 
     public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage,
                          ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs,
-                         ArrayList<String> transferString, int daysPassed) {
+                         String name) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.plotModels = plotModels;
         this.plotModelImgs = plotModelImgs;
-        this.transferString = transferString;
-        this.daysPassed = daysPassed;
+        this.name = name;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         if (storage.userInventory().get(0) != null) {
             setPrice(panel1Value, 0, panel1Price);
@@ -413,9 +411,7 @@ public class MarketPlace {
         }
 
         FarmUIController farmUIController = loader.getController();
-        farmUIController.initData2(this.playerViewModel,
-                plotModels, plotModelImgs, transferString, daysPassed);
-
+        farmUIController.initData2(this.playerViewModel, plotModels, plotModelImgs, name);
         stage.setTitle("Farm");
         stage.show();
     }
