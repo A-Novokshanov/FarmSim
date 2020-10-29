@@ -17,9 +17,12 @@ public class PlayerInventoryService {
 
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
-    private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
-    private static final String ADD_CROPS_QUERY = "INSERT INTO crop(name, value, quantity, player) VALUES(?, ?, ? ,?)";
-    private static final String UPDATE_QUANTITY_QUERY = "UPDATE crop SET quantity = quantity + ? "
+    private static final String GET_USER_ID_QUERY =
+            "SELECT a.id FROM player a WHERE a.name = ?";
+    private static final String ADD_CROPS_QUERY =
+            "INSERT INTO crop(name, value, quantity, player) VALUES(?, ?, ? ,?)";
+    private static final String UPDATE_QUANTITY_QUERY =
+            "UPDATE crop SET quantity = quantity + ? "
             + "WHERE name = ? AND player = ?";
 
     /**

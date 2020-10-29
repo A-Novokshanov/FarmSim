@@ -47,7 +47,8 @@ public class PlotViewModelTestAndrewNovokshanov {
         StorageModel playerStorage = new StorageModel();
         PlayerModel player = new PlayerModel(100.00, playerSetting, playerStorage);
         playerViewModel = new PlayerViewModel();
-        playerViewModel.setPlayerDetails(playerSetting.getStartingCropType(), season, playerSetting.getPlayerName(),
+        playerViewModel.setPlayerDetails(
+                playerSetting.getStartingCropType(), season, playerSetting.getPlayerName(),
                 playerStorage, playerSetting.getStartingDifficulty(), player.getUserCurrentMoney());
         plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
     }
@@ -80,12 +81,16 @@ public class PlotViewModelTestAndrewNovokshanov {
         harvestedPlotAlive.setDaysOld(10);
         assertEquals("Potato", harvestedPlotAlive.getCropInPlot().getCropName());
         plotViewModel.harvestPlot(harvestedPlotAlive, playerViewModel);
-        assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
+        assertEquals(4,
+                playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity()
+        );
         assertNull(harvestedPlotAlive.getCropInPlot());
         assertEquals("Potato", harvestedPlotDead.getCropInPlot().getCropName());
         harvestedPlotDead.setWaterValue(10);
         plotViewModel.harvestPlot(harvestedPlotDead, playerViewModel);
-        assertEquals(4, playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity());
+        assertEquals(4,
+                playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity()
+        );
         assertNull(harvestedPlotDead.getCropInPlot());
     }
 

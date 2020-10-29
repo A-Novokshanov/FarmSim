@@ -2,7 +2,6 @@ package services.authentication;
 
 import models.CropModel;
 import models.PlayerModel;
-import models.PlotModel;
 import models.SeasonModel;
 import models.SettingModel;
 import models.StorageModel;
@@ -13,14 +12,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginPlayer {
-    private static final String USER_EXISTS_QUERY = "SELECT name from player where name=?";
-    private static final String GET_USER_ID_MONEY = "SELECT id, money, days from player where name=?";
-    private static final String GET_USER_SETTINGS = "SELECT difficulty, season, "
+    private static final String USER_EXISTS_QUERY =
+            "SELECT name from player where name=?";
+    private static final String GET_USER_ID_MONEY =
+            "SELECT id, money, days from player where name=?";
+    private static final String GET_USER_SETTINGS =
+            "SELECT difficulty, season, "
             + "seed from setting where player = ?";
-    private static final String GET_PLAYER_CROPS = "SELECT * FROM crop WHERE player = ?";
+    private static final String GET_PLAYER_CROPS =
+            "SELECT * FROM crop WHERE player = ?";
     private PreparedStatement preparedStatement;
 
     /**
@@ -36,6 +38,7 @@ public class LoginPlayer {
     /**
      * Checks if the database is connected to run queries.
      *
+     * @param dbConnection placeholder
      * @return A boolean indicating if the database is connected.
      */
     public boolean isDbConnected(Connection dbConnection) {
@@ -120,10 +123,11 @@ public class LoginPlayer {
                 SettingModel settingModel = new SettingModel(seasonModel,
                         cropModel, difficulty, playerName);
 
-                //TODO add storage to database first, and then get the value to replace the null.
-                playerModel = new PlayerModel(currentMoney, settingModel, queryPlayerInventory(playerId));
+                //TODO add storage to database first,
+                // and then get the value to replace the null.
+                playerModel = new PlayerModel(currentMoney, settingModel,
+                        queryPlayerInventory(playerId));
                 playerModel.setDays(days);
-
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } finally {

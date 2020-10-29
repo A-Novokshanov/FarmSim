@@ -14,7 +14,8 @@ public class PlayerSettingsService {
 
     private static final String PLAYER_UPDATE_MONEY_QUERY =
             "UPDATE player SET money = money + ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_DAY = "UPDATE player SET days = days + ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_DAY =
+            "UPDATE player SET days = days + ? WHERE name = ?";
     private PreparedStatement preparedStatement;
 
     /**

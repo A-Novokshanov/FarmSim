@@ -87,13 +87,13 @@ public class PlotViewModel {
         }
     }
 
-//    /**
-//     *
-//     */
-//    public void zeroWaterValue(int curPlotWaterValue, int id) {
-//        playerPlotService.updateWaterValue(-curPlotWaterValue,
-//                playerModel.getPlayerSettings().getPlayerName(), id);
-//    }
+    //    /**
+    //     *
+    //     */
+    //    public void zeroWaterValue(int curPlotWaterValue, int id) {
+    //        playerPlotService.updateWaterValue(-curPlotWaterValue,
+    //                playerModel.getPlayerSettings().getPlayerName(), id);
+    //    }
 
     /**
      * Gets the players plots from the database.

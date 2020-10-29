@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PlayerPlotServiceTestRohan {
-    private static final String GET_PLOT_WATER = "SELECT a.watervalue FROM plot a WHERE a.player = ? AND "
-            + "a.identifier = ?";
+    private static final String GET_PLOT_WATER =
+            "SELECT a.watervalue FROM plot a WHERE a.player = ? AND " + "a.identifier = ?";
     private PlayerPlotService playerPlotService;
 
     @Before

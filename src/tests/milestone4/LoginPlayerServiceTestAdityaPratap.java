@@ -21,7 +21,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class LoginPlayerServiceTestAdityaPratap {
     private LoginPlayer loginPlayer;
-    private static final String GET_USER_ID_MONEY = "SELECT id, money, days from player where name=?";
+    private static final String GET_USER_ID_MONEY =
+            "SELECT id, money, days from player where name=?";
     private PreparedStatement preparedStatement;
 
     @Before
@@ -60,21 +61,26 @@ public class LoginPlayerServiceTestAdityaPratap {
 
     @Test
     public void testPlayerDays() {
-        int actual = loginPlayer.queryPlayerMoneyAndSettings("test").getDays();
+        int actual =
+                loginPlayer.queryPlayerMoneyAndSettings("test").getDays();
         int expected = 1;
         assertEquals(expected, actual);
     }
 
     @Test
     public void testPlayerDifficulty() {
-        String actual = loginPlayer.queryPlayerMoneyAndSettings("test").getPlayerSettings().getStartingDifficulty();
+        String actual =
+                loginPlayer.queryPlayerMoneyAndSettings("test").
+                        getPlayerSettings().getStartingDifficulty();
         String expected = "Normal";
         assertEquals(expected, actual);
     }
 
     @Test
     public void testPlayerName() {
-        String actual = loginPlayer.queryPlayerMoneyAndSettings("test").getPlayerSettings().getPlayerName();
+        String actual =
+                loginPlayer.queryPlayerMoneyAndSettings("test").
+                        getPlayerSettings().getPlayerName();
         String expected = "test";
         assertEquals(expected, actual);
     }
