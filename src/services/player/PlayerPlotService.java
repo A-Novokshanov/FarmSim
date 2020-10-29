@@ -151,7 +151,7 @@ public class PlayerPlotService {
 
     }
 
-     public List<PlotModel> queryPlayerPlots(String playerName) {
+    public List<PlotModel> queryPlayerPlots(String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         List<PlotModel> myList = new java.util.ArrayList<>();
         int playerId = getPlayerId(playerName);
