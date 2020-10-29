@@ -16,20 +16,14 @@ import java.util.List;
  */
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
-    private static final String ADD_PLOTS_QUERY =
-            "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
-                    + "VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String GET_USER_ID_QUERY =
-            "SELECT a.id FROM player a WHERE a.name = ?";
-    private static final String UPDATE_PLOT_MATURITY =
-            "UPDATE plot SET days = days + 1, water = water + 1 "
-                    + "WHERE crop = ? AND player = ?";
-    private static final String REMOVE_PLOT_QUERY =
-            "DELETE FROM plot WHERE identifier = ? AND player = ?";
-    private static final String UPDATE_WATER_VALUE =
-            "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
-    private static final String GET_USER_PLOTS =
-            "SELECT * FROM plot where player=?";
+    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
+            + "VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
+    private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
+            + "WHERE identifier = ? AND player = ?";
+    private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
+    private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
+    private static final String GET_USER_PLOTS = "SELECT * FROM plot where player=?";
 
 
     /**
@@ -151,7 +145,7 @@ public class PlayerPlotService {
 
     }
 
-    public List<PlotModel> queryPlayerPlots(String playerName) {
+     public List<PlotModel> queryPlayerPlots(String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         List<PlotModel> myList = new java.util.ArrayList<>();
         int playerId = getPlayerId(playerName);
@@ -184,6 +178,7 @@ public class PlayerPlotService {
                     plotModel.setPlotIdentifier(plotIdentifier);
                     myList.add(plotModel);
                 }
+
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
@@ -238,15 +233,15 @@ public class PlayerPlotService {
     /**
      * Adjusts the days old the plot is as days pass by.
      *
-     * @param cropName   The name of the crop in the plot.
-     * @param playerName The player whose plots need to be updated.
+     * @param plotIdentifier The identifier of the plot.
+     * @param playerName     The player whose plots need to be updated.
      */
-    public void adjustPlotDaysOld(String cropName, String playerName) {
+    public void adjustPlotDaysOld(int plotIdentifier, String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
         try {
             preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_MATURITY);
-            preparedStatement.setString(1, cropName);
+            preparedStatement.setInt(1, plotIdentifier);
             preparedStatement.setInt(2, playerId);
             preparedStatement.execute();
 

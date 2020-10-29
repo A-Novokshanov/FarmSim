@@ -321,8 +321,7 @@ public class FarmUIController {
     }
 
     /**
-     *
-     * @param plotModels Placeholder
+     * @param plotModels    Placeholder
      * @param plotModelImgs Placeholder
      */
     public void setUpPlotModels(List<PlotModel> plotModels, ArrayList<Image> plotModelImgs) {
@@ -363,16 +362,42 @@ public class FarmUIController {
         plotViewModel.incrementPlotDaysOld(plot8);
         plotViewModel.incrementPlotDaysOld(plot9);
         plotViewModel.incrementPlotDaysOld(plot10);
-        plotViewModel.updatePlotMaturity(plot1.getCropInPlot().getCropName(),
+        plotViewModel.updatePlotMaturity(plot1.getPlotIdentifier(),
                 playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+        plotViewModel.updatePlotMaturity(plot2.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot3.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot4.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot5.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot6.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot7.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot8.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot9.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
+        plotViewModel.updatePlotMaturity(plot10.getPlotIdentifier(),
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+
 
         checkAllMaturity();
         updateWaterValueAll();
     }
 
     /**
-     *
-     * @param plot Placeholder
+     * @param plot       Placeholder
      * @param waterValue Placeholder
      */
     private void updateWaterValue(PlotModel plot, Text waterValue) {
@@ -431,8 +456,8 @@ public class FarmUIController {
     /**
      * Placeholder
      *
-     * @param plotModel Placeholder
-     * @param plotImg   Placeholder
+     * @param plotModel  Placeholder
+     * @param plotImg    Placeholder
      * @param waterValue Placeholder
      */
     public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterValue) {
@@ -510,24 +535,23 @@ public class FarmUIController {
 
     public Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-        case "Corn":
-            return this.cornNameImg;
-        case "Potato":
-            return this.potatoNameImg;
-        case "Tomato":
-            return this.tomatoNameImg;
-        default:
-            return this.emptyNameImg;
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
         }
     }
 
     /**
-     *
-     * @param harvestedPlot Placeholder
-     * @param harvestedPlotImg Placeholder
+     * @param harvestedPlot        Placeholder
+     * @param harvestedPlotImg     Placeholder
      * @param harvestedPlotNameImg Placeholder
-     * @param harvestedPlotNum Placeholder
-     * @param waterDays Placeholder
+     * @param harvestedPlotNum     Placeholder
+     * @param waterDays            Placeholder
      */
     public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
                             ImageView harvestedPlotNameImg, int harvestedPlotNum, Text waterDays) {
@@ -545,10 +569,9 @@ public class FarmUIController {
     }
 
     /**
-     *
-     * @param plotModel Placeholder
+     * @param plotModel    Placeholder
      * @param plotModelImg Placeholder
-     * @param waterDays Placeholder
+     * @param waterDays    Placeholder
      */
     public void waterCrop(PlotModel plotModel, ImageView plotModelImg, Text waterDays) {
         if (plotModel != null) {
@@ -569,78 +592,78 @@ public class FarmUIController {
      */
     public void switchPlantHarvest(ImageView plotImg, int i, boolean isPlant) {
         switch (i) {
-        case 1:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot1);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot1);
-            }
-            break;
-        case 2:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot2);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot2);
-            }
-            break;
-        case 3:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot3);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot3);
-            }
-            break;
-        case 4:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot4);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot4);
-            }
-            break;
-        case 5:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot5);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot5);
-            }
-            break;
-        case 6:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot6);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot6);
-            }
-            break;
-        case 7:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot7);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot7);
-            }
-            break;
-        case 8:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot8);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot8);
-            }
-            break;
-        case 9:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot9);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot9);
-            }
-            break;
-        case 10:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot10);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot10);
-            }
-            break;
-        default:
-            break;
+            case 1:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot1);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot1);
+                }
+                break;
+            case 2:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot2);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot2);
+                }
+                break;
+            case 3:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot3);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot3);
+                }
+                break;
+            case 4:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot4);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot4);
+                }
+                break;
+            case 5:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot5);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot5);
+                }
+                break;
+            case 6:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot6);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot6);
+                }
+                break;
+            case 7:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot7);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot7);
+                }
+                break;
+            case 8:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot8);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot8);
+                }
+                break;
+            case 9:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot9);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot9);
+                }
+                break;
+            case 10:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot10);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot10);
+                }
+                break;
+            default:
+                break;
         }
     }
 
