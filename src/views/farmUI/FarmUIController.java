@@ -668,7 +668,7 @@ public class FarmUIController {
     }
 
     public void plantCropPlot1(MouseEvent mouseEvent) {
-        plantingInventory(plot1, plot1Img, plotName1Img, 2, txtWaterValue1);
+        plantingInventory(plot1, plot1Img, plotName1Img, 1, txtWaterValue1);
     }
 
     public void plantCropPlot2(MouseEvent mouseEvent) {

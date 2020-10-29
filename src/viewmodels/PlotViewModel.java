@@ -112,7 +112,9 @@ public class PlotViewModel {
     public void incrementPlotDaysOld(PlotModel plotToIncrement) {
         plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
         //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
-        plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
+        if ((plotToIncrement.getWaterValue() > 0) && (plotToIncrement.getWaterValue() <= 6)) {
+            plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
+        }
     }
 
     /**
