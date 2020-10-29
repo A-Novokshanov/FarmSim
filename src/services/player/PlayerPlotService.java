@@ -16,14 +16,20 @@ import java.util.List;
  */
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
-    private static final String ADD_PLOTS_QUERY = "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
+    private static final String ADD_PLOTS_QUERY =
+            "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
             + "VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String GET_USER_ID_QUERY = "SELECT a.id FROM player a WHERE a.name = ?";
-    private static final String UPDATE_PLOT_MATURITY = "UPDATE plot SET days = days + 1, water = water + 1 "
+    private static final String GET_USER_ID_QUERY =
+            "SELECT a.id FROM player a WHERE a.name = ?";
+    private static final String UPDATE_PLOT_MATURITY =
+            "UPDATE plot SET days = days + 1, water = water + 1 "
             + "WHERE identifier = ? AND player = ?";
-    private static final String REMOVE_PLOT_QUERY = "DELETE FROM plot WHERE identifier = ? AND player = ?";
-    private static final String UPDATE_WATER_VALUE = "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
-    private static final String GET_USER_PLOTS = "SELECT * FROM plot where player=?";
+    private static final String REMOVE_PLOT_QUERY =
+            "DELETE FROM plot WHERE identifier = ? AND player = ?";
+    private static final String UPDATE_WATER_VALUE =
+            "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
+    private static final String GET_USER_PLOTS =
+            "SELECT * FROM plot where player=?";
 
 
     /**
