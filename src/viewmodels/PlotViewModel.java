@@ -140,11 +140,11 @@ public class PlotViewModel {
     /**
      * Updates the plot maturity by the time since planted.
      *
-     * @param cropName   is the name of the crop.
-     * @param playerName is the name of the player.
+     * @param plotIdentifier is the identifier of the plot.
+     * @param playerName     is the name of the player.
      */
-    public void updatePlotMaturity(String cropName, String playerName) {
-        playerPlotService.adjustPlotDaysOld(cropName, playerName);
+    public void updatePlotMaturity(int plotIdentifier, String playerName) {
+        playerPlotService.adjustPlotDaysOld(plotIdentifier, playerName);
         playerSettingsService.updatePlayerDay(1, playerName);
     }
 }
