@@ -110,18 +110,18 @@ public class StorageViewModel {
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
-            case "Casual":
-                difficultyMod = 0.8;
-                break;
-            case "Normal":
-                difficultyMod = 1.0;
-                break;
-            case "Veteran":
-                difficultyMod = 1.2;
-                break;
-            default:
-                difficultyMod = 0.0;
-                break;
+        case "Casual":
+            difficultyMod = 0.8;
+            break;
+        case "Normal":
+            difficultyMod = 1.0;
+            break;
+        case "Veteran":
+            difficultyMod = 1.2;
+            break;
+        default:
+            difficultyMod = 0.0;
+            break;
         }
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;

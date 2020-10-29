@@ -11,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import models.PlotModel;
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
@@ -125,17 +124,15 @@ public class MarketPlace {
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
-    private ArrayList<PlotModel> plotModels;
     private ArrayList<Image> plotModelImgs;
     private String name;
 
-    public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage,
-                         ArrayList<PlotModel> plotModels, ArrayList<Image> plotModelImgs,
+    public void initData(MouseEvent mouseEvent, PlayerViewModel player,
+                         StorageViewModel storage, ArrayList<Image> plotModelImgs,
                          String name) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
-        this.plotModels = plotModels;
         this.plotModelImgs = plotModelImgs;
         this.name = name;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
@@ -397,23 +394,28 @@ public class MarketPlace {
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
+//    public void returnFarm(MouseEvent mouseEvent) {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+//        Stage stage = new Stage(StageStyle.DECORATED);
+//        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+//        currentStage.close();
+//        try {
+//            stage.setScene(
+//                    new Scene(loader.load())
+//            );
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        FarmUIController farmUIController = loader.getController();
+//        farmUIController.initDataFromMarket(this.playerViewModel, plotModelImgs, name);
+//        stage.setTitle("Farm");
+//        stage.show();
+//    }
+
     public void returnFarm(MouseEvent mouseEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
         Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
         currentStage.close();
-        try {
-            stage.setScene(
-                    new Scene(loader.load())
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        FarmUIController farmUIController = loader.getController();
-        farmUIController.initData2(this.playerViewModel, plotModels, plotModelImgs, name);
-        stage.setTitle("Farm");
-        stage.show();
     }
 }
 

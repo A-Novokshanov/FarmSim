@@ -51,8 +51,8 @@ public class PlotViewModel {
                 storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                 toAdd++;
             }
-            playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
-                    player.getPlayer().getPlayerSettings().getPlayerName());
+            //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
+            //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
         }
     }
@@ -86,6 +86,14 @@ public class PlotViewModel {
                     plotToWater.getPlotIdentifier());
         }
     }
+
+//    /**
+//     *
+//     */
+//    public void zeroWaterValue(int curPlotWaterValue, int id) {
+//        playerPlotService.updateWaterValue(-curPlotWaterValue,
+//                playerModel.getPlayerSettings().getPlayerName(), id);
+//    }
 
     /**
      * Gets the players plots from the database.

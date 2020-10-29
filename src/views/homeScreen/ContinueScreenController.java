@@ -44,7 +44,8 @@ public class ContinueScreenController {
      */
     public void continueGame(ActionEvent actionEvent) {
         if (this.playerViewModel.playerExists(txtFldUserName.textProperty().getValue())) {
-            playerViewModel.getPlayerInformationFromDatabase(txtFldUserName.textProperty().getValue());
+            playerViewModel.getPlayerInformationFromDatabase(
+                    txtFldUserName.textProperty().getValue());
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
             Stage stage = new Stage(StageStyle.DECORATED);
