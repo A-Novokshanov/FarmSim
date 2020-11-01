@@ -41,10 +41,6 @@ public class FarmUIController {
     @FXML
     private Circle dayCounter;
     @FXML
-    private Circle sun;
-    @FXML
-    private Line sunProgressBar;
-    @FXML
     private Text numTomatoes;
     @FXML
     private Text numPotatoes;
@@ -211,8 +207,6 @@ public class FarmUIController {
         inventoryScreen.setVisible(!inventoryScreen.isVisible());
         dayCounter.setVisible(!dayCounter.isVisible());
         dayNum.setVisible(!dayNum.isVisible());
-        sun.setVisible(!sun.isVisible());
-        sunProgressBar.setVisible(!sunProgressBar.isVisible());
         numCorn.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
         numPotatoes.setText(
