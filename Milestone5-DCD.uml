@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>viewmodels.MarketViewModel</OriginalElement>
+  <nodes>
+    <node x="206.50000000000023" y="1140.0">models.PlayerModel</node>
+    <node x="587.3175515151524" y="1578.0">services.authentication.LoginPlayer</node>
+    <node x="1322.6750333333346" y="1578.0">services.player.PlayerInventoryService</node>
+    <node x="39.64195627705726" y="750.0">models.StorageModel</node>
+    <node x="1732.0495813852822" y="2878.0">viewmodels.PlotViewModel</node>
+    <node x="1496.2675515151523" y="2451.0">viewmodels.StorageViewModel</node>
+    <node x="494.66624805194886" y="2008.0">viewmodels.PlayerViewModel</node>
+    <node x="2200.6071348484857" y="1920.0">models.PlotModel</node>
+    <node x="1142.9175515151524" y="0.0">models.CropModel</node>
+    <node x="1298.2474980519487" y="2911.0">viewmodels.MarketViewModel</node>
+    <node x="1948.6329147186152" y="2374.0">services.player.PlayerPlotService</node>
+    <node x="656.0137865800871" y="392.0">models.SeasonModel</node>
+    <node x="1272.4250333333346" y="1250.0">services.DatabaseConnection</node>
+    <node x="417.65183116883236" y="761.0">models.SettingModel</node>
+    <node x="86.76695627705726" y="1644.0">models.UserModel</node>
+    <node x="955.3175515151524" y="1600.0">services.authentication.CreatePlayer</node>
+    <node x="1709.798801515152" y="2019.0">services.player.PlayerSettingsService</node>
+    <node x="2158.857914718615" y="491.0">models.MarketModel</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.17305276381909548" x="1235.0" y="1582.0" />
+  <SelectedNodes>
+    <node>viewmodels.MarketViewModel</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
