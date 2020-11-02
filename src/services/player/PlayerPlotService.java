@@ -179,11 +179,12 @@ public class PlayerPlotService {
                         cropValue = 40.00;
                     }
                     int plotIdentifier = resultSet.getInt("identifier");
-
+                    String stage = resultSet.getString("stage");
                     CropModel crop = new CropModel(cropName, 1, cropValue);
                     PlotModel plotModel = new PlotModel(crop, days);
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);
+                    plotModel.setPlotStage(stage);
                     myList.add(plotModel);
                 }
 
@@ -296,7 +297,7 @@ public class PlayerPlotService {
      * Updates the plot maturity stage.
      *
      * @param identifier the plot we want.
-     * @param stage the stage it's at.
+     * @param stage      the stage it's at.
      * @param playerName the name of the player who owns it.
      */
     public void updatePlotStage(int identifier, String stage, String playerName) {
