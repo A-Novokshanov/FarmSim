@@ -22,6 +22,7 @@ import views.marketPlace.MarketPlace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -256,42 +257,27 @@ public class FarmUIController {
     }
 
     public void setUpPlotImages() {
-        listPlotImages.add(plot1Img);
-        listPlotImages.add(plot2Img);
-        listPlotImages.add(plot3Img);
-        listPlotImages.add(plot4Img);
-        listPlotImages.add(plot5Img);
-        listPlotImages.add(plot6Img);
-        listPlotImages.add(plot7Img);
-        listPlotImages.add(plot8Img);
-        listPlotImages.add(plot9Img);
-        listPlotImages.add(plot10Img);
+        listPlotImages = new ArrayList<>(
+                Arrays.asList(plot1Img, plot2Img, plot3Img,
+                        plot4Img, plot5Img, plot6Img, plot7Img,
+                        plot8Img, plot9Img, plot10Img)
+        );
     }
 
     public void setUpPlotNameImages() {
-        listPlotNameImages.add(plotName1Img);
-        listPlotNameImages.add(plotName2Img);
-        listPlotNameImages.add(plotName3Img);
-        listPlotNameImages.add(plotName4Img);
-        listPlotNameImages.add(plotName5Img);
-        listPlotNameImages.add(plotName6Img);
-        listPlotNameImages.add(plotName7Img);
-        listPlotNameImages.add(plotName8Img);
-        listPlotNameImages.add(plotName9Img);
-        listPlotNameImages.add(plotName10Img);
+        listPlotNameImages = new ArrayList<>(
+                Arrays.asList(plotName1Img, plotName2Img, plotName3Img,
+                        plotName4Img, plotName5Img, plotName6Img, plotName7Img,
+                        plotName8Img, plotName9Img, plotName10Img)
+        );
     }
 
     public void setUpPlotWaterValues() {
-        listPlotWaterValues.add(txtWaterValue1);
-        listPlotWaterValues.add(txtWaterValue2);
-        listPlotWaterValues.add(txtWaterValue3);
-        listPlotWaterValues.add(txtWaterValue4);
-        listPlotWaterValues.add(txtWaterValue5);
-        listPlotWaterValues.add(txtWaterValue6);
-        listPlotWaterValues.add(txtWaterValue7);
-        listPlotWaterValues.add(txtWaterValue8);
-        listPlotWaterValues.add(txtWaterValue9);
-        listPlotWaterValues.add(txtWaterValue10);
+        listPlotWaterValues = new ArrayList<>(
+                Arrays.asList(txtWaterValue1, txtWaterValue2, txtWaterValue3,
+                        txtWaterValue4, txtWaterValue5, txtWaterValue6, txtWaterValue7,
+                        txtWaterValue8, txtWaterValue9, txtWaterValue10)
+        );
     }
 
     public void setUpPlotModels(CropModel cropModel) {
@@ -642,7 +628,6 @@ public class FarmUIController {
     }
 
     public void setUpPlotName(int plotNum, String str) {
-        System.out.println(listPlotNameImages.toString());
         if (str.equals("Corn")) {
             listPlotNameImages.get(plotNum).setImage(cornNameImg);
         } else if (str.equals("Potato")) {
