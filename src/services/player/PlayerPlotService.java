@@ -30,7 +30,8 @@ public class PlayerPlotService {
             "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
             "SELECT * FROM plot where player=?";
-    private static final String UPDATE_PLOT_STAGE = "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
+    private static final String UPDATE_PLOT_STAGE =
+            "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
 
 
     /**

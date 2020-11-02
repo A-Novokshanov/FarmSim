@@ -2,22 +2,15 @@ package views.marketPlace;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-//import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-//import javafx.stage.StageStyle;
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
-//import views.farmUI.FarmUIController;
 
-//import java.io.IOException;
-import java.util.ArrayList;
 
 public class MarketPlace {
     @FXML
