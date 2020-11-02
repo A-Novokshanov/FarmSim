@@ -234,7 +234,7 @@ public class InitialConfiguration {
                     txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
             playerViewModel.getPlayer().setPlayerStorage(userStorage);
             FarmUIController farmUIController = loader.getController();
-            farmUIController.initData(playerViewModel, txtFldName.textProperty().getValue());
+            farmUIController.initConfigData(playerViewModel, txtFldName.textProperty().getValue());
 
             Stage currentStage = (Stage) txtFldName.getScene().getWindow();
             currentStage.close();

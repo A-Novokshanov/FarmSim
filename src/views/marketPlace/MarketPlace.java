@@ -124,16 +124,14 @@ public class MarketPlace {
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
-    private ArrayList<Image> plotModelImgs;
     private String name;
 
     public void initData(MouseEvent mouseEvent, PlayerViewModel player,
-                         StorageViewModel storage, ArrayList<Image> plotModelImgs,
+                         StorageViewModel storage,
                          String name) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
-        this.plotModelImgs = plotModelImgs;
         this.name = name;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         if (storage.userInventory().get(0) != null) {
@@ -408,7 +406,7 @@ public class MarketPlace {
     //        }
     //
     //        FarmUIController farmUIController = loader.getController();
-    //        farmUIController.initDataFromMarket(this.playerViewModel, plotModelImgs, name);
+    //        farmUIController.initDataFromMarket(this.playerViewModel, name);
     //        stage.setTitle("Farm");
     //        stage.show();
     //    }

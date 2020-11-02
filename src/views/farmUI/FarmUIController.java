@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +22,7 @@ import views.marketPlace.MarketPlace;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,10 +41,6 @@ public class FarmUIController {
     @FXML
     private Circle dayCounter;
     @FXML
-    private Circle sun;
-    @FXML
-    private Line sunProgressBar;
-    @FXML
     private Text numTomatoes;
     @FXML
     private Text numPotatoes;
@@ -52,46 +48,46 @@ public class FarmUIController {
     private Text numCorn;
 
     @FXML
-    private ImageView plot1Img;
+    private ImageView plot1Img = new ImageView();
     @FXML
-    private ImageView plot2Img;
+    private ImageView plot2Img = new ImageView();
     @FXML
-    private ImageView plot3Img;
+    private ImageView plot3Img = new ImageView();
     @FXML
-    private ImageView plot4Img;
+    private ImageView plot4Img = new ImageView();
     @FXML
-    private ImageView plot5Img;
+    private ImageView plot5Img = new ImageView();
     @FXML
-    private ImageView plot6Img;
+    private ImageView plot6Img = new ImageView();
     @FXML
-    private ImageView plot7Img;
+    private ImageView plot7Img = new ImageView();
     @FXML
-    private ImageView plot8Img;
+    private ImageView plot8Img = new ImageView();
     @FXML
-    private ImageView plot9Img;
+    private ImageView plot9Img = new ImageView();
     @FXML
-    private ImageView plot10Img;
+    private ImageView plot10Img = new ImageView();
 
     @FXML
-    private ImageView plotName1Img;
+    private ImageView plotName1Img = new ImageView();
     @FXML
-    private ImageView plotName2Img;
+    private ImageView plotName2Img = new ImageView();
     @FXML
-    private ImageView plotName3Img;
+    private ImageView plotName3Img = new ImageView();
     @FXML
-    private ImageView plotName4Img;
+    private ImageView plotName4Img = new ImageView();
     @FXML
-    private ImageView plotName5Img;
+    private ImageView plotName5Img = new ImageView();
     @FXML
-    private ImageView plotName6Img;
+    private ImageView plotName6Img = new ImageView();
     @FXML
-    private ImageView plotName7Img;
+    private ImageView plotName7Img = new ImageView();
     @FXML
-    private ImageView plotName8Img;
+    private ImageView plotName8Img = new ImageView();
     @FXML
-    private ImageView plotName9Img;
+    private ImageView plotName9Img = new ImageView();
     @FXML
-    private ImageView plotName10Img;
+    private ImageView plotName10Img = new ImageView();
 
     @FXML
     private JFXButton btnCornPlant;
@@ -101,36 +97,38 @@ public class FarmUIController {
     private JFXButton btnTomatoPlant;
 
     @FXML
-    private Text txtWaterValue1;
+    private Text txtWaterValue1 = new Text("03");
     @FXML
-    private Text txtWaterValue2;
+    private Text txtWaterValue2 = new Text("03");
     @FXML
-    private Text txtWaterValue3;
+    private Text txtWaterValue3 = new Text("03");
     @FXML
-    private Text txtWaterValue4;
+    private Text txtWaterValue4 = new Text("03");
     @FXML
-    private Text txtWaterValue5;
+    private Text txtWaterValue5 = new Text("03");
     @FXML
-    private Text txtWaterValue6;
+    private Text txtWaterValue6 = new Text("03");
     @FXML
-    private Text txtWaterValue7;
+    private Text txtWaterValue7 = new Text("03");
     @FXML
-    private Text txtWaterValue8;
+    private Text txtWaterValue8 = new Text("03");
     @FXML
-    private Text txtWaterValue9;
+    private Text txtWaterValue9 = new Text("03");
     @FXML
-    private Text txtWaterValue10;
+    private Text txtWaterValue10 = new Text("03");
 
-    private PlotModel plot1;
-    private PlotModel plot2;
-    private PlotModel plot3;
-    private PlotModel plot4;
-    private PlotModel plot5;
-    private PlotModel plot6;
-    private PlotModel plot7;
-    private PlotModel plot8;
-    private PlotModel plot9;
-    private PlotModel plot10;
+    private ArrayList<PlotModel> listPlots = new ArrayList<>();
+    private ArrayList<ImageView> listPlotImages = new ArrayList<>(
+            Arrays.asList(plot1Img, plot2Img, plot3Img, plot4Img, plot5Img,
+                    plot6Img, plot7Img, plot8Img, plot9Img, plot10Img));
+    private ArrayList<ImageView> listPlotNameImages = new ArrayList<>(
+            Arrays.asList(plotName1Img, plotName2Img, plotName3Img, plotName4Img,
+                    plotName5Img, plotName6Img, plotName7Img, plotName8Img,
+                    plotName9Img, plotName10Img));
+    private ArrayList<Text> listPlotWaterValues = new ArrayList<>(
+            Arrays.asList(txtWaterValue1, txtWaterValue2, txtWaterValue3,
+                    txtWaterValue4, txtWaterValue5, txtWaterValue6, txtWaterValue7,
+                    txtWaterValue8, txtWaterValue9, txtWaterValue10));
 
     private final Image dirtImg = new Image("@../../dependencies/images/Dirt.png",
             400.0, 300.0, true, false);
@@ -157,14 +155,8 @@ public class FarmUIController {
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private PlotViewModel plotViewModel;
-    private final ArrayList<PlotModel> plotModels = new ArrayList<>(10);
-    private final ArrayList<Image> plotModelImgs = new ArrayList<>(10);
     private String name;
-    private PlotModel plantingPlot;
-    private ImageView plantedPlotImg;
-    private ImageView plantedPlotNameImg;
-    private int plantedPlotNum;
-    private Text plantedWaterValueText;
+    private int plantingPlotNum;
 
     /**
      * Initializes data from the Initial Configuration screen.
@@ -172,16 +164,15 @@ public class FarmUIController {
      * @param playerViewModel Setting View Model to access player details.
      * @param playerName      The name of the current player.
      */
-    public void initData(PlayerViewModel playerViewModel, String playerName) {
+    public void initConfigData(PlayerViewModel playerViewModel, String playerName) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
-        this.storageViewModel = new StorageViewModel(playerViewModel);
         this.playerViewModel = playerViewModel;
+        this.storageViewModel = new StorageViewModel(playerViewModel);
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.name = playerName;
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
-        createPlotModels();
     }
 
     //    /**
@@ -190,8 +181,7 @@ public class FarmUIController {
     //     * @param plotModelImgs
     //     * @param name
     //     */
-    //    public void initDataFromMarket(PlayerViewModel playerViewModel,
-    //                                   ArrayList<Image> plotModelImgs, String name) {
+    //    public void initDataFromMarket(PlayerViewModel playerViewModel, String name) {
     //        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
     //        this.storageViewModel = new StorageViewModel(playerViewModel);
     //        this.playerViewModel = playerViewModel;
@@ -211,8 +201,6 @@ public class FarmUIController {
         inventoryScreen.setVisible(!inventoryScreen.isVisible());
         dayCounter.setVisible(!dayCounter.isVisible());
         dayNum.setVisible(!dayNum.isVisible());
-        sun.setVisible(!sun.isVisible());
-        sunProgressBar.setVisible(!sunProgressBar.isVisible());
         numCorn.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
         numPotatoes.setText(
@@ -259,10 +247,8 @@ public class FarmUIController {
             e.printStackTrace();
         }
 
-        createPlotModelImgs();
         MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel,
-                plotModelImgs, name);
+        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, name);
 
         stage.setTitle("Market");
         stage.show();
@@ -284,68 +270,24 @@ public class FarmUIController {
      * @param cropModel Placeholder
      */
     public void setUpPlotModels(CropModel cropModel) {
-        List<PlotModel> plotModelList = new ArrayList<>();
-        plot1 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot1);
-        plot2 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot2);
-        plot3 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot3);
-        plot4 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot4);
-        plot5 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot5);
-        plot6 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot6);
-        plot7 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot7);
-        plot8 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot8);
-        plot9 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot9);
-        plot10 = plotViewModel.populatePlot(cropModel);
-        plotModelList.add(plot10);
-        setUpPlotName(plotName1Img, cropModel.getCropName());
-        setUpPlotName(plotName2Img, cropModel.getCropName());
-        setUpPlotName(plotName3Img, cropModel.getCropName());
-        setUpPlotName(plotName4Img, cropModel.getCropName());
-        setUpPlotName(plotName5Img, cropModel.getCropName());
-        setUpPlotName(plotName6Img, cropModel.getCropName());
-        setUpPlotName(plotName7Img, cropModel.getCropName());
-        setUpPlotName(plotName8Img, cropModel.getCropName());
-        setUpPlotName(plotName9Img, cropModel.getCropName());
-        setUpPlotName(plotName10Img, cropModel.getCropName());
+        for (int i = 0; i < 10; i++) {
+            listPlots.add(plotViewModel.populatePlot(cropModel));
+            setUpPlotName(i, cropModel.getCropName());
+        }
         checkAllMaturity();
-
-        plotViewModel.addPlayerPlotsToDatabase(plotModelList,
+        plotViewModel.addPlayerPlotsToDatabase(listPlots,
                 playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
     }
 
     /**
      * @param plotModels    Placeholder
-     * @param plotModelImgs Placeholder
+     * @param plotModelNameImages Placeholder
      */
-    public void setUpPlotModels(List<PlotModel> plotModels, ArrayList<Image> plotModelImgs) {
-        plot1 = plotModels.get(0);
-        plot2 = plotModels.get(1);
-        plot3 = plotModels.get(2);
-        plot4 = plotModels.get(3);
-        plot5 = plotModels.get(4);
-        plot6 = plotModels.get(5);
-        plot7 = plotModels.get(6);
-        plot8 = plotModels.get(7);
-        plot9 = plotModels.get(8);
-        plot10 = plotModels.get(9);
-        plotName1Img.setImage(plotModelImgs.get(0));
-        plotName2Img.setImage(plotModelImgs.get(1));
-        plotName3Img.setImage(plotModelImgs.get(2));
-        plotName4Img.setImage(plotModelImgs.get(3));
-        plotName5Img.setImage(plotModelImgs.get(4));
-        plotName6Img.setImage(plotModelImgs.get(5));
-        plotName7Img.setImage(plotModelImgs.get(6));
-        plotName8Img.setImage(plotModelImgs.get(7));
-        plotName9Img.setImage(plotModelImgs.get(8));
-        plotName10Img.setImage(plotModelImgs.get(9));
+    public void setUpPlotModels(List<PlotModel> plotModels, ArrayList<Image> plotModelNameImages) {
+        for (int i = 0; i < 10; i++) {
+            listPlots.set(i, plotModels.get(i));
+            listPlotNameImages.get(i).setImage(plotModelNameImages.get(i));
+        }
         checkAllMaturity();
     }
 
@@ -353,46 +295,11 @@ public class FarmUIController {
      *
      */
     private void incrementAllPlotDays() {
-        plotViewModel.incrementPlotDaysOld(plot1);
-        plotViewModel.incrementPlotDaysOld(plot2);
-        plotViewModel.incrementPlotDaysOld(plot3);
-        plotViewModel.incrementPlotDaysOld(plot4);
-        plotViewModel.incrementPlotDaysOld(plot5);
-        plotViewModel.incrementPlotDaysOld(plot6);
-        plotViewModel.incrementPlotDaysOld(plot7);
-        plotViewModel.incrementPlotDaysOld(plot8);
-        plotViewModel.incrementPlotDaysOld(plot9);
-        plotViewModel.incrementPlotDaysOld(plot10);
-        plotViewModel.updatePlotMaturity(plot1.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-        plotViewModel.updatePlotMaturity(plot2.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot3.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot4.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot5.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot6.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot7.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot8.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot9.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-        plotViewModel.updatePlotMaturity(plot10.getPlotIdentifier(),
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-
-
+        for (int i = 0; i < 10; i++) {
+            plotViewModel.incrementPlotDaysOld(listPlots.get(i));
+            plotViewModel.updatePlotMaturity(listPlots.get(i).getPlotIdentifier(),
+                    playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+        }
         checkAllMaturity();
         updateWaterValueAll();
     }
@@ -410,48 +317,9 @@ public class FarmUIController {
      *
      */
     private void updateWaterValueAll() {
-        updateWaterValue(plot1, txtWaterValue1);
-        updateWaterValue(plot2, txtWaterValue2);
-        updateWaterValue(plot3, txtWaterValue3);
-        updateWaterValue(plot4, txtWaterValue4);
-        updateWaterValue(plot5, txtWaterValue5);
-        updateWaterValue(plot6, txtWaterValue6);
-        updateWaterValue(plot7, txtWaterValue7);
-        updateWaterValue(plot8, txtWaterValue8);
-        updateWaterValue(plot9, txtWaterValue9);
-        updateWaterValue(plot10, txtWaterValue10);
-    }
-
-    /**
-     *
-     */
-    public void createPlotModels() {
-        plotModels.add(plot1);
-        plotModels.add(plot2);
-        plotModels.add(plot3);
-        plotModels.add(plot4);
-        plotModels.add(plot5);
-        plotModels.add(plot6);
-        plotModels.add(plot7);
-        plotModels.add(plot8);
-        plotModels.add(plot9);
-        plotModels.add(plot10);
-    }
-
-    /**
-     * Placeholder
-     */
-    public void createPlotModelImgs() {
-        plotModelImgs.add(plotName1Img.getImage());
-        plotModelImgs.add(plotName2Img.getImage());
-        plotModelImgs.add(plotName3Img.getImage());
-        plotModelImgs.add(plotName4Img.getImage());
-        plotModelImgs.add(plotName5Img.getImage());
-        plotModelImgs.add(plotName6Img.getImage());
-        plotModelImgs.add(plotName7Img.getImage());
-        plotModelImgs.add(plotName8Img.getImage());
-        plotModelImgs.add(plotName9Img.getImage());
-        plotModelImgs.add(plotName10Img.getImage());
+        for (int i = 0; i < 10; i++) {
+            updateWaterValue(listPlots.get(i), listPlotWaterValues.get(i));
+        }
     }
 
     /**
@@ -485,52 +353,35 @@ public class FarmUIController {
      * Placeholder
      */
     public void checkAllMaturity() {
-        checkMaturity(plot1, plot1Img, txtWaterValue1);
-        checkMaturity(plot2, plot2Img, txtWaterValue2);
-        checkMaturity(plot3, plot3Img, txtWaterValue3);
-        checkMaturity(plot4, plot4Img, txtWaterValue4);
-        checkMaturity(plot5, plot5Img, txtWaterValue5);
-        checkMaturity(plot6, plot6Img, txtWaterValue6);
-        checkMaturity(plot7, plot7Img, txtWaterValue7);
-        checkMaturity(plot8, plot8Img, txtWaterValue8);
-        checkMaturity(plot9, plot9Img, txtWaterValue9);
-        checkMaturity(plot10, plot10Img, txtWaterValue10);
+        for (int i = 0; i < 10; i++) {
+            checkMaturity(listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
+        }
     }
 
     /**
-     * Placeholder
-     *
-     * @param plantingPlot         Placeholder
-     * @param plantedPlotImg       Placeholder
-     * @param plantedPlotNameImg   Placeholder
-     * @param plantedPlotNum       Placeholder
-     * @param plantedWaterDaysText Placeholder
+     * Placeholder.
+     * @param plotNum Placeholder
      */
-    public void plantingInventory(PlotModel plantingPlot, ImageView plantedPlotImg,
-                                  ImageView plantedPlotNameImg,
-                                  int plantedPlotNum, Text plantedWaterDaysText) {
+    public void plantingInventory(int plotNum) {
         toggleInventoryScreenVisibility();
         turnOnPlantBtnVisibility();
-        this.plantingPlot = plantingPlot;
-        this.plantedPlotImg = plantedPlotImg;
-        this.plantedPlotNameImg = plantedPlotNameImg;
-        this.plantedPlotNum = plantedPlotNum;
-        this.plantedWaterValueText = plantedWaterDaysText;
+        this.plantingPlotNum = plotNum;
     }
 
     public void plantCrop(int cropNum, CropModel crop) {
         if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 0) {
+            int i = plantingPlotNum;
             storageViewModel.userInventory().get(cropNum).setCropQuantity(
                     storageViewModel.userInventory().get(cropNum).getCropQuantity() - 1);
             toggleInventoryScreenVisibility();
-            this.plantingPlot.setWaterValue(3);
-            this.plantingPlot.setDaysOld(0);
-            this.plotViewModel.plantPlot(this.plantingPlot, crop);
-            this.plantedPlotImg.setImage(seedImg);
-            this.plantedPlotNameImg.setImage(chooseCropImage(crop));
-            updateWaterValue(this.plantingPlot, this.plantedWaterValueText);
-            this.plantedWaterValueText.setVisible(true);
-            switchPlantHarvest(this.plantedPlotImg, this.plantedPlotNum, true);
+            listPlots.get(i).setWaterValue(3);
+            listPlots.get(i).setDaysOld(0);
+            this.plotViewModel.plantPlot(listPlots.get(i), crop);
+            listPlotImages.get(i).setImage(seedImg);
+            listPlotNameImages.get(i).setImage(chooseCropImage(crop));
+            updateWaterValue(listPlots.get(i), listPlotWaterValues.get(i));
+            listPlotWaterValues.get(i).setVisible(true);
+            switchPlantHarvest(listPlotImages.get(i), i, true);
         }
     }
 
@@ -548,38 +399,38 @@ public class FarmUIController {
     }
 
     /**
-     * @param harvestedPlot        Placeholder
-     * @param harvestedPlotImg     Placeholder
-     * @param harvestedPlotNameImg Placeholder
+     *
      * @param harvestedPlotNum     Placeholder
-     * @param waterDays            Placeholder
      */
-    public void harvestCrop(PlotModel harvestedPlot, ImageView harvestedPlotImg,
-                            ImageView harvestedPlotNameImg, int harvestedPlotNum, Text waterDays) {
+    public void harvestCrop(int harvestedPlotNum) {
+        PlotModel harvestedPlot = listPlots.get(harvestedPlotNum);
+        ImageView harvestedPlotImage = listPlotImages.get(harvestedPlotNum);
+        ImageView harvestedPlotNameImage = listPlotNameImages.get(harvestedPlotNum);
+        Text waterValue = listPlotWaterValues.get(harvestedPlotNum);
         if (harvestedPlot.getDaysOld() >= 10
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
-            harvestedPlotImg.setImage(dirtImg);
-            harvestedPlotNameImg.setImage(emptyNameImg);
+            harvestedPlotImage.setImage(dirtImg);
+            harvestedPlotNameImage.setImage(emptyNameImg);
             //this.plotViewModel.zeroWaterValue(harvestedPlot.getWaterValue(),
             //harvestedPlot.getPlotIdentifier());
             //harvestedPlot.setWaterValue(0);
-            switchPlantHarvest(harvestedPlotImg, harvestedPlotNum, false);
-            waterDays.setVisible(false);
+            switchPlantHarvest(harvestedPlotImage, harvestedPlotNum, false);
+            waterValue.setVisible(false);
         }
     }
 
     /**
-     * @param plotModel    Placeholder
-     * @param plotModelImg Placeholder
-     * @param waterDays    Placeholder
+     * @param plotNum    Placeholder
      */
-    public void waterCrop(PlotModel plotModel, ImageView plotModelImg, Text waterDays) {
-        if (plotModel != null) {
-            if (plotModel.getWaterValue() > 0 && plotModel.getWaterValue() <= 6) {
-                this.plotViewModel.waterPlot(plotModel);
-                waterDays.setText(doubleDigitString(plotModel.getWaterValue()));
-                checkMaturity(plotModel, plotModelImg, waterDays);
+    public void waterCrop(int plotNum) {
+        if (listPlots.get(plotNum) != null) {
+            if (listPlots.get(plotNum).getWaterValue() > 0 && listPlots.get(plotNum).getWaterValue() <= 6) {
+                this.plotViewModel.waterPlot(listPlots.get(plotNum));
+                listPlotWaterValues.get(plotNum).setText(
+                        doubleDigitString(listPlots.get(plotNum).getWaterValue()));
+                checkMaturity(listPlots.get(plotNum), listPlotImages.get(plotNum),
+                        listPlotWaterValues.get(plotNum));
             }
         }
     }
@@ -593,70 +444,70 @@ public class FarmUIController {
      */
     public void switchPlantHarvest(ImageView plotImg, int i, boolean isPlant) {
         switch (i) {
-        case 1:
+        case 0:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot1);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot1);
             }
             break;
-        case 2:
+        case 1:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot2);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot2);
             }
             break;
-        case 3:
+        case 2:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot3);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot3);
             }
             break;
-        case 4:
+        case 3:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot4);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot4);
             }
             break;
-        case 5:
+        case 4:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot5);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot5);
             }
             break;
-        case 6:
+        case 5:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot6);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot6);
             }
             break;
-        case 7:
+        case 6:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot7);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot7);
             }
             break;
-        case 8:
+        case 7:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot8);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot8);
             }
             break;
-        case 9:
+        case 8:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot9);
             } else {
                 plotImg.setOnMouseClicked(this::plantCropPlot9);
             }
             break;
-        case 10:
+        case 9:
             if (isPlant) {
                 plotImg.setOnMouseClicked(this::harvestCropPlot10);
             } else {
@@ -669,43 +520,43 @@ public class FarmUIController {
     }
 
     public void plantCropPlot1(MouseEvent mouseEvent) {
-        plantingInventory(plot1, plot1Img, plotName1Img, 1, txtWaterValue1);
+        plantingInventory(0);
     }
 
     public void plantCropPlot2(MouseEvent mouseEvent) {
-        plantingInventory(plot2, plot2Img, plotName2Img, 2, txtWaterValue2);
+        plantingInventory(1);
     }
 
     public void plantCropPlot3(MouseEvent mouseEvent) {
-        plantingInventory(plot3, plot3Img, plotName3Img, 3, txtWaterValue3);
+        plantingInventory(2);
     }
 
     public void plantCropPlot4(MouseEvent mouseEvent) {
-        plantingInventory(plot4, plot4Img, plotName4Img, 4, txtWaterValue4);
+        plantingInventory(3);
     }
 
     public void plantCropPlot5(MouseEvent mouseEvent) {
-        plantingInventory(plot5, plot5Img, plotName5Img, 5, txtWaterValue5);
+        plantingInventory(4);
     }
 
     public void plantCropPlot6(MouseEvent mouseEvent) {
-        plantingInventory(plot6, plot6Img, plotName6Img, 6, txtWaterValue6);
+        plantingInventory(5);
     }
 
     public void plantCropPlot7(MouseEvent mouseEvent) {
-        plantingInventory(plot7, plot7Img, plotName7Img, 7, txtWaterValue7);
+        plantingInventory(6);
     }
 
     public void plantCropPlot8(MouseEvent mouseEvent) {
-        plantingInventory(plot8, plot8Img, plotName8Img, 8, txtWaterValue8);
+        plantingInventory(7);
     }
 
     public void plantCropPlot9(MouseEvent mouseEvent) {
-        plantingInventory(plot9, plot9Img, plotName9Img, 9, txtWaterValue9);
+        plantingInventory(8);
     }
 
     public void plantCropPlot10(MouseEvent mouseEvent) {
-        plantingInventory(plot10, plot10Img, plotName10Img, 10, txtWaterValue10);
+        plantingInventory(9);
     }
 
     public void chooseCorn() {
@@ -721,98 +572,99 @@ public class FarmUIController {
     }
 
     public void harvestCropPlot1(MouseEvent mouseEvent) {
-        harvestCrop(plot1, plot1Img, plotName1Img, 1, txtWaterValue1);
+        harvestCrop(0);
     }
 
     public void harvestCropPlot2(MouseEvent mouseEvent) {
-        harvestCrop(plot2, plot2Img, plotName2Img, 2, txtWaterValue2);
+        harvestCrop(1);
     }
 
     public void harvestCropPlot3(MouseEvent mouseEvent) {
-        harvestCrop(plot3, plot3Img, plotName3Img, 3, txtWaterValue3);
+        harvestCrop(2);
     }
 
     public void harvestCropPlot4(MouseEvent mouseEvent) {
-        harvestCrop(plot4, plot4Img, plotName4Img, 4, txtWaterValue4);
+        harvestCrop(3);
     }
 
     public void harvestCropPlot5(MouseEvent mouseEvent) {
-        harvestCrop(plot5, plot5Img, plotName5Img, 5, txtWaterValue5);
+        harvestCrop(4);
     }
 
     public void harvestCropPlot6(MouseEvent mouseEvent) {
-        harvestCrop(plot6, plot6Img, plotName6Img, 6, txtWaterValue6);
+        harvestCrop(5);
     }
 
     public void harvestCropPlot7(MouseEvent mouseEvent) {
-        harvestCrop(plot7, plot7Img, plotName7Img, 7, txtWaterValue7);
+        harvestCrop(6);
     }
 
     public void harvestCropPlot8(MouseEvent mouseEvent) {
-        harvestCrop(plot8, plot8Img, plotName8Img, 8, txtWaterValue8);
+        harvestCrop(7);
     }
 
     public void harvestCropPlot9(MouseEvent mouseEvent) {
-        harvestCrop(plot9, plot9Img, plotName9Img, 9, txtWaterValue8);
+        harvestCrop(8);
     }
 
     public void harvestCropPlot10(MouseEvent mouseEvent) {
-        harvestCrop(plot10, plot10Img, plotName10Img, 10, txtWaterValue10);
+        harvestCrop(9);
     }
 
     public void waterPlot1() {
-        waterCrop(plot1, plot1Img, txtWaterValue1);
+        waterCrop(0);
     }
 
     public void waterPlot2() {
-        waterCrop(plot2, plot2Img, txtWaterValue2);
+        waterCrop(1);
     }
 
     public void waterPlot3() {
-        waterCrop(plot3, plot3Img, txtWaterValue3);
+        waterCrop(2);
     }
 
     public void waterPlot4() {
-        waterCrop(plot4, plot4Img, txtWaterValue4);
+        waterCrop(3);
     }
 
     public void waterPlot5() {
-        waterCrop(plot5, plot5Img, txtWaterValue5);
+        waterCrop(4);
     }
 
     public void waterPlot6() {
-        waterCrop(plot6, plot6Img, txtWaterValue6);
+        waterCrop(5);
     }
 
     public void waterPlot7() {
-        waterCrop(plot7, plot7Img, txtWaterValue7);
+        waterCrop(6);
     }
 
     public void waterPlot8() {
-        waterCrop(plot8, plot8Img, txtWaterValue8);
+        waterCrop(7);
     }
 
     public void waterPlot9() {
-        waterCrop(plot9, plot9Img, txtWaterValue9);
+        waterCrop(8);
     }
 
     public void waterPlot10() {
-        waterCrop(plot10, plot10Img, txtWaterValue10);
+        waterCrop(9);
     }
 
     /**
      * Placeholder
      *
-     * @param plotName Placeholder
+     * @param plotNum Placeholder
      * @param str      Placeholder
      */
-    public void setUpPlotName(ImageView plotName, String str) {
+    public void setUpPlotName(int plotNum, String str) {
+        System.out.println(listPlotNameImages.toString());
         if (str.equals("Corn")) {
-            plotName.setImage(cornNameImg);
+            listPlotNameImages.get(plotNum).setImage(cornNameImg);
         } else if (str.equals("Potato")) {
-            plotName.setImage(potatoNameImg);
+            listPlotNameImages.get(plotNum).setImage(potatoNameImg);
         } else {
-            plotName.setImage(tomatoNameImg);
+            listPlotNameImages.get(plotNum).setImage(tomatoNameImg);
         }
     }
 
