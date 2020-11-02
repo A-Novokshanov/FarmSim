@@ -17,19 +17,20 @@ import java.util.List;
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
     private static final String ADD_PLOTS_QUERY =
-            "INSERT INTO plot(days, water, crop, player, identifier, watervalue) "
-            + "VALUES(?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plot(days, water, crop, player, identifier, watervalue, stage) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY =
             "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY =
             "UPDATE plot SET days = days + 1, water = water + 1 "
-            + "WHERE identifier = ? AND player = ?";
+                    + "WHERE identifier = ? AND player = ?";
     private static final String REMOVE_PLOT_QUERY =
             "DELETE FROM plot WHERE identifier = ? AND player = ?";
     private static final String UPDATE_WATER_VALUE =
             "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
             "SELECT * FROM plot where player=?";
+    private static final String UPDATE_PLOT_STAGE = "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
 
 
     /**
@@ -136,6 +137,7 @@ public class PlayerPlotService {
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());
+                preparedStatement.setString(7, plot.getPlotStage());
                 preparedStatement.execute();
             }
         } catch (SQLException throwables) {
@@ -177,11 +179,12 @@ public class PlayerPlotService {
                         cropValue = 40.00;
                     }
                     int plotIdentifier = resultSet.getInt("identifier");
-
+                    String stage = resultSet.getString("stage");
                     CropModel crop = new CropModel(cropName, 1, cropValue);
                     PlotModel plotModel = new PlotModel(crop, days);
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);
+                    plotModel.setPlotStage(stage);
                     myList.add(plotModel);
                 }
 
@@ -276,6 +279,35 @@ public class PlayerPlotService {
             preparedStatement = dbConnection.prepareStatement(REMOVE_PLOT_QUERY);
             preparedStatement.setInt(1, plotIdentifier);
             preparedStatement.setInt(2, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Updates the plot maturity stage.
+     *
+     * @param identifier the plot we want.
+     * @param stage      the stage it's at.
+     * @param playerName the name of the player who owns it.
+     */
+    public void updatePlotStage(int identifier, String stage, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_STAGE);
+            preparedStatement.setString(1, stage);
+            preparedStatement.setInt(2, playerId);
+            preparedStatement.setInt(3, identifier);
             preparedStatement.execute();
 
         } catch (SQLException throwables) {

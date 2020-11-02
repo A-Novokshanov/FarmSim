@@ -333,18 +333,24 @@ public class FarmUIController {
         if (plotModel.getCropInPlot() != null) {
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
+                plotModel.setPlotStage("Withered");
                 waterValue.setVisible(false);
             } else if (plotModel.getDaysOld() < 2) {
                 plotImg.setImage(seedImg);
+                plotModel.setPlotStage("Seed");
             } else if (plotModel.getDaysOld() < 6) {
                 plotImg.setImage(immature1Img);
+                plotModel.setPlotStage("Immature 1");
             } else if (plotModel.getDaysOld() < 10) {
+                plotModel.setPlotStage("Immature 2");
                 plotImg.setImage(immature2Img);
             } else {
+                plotModel.setPlotStage("Mature");
                 plotImg.setImage(matureImg);
             }
         } else {
             plotImg.setImage(dirtImg);
+            plotModel.setPlotStage(null);
             waterValue.setVisible(false);
         }
     }
@@ -387,14 +393,14 @@ public class FarmUIController {
 
     public Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-        case "Corn":
-            return this.cornNameImg;
-        case "Potato":
-            return this.potatoNameImg;
-        case "Tomato":
-            return this.tomatoNameImg;
-        default:
-            return this.emptyNameImg;
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
         }
     }
 

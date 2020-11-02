@@ -149,4 +149,15 @@ public class PlotViewModel {
         playerPlotService.adjustPlotDaysOld(plotIdentifier, playerName);
         playerSettingsService.updatePlayerDay(1, playerName);
     }
+
+    /**
+     * Method that sets the plot to a new stage.
+     *
+     * @param playerName     the player who owns it.
+     * @param plotStage      the stage the plot is at.
+     * @param plotIdentifier what plot we want.
+     */
+    public void updatePlotStage(String playerName, String plotStage, int plotIdentifier) {
+        playerPlotService.updatePlotStage(plotIdentifier, plotStage, playerName);
+    }
 }
