@@ -17,6 +17,26 @@ public class PlotModel {
     private int plotIdentifier;
 
     /**
+     * This method gets the plot's current stage.
+     *
+     * @return the plot stage.
+     */
+    public String getPlotStage() {
+        return plotStage;
+    }
+
+    /**
+     * This method sets the current plot's stage.
+     *
+     * @param plotStage is the stage that the plot is at currently.
+     */
+    public void setPlotStage(String plotStage) {
+        this.plotStage = plotStage;
+    }
+
+    private String plotStage;
+
+    /**
      * Constructs a PlotModel object.
      *
      * @param cropInPlot The type of crop in the PlotModel
@@ -46,6 +66,11 @@ public class PlotModel {
         this.cropInPlot = cropInPlot;
     }
 
+    /**
+     * This is the thing that sets the plot identifier.
+     *
+     * @param identifer the identifier we want to set it as.
+     */
     public void setPlotIdentifier(int identifer) {
         this.plotIdentifier = identifer;
     }
@@ -93,15 +118,19 @@ public class PlotModel {
         this.daysSinceWater = daysSinceWater;
     }
 
-    /** Gets and returns the waterValue of a PlotModel object.
+    /**
+     * Gets and returns the waterValue of a PlotModel object.
+     *
      * @return Returns a number based on waterValue of a plot.
      */
     public int getWaterValue() {
         return this.waterValue;
     }
 
-    /** Sets the waterValue of a PlotModel object.
-     @param waterValue is the new desired waterValue of a plot.
+    /**
+     * Sets the waterValue of a PlotModel object.
+     *
+     * @param waterValue is the new desired waterValue of a plot.
      */
     public void setWaterValue(int waterValue) {
         this.waterValue = waterValue;
