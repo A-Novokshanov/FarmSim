@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -89,8 +88,8 @@ public class HomeScreenUIController {
         Stage stage = (Stage) btnNewGame.getScene().getWindow();
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().
-                    getResource("../initialConfigUI/InitialConfigUI.fxml"));
+            root = FXMLLoader.load(
+                    getClass().getResource("../initialConfigUI/InitialConfigUI.fxml"));
             stage.setTitle("Initial Configuration");
             stage.setScene(new Scene(root, 1280, 720));
             stage.show();
@@ -106,19 +105,17 @@ public class HomeScreenUIController {
      * @param mouseEvent On click, moves player to farm UI screen.
      */
     public void continueGame(MouseEvent mouseEvent) {
-        Stage stage = new Stage();
-        Stage currentStage = (Stage) btnContinue.getScene().getWindow();
-        stage.initStyle(StageStyle.DECORATED);
-        Parent root = null;
+        Stage stage = (Stage) btnContinue.getScene().getWindow();
+        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("../homeScreenUI/ContinueScreen.fxml"));
+            root = FXMLLoader.load(
+                    getClass().getResource("../homeScreenUI/ContinueScreen.fxml"));
+            stage.setTitle("Login");
+            stage.setScene(new Scene(root, 640, 480));
+            stage.show();
         } catch (IOException e) {
             System.out.println("Loader error.");
             e.printStackTrace();
         }
-        stage.setTitle("Hello World");
-        stage.setScene(new Scene(root, 600, 344));
-        currentStage.close();
-        stage.show();
     }
 }

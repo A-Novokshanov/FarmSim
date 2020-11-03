@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.stage.StageStyle;
 import viewmodels.PlayerViewModel;
 import views.farmUI.FarmUIController;
@@ -46,22 +47,18 @@ public class ContinueScreenController {
         if (this.playerViewModel.playerExists(txtFldUserName.textProperty().getValue())) {
             playerViewModel.getPlayerInformationFromDatabase(
                     txtFldUserName.textProperty().getValue());
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
+            Parent root;
             try {
-                stage.setScene(
-                        new Scene(loader.load())
-                );
+                root = FXMLLoader.load(
+                        getClass().getResource("../farmUI/FarmUI.fxml"));
+                Stage stage = new Stage(StageStyle.DECORATED);
+                stage.setScene(new Scene(root, 1280, 720));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             FarmUIController farmUIController = loader.getController();
             farmUIController.initSaveData(playerViewModel);
-
-            Stage currentStage = (Stage) this.txtFldUserName.getScene().getWindow();
-            currentStage.close();
 
             stage.setTitle("Farm");
             stage.show();

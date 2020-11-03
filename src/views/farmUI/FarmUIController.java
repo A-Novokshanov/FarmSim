@@ -269,8 +269,8 @@ public class FarmUIController {
     public void goToMarket(MouseEvent mouseEvent) {
         try {
             Stage stage = (Stage) btnMarket.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().
-                    getResource("../marketUI/MarketUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../marketUI/MarketUI.fxml"));
             stage.setScene(new Scene(loader.load()));
             MarketUIController marketUIController = loader.getController();
             marketUIController.initData(mouseEvent, playerViewModel, storageViewModel);
