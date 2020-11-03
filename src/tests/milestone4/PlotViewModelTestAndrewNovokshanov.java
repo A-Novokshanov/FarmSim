@@ -81,14 +81,14 @@ public class PlotViewModelTestAndrewNovokshanov {
         harvestedPlotAlive.setDaysOld(10);
         assertEquals("Potato", harvestedPlotAlive.getCropInPlot().getCropName());
         plotViewModel.harvestPlot(harvestedPlotAlive, playerViewModel);
-        assertEquals(4,
+        assertEquals(6,
                 playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity()
         );
         assertNull(harvestedPlotAlive.getCropInPlot());
         assertEquals("Potato", harvestedPlotDead.getCropInPlot().getCropName());
         harvestedPlotDead.setWaterValue(10);
         plotViewModel.harvestPlot(harvestedPlotDead, playerViewModel);
-        assertEquals(4,
+        assertEquals(6,
                 playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity()
         );
         assertNull(harvestedPlotDead.getCropInPlot());
