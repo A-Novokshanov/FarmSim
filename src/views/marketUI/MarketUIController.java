@@ -1,4 +1,4 @@
-package views.marketPlace;
+package views.marketUI;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ import views.farmUI.FarmUIController;
 import java.io.IOException;
 
 
-public class MarketPlace {
+public class MarketUIController {
     @FXML
     private JFXButton btnSeeds;
     @FXML
