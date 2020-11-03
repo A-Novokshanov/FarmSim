@@ -31,8 +31,27 @@ public class EventViewModel {
      */
     public int chooseEvent() {
         Random rand = new Random();
+        String difficulty = player.getPlayerSettings().getStartingDifficulty();
+        int isThereEvent = rand.nextInt(100);
         int toReturn = rand.nextInt(eventList.getEventList().size());
-        return toReturn;
+        switch (difficulty) {
+            case "Casual":
+                if (isThereEvent > 80) {
+                    return toReturn;
+                }
+                break;
+            case "Normal":
+                if (isThereEvent > 70) {
+                    return toReturn;
+                }
+                break;
+            case "Veteran":
+                if (isThereEvent > 60) {
+                    return toReturn;
+                }
+                break;
+        }
+        return -1;
     }
 
     /** Performs a rain Event
@@ -40,8 +59,7 @@ public class EventViewModel {
      */
     public int performRainEvent() { //if chooseEvent returns 0
         Random rand = new Random();
-        int waterIncrease = rand.nextInt(2) + 1;
-        return waterIncrease; // perform PlotViewModel's setWaterValue with (plot.getWaterValue + waterIncrease)
+        return rand.nextInt(2) + 1; // perform PlotViewModel's setWaterValue with (plot.getWaterValue + waterIncrease)
         }
 
     /** Performs a drought Event
@@ -49,8 +67,7 @@ public class EventViewModel {
      */
     public int performDroughtEvent() { //if chooseEvent returns 1
         Random rand = new Random();
-        int waterDecrease = rand.nextInt(2) + 1;
-        return waterDecrease; // perform PlotViewModel's setWaterValue with (plot.getWaterValue - waterIncrease)
+        return rand.nextInt(2) + 1; // perform PlotViewModel's setWaterValue with (plot.getWaterValue - waterIncrease)
     }
 
     /** Performs a locust Event
