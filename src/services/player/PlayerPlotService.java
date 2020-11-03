@@ -25,7 +25,7 @@ public class PlayerPlotService {
             "UPDATE plot SET days = days + 1, water = water + 1 "
                     + "WHERE identifier = ? AND player = ?";
     private static final String HARVEST_PLOT_QUERY =
-            "UPDATE plot SET crop = ? WHERE player = ?";
+            "UPDATE plot SET crop = ? WHERE player = ? AND identifier = ?";
     private static final String UPDATE_WATER_VALUE =
             "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
@@ -282,6 +282,7 @@ public class PlayerPlotService {
             preparedStatement = dbConnection.prepareStatement(HARVEST_PLOT_QUERY);
             preparedStatement.setString(1, null);
             preparedStatement.setInt(2, playerId);
+            preparedStatement.setInt(3, plotIdentifier);
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
