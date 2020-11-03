@@ -111,7 +111,7 @@ public class HomeScreenUIController {
             root = FXMLLoader.load(
                     getClass().getResource("../homeScreenUI/ContinueScreen.fxml"));
             stage.setTitle("Login");
-            stage.setScene(new Scene(root, 640, 480));
+            stage.setScene(new Scene(root, 600, 344));
             stage.show();
         } catch (IOException e) {
             System.out.println("Loader error.");

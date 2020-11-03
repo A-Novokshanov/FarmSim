@@ -397,8 +397,6 @@ public class FarmUIController {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             this.plotViewModel.updatePlotStage(name, "Empty",
                     listPlots.get(harvestedPlotNum).getPlotIdentifier());
-            this.plotViewModel.updateWaterValue(-listPlots.get(harvestedPlotNum).getWaterValue(),
-                    listPlots.get(harvestedPlotNum).getPlotIdentifier());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
             switchPlantHarvest(harvestedPlotImage, harvestedPlotNum, false);

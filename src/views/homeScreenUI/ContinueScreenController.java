@@ -47,22 +47,18 @@ public class ContinueScreenController {
         if (this.playerViewModel.playerExists(txtFldUserName.textProperty().getValue())) {
             playerViewModel.getPlayerInformationFromDatabase(
                     txtFldUserName.textProperty().getValue());
-            Parent root;
             try {
-                root = FXMLLoader.load(
+                Stage stage = (Stage) txtFldUserName.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(
                         getClass().getResource("../farmUI/FarmUI.fxml"));
-                Stage stage = new Stage(StageStyle.DECORATED);
-                stage.setScene(new Scene(root, 1280, 720));
+                stage.setScene(new Scene(loader.load(), 1280, 720));
+                FarmUIController farmUIController = loader.getController();
+                farmUIController.initSaveData(playerViewModel);
+                stage.setTitle("Farm");
+                stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            FarmUIController farmUIController = loader.getController();
-            farmUIController.initSaveData(playerViewModel);
-
-            stage.setTitle("Farm");
-            stage.show();
-
         } else {
             txtFldUserName.setStyle("-fx-text-fill: white");
             txtFldUserName.setUnFocusColor(Color.RED);
