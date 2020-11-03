@@ -1,4 +1,4 @@
-package views.homeScreen;
+package views.homeScreenUI;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -17,7 +17,7 @@ import java.io.IOException;
  * @author Shaun Jacob Email: sjacob31@gatech.edu
  * @version 1.0
  */
-public class HomeScreenController {
+public class HomeScreenUIController {
     @FXML
     private JFXButton btnNewGame;
     @FXML
@@ -90,7 +90,7 @@ public class HomeScreenController {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().
-                    getResource("../initialConfig/InitialConfiguration.fxml"));
+                    getResource("../initialConfigUI/InitialConfigUI.fxml"));
             stage.setTitle("Initial Configuration");
             stage.setScene(new Scene(root, 1280, 720));
             stage.show();
@@ -111,7 +111,7 @@ public class HomeScreenController {
         stage.initStyle(StageStyle.DECORATED);
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../homeScreen/ContinueScreen.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/ContinueScreen.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error.");
             e.printStackTrace();

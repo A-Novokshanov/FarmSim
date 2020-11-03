@@ -1,4 +1,4 @@
-package views.initialConfig;
+package views.initialConfigUI;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitialConfiguration {
+public class InitialConfigUIController {
     private final Image springImage = new Image("@../../dependencies/images/SpringBig.png",
             400.0, 300.0, true, false);
     private final Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg",

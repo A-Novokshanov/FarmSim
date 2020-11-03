@@ -1,4 +1,4 @@
-package views.homeScreen;
+package views.homeScreenUI;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;

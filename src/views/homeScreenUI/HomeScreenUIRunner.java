@@ -1,4 +1,4 @@
-package views.homeScreen;
+package views.homeScreenUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,11 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class HomeScreenRunner extends Application {
+public class HomeScreenUIRunner extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomeScreenUI.fxml"));
         primaryStage.setTitle("Welcome Screen");
         primaryStage.initStyle(StageStyle.DECORATED);
         Scene scene = new Scene(root, 1280, 720);
