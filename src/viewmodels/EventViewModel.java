@@ -1,13 +1,8 @@
 package viewmodels;
 
-import models.CropModel;
 import models.EventModel;
 import models.PlayerModel;
 import models.PlotModel;
-import services.player.PlayerPlotService;
-import services.player.PlayerSettingsService;
-
-import java.util.List;
 import java.util.Random;
 
 /**
