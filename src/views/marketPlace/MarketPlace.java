@@ -2,7 +2,8 @@ package views.marketPlace;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -10,6 +11,9 @@ import javafx.stage.Stage;
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
+import views.farmUI.FarmUIController;
+
+import java.io.IOException;
 
 
 public class MarketPlace {
@@ -385,28 +389,18 @@ public class MarketPlace {
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
-    //    public void returnFarm(MouseEvent mouseEvent) {
-    //        FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
-    //        Stage stage = new Stage(StageStyle.DECORATED);
-    //        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-    //        currentStage.close();
-    //        try {
-    //            stage.setScene(
-    //                    new Scene(loader.load())
-    //            );
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //        }
-    //
-    //        FarmUIController farmUIController = loader.getController();
-    //        farmUIController.initDataFromMarket(this.playerViewModel, name);
-    //        stage.setTitle("Farm");
-    //        stage.show();
-    //    }
-
-    public void returnFarm(MouseEvent mouseEvent) {
-        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        currentStage.close();
+    public void returnFarm() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+            Stage stage = (Stage) btnFarm.getScene().getWindow();
+            stage.setScene(new Scene(loader.load()));
+            FarmUIController farmUIController = loader.getController();
+            farmUIController.initDataFromMarket(this.playerViewModel, name);
+            stage.setTitle("Farm");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -3,7 +3,6 @@ package views.farmUI;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.CropModel;
 import models.PlotModel;
 import viewmodels.PlayerViewModel;
@@ -29,7 +27,7 @@ import java.util.List;
  * A view class that controls the UI elements for the main farm screen.
  *
  * @author Matthew Farias, Shaun Jacob
- * @version 0.3
+ * @version 0.4
  */
 public class FarmUIController {
     @FXML
@@ -46,6 +44,8 @@ public class FarmUIController {
     private Text numPotatoes;
     @FXML
     private Text numCorn;
+    @FXML
+    private JFXButton btnMarket;
 
     @FXML
     private ImageView plot1Img;
@@ -170,24 +170,15 @@ public class FarmUIController {
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
     }
 
-    //    /**
-    //     *
-    //     * @param playerViewModel
-    //     * @param plotModelImgs
-    //     * @param name
-    //     */
-    //    public void initDataFromMarket(PlayerViewModel playerViewModel, String name) {
-    //        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
-    //        this.storageViewModel = new StorageViewModel(playerViewModel);
-    //        this.playerViewModel = playerViewModel;
-    //        this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
-    //        this.name = name;
-    //        this.dayNum.setText("Day " + doubleDigitString(
-    //        this.playerViewModel.getPlayer().getDays()));
-    //        setUpPlotModels(this.plotViewModel.getPlotsFromDatabase(), plotModelImgs);
-    //        checkAllMaturity();
-    //        createPlotModels();
-    //    }
+    public void initDataFromMarket(PlayerViewModel playerViewModel, String name) {
+        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
+        this.storageViewModel = new StorageViewModel(playerViewModel);
+        this.playerViewModel = playerViewModel;
+        this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
+        this.name = name;
+        this.dayNum.setText("Day " + doubleDigitString(
+        this.playerViewModel.getPlayer().getDays()));
+    }
 
     /**
      * Makes Inventory Screen Invisible if exit button is clicked.
@@ -229,24 +220,18 @@ public class FarmUIController {
      * @param mouseEvent is the mouse trigger event
      */
     public void goToMarket(MouseEvent mouseEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().
-                getResource("../marketPlace/MarketPlace.fxml"));
-        Stage currentStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        //currentStage.close();
-        Stage stage = new Stage(StageStyle.DECORATED);
         try {
-            stage.setScene(
-                    new Scene(loader.load())
-            );
+            Stage stage = (Stage) btnMarket.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().
+                    getResource("../marketPlace/MarketPlace.fxml"));
+            MarketPlace marketController = loader.getController();
+            marketController.initData(mouseEvent, playerViewModel, storageViewModel, name);
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Market");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        MarketPlace marketPlace = loader.getController();
-        marketPlace.initData(mouseEvent, playerViewModel, storageViewModel, name);
-
-        stage.setTitle("Market");
-        stage.show();
     }
 
     public void updateDay() {

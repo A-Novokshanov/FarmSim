@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.AnimalModel;
 import models.CropModel;
 import models.SeasonModel;
@@ -27,13 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitialConfiguration {
-    private Image springImage = new Image("@../../dependencies/images/SpringBig.png",
+    private final Image springImage = new Image("@../../dependencies/images/SpringBig.png",
             400.0, 300.0, true, false);
-    private Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg",
+    private final Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg",
             400.0, 300.0, true, true);
-    private Image autumnImage = new Image("@../../dependencies/images/Fall.png",
+    private final Image autumnImage = new Image("@../../dependencies/images/Fall.png",
             400.0, 300.0, true, true);
-    private Image winterImage = new Image("@../../dependencies/images/Winter.png",
+    private final Image winterImage = new Image("@../../dependencies/images/Winter.png",
             400.0, 300.0, true, true);
 
     @FXML
@@ -211,36 +210,29 @@ public class InitialConfiguration {
 
     /**
      * Creates new game based on selected settings
-     *
-     * @param mouseEvent Game created on mouse click.
      */
-    public void createGame(MouseEvent mouseEvent) {
+    public void createGame() {
         setSeasonAndCrop();
         // btn1 = create button id
         if (validateName(txtFldName.textProperty().getValue())) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
-            Stage stage = new Stage(StageStyle.DECORATED);
+            Stage stage = (Stage) btnCreateGame.getScene().getWindow();
             try {
-                stage.setScene(
-                        new Scene(loader.load())
-                );
+                FXMLLoader loader = new FXMLLoader(getClass().
+                        getResource("../farmUI/FarmUI.fxml"));
+                stage.setTitle("Farm Screen");
+                stage.setScene(new Scene(loader.load()));
+                this.setMoney();
+                StorageModel userStorage = new StorageModel();
+                playerViewModel.setPlayerDetails(crop, season,
+                        txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
+                playerViewModel.getPlayer().setPlayerStorage(userStorage);
+                FarmUIController farmUIController = loader.getController();
+                farmUIController.initConfigData(playerViewModel, txtFldName.textProperty().getValue());
+                stage.show();
             } catch (IOException e) {
+                System.out.println("Create game loader error.");
                 e.printStackTrace();
             }
-
-            this.setMoney();
-            StorageModel userStorage = new StorageModel();
-            playerViewModel.setPlayerDetails(crop, season,
-                    txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
-            playerViewModel.getPlayer().setPlayerStorage(userStorage);
-            FarmUIController farmUIController = loader.getController();
-            farmUIController.initConfigData(playerViewModel, txtFldName.textProperty().getValue());
-
-            Stage currentStage = (Stage) txtFldName.getScene().getWindow();
-            currentStage.close();
-
-            stage.setTitle("Farm");
-            stage.show();
         }
     }
 
@@ -265,10 +257,8 @@ public class InitialConfiguration {
 
     /**
      * Sets difficulty to Casual.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setCasual(MouseEvent mouseEvent) {
+    public void setCasual() {
         btnCasual.setSelected(true);
         btnNormal.setSelected(false);
         btnVeteran.setSelected(false);
@@ -277,10 +267,8 @@ public class InitialConfiguration {
 
     /**
      * Sets difficulty to Normal.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setNormal(MouseEvent mouseEvent) {
+    public void setNormal() {
         btnCasual.setSelected(false);
         btnNormal.setSelected(true);
         btnVeteran.setSelected(false);
@@ -289,10 +277,8 @@ public class InitialConfiguration {
 
     /**
      * Sets difficulty to Veteran.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setVeteran(MouseEvent mouseEvent) {
+    public void setVeteran() {
         btnCasual.setSelected(false);
         btnNormal.setSelected(false);
         btnVeteran.setSelected(true);
@@ -301,10 +287,8 @@ public class InitialConfiguration {
 
     /**
      * Sets starting seed type to Corn.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setCorn(MouseEvent mouseEvent) {
+    public void setCorn() {
         btnCorn.setSelected(true);
         btnPotato.setSelected(false);
         btnTomato.setSelected(false);
@@ -313,10 +297,8 @@ public class InitialConfiguration {
 
     /**
      * Sets starting seed type to Potato.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setPotato(MouseEvent mouseEvent) {
+    public void setPotato() {
         btnCorn.setSelected(false);
         btnPotato.setSelected(true);
         btnTomato.setSelected(false);
@@ -325,10 +307,8 @@ public class InitialConfiguration {
 
     /**
      * Sets starting seed type to Tomato.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setTomato(MouseEvent mouseEvent) {
+    public void setTomato() {
         btnCorn.setSelected(false);
         btnPotato.setSelected(false);
         btnTomato.setSelected(true);
@@ -337,40 +317,32 @@ public class InitialConfiguration {
 
     /**
      * Sets season to Spring.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setSpring(MouseEvent mouseEvent) {
+    public void setSpring() {
         imgSeasonSelected.setImage(springImage);
         curSeason = "Spring";
     }
 
     /**
      * Sets season to Summer.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setSummer(MouseEvent mouseEvent) {
+    public void setSummer() {
         imgSeasonSelected.setImage(summerImage);
         curSeason = "Summer";
     }
 
     /**
      * Sets season to Autumn.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setAutumn(MouseEvent mouseEvent) {
+    public void setAutumn() {
         imgSeasonSelected.setImage(autumnImage);
         curSeason = "Autumn";
     }
 
     /**
      * Sets season to Winter.
-     *
-     * @param mouseEvent Button selected on mouse click.
      */
-    public void setWinter(MouseEvent mouseEvent) {
+    public void setWinter() {
         imgSeasonSelected.setImage(winterImage);
         curSeason = "Winter";
     }

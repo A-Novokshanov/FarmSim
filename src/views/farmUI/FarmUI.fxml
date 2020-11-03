@@ -403,7 +403,7 @@
                   </ScrollPane>
                </children>
             </Pane>
-            <JFXButton layoutX="39.0" layoutY="625.0" onMouseClicked="#goToMarket" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: Black;" text="Market">
+            <JFXButton fx:id="btnMarket" layoutX="39.0" layoutY="625.0" onMouseClicked="#goToMarket" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: Black;" text="Market">
                <font>
                   <Font size="20.0" />
                </font>

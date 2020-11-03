@@ -86,9 +86,8 @@ public class HomeScreenController {
      * @param mouseEvent On click, moves player to initial configuration screen.
      */
     public void newGame(MouseEvent mouseEvent) {
-
         Stage stage = (Stage) btnNewGame.getScene().getWindow();
-        Parent root = null;
+        Parent root;
         try {
             root = FXMLLoader.load(getClass().
                     getResource("../initialConfig/InitialConfiguration.fxml"));
@@ -96,27 +95,9 @@ public class HomeScreenController {
             stage.setScene(new Scene(root, 1280, 720));
             stage.show();
         } catch (IOException e) {
-            System.out.println("Loader error.");
+            System.out.println("New game loader error.");
             e.printStackTrace();
         }
-
-        //        Stage stage = new Stage();
-        //        Stage currentStage = (Stage) btnNewGame.
-        //        getScene().getWindow();
-        //        Parent root = null;
-        //        try {
-        //            root = FXMLLoader.load(getClass().
-        //            getResource("../initialConfig/InitialConfiguration2.fxml"));
-        //        } catch (IOException e) {
-        //            e.printStackTrace();
-        //        }
-        //        stage.setTitle("Initial Configuration");
-        //        stage.initStyle(StageStyle.TRANSPARENT);
-        //        Scene scene = new Scene(root, 1280, 720);
-        //        scene.setFill(Color.TRANSPARENT);
-        //        stage.setScene(scene);
-        //        currentStage.close();
-        //        stage.show();
     }
 
     /**
