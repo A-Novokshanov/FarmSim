@@ -324,19 +324,24 @@ public class FarmUIController {
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
                 plotModel.setPlotStage("Withered");
+                plotViewModel.updatePlotStage(name, "Withered", plotModel.getPlotIdentifier());
                 waterValue.setVisible(false);
             } else if (plotModel.getDaysOld() < 2) {
                 plotImg.setImage(seedImg);
                 plotModel.setPlotStage("Seed");
+                plotViewModel.updatePlotStage(name, "Seed", plotModel.getPlotIdentifier());
             } else if (plotModel.getDaysOld() < 6) {
                 plotImg.setImage(immature1Img);
                 plotModel.setPlotStage("Immature 1");
+                plotViewModel.updatePlotStage(name, "Immature 1", plotModel.getPlotIdentifier());
             } else if (plotModel.getDaysOld() < 10) {
                 plotModel.setPlotStage("Immature 2");
                 plotImg.setImage(immature2Img);
+                plotViewModel.updatePlotStage(name, "Immature 2", plotModel.getPlotIdentifier());
             } else {
                 plotModel.setPlotStage("Mature");
                 plotImg.setImage(matureImg);
+                plotViewModel.updatePlotStage(name, "Mature", plotModel.getPlotIdentifier());
             }
         } else {
             plotImg.setImage(dirtImg);
@@ -395,6 +400,8 @@ public class FarmUIController {
         if (harvestedPlot.getDaysOld() >= 10
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
+            this.plotViewModel.updatePlotStage(name, "Empty",
+                    listPlots.get(harvestedPlotNum).getPlotIdentifier());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
             //this.plotViewModel.zeroWaterValue(harvestedPlot.getWaterValue(),
