@@ -224,9 +224,9 @@ public class FarmUIController {
             Stage stage = (Stage) btnMarket.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().
                     getResource("../marketUI/MarketUI.fxml"));
+            stage.setScene(new Scene(loader.load()));
             MarketUIController marketUIController = loader.getController();
             marketUIController.initData(mouseEvent, playerViewModel, storageViewModel, name);
-            stage.setScene(new Scene(loader.load()));
             stage.setTitle("Market");
             stage.show();
         } catch (IOException e) {

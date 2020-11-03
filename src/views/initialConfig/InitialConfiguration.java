@@ -213,7 +213,6 @@ public class InitialConfiguration {
      */
     public void createGame() {
         setSeasonAndCrop();
-        // btn1 = create button id
         if (validateName(txtFldName.textProperty().getValue())) {
             Stage stage = (Stage) btnCreateGame.getScene().getWindow();
             try {
