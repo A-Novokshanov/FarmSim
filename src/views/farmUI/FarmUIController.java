@@ -297,14 +297,18 @@ public class FarmUIController {
             plotViewModel.incrementPlotDaysOld(listPlots.get(i));
             plotViewModel.updatePlotMaturity(listPlots.get(i).getPlotIdentifier(),
                     playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+            this.plotViewModel.updateWaterValue(-1,
+                    listPlots.get(i).getPlotIdentifier());
         }
         checkAllMaturity();
         updateWaterValueAll();
     }
 
     private void updateWaterValue(PlotModel plot, Text waterValue) {
-        String str = doubleDigitString(plot.getWaterValue());
-        waterValue.setText(str);
+        if (plot.getCropInPlot() != null) {
+            String str = doubleDigitString(plot.getWaterValue());
+            waterValue.setText(str);
+        }
     }
 
     private void updateWaterValueAll() {
@@ -328,7 +332,7 @@ public class FarmUIController {
     }
 
     public void checkMaturity(int plotNum, PlotModel plotModel, ImageView plotImg, Text waterValue) {
-        if (!plotModel.getPlotStage().equals("Empty")) {
+        if (plotModel.getCropInPlot() != null) {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);

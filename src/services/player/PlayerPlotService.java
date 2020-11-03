@@ -253,6 +253,7 @@ public class PlayerPlotService {
 
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
+        updateWaterValue(4, playerName, plot.getPlotIdentifier());
         if (isDbConnected(dbConnection)) {
             try {
                 preparedStatement = dbConnection.prepareStatement(HARVEST_PLOT_QUERY);

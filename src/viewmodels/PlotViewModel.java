@@ -126,7 +126,6 @@ public class PlotViewModel {
      * @param cropToPlant the crop to plant in the plot.
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
-
         plotToPlant.setCropInPlot(cropToPlant);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
     }
