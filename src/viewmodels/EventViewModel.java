@@ -18,7 +18,7 @@ public class EventViewModel {
     private EventModel eventList = new EventModel();
 
     /**
-     * Constructor for plot view model/
+     * Constructor for EventViewModel/
      */
     public EventViewModel(PlayerModel player) {
         this.player = player;
@@ -53,7 +53,7 @@ public class EventViewModel {
         return waterDecrease; // perform PlotViewModel's setWaterValue with (plot.getWaterValue - waterIncrease)
     }
 
-    /** Performs a drought Event
+    /** Performs a locust Event
      * @return binary boolean where 1 means crop was eaten, 0 where crop is fine
      */
     public int performLocustEvent(PlotModel plot) { //if chooseEvent returns 2
