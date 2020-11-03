@@ -8,6 +8,7 @@ import models.StorageModel;
 import services.authentication.CreatePlayer;
 import services.authentication.LoginPlayer;
 import services.player.PlayerInventoryService;
+import services.player.PlayerSettingsService;
 
 /**
  * This view-model class will aid accessing certain types of players.
@@ -20,6 +21,7 @@ public class PlayerViewModel {
 
     private SettingModel settingModel;
     private PlayerModel playerModel;
+    private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
 
 
     /**
@@ -87,6 +89,14 @@ public class PlayerViewModel {
      */
     public PlayerModel getPlayer() {
         return this.playerModel;
+    }
+
+    /**
+     * Updates player day by 1.
+     * @param playerName Name of the current user.
+     */
+    public void updatePlayerDay(String playerName) {
+        playerSettingsService.updatePlayerDay(1, playerName);
     }
 
 }

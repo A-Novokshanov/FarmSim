@@ -172,16 +172,19 @@ public class PlayerPlotService {
                     int water = resultSet.getInt("water");
                     String cropName = resultSet.getString("crop");
                     double cropValue = 0;
-                    if (cropName.equals("Corn")) {
-                        cropValue = 100.00;
-                    } else if (cropName.equals("Tomato")) {
-                        cropValue = 60.00;
-                    } else if (cropName.equals("Potato")) {
-                        cropValue = 40.00;
+                    CropModel crop = null;
+                    if (cropName != null) {
+                        if (cropName.equals("Corn")) {
+                            cropValue = 100.00;
+                        } else if (cropName.equals("Tomato")) {
+                            cropValue = 60.00;
+                        } else if (cropName.equals("Potato")) {
+                            cropValue = 40.00;
+                        }
+                        crop = new CropModel(cropName, 1, cropValue);
                     }
                     int plotIdentifier = resultSet.getInt("identifier");
                     String stage = resultSet.getString("stage");
-                    CropModel crop = new CropModel(cropName, 1, cropValue);
                     PlotModel plotModel = new PlotModel(crop, days);
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);

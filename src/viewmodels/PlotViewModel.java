@@ -149,7 +149,6 @@ public class PlotViewModel {
      */
     public void updatePlotMaturity(int plotIdentifier, String playerName) {
         playerPlotService.adjustPlotDaysOld(plotIdentifier, playerName);
-        playerSettingsService.updatePlayerDay(1, playerName);
     }
 
     /**

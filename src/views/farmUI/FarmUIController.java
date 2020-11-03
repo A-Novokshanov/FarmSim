@@ -219,8 +219,10 @@ public class FarmUIController {
     public void setUpPlotModels(List<PlotModel> plotModels) {
         for (int i = 0; i < 10; i++) {
             listPlots.add(plotModels.get(i));
-            listPlotNameImages.get(i).setImage(
-                    chooseCropImage(plotModels.get(i).getCropInPlot()));
+            if (plotModels.get(i).getCropInPlot() != null) {
+                listPlotNameImages.get(i).setImage(
+                        chooseCropImage(plotModels.get(i).getCropInPlot()));
+            }
             listPlotWaterValues.get(i).setText(
                     doubleDigitString(plotModels.get(i).getWaterValue()));
         }
@@ -285,6 +287,8 @@ public class FarmUIController {
         this.playerViewModel.getPlayer().setDays(
                 this.playerViewModel.getPlayer().getDays() + 1);
         dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
+        this.playerViewModel.updatePlayerDay(
+                this.playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
         incrementAllPlotDays();
     }
 
@@ -323,7 +327,7 @@ public class FarmUIController {
         }
     }
 
-    public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterValue) {
+    public void checkMaturity(int plotNum, PlotModel plotModel, ImageView plotImg, Text waterValue) {
         if (!plotModel.getPlotStage().equals("Empty")) {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
@@ -351,12 +355,13 @@ public class FarmUIController {
         } else {
             plotImg.setImage(dirtImg);
             waterValue.setVisible(false);
+            switchPlantHarvest(plotImg, plotNum, false);
         }
     }
 
     public void checkAllMaturity() {
         for (int i = 0; i < 10; i++) {
-            checkMaturity(listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
+            checkMaturity(i, listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
         }
     }
 
@@ -411,7 +416,9 @@ public class FarmUIController {
                 this.plotViewModel.waterPlot(listPlots.get(plotNum));
                 listPlotWaterValues.get(plotNum).setText(
                         doubleDigitString(listPlots.get(plotNum).getWaterValue()));
-                checkMaturity(listPlots.get(plotNum), listPlotImages.get(plotNum),
+                this.plotViewModel.updateWaterValue(2,
+                        listPlots.get(plotNum).getPlotIdentifier());
+                checkMaturity(plotNum, listPlots.get(plotNum), listPlotImages.get(plotNum),
                         listPlotWaterValues.get(plotNum));
             }
         }
