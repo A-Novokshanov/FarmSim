@@ -46,6 +46,8 @@ public class PlotViewModel {
         */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
+                    player.getPlayer().getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
             while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
                 storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
@@ -54,6 +56,8 @@ public class PlotViewModel {
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
+                    player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
 
@@ -84,8 +88,9 @@ public class PlotViewModel {
 
     /**
      * Used to update water value in database.
+     *
      * @param difWaterValue The water value to change value by.
-     * @param plotId The plot's identification number.
+     * @param plotId        The plot's identification number.
      */
     public void updateWaterValue(int difWaterValue, int plotId) {
         playerPlotService.updateWaterValue(difWaterValue,
