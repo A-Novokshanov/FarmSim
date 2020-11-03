@@ -15,6 +15,7 @@ public class PlotModel {
     private int daysSinceWater;
     private int waterValue;
     private int plotIdentifier;
+    private String plotStage;
 
     /**
      * This method gets the plot's current stage.
@@ -33,8 +34,6 @@ public class PlotModel {
     public void setPlotStage(String plotStage) {
         this.plotStage = plotStage;
     }
-
-    private String plotStage;
 
     /**
      * Constructs a PlotModel object.

@@ -58,8 +58,7 @@ public class ContinueScreenController {
             }
 
             FarmUIController farmUIController = loader.getController();
-            farmUIController.initConfigData(playerViewModel,
-                    txtFldUserName.textProperty().getValue());
+            farmUIController.initSaveData(playerViewModel);
 
             Stage currentStage = (Stage) this.txtFldUserName.getScene().getWindow();
             currentStage.close();

@@ -147,37 +147,82 @@ public class FarmUIController {
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
     private PlotViewModel plotViewModel;
-    private String name;
     private int plantingPlotNum;
 
     /**
      * Initializes data from the Initial Configuration screen.
      *
      * @param playerViewModel Setting View Model to access player details.
-     * @param playerName      The name of the current player.
      */
-    public void initConfigData(PlayerViewModel playerViewModel, String playerName) {
-        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
-        this.playerViewModel = playerViewModel;
-        this.storageViewModel = new StorageViewModel(playerViewModel);
-        this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
-        this.name = playerName;
-        this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
-        setUpPlotImages();
-        setUpPlotNameImages();
-        setUpPlotWaterValues();
+    public void initConfigData(PlayerViewModel playerViewModel) {
+        setUpData(playerViewModel);
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
     }
 
-    public void initDataFromMarket(PlayerViewModel playerViewModel, String name) {
+    public void initSaveData(PlayerViewModel playerViewModel) {
+        setUpData(playerViewModel);
+        setUpPlotModels(plotViewModel.getPlotsFromDatabase());
+    }
+
+    public void initDataFromMarket(PlayerViewModel playerViewModel) {
+        setUpData(playerViewModel);
+        setUpPlotModels(plotViewModel.getPlotsFromDatabase());
+    }
+
+    public void setUpData(PlayerViewModel playerViewModel) {
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
-        this.storageViewModel = new StorageViewModel(playerViewModel);
         this.playerViewModel = playerViewModel;
+        this.storageViewModel = new StorageViewModel(playerViewModel);
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
-        this.name = name;
-        this.dayNum.setText("Day " + doubleDigitString(
-        this.playerViewModel.getPlayer().getDays()));
+        this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
+        setUpPlotImages();
+        setUpPlotNameImages();
+        setUpPlotWaterValues();
+    }
+
+    public void setUpPlotImages() {
+        this.listPlotImages = new ArrayList<>(
+                Arrays.asList(plot1Img, plot2Img, plot3Img,
+                        plot4Img, plot5Img, plot6Img, plot7Img,
+                        plot8Img, plot9Img, plot10Img)
+        );
+    }
+
+    public void setUpPlotNameImages() {
+        this.listPlotNameImages = new ArrayList<>(
+                Arrays.asList(plotName1Img, plotName2Img, plotName3Img,
+                        plotName4Img, plotName5Img, plotName6Img, plotName7Img,
+                        plotName8Img, plotName9Img, plotName10Img)
+        );
+    }
+
+    public void setUpPlotWaterValues() {
+        this.listPlotWaterValues = new ArrayList<>(
+                Arrays.asList(txtWaterValue1, txtWaterValue2, txtWaterValue3,
+                        txtWaterValue4, txtWaterValue5, txtWaterValue6, txtWaterValue7,
+                        txtWaterValue8, txtWaterValue9, txtWaterValue10)
+        );
+    }
+
+    public void setUpPlotModels(CropModel cropModel) {
+        for (int i = 0; i < 10; i++) {
+            listPlots.add(plotViewModel.populatePlot(cropModel));
+            setUpPlotName(i, cropModel.getCropName());
+        }
+        setAllInitialMaturity();
+        checkAllMaturity();
+        plotViewModel.addPlayerPlotsToDatabase(listPlots,
+                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+    }
+
+    public void setUpPlotModels(List<PlotModel> plotModels) {
+        for (int i = 0; i < 10; i++) {
+            listPlots.add(plotModels.get(i));
+            listPlotNameImages.get(i).setImage(chooseCropImage(plotModels.get(i).getCropInPlot()));
+            listPlotWaterValues.get(i).setText(doubleDigitString(plotModels.get(i).getWaterValue()));
+        }
+        checkAllMaturity();
     }
 
     /**
@@ -226,7 +271,7 @@ public class FarmUIController {
                     getResource("../marketUI/MarketUI.fxml"));
             stage.setScene(new Scene(loader.load()));
             MarketUIController marketUIController = loader.getController();
-            marketUIController.initData(mouseEvent, playerViewModel, storageViewModel, name);
+            marketUIController.initData(mouseEvent, playerViewModel, storageViewModel);
             stage.setTitle("Market");
             stage.show();
         } catch (IOException e) {
@@ -239,48 +284,6 @@ public class FarmUIController {
                 this.playerViewModel.getPlayer().getDays() + 1);
         dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         incrementAllPlotDays();
-    }
-
-    public void setUpPlotImages() {
-        listPlotImages = new ArrayList<>(
-                Arrays.asList(plot1Img, plot2Img, plot3Img,
-                        plot4Img, plot5Img, plot6Img, plot7Img,
-                        plot8Img, plot9Img, plot10Img)
-        );
-    }
-
-    public void setUpPlotNameImages() {
-        listPlotNameImages = new ArrayList<>(
-                Arrays.asList(plotName1Img, plotName2Img, plotName3Img,
-                        plotName4Img, plotName5Img, plotName6Img, plotName7Img,
-                        plotName8Img, plotName9Img, plotName10Img)
-        );
-    }
-
-    public void setUpPlotWaterValues() {
-        listPlotWaterValues = new ArrayList<>(
-                Arrays.asList(txtWaterValue1, txtWaterValue2, txtWaterValue3,
-                        txtWaterValue4, txtWaterValue5, txtWaterValue6, txtWaterValue7,
-                        txtWaterValue8, txtWaterValue9, txtWaterValue10)
-        );
-    }
-
-    public void setUpPlotModels(CropModel cropModel) {
-        for (int i = 0; i < 10; i++) {
-            listPlots.add(plotViewModel.populatePlot(cropModel));
-            setUpPlotName(i, cropModel.getCropName());
-        }
-        checkAllMaturity();
-        plotViewModel.addPlayerPlotsToDatabase(listPlots,
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
-    }
-
-    public void setUpPlotModels(List<PlotModel> plotModels, ArrayList<Image> plotModelNameImages) {
-        for (int i = 0; i < 10; i++) {
-            listPlots.set(i, plotModels.get(i));
-            listPlotNameImages.get(i).setImage(plotModelNameImages.get(i));
-        }
-        checkAllMaturity();
     }
 
     private void incrementAllPlotDays() {
@@ -304,8 +307,23 @@ public class FarmUIController {
         }
     }
 
+    public void setAllInitialMaturity() {
+        for (int i = 0; i < 10; i++) {
+            if (listPlots.get(i).getDaysOld() < 2) {
+                listPlots.get(i).setPlotStage("Seed");
+            } else if (listPlots.get(i).getDaysOld() < 6) {
+                listPlots.get(i).setPlotStage("Immature 1");
+            } else if (listPlots.get(i).getDaysOld() < 10) {
+                listPlots.get(i).setPlotStage("Immature 2");
+            } else {
+                listPlots.get(i).setPlotStage("Mature");
+            }
+        }
+    }
+
     public void checkMaturity(PlotModel plotModel, ImageView plotImg, Text waterValue) {
-        if (plotModel.getCropInPlot() != null) {
+        if (!plotModel.getPlotStage().equals("Empty")) {
+            String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
                 plotModel.setPlotStage("Withered");
@@ -330,7 +348,6 @@ public class FarmUIController {
             }
         } else {
             plotImg.setImage(dirtImg);
-            plotModel.setPlotStage(null);
             waterValue.setVisible(false);
         }
     }
@@ -356,24 +373,14 @@ public class FarmUIController {
             listPlots.get(i).setWaterValue(3);
             listPlots.get(i).setDaysOld(0);
             this.plotViewModel.plantPlot(listPlots.get(i), crop);
+            String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
+            this.plotViewModel.updatePlotStage(name, "Seed",
+                    listPlots.get(i).getPlotIdentifier());
             listPlotImages.get(i).setImage(seedImg);
             listPlotNameImages.get(i).setImage(chooseCropImage(crop));
             updateWaterValue(listPlots.get(i), listPlotWaterValues.get(i));
             listPlotWaterValues.get(i).setVisible(true);
             switchPlantHarvest(listPlotImages.get(i), i, true);
-        }
-    }
-
-    public Image chooseCropImage(CropModel crop) {
-        switch (crop.getCropName()) {
-        case "Corn":
-            return this.cornNameImg;
-        case "Potato":
-            return this.potatoNameImg;
-        case "Tomato":
-            return this.tomatoNameImg;
-        default:
-            return this.emptyNameImg;
         }
     }
 
@@ -385,13 +392,11 @@ public class FarmUIController {
         if (harvestedPlot.getDaysOld() >= 10
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
+            String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             this.plotViewModel.updatePlotStage(name, "Empty",
                     listPlots.get(harvestedPlotNum).getPlotIdentifier());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
-            //this.plotViewModel.zeroWaterValue(harvestedPlot.getWaterValue(),
-            //harvestedPlot.getPlotIdentifier());
-            //harvestedPlot.setWaterValue(0);
             switchPlantHarvest(harvestedPlotImage, harvestedPlotNum, false);
             waterValue.setVisible(false);
         }
@@ -407,6 +412,19 @@ public class FarmUIController {
                 checkMaturity(listPlots.get(plotNum), listPlotImages.get(plotNum),
                         listPlotWaterValues.get(plotNum));
             }
+        }
+    }
+
+    public Image chooseCropImage(CropModel crop) {
+        switch (crop.getCropName()) {
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
         }
     }
 

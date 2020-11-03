@@ -121,15 +121,11 @@ public class MarketUIController {
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
-    private String name;
 
-    public void initData(MouseEvent mouseEvent, PlayerViewModel player,
-                         StorageViewModel storage,
-                         String name) {
+    public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
-        this.name = name;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         if (storage.userInventory().get(0) != null) {
             setPrice(panel1Value, 0, panel1Price);
@@ -395,7 +391,7 @@ public class MarketUIController {
             Stage stage = (Stage) btnFarm.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             FarmUIController farmUIController = loader.getController();
-            farmUIController.initDataFromMarket(this.playerViewModel, name);
+            farmUIController.initDataFromMarket(this.playerViewModel);
             stage.setTitle("Farm");
             stage.show();
         } catch (IOException e) {

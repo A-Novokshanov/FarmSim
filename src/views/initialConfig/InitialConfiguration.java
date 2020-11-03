@@ -226,7 +226,7 @@ public class InitialConfiguration {
                         txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
                 playerViewModel.getPlayer().setPlayerStorage(userStorage);
                 FarmUIController farmUIController = loader.getController();
-                farmUIController.initConfigData(playerViewModel, txtFldName.textProperty().getValue());
+                farmUIController.initConfigData(playerViewModel);
                 stage.show();
             } catch (IOException e) {
                 System.out.println("Create game loader error.");
