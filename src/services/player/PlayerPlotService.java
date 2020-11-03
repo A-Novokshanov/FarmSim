@@ -24,8 +24,8 @@ public class PlayerPlotService {
     private static final String UPDATE_PLOT_MATURITY =
             "UPDATE plot SET days = days + 1, water = water + 1 "
                     + "WHERE identifier = ? AND player = ?";
-    private static final String REMOVE_PLOT_QUERY =
-            "DELETE FROM plot WHERE identifier = ? AND player = ?";
+    private static final String HARVEST_PLOT_QUERY =
+            "UPDATE plot SET crop = ? WHERE player = ?";
     private static final String UPDATE_WATER_VALUE =
             "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
@@ -270,15 +270,17 @@ public class PlayerPlotService {
     /**
      * Deletes a plot from the database when the player harvests a plot.
      *
+     * @param waterValue     The waterValue to be changed by.
      * @param plotIdentifier The unique identifier assigned to each plot for access.
      * @param playerName     The name of the player whose plots need to be removed.
      */
-    public void deletePlot(int plotIdentifier, String playerName) {
+    public void harvestPlot(int waterValue, int plotIdentifier, String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
+        updateWaterValue(waterValue, playerName, plotIdentifier);
         try {
-            preparedStatement = dbConnection.prepareStatement(REMOVE_PLOT_QUERY);
-            preparedStatement.setInt(1, plotIdentifier);
+            preparedStatement = dbConnection.prepareStatement(HARVEST_PLOT_QUERY);
+            preparedStatement.setString(1, null);
             preparedStatement.setInt(2, playerId);
             preparedStatement.execute();
 
