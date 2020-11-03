@@ -219,8 +219,10 @@ public class FarmUIController {
     public void setUpPlotModels(List<PlotModel> plotModels) {
         for (int i = 0; i < 10; i++) {
             listPlots.add(plotModels.get(i));
-            listPlotNameImages.get(i).setImage(chooseCropImage(plotModels.get(i).getCropInPlot()));
-            listPlotWaterValues.get(i).setText(doubleDigitString(plotModels.get(i).getWaterValue()));
+            listPlotNameImages.get(i).setImage(
+                    chooseCropImage(plotModels.get(i).getCropInPlot()));
+            listPlotWaterValues.get(i).setText(
+                    doubleDigitString(plotModels.get(i).getWaterValue()));
         }
         checkAllMaturity();
     }
@@ -395,6 +397,8 @@ public class FarmUIController {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             this.plotViewModel.updatePlotStage(name, "Empty",
                     listPlots.get(harvestedPlotNum).getPlotIdentifier());
+            this.plotViewModel.updateWaterValue(-listPlots.get(harvestedPlotNum).getWaterValue(),
+                    listPlots.get(harvestedPlotNum).getPlotIdentifier());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
             switchPlantHarvest(harvestedPlotImage, harvestedPlotNum, false);
@@ -417,14 +421,14 @@ public class FarmUIController {
 
     public Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-            case "Corn":
-                return this.cornNameImg;
-            case "Potato":
-                return this.potatoNameImg;
-            case "Tomato":
-                return this.tomatoNameImg;
-            default:
-                return this.emptyNameImg;
+        case "Corn":
+            return this.cornNameImg;
+        case "Potato":
+            return this.potatoNameImg;
+        case "Tomato":
+            return this.tomatoNameImg;
+        default:
+            return this.emptyNameImg;
         }
     }
 

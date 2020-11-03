@@ -223,7 +223,8 @@ public class InitialConfigUIController {
                 this.setMoney();
                 StorageModel userStorage = new StorageModel();
                 playerViewModel.setPlayerDetails(crop, season,
-                        txtFldName.textProperty().getValue(), userStorage, curDifficulty, currentMoney);
+                        txtFldName.textProperty().getValue(), userStorage,
+                        curDifficulty, currentMoney);
                 playerViewModel.getPlayer().setPlayerStorage(userStorage);
                 FarmUIController farmUIController = loader.getController();
                 farmUIController.initConfigData(playerViewModel);

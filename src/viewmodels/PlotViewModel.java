@@ -75,11 +75,6 @@ public class PlotViewModel {
      * @param plotToWater The plot to water.
      */
     public void waterPlot(PlotModel plotToWater) {
-        /*
-        if (plotToWater.getDaysSinceWater() <= 5) {
-            plotToWater.setDaysSinceWater(0);
-        }
-        */
         if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
             playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName(),
@@ -87,13 +82,15 @@ public class PlotViewModel {
         }
     }
 
-    //    /**
-    //     *
-    //     */
-    //    public void zeroWaterValue(int curPlotWaterValue, int id) {
-    //        playerPlotService.updateWaterValue(-curPlotWaterValue,
-    //                playerModel.getPlayerSettings().getPlayerName(), id);
-    //    }
+    /**
+     * Used to update water value in database.
+     * @param difWaterValue The water value to change value by.
+     * @param plotId The plot's identification number.
+     */
+    public void updateWaterValue(int difWaterValue, int plotId) {
+        playerPlotService.updateWaterValue(difWaterValue,
+                playerModel.getPlayerSettings().getPlayerName(), plotId);
+    }
 
     /**
      * Gets the players plots from the database.

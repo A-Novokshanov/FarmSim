@@ -111,7 +111,7 @@ public class HomeScreenUIController {
         stage.initStyle(StageStyle.DECORATED);
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/ContinueScreen.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../homeScreenUI/ContinueScreen.fxml"));
         } catch (IOException e) {
             System.out.println("Loader error.");
             e.printStackTrace();
