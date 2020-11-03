@@ -17,14 +17,6 @@ public class HomeScreenRunner extends Application {
         Scene scene = new Scene(root, 1280, 720);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        //        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-        //        primaryStage.setTitle("Initial Configuration");
-        //        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        //        Scene scene = new Scene(root, 950, 480);
-        //        scene.setFill(Color.TRANSPARENT);
-        //        primaryStage.setScene(scene);
-        //        primaryStage.show();
     }
 
 
