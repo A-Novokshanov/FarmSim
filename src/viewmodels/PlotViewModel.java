@@ -128,7 +128,7 @@ public class PlotViewModel {
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
 
         plotToPlant.setCropInPlot(cropToPlant);
-        playerPlotService.addPlot(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+        playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
