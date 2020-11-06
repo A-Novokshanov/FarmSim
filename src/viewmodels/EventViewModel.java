@@ -74,7 +74,7 @@ public class EventViewModel {
      * @return binary boolean where 1 means crop was eaten, 0 where crop is fine
      */
     public int performLocustEvent(PlotModel plot) { //if chooseEvent returns 2
-        if (plot.getCropInPlot().getHasPesticide() == true) {
+        if (plot.getCropInPlot().getHasPesticide()) {
             return 0;
         }
         Random rand = new Random();
