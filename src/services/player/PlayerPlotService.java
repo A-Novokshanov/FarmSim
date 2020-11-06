@@ -244,6 +244,39 @@ public class PlayerPlotService {
     }
 
     /**
+     * Plants a crop in the plot;
+     *
+     * @param plot       The plot that contains the new crop.
+     * @param playerName the player who needs the plot added.
+     */
+    public void plantCrop(PlotModel plot, String playerName) {
+
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        updateWaterValue(3, playerName, plot.getPlotIdentifier());
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(HARVEST_PLOT_QUERY);
+                preparedStatement.setString(1, plot.getCropInPlot().getCropName());
+                preparedStatement.setInt(2, playerId);
+                preparedStatement.setInt(3, plot.getPlotIdentifier());
+                preparedStatement.execute();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    /**
      * Adjusts the days old the plot is as days pass by.
      *
      * @param plotIdentifier The identifier of the plot.

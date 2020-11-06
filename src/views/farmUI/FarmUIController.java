@@ -263,26 +263,6 @@ public class FarmUIController {
         btnTomatoPlant.setVisible(false);
     }
 
-    /**
-     * Switches screen to the Market UI screen.
-     *
-     * @param mouseEvent is the mouse trigger event
-     */
-    public void goToMarket(MouseEvent mouseEvent) {
-        try {
-            Stage stage = (Stage) btnMarket.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("../marketUI/MarketUI.fxml"));
-            stage.setScene(new Scene(loader.load()));
-            MarketUIController marketUIController = loader.getController();
-            marketUIController.initData(mouseEvent, playerViewModel, storageViewModel);
-            stage.setTitle("Market");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void updateDay() {
         this.playerViewModel.getPlayer().setDays(
                 this.playerViewModel.getPlayer().getDays() + 1);
@@ -294,22 +274,28 @@ public class FarmUIController {
 
     private void incrementAllPlotDays() {
         for (int i = 0; i < 10; i++) {
-            plotViewModel.incrementPlotDaysOld(listPlots.get(i));
-            plotViewModel.updatePlotMaturity(listPlots.get(i).getPlotIdentifier(),
-                    playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+            if (listPlots.get(i).getCropInPlot() != null) {
+                plotViewModel.incrementPlotDaysOld(listPlots.get(i));
+                plotViewModel.updatePlotMaturity(listPlots.get(i).getPlotIdentifier(),
+                        playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+                this.plotViewModel.updateWaterValue(-1,
+                        listPlots.get(i).getPlotIdentifier());
+            }
         }
         checkAllMaturity();
         updateWaterValueAll();
     }
 
-    private void updateWaterValue(PlotModel plot, Text waterValue) {
-        String str = doubleDigitString(plot.getWaterValue());
-        waterValue.setText(str);
-    }
-
     private void updateWaterValueAll() {
         for (int i = 0; i < 10; i++) {
             updateWaterValue(listPlots.get(i), listPlotWaterValues.get(i));
+        }
+    }
+
+    private void updateWaterValue(PlotModel plot, Text waterValue) {
+        if (plot.getCropInPlot() != null) {
+            String str = doubleDigitString(plot.getWaterValue());
+            waterValue.setText(str);
         }
     }
 
@@ -327,8 +313,14 @@ public class FarmUIController {
         }
     }
 
+    public void checkAllMaturity() {
+        for (int i = 0; i < 10; i++) {
+            checkMaturity(i, listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
+        }
+    }
+
     public void checkMaturity(int plotNum, PlotModel plotModel, ImageView plotImg, Text waterValue) {
-        if (!plotModel.getPlotStage().equals("Empty")) {
+        if (plotModel.getCropInPlot() != null) {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
@@ -356,12 +348,6 @@ public class FarmUIController {
             plotImg.setImage(dirtImg);
             waterValue.setVisible(false);
             switchPlantHarvest(plotImg, plotNum, false);
-        }
-    }
-
-    public void checkAllMaturity() {
-        for (int i = 0; i < 10; i++) {
-            checkMaturity(i, listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
         }
     }
 
@@ -400,7 +386,7 @@ public class FarmUIController {
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
-            this.plotViewModel.updatePlotStage(name, "Empty",
+            this.plotViewModel.updatePlotStage(name, null,
                     listPlots.get(harvestedPlotNum).getPlotIdentifier());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
@@ -416,8 +402,6 @@ public class FarmUIController {
                 this.plotViewModel.waterPlot(listPlots.get(plotNum));
                 listPlotWaterValues.get(plotNum).setText(
                         doubleDigitString(listPlots.get(plotNum).getWaterValue()));
-                this.plotViewModel.updateWaterValue(2,
-                        listPlots.get(plotNum).getPlotIdentifier());
                 checkMaturity(plotNum, listPlots.get(plotNum), listPlotImages.get(plotNum),
                         listPlotWaterValues.get(plotNum));
             }
@@ -664,5 +648,25 @@ public class FarmUIController {
             str = String.valueOf(num);
         }
         return str;
+    }
+
+    /**
+     * Switches screen to the Market UI screen.
+     *
+     * @param mouseEvent is the mouse trigger event
+     */
+    public void goToMarket(MouseEvent mouseEvent) {
+        try {
+            Stage stage = (Stage) btnMarket.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../marketUI/MarketUI.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            MarketUIController marketUIController = loader.getController();
+            marketUIController.initData(mouseEvent, playerViewModel, storageViewModel);
+            stage.setTitle("Market");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
