@@ -3,30 +3,164 @@
   <ID>JAVA</ID>
   <OriginalElement>viewmodels.MarketViewModel</OriginalElement>
   <nodes>
-    <node x="206.50000000000023" y="1140.0">models.PlayerModel</node>
-    <node x="587.3175515151524" y="1578.0">services.authentication.LoginPlayer</node>
-    <node x="1322.6750333333346" y="1578.0">services.player.PlayerInventoryService</node>
-    <node x="39.64195627705726" y="750.0">models.StorageModel</node>
-    <node x="1732.0495813852822" y="2878.0">viewmodels.PlotViewModel</node>
-    <node x="1496.2675515151523" y="2451.0">viewmodels.StorageViewModel</node>
-    <node x="494.66624805194886" y="2008.0">viewmodels.PlayerViewModel</node>
-    <node x="2200.6071348484857" y="1920.0">models.PlotModel</node>
-    <node x="1142.9175515151524" y="0.0">models.CropModel</node>
-    <node x="1298.2474980519487" y="2911.0">viewmodels.MarketViewModel</node>
-    <node x="1948.6329147186152" y="2374.0">services.player.PlayerPlotService</node>
-    <node x="656.0137865800871" y="392.0">models.SeasonModel</node>
-    <node x="1272.4250333333346" y="1250.0">services.DatabaseConnection</node>
-    <node x="417.65183116883236" y="761.0">models.SettingModel</node>
-    <node x="86.76695627705726" y="1644.0">models.UserModel</node>
-    <node x="955.3175515151524" y="1600.0">services.authentication.CreatePlayer</node>
-    <node x="1709.798801515152" y="2019.0">services.player.PlayerSettingsService</node>
-    <node x="2158.857914718615" y="491.0">models.MarketModel</node>
+    <node x="503.4916666666666" y="0.0">models.CropModel</node>
+    <node x="185.74999999999994" y="1202.0">models.PlayerModel</node>
+    <node x="457.7652626811593" y="398.0">models.SeasonModel</node>
+    <node x="344.8902626811593" y="833.0">models.SettingModel</node>
+    <node x="0.0" y="822.0">models.StorageModel</node>
+    <node x="408.49859601449265" y="2142.0">viewmodels.PlotViewModel</node>
+    <node x="312.62359601449265" y="1862.0">viewmodels.StorageViewModel</node>
+    <node x="219.94578804347816" y="1570.0">viewmodels.PlayerViewModel</node>
+    <node x="818.1319293478259" y="332.0">models.PlotModel</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="0.17305276381909548" x="1235.0" y="1582.0" />
+  <edges>
+    <edge source="viewmodels.StorageViewModel" target="models.CropModel">
+      <point x="119.625" y="-110.0" />
+      <point x="591.7485960144927" y="1842.0" />
+      <point x="807.6319293478259" y="1842.0" />
+      <point x="807.6319293478259" y="292.0" />
+      <point x="647.9916666666666" y="292.0" />
+      <point x="42.5" y="121.0" />
+    </edge>
+    <edge source="models.PlotModel" target="models.CropModel">
+      <point x="-57.5" y="-220.0" />
+      <point x="875.6319293478259" y="282.0" />
+      <point x="664.9916666666666" y="282.0" />
+      <point x="59.5" y="121.0" />
+    </edge>
+    <edge source="viewmodels.PlotViewModel" target="models.CropModel">
+      <point x="164.9375" y="-165.0" />
+      <point x="761.9360960144927" y="2122.0" />
+      <point x="1058.631929347826" y="2122.0" />
+      <point x="1058.631929347826" y="262.0" />
+      <point x="698.9916666666666" y="262.0" />
+      <point x="93.5" y="121.0" />
+    </edge>
+    <edge source="viewmodels.PlayerViewModel" target="models.SeasonModel">
+      <point x="170.3125" y="-121.0" />
+      <point x="662.7582880434782" y="1550.0" />
+      <point x="719.1791666666666" y="1550.0" />
+      <point x="719.1791666666666" y="802.0" />
+      <point x="721.9319293478261" y="802.0" />
+      <point x="105.66666666666674" y="154.0" />
+    </edge>
+    <edge source="viewmodels.PlayerViewModel" target="models.PlayerModel">
+      <point x="-170.3125" y="-121.0" />
+      <point x="322.13328804347816" y="1550.0" />
+      <point x="319.74999999999994" y="1550.0" />
+      <point x="0.0" y="154.0" />
+    </edge>
+    <edge source="viewmodels.StorageViewModel" target="models.StorageModel">
+      <point x="-119.625" y="-110.0" />
+      <point x="352.49859601449265" y="1842.0" />
+      <point x="117.96453804347811" y="1842.0" />
+      <point x="117.96453804347811" y="1182.0" />
+      <point x="39.875" y="1182.0" />
+      <point x="-119.625" y="165.0" />
+    </edge>
+    <edge source="models.StorageModel" target="models.CropModel">
+      <point x="0.0" y="-165.0" />
+      <point x="159.5" y="802.0" />
+      <point x="173.17572463768113" y="802.0" />
+      <point x="173.17572463768113" y="272.0" />
+      <point x="528.9916666666666" y="272.0" />
+      <point x="-76.5" y="121.0" />
+    </edge>
+    <edge source="models.PlayerModel" target="models.StorageModel">
+      <point x="-100.5" y="-154.0" />
+      <point x="219.24999999999994" y="1182.0" />
+      <point x="199.375" y="1182.0" />
+      <point x="39.875" y="165.0" />
+    </edge>
+    <edge source="models.PlayerModel" target="models.SettingModel">
+      <point x="33.5" y="-154.0" />
+      <point x="353.24999999999994" y="1182.0" />
+      <point x="379.0152626811593" y="1182.0" />
+      <point x="-102.375" y="154.0" />
+    </edge>
+    <edge source="viewmodels.StorageViewModel" target="viewmodels.PlayerViewModel">
+      <point x="-39.875" y="-110.0" />
+      <point x="432.24859601449265" y="1832.0" />
+      <point x="310.77912137681153" y="1832.0" />
+      <point x="-181.66666666666663" y="121.0" />
+    </edge>
+    <edge source="models.SeasonModel" target="models.CropModel">
+      <point x="-79.25" y="-154.0" />
+      <point x="537.0152626811594" y="312.0" />
+      <point x="596.9916666666666" y="312.0" />
+      <point x="-8.5" y="121.0" />
+    </edge>
+    <edge source="models.SettingModel" target="models.SeasonModel">
+      <point x="34.125" y="-154.0" />
+      <point x="515.5152626811594" y="802.0" />
+      <point x="510.59859601449267" y="802.0" />
+      <point x="-105.66666666666663" y="154.0" />
+    </edge>
+    <edge source="viewmodels.PlayerViewModel" target="models.StorageModel">
+      <point x="-238.4375" y="-121.0" />
+      <point x="254.00828804347816" y="1530.0" />
+      <point x="128.96453804347817" y="1530.0" />
+      <point x="128.96453804347817" y="1172.0" />
+      <point x="119.625" y="1172.0" />
+      <point x="-39.875" y="165.0" />
+    </edge>
+    <edge source="viewmodels.PlayerViewModel" target="models.SettingModel">
+      <point x="34.0625" y="-121.0" />
+      <point x="526.5082880434782" y="1550.0" />
+      <point x="559.2881793478259" y="1550.0" />
+      <point x="559.2881793478259" y="1182.0" />
+      <point x="515.5152626811594" y="1182.0" />
+      <point x="34.125" y="154.0" />
+    </edge>
+    <edge source="viewmodels.PlayerViewModel" target="models.CropModel">
+      <point x="238.4375" y="-121.0" />
+      <point x="730.8832880434782" y="1550.0" />
+      <point x="785.2652626811594" y="1550.0" />
+      <point x="785.2652626811594" y="302.0" />
+      <point x="630.9916666666666" y="302.0" />
+      <point x="25.5" y="121.0" />
+    </edge>
+    <edge source="viewmodels.PlotViewModel" target="viewmodels.StorageViewModel">
+      <point x="-70.6875" y="-165.0" />
+      <point x="526.3110960144927" y="2102.0" />
+      <point x="392.37359601449265" y="2102.0" />
+      <point x="-79.75" y="110.0" />
+    </edge>
+    <edge source="viewmodels.PlotViewModel" target="models.PlayerModel">
+      <point x="-117.8125" y="-165.0" />
+      <point x="479.18609601449265" y="2112.0" />
+      <point x="209.44578804347816" y="2112.0" />
+      <point x="209.44578804347816" y="1550.0" />
+      <point x="266.1499999999999" y="1550.0" />
+      <point x="-53.60000000000002" y="154.0" />
+    </edge>
+    <edge source="viewmodels.PlotViewModel" target="viewmodels.PlayerViewModel">
+      <point x="23.5625" y="-165.0" />
+      <point x="620.5610960144927" y="2122.0" />
+      <point x="642.1235960144927" y="2122.0" />
+      <point x="642.1235960144927" y="1832.0" />
+      <point x="674.1124547101449" y="1832.0" />
+      <point x="181.66666666666674" y="121.0" />
+    </edge>
+    <edge source="models.SettingModel" target="models.CropModel">
+      <point x="-34.125" y="-154.0" />
+      <point x="447.2652626811593" y="302.0" />
+      <point x="579.9916666666666" y="302.0" />
+      <point x="-25.5" y="121.0" />
+    </edge>
+    <edge source="viewmodels.PlotViewModel" target="models.PlotModel">
+      <point x="70.6875" y="-165.0" />
+      <point x="667.6860960144927" y="2102.0" />
+      <point x="934.8270833333332" y="2102.0" />
+      <point x="934.8270833333332" y="802.0" />
+      <point x="875.6319293478259" y="802.0" />
+      <point x="-57.5" y="220.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7205435651478816" x="532.5000000000001" y="626.2076516810512" />
   <SelectedNodes>
-    <node>viewmodels.MarketViewModel</node>
+    <node>models.CropModel</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
