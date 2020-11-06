@@ -3,7 +3,7 @@ package models;
 /**
  * This class keeps track of a crop's attributes.
  *
- * @author Aditya Varun Pratap
+ * @author Aditya Varun Pratap, Andrew Novokshanov
  * @version 1.0
  */
 public class CropModel {
@@ -11,6 +11,7 @@ public class CropModel {
     private String cropName;
     private int cropQuantity;
     private double cropValue;
+    private boolean hasPesticide;
 
     /**
      * This 3-parameter constructor initializes the instance variables to the parameters.
@@ -23,6 +24,7 @@ public class CropModel {
         this.cropName = cropName;
         this.cropQuantity = cropQuantity;
         this.cropValue = cropValue;
+        this.hasPesticide = false;
     }
 
     /**
@@ -77,5 +79,23 @@ public class CropModel {
      */
     public void setCropValue(double cropValue) {
         this.cropValue = cropValue;
+    }
+
+    /**
+     * Gets the hasPesticide boolean of the crop.
+     *
+     * @return The hasPesticide attribute of the CropModel object.
+     */
+    public boolean getHasPesticide() {
+        return hasPesticide;
+    }
+
+    /**
+     * Sets the hasPesticide boolean of the crop.
+     *
+     * @param hasPesticide The hasPesticide boolean to be set to the hasPesticide attribute.
+     */
+    public void setHasPesticide(boolean hasPesticide) {
+        this.hasPesticide = hasPesticide;
     }
 }

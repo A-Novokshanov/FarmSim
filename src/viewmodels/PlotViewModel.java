@@ -3,6 +3,7 @@ package viewmodels;
 import models.CropModel;
 import models.PlayerModel;
 import models.PlotModel;
+import models.StorageModel;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -49,9 +50,22 @@ public class PlotViewModel {
             playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
                     player.getPlayer().getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
-            while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
-                storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
-                toAdd++;
+            if (harvestedPlot.getFertilizerLevel() > 0) {
+                Random rand = new Random();
+                int chanceIncrease = rand.nextInt(2);
+                int newYield = 3;
+                if (chanceIncrease > 0) {
+                    newYield = 5;
+                }
+                while ((toAdd < newYield) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
+                    storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
+                    toAdd++;
+                }
+            } else {
+                while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
+                    storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
+                    toAdd++;
+                }
             }
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
@@ -112,10 +126,17 @@ public class PlotViewModel {
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement) {
-        plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
+        if (plotToIncrement.getFertilizerLevel() > 0) {
+            plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
+        } else {
+            plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
+        }
         //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
         if ((plotToIncrement.getWaterValue() > 0) && (plotToIncrement.getWaterValue() <= 6)) {
             plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
+        }
+        if (plotToIncrement.getFertilizerLevel() > 0) {
+            plotToIncrement.setWaterValue(plotToIncrement.getFertilizerLevel() - 1);
         }
     }
 
@@ -129,6 +150,46 @@ public class PlotViewModel {
 
         plotToPlant.setCropInPlot(cropToPlant);
         playerPlotService.addPlot(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Uses fertilizer on a plot.
+     *
+     * @param plotToPlant the plot which to plant a crop to.
+     */
+    public void fertilizePlot(PlotModel plotToPlant) {
+        if (plotToPlant.getFertilizerLevel() < 9) {
+            plotToPlant.setFertilizerLevel(plotToPlant.getFertilizerLevel() + 2);
+        }
+    }
+
+    /**
+     * Uses pesticide on a plot.
+     *
+     * @param plotToPlant the plot which to plant a crop to.
+     */
+    public void pesticidePlot(PlotModel plotToPlant) {
+        if (plotToPlant.getCropInPlot() == null) {
+            return;
+        }
+        StorageModel storage = playerModel.getUserStorage();
+        switch (plotToPlant.getCropInPlot().getCropName()) {
+            case ("Corn") :
+                plotToPlant.setCropInPlot(storage.getInventory().get(3));
+                storage.setNewCropAmount(storage.getInventory().get(0).getCropQuantity() - 1, 0);
+                storage.setNewCropAmount(storage.getInventory().get(3).getCropQuantity() + 1, 3);
+                break;
+            case ("Potato") :
+                plotToPlant.setCropInPlot(storage.getInventory().get(4));
+                storage.setNewCropAmount(storage.getInventory().get(1).getCropQuantity() - 1, 1);
+                storage.setNewCropAmount(storage.getInventory().get(4).getCropQuantity() + 1, 4);
+                break;
+            case ("Tomato") :
+                plotToPlant.setCropInPlot(storage.getInventory().get(5));
+                storage.setNewCropAmount(storage.getInventory().get(2).getCropQuantity() - 1, 2);
+                storage.setNewCropAmount(storage.getInventory().get(5).getCropQuantity() + 1, 5);
+                break;
+        }
     }
 
     /**
