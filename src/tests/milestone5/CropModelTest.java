@@ -65,13 +65,16 @@ public class CropModelTest {
     }
 
     /**
-     * Testing the crop getHasPesticide method
+     * Testing the crop hasPesticide getter
      */
     @Test
     public void testGetHasPesticide() {
         assertFalse(cropModel.getHasPesticide());
     }
 
+    /**
+     * Testing the crop hasPesticide setter
+     */
     @Test
     public void testSetHasPesticide() {
         cropModel.setHasPesticide(true);
