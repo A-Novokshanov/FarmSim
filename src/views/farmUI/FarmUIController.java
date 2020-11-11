@@ -483,7 +483,7 @@ public class FarmUIController {
             for (int i = 0; i < 10; i++) {
                 if (listPlots.get(i).getCropInPlot() != null) {
                     if (listPlots.get(i).getWaterValue() > 0
-                            || listPlots.get(i).getWaterValue() <= 6) {
+                            && listPlots.get(i).getWaterValue() <= 6) {
                         listPlots.get(i).setWaterValue(
                                 listPlots.get(i).getWaterValue() + waterRainChange);
                     }
@@ -496,7 +496,7 @@ public class FarmUIController {
             for (int i = 0; i < 10; i++) {
                 if (listPlots.get(i).getCropInPlot() != null) {
                     if (listPlots.get(i).getWaterValue() > 0
-                            || listPlots.get(i).getWaterValue() <= 6) {
+                            && listPlots.get(i).getWaterValue() <= 6) {
                         if (listPlots.get(i).getWaterValue() - waterDroughtChange < 0) {
                             listPlots.get(i).setWaterValue(0);
                         } else {
@@ -524,7 +524,7 @@ public class FarmUIController {
                     }
                 }
             }
-            textEvent.setText("Locust Swarm");
+            textEvent.setText("Locusts");
             break;
         default:
             textEvent.setText("Normal");
