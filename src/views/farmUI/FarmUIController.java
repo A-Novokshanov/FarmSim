@@ -40,11 +40,17 @@ public class FarmUIController {
     @FXML
     private Circle dayCounter;
     @FXML
-    private Text numTomatoes;
+    private Text numCorn;
     @FXML
     private Text numPotatoes;
     @FXML
-    private Text numCorn;
+    private Text numTomatoes;
+    @FXML
+    private Text numPesticideCorn;
+    @FXML
+    private Text numPesticidePotatoes;
+    @FXML
+    private Text numPesticideTomatoes;
     @FXML
     private Text textEvent;
     @FXML
@@ -296,6 +302,12 @@ public class FarmUIController {
                 String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
         numTomatoes.setText(
                 String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+        numPesticideCorn.setText(
+                String.valueOf(storageViewModel.userInventory().get(3).getCropQuantity()));
+        numPesticidePotatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(4).getCropQuantity()));
+        numPesticideTomatoes.setText(
+                String.valueOf(storageViewModel.userInventory().get(5).getCropQuantity()));
         turnOffPlantBtnVisibility();
     }
 
