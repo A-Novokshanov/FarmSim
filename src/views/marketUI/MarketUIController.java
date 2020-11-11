@@ -18,10 +18,6 @@ import java.io.IOException;
 
 public class MarketUIController {
     @FXML
-    private JFXButton btnSeeds;
-    @FXML
-    private JFXButton btnAnimals;
-    @FXML
     private JFXButton btnSwap;
     @FXML
     private JFXButton btnFarm;
@@ -310,8 +306,6 @@ public class MarketUIController {
 
     public void buySwap(MouseEvent mouseEvent) {
         buyState = false;
-        btnAnimals.setVisible(false);
-        btnSeeds.setVisible(false);
         setActionLabel("Sell");
         resetValues();
         btnSwap.setText("Buy Crops");
@@ -321,8 +315,6 @@ public class MarketUIController {
 
     public void sellSwap(MouseEvent mouseEvent) {
         buyState = true;
-        btnAnimals.setVisible(true);
-        btnSeeds.setVisible(true);
         setActionLabel("Buy");
         resetValues();
         btnSwap.setText("Sell Crops");
