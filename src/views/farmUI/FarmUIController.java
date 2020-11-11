@@ -481,19 +481,29 @@ public class FarmUIController {
         case 0:
             int waterRainChange = eventViewModel.performRainEvent();
             for (int i = 0; i < 10; i++) {
-                listPlots.get(i).setWaterValue(
-                        listPlots.get(i).getWaterValue() + waterRainChange);
+                if (listPlots.get(i).getCropInPlot() != null) {
+                    if (listPlots.get(i).getWaterValue() > 0
+                            || listPlots.get(i).getWaterValue() <= 6) {
+                        listPlots.get(i).setWaterValue(
+                                listPlots.get(i).getWaterValue() + waterRainChange);
+                    }
+                }
             }
             textEvent.setText("Rain");
             break;
         case 1:
             int waterDroughtChange = eventViewModel.performDroughtEvent();
             for (int i = 0; i < 10; i++) {
-                if (listPlots.get(i).getWaterValue() - waterDroughtChange < 0) {
-                    listPlots.get(i).setWaterValue(0);
-                } else {
-                    listPlots.get(i).setWaterValue(
-                            listPlots.get(i).getWaterValue() - waterDroughtChange);
+                if (listPlots.get(i).getCropInPlot() != null) {
+                    if (listPlots.get(i).getWaterValue() > 0
+                            || listPlots.get(i).getWaterValue() <= 6) {
+                        if (listPlots.get(i).getWaterValue() - waterDroughtChange < 0) {
+                            listPlots.get(i).setWaterValue(0);
+                        } else {
+                            listPlots.get(i).setWaterValue(
+                                    listPlots.get(i).getWaterValue() - waterDroughtChange);
+                        }
+                    }
                 }
             }
             textEvent.setText("Drought");
