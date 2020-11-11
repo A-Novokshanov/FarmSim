@@ -136,7 +136,7 @@ public class PlotViewModel {
             plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
         }
         if (plotToIncrement.getFertilizerLevel() > 0) {
-            plotToIncrement.setWaterValue(plotToIncrement.getFertilizerLevel() - 1);
+            plotToIncrement.setFertilizerLevel(plotToIncrement.getFertilizerLevel() - 1);
         }
     }
 
@@ -173,21 +173,21 @@ public class PlotViewModel {
         }
         StorageModel storage = playerModel.getUserStorage();
         switch (plotToPlant.getCropInPlot().getCropName()) {
-            case ("Corn") :
-                plotToPlant.setCropInPlot(storage.getInventory().get(3));
-                storage.setNewCropAmount(storage.getInventory().get(0).getCropQuantity() - 1, 0);
-                storage.setNewCropAmount(storage.getInventory().get(3).getCropQuantity() + 1, 3);
-                break;
-            case ("Potato") :
-                plotToPlant.setCropInPlot(storage.getInventory().get(4));
-                storage.setNewCropAmount(storage.getInventory().get(1).getCropQuantity() - 1, 1);
-                storage.setNewCropAmount(storage.getInventory().get(4).getCropQuantity() + 1, 4);
-                break;
-            case ("Tomato") :
-                plotToPlant.setCropInPlot(storage.getInventory().get(5));
-                storage.setNewCropAmount(storage.getInventory().get(2).getCropQuantity() - 1, 2);
-                storage.setNewCropAmount(storage.getInventory().get(5).getCropQuantity() + 1, 5);
-                break;
+        case ("Corn") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(3));
+            storage.setNewCropAmount(storage.getInventory().get(0).getCropQuantity() - 1, 0);
+            storage.setNewCropAmount(storage.getInventory().get(3).getCropQuantity() + 1, 3);
+            break;
+        case ("Potato") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(4));
+            storage.setNewCropAmount(storage.getInventory().get(1).getCropQuantity() - 1, 1);
+            storage.setNewCropAmount(storage.getInventory().get(4).getCropQuantity() + 1, 4);
+            break;
+        case ("Tomato") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(5));
+            storage.setNewCropAmount(storage.getInventory().get(2).getCropQuantity() - 1, 2);
+            storage.setNewCropAmount(storage.getInventory().get(5).getCropQuantity() + 1, 5);
+            break;
         }
     }
 
