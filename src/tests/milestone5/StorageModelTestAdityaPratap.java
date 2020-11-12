@@ -17,8 +17,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class StorageModelTestAdityaPratap {
 
-    StorageModel storageModel;
-    ArrayList<CropModel> cropInventory = new ArrayList<>(15);
+    private StorageModel storageModel;
+    private ArrayList<CropModel> cropInventory = new ArrayList<>(15);
 
     @Before
     public void setup() {
@@ -42,7 +42,8 @@ public class StorageModelTestAdityaPratap {
 
 
         for (int i = 0; i < cropInventory.size(); i++) {
-            assertEquals(cropInventory.get(i).getCropName(), storageModel.getInventory().get(i).getCropName());
+            assertEquals(cropInventory.get(i).getCropName(),
+                    storageModel.getInventory().get(i).getCropName());
         }
 
     }
