@@ -37,32 +37,32 @@ public class WorkerViewModel {
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
         double workerWageMulti = 1.0;
         switch (difficulty) {
-            case "Casual":
-                workerWageMulti = 0.8;
-                break;
-            case "Normal":
-                workerWageMulti = 1.0;
-                break;
-            case "Veteran":
-                workerWageMulti = 1.2;
-                break;
-            default:
-                break;
+        case "Casual":
+            workerWageMulti = 0.8;
+            break;
+        case "Normal":
+            workerWageMulti = 1.0;
+            break;
+        case "Veteran":
+            workerWageMulti = 1.2;
+            break;
+        default:
+            break;
         }
         if (!checkPurchasableUpgrade(upgradePrice)) {
             return;
         }
         switch (worker.getWorkerType()) {
-            case 0:
-                worker.setWorkerType(1);
-                worker.setWorkerWage(10);
-                break;
-            case 1:
-                worker.setWorkerType(2);
-                worker.setWorkerWage(20);
-                break;
-            default:
-                break;
+        case 0:
+            worker.setWorkerType(1);
+            worker.setWorkerWage(10);
+            break;
+        case 1:
+            worker.setWorkerType(2);
+            worker.setWorkerWage(20);
+            break;
+        default:
+            break;
         }
     }
 
@@ -79,17 +79,17 @@ public class WorkerViewModel {
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
         double workerWageMulti = 1.0;
         switch (difficulty) {
-            case "Casual":
-                workerWageMulti = 0.8;
-                break;
-            case "Normal":
-                workerWageMulti = 1.0;
-                break;
-            case "Veteran":
-                workerWageMulti = 1.2;
-                break;
-            default:
-                break;
+        case "Casual":
+            workerWageMulti = 0.8;
+            break;
+        case "Normal":
+            workerWageMulti = 1.0;
+            break;
+        case "Veteran":
+            workerWageMulti = 1.2;
+            break;
+        default:
+            break;
         }
         double workerWage = workerModel.getWorkerWage() * workerWageMulti;
         if (currMoney < workerWage) {
@@ -102,6 +102,7 @@ public class WorkerViewModel {
 
     /**
      * Method to make the worker leave
+     * @param workerModel worker model
      */
     public void workerLeaves(WorkerModel workerModel) {
         workerModel.setWorkerType(0);

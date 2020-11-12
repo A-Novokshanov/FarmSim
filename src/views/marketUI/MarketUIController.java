@@ -138,7 +138,8 @@ public class MarketUIController {
                 pane4Value, pane5Value, pane6Value));
         listPanePrices = new ArrayList<>(Arrays.asList(pane1Price, pane2Price, pane3Price,
                 pane4Price, pane5Price, pane6Price));
-        listPaneQuantities = new ArrayList<>(Arrays.asList(pane1Quantity, pane2Quantity, pane3Quantity,
+        listPaneQuantities = new ArrayList<>(
+                Arrays.asList(pane1Quantity, pane2Quantity, pane3Quantity,
                 pane4Quantity, pane5Quantity, pane6Quantity));
         for (int i = 0; i < 6; i++) {
             if (storage.userInventory().get(i) != null) {
@@ -149,7 +150,7 @@ public class MarketUIController {
                 } else if (i == 4) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
                             player.getPlayer().getUserStorage().getTotalFertilizer() - 1));
-                } else if (i== 5) {
+                } else if (i == 5) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
                             player.getPlayer().getUserStorage().getTotalPesticide() - 1));
                 }
@@ -386,7 +387,7 @@ public class MarketUIController {
             } else if (!buyState) {
                 listPaneQuantities.get(i).setText(doubleDigitString(
                         storageViewModel.userInventory().get(i).getCropQuantity()));
-            }else if (i == 3) {
+            } else if (i == 3) {
                 listPaneQuantities.get(i).setText(doubleDigitString(
                         playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
             } else if (i == 4) {
