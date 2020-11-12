@@ -1,7 +1,11 @@
 package viewmodels;
 
 
-import models.*;
+import models.CropModel;
+import models.PlayerModel;
+import models.PlotModel;
+import models.StorageModel;
+import models.WorkerModel;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -85,7 +89,7 @@ public class PlotViewModel {
      *
      * @param harvestedPlot The plot to be harvested.
      * @param player        The player harvesting the plot.
-     * @param worker The worker that will be responsible for doing work
+     * @param worker        The worker that will be responsible for doing work
      */
     public void workerWork(PlotModel harvestedPlot, PlayerViewModel player, WorkerModel worker) {
         StorageViewModel storageVM = new StorageViewModel(player);
@@ -152,7 +156,7 @@ public class PlotViewModel {
      * Increments the daysOld of a PlotModel.
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
-     * @param player the player.
+     * @param player          the player.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
@@ -204,17 +208,17 @@ public class PlotViewModel {
         }
         StorageModel storage = playerModel.getUserStorage();
         switch (plotToPlant.getCropInPlot().getCropName()) {
-        case ("Corn") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(3));
-            break;
-        case ("Potato") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(4));
-            break;
-        case ("Tomato") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(5));
-            break;
-        default:
-            break;
+            case ("Corn"):
+                plotToPlant.setCropInPlot(storage.getInventory().get(3));
+                break;
+            case ("Potato"):
+                plotToPlant.setCropInPlot(storage.getInventory().get(4));
+                break;
+            case ("Tomato"):
+                plotToPlant.setCropInPlot(storage.getInventory().get(5));
+                break;
+            default:
+                break;
         }
     }
 
@@ -222,7 +226,7 @@ public class PlotViewModel {
      * Saves the plots from the users game when they click continue.
      *
      * @param plots      is list of all 8 plots the user has, each having a certain state.
-     * @param playerName the user name we are specifically pulling from the database for.
+     * @param playerName the user name we are specifically pulling from the database for.git
      */
     public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
         playerPlotService.addPlayerPlots(plots, playerName);
@@ -235,7 +239,7 @@ public class PlotViewModel {
      * @param playerName     is the name of the player.
      */
     public void updatePlotMaturity(int plotIdentifier, String playerName) {
-        playerPlotService.adjustPlotDaysOld(plotIdentifier, playerName);
+        playerPlotService.adjustPlotMaturity(plotIdentifier, playerName);
     }
 
     /**
@@ -247,5 +251,16 @@ public class PlotViewModel {
      */
     public void updatePlotStage(String playerName, String plotStage, int plotIdentifier) {
         playerPlotService.updatePlotStage(plotIdentifier, plotStage, playerName);
+    }
+
+    /**
+     * Updates the days of the plot.
+     *
+     * @param days       The number of days to increment by.
+     * @param identifier The identifier of the plot.
+     * @param playerName The name of the player.
+     */
+    public void updatePlotDays(int days, int identifier, String playerName) {
+        playerPlotService.adjustPlotDays(days, identifier, playerName);
     }
 }

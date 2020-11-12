@@ -32,6 +32,8 @@ public class PlayerPlotService {
             "SELECT * FROM plot where player=?";
     private static final String UPDATE_PLOT_STAGE =
             "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
+    private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = days + ? WHERE "
+            + "identifier = ? AND player = ?";
 
 
     /**
@@ -119,6 +121,15 @@ public class PlayerPlotService {
             }
         }
     }
+
+
+    /**
+     * Gets the player water value.
+     *
+     *
+     *
+     */
+
 
     /**
      * Adds the player plots to the database.
@@ -282,13 +293,35 @@ public class PlayerPlotService {
      * @param plotIdentifier The identifier of the plot.
      * @param playerName     The player whose plots need to be updated.
      */
-    public void adjustPlotDaysOld(int plotIdentifier, String playerName) {
+    public void adjustPlotMaturity(int plotIdentifier, String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
         try {
             preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_MATURITY);
             preparedStatement.setInt(1, plotIdentifier);
             preparedStatement.setInt(2, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public void adjustPlotDays(int days, int plotIdentifier, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_DAYS);
+            preparedStatement.setInt(1, days);
+            preparedStatement.setInt(2, plotIdentifier);
+            preparedStatement.setInt(3, playerId);
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
