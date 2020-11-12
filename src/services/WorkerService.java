@@ -1,7 +1,10 @@
 package services;
 
+import models.WorkerModel;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -15,6 +18,7 @@ public class WorkerService {
     private static final String ADD_WORKER = "INSERT INTO worker(type, wage) VALUES (?, ?)";
     private static final String UPDATE_WORKER_WAGE = "UPDATE worker SET wage = ? ";
     private static final String UPDATE_WORKER_TYPE = "UPDATE worker SET type = ?";
+    private static final String GET_WORKER = "SELECT  * FROM worker";
 
     private PreparedStatement preparedStatement;
 
@@ -117,4 +121,31 @@ public class WorkerService {
             }
         }
     }
+
+    public WorkerModel queryWorker() {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        WorkerModel workerModel;
+        if (isDbConnected(dbConnection)) {
+            try {
+                workerModel = new WorkerModel();
+                preparedStatement = dbConnection.prepareStatement(GET_WORKER);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                workerModel.setWorkerType(resultSet.getInt("type"));
+                workerModel.setWorkerWage(resultSet.getInt("wage"));
+
+                return workerModel;
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
 }
+

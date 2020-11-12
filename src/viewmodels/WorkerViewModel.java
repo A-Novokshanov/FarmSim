@@ -1,6 +1,5 @@
 package viewmodels;
 
-import javafx.concurrent.Worker;
 import models.PlayerModel;
 import models.WorkerModel;
 import services.WorkerService;
@@ -20,7 +19,7 @@ public class WorkerViewModel {
     /**
      * Constructor for worker view model/
      *
-     * @param player      is the player.
+     * @param player is the player.
      */
     public WorkerViewModel(PlayerModel player) {
         this.workerService = new WorkerService();
@@ -29,6 +28,7 @@ public class WorkerViewModel {
 
     /**
      * Method to upgrade the type of the worker
+     *
      * @param worker the worker model to try to upgrade the tier of
      */
     public void upgradeWorker(WorkerModel worker) {
@@ -37,32 +37,32 @@ public class WorkerViewModel {
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
         double workerWageMulti = 1.0;
         switch (difficulty) {
-        case "Casual":
-            workerWageMulti = 0.8;
-            break;
-        case "Normal":
-            workerWageMulti = 1.0;
-            break;
-        case "Veteran":
-            workerWageMulti = 1.2;
-            break;
-        default:
-            break;
+            case "Casual":
+                workerWageMulti = 0.8;
+                break;
+            case "Normal":
+                workerWageMulti = 1.0;
+                break;
+            case "Veteran":
+                workerWageMulti = 1.2;
+                break;
+            default:
+                break;
         }
         if (!checkPurchasableUpgrade(upgradePrice)) {
             return;
         }
         switch (worker.getWorkerType()) {
-        case 0:
-            worker.setWorkerType(1);
-            worker.setWorkerWage(10);
-            break;
-        case 1:
-            worker.setWorkerType(2);
-            worker.setWorkerWage(20);
-            break;
-        default:
-            break;
+            case 0:
+                worker.setWorkerType(1);
+                worker.setWorkerWage(10);
+                break;
+            case 1:
+                worker.setWorkerType(2);
+                worker.setWorkerWage(20);
+                break;
+            default:
+                break;
         }
     }
 
@@ -79,17 +79,17 @@ public class WorkerViewModel {
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
         double workerWageMulti = 1.0;
         switch (difficulty) {
-        case "Casual":
-            workerWageMulti = 0.8;
-            break;
-        case "Normal":
-            workerWageMulti = 1.0;
-            break;
-        case "Veteran":
-            workerWageMulti = 1.2;
-            break;
-        default:
-            break;
+            case "Casual":
+                workerWageMulti = 0.8;
+                break;
+            case "Normal":
+                workerWageMulti = 1.0;
+                break;
+            case "Veteran":
+                workerWageMulti = 1.2;
+                break;
+            default:
+                break;
         }
         double workerWage = workerModel.getWorkerWage() * workerWageMulti;
         if (currMoney < workerWage) {
@@ -110,6 +110,7 @@ public class WorkerViewModel {
 
     /**
      * Current Price to upgrade worker
+     *
      * @param worker the worker model to check the upgrade price of
      * @return the price to upgrade the worker from its current tier
      */
@@ -164,5 +165,7 @@ public class WorkerViewModel {
         workerService.adjustWorkerType(workerModel.getWorkerType());
     }
 
-
+    public WorkerModel getWorkerDatabase() {
+        return workerService.queryWorker();
+    }
 }

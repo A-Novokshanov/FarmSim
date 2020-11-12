@@ -127,6 +127,11 @@ public class StorageModel {
 
     }
 
+    /**
+     * BLANK
+     *
+     * @return blank.
+     */
     public int getInventorySize() {
         return cropInventory.size();
     }
