@@ -32,12 +32,18 @@ public class WorkerViewModel {
     public void upgradeWorker() {
         switch (workerModel.getWorkerType()) {
         case 0:
-            workerModel.setWorkerType(1);
-            workerModel.setWorkerWage(10);
+            if (player.getUserCurrentMoney() > 500) {
+                workerModel.setWorkerType(1);
+                workerModel.setWorkerWage(10);
+                player.setUserCurrentMoney(player.getUserCurrentMoney() - 500);
+            }
             break;
         case 1:
-            workerModel.setWorkerType(2);
-            workerModel.setWorkerWage(20);
+            if (player.getUserCurrentMoney() > 1000) {
+                workerModel.setWorkerType(2);
+                workerModel.setWorkerWage(20);
+                player.setUserCurrentMoney(player.getUserCurrentMoney() - 1000);
+            }
             break;
         default:
             break;
