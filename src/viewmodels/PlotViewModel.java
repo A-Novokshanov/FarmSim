@@ -235,43 +235,57 @@ public class PlotViewModel {
     /**
      * Updates the plot maturity by the time since planted.
      *
-     * @param plotIdentifier is the identifier of the plot.
-     * @param playerName     is the name of the player.
+     * @param plot        The plotModel that contains the plotIdentifier.
+     * @param playerModel The playerModel containing the player information.
      */
-    public void updatePlotMaturity(int plotIdentifier, String playerName) {
-        playerPlotService.adjustPlotMaturity(plotIdentifier, playerName);
+    public void updatePlotMaturity(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotMaturity(plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
      * Method that sets the plot to a new stage.
      *
-     * @param playerName     the player who owns it.
-     * @param plotStage      the stage the plot is at.
-     * @param plotIdentifier what plot we want.
+     * @param playerModel The playerModel containing the player information.
+     * @param plot        The plot model that contains the updated information.
      */
-    public void updatePlotStage(String playerName, String plotStage, int plotIdentifier) {
-        playerPlotService.updatePlotStage(plotIdentifier, plotStage, playerName);
+    public void updatePlotStage(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.updatePlotStage(plot.getPlotIdentifier(),
+                plot.getPlotStage(), playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
      * Updates the days of the plot.
      *
-     * @param days       The number of days to increment by.
-     * @param identifier The identifier of the plot.
-     * @param playerName The name of the player.
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
      */
-    public void updatePlotDaysDatabase(int days, int identifier, String playerName) {
-        playerPlotService.adjustPlotDays(days, identifier, playerName);
+    public void updatePlotDaysDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotDays(plot.getDaysOld(), plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
-
-    public void updatePlotFertilizerDatabase(int fertAmount, int plotIdentifier, String playerName) {
-        playerPlotService.adjustPlotFertilizer(fertAmount, plotIdentifier, playerName);
+    /**
+     * Updates the fertilizer level of the plot.
+     *
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
+     */
+    public void updatePlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotFertilizer(plot.getFertilizerLevel(),
+                plot.getPlotIdentifier(), playerModel.getPlayerSettings().getPlayerName());
 
     }
 
-    public void getPlotFertilizerDatabase(int plotIdentifier, String playerName) {
-        playerPlotService.queryPlotFertilizer(plotIdentifier, playerName);
+    /**
+     * Gets the fertilizer level of the plot.
+     *
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
+     */
+    public void getPlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.queryPlotFertilizer(plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
 

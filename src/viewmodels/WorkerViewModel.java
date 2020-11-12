@@ -98,5 +98,21 @@ public class WorkerViewModel {
         workerService.addWorker(workerModel.getWorkerType(), workerModel.getWorkerWage());
     }
 
+    /**
+     * Updates the worker wage in the database.
+     *
+     * @param workerModel The worker model class that contains the new wage.
+     */
+    public void updateWorkerWageDatabase(WorkerModel workerModel) {
+        workerService.adjustWorkerWage(workerModel.getWorkerWage());
+    }
+
+    /**
+     * @param workerModel The worker model class the contains the new type.
+     */
+    public void updateWorkerTypeDatabase(WorkerModel workerModel) {
+        workerService.adjustWorkerType(workerModel.getWorkerType());
+    }
+
 
 }

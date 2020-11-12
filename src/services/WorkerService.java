@@ -13,6 +13,9 @@ import java.sql.SQLException;
 public class WorkerService {
 
     private static final String ADD_WORKER = "INSERT INTO worker(type, wage) VALUES (?, ?)";
+    private static final String UPDATE_WORKER_WAGE = "UPDATE worker SET wage = ? ";
+    private static final String UPDATE_WORKER_TYPE = "UPDATE worker SET type = ?";
+
     private PreparedStatement preparedStatement;
 
     /**
@@ -65,7 +68,53 @@ public class WorkerService {
                 throwables.printStackTrace();
             }
         }
+    }
 
+    /**
+     * Adjusts the worker's wage in the database.
+     *
+     * @param workerWage The wage to update by.
+     */
+    public void adjustWorkerWage(int workerWage) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_WORKER_WAGE);
+            preparedStatement.setInt(1, workerWage);
+            preparedStatement.execute();
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Adjusts the worker's type in the database.
+     *
+     * @param workerType The type of the worker to update by.
+     */
+    public void adjustWorkerType(int workerType) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_WORKER_TYPE);
+            preparedStatement.setInt(1, workerType);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
 }
