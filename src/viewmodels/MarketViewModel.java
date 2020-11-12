@@ -112,7 +112,8 @@ public class MarketViewModel {
         }
         if (equipment.equals("Fertilizer")) {
             if (checkPurchasable(100, quantity)) {
-                player.getPlayer().getUserStorage().updateTotalFertilizer(quantity);
+                player.getPlayer().getUserStorage().setTotalFertilizer(
+                        player.getPlayer().getUserStorage().getTotalFertilizer() + quantity);
                 PlayerModel curPlayer = player.getPlayer();
                 double money = calculateCropPrice(100,
                         player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
@@ -123,7 +124,8 @@ public class MarketViewModel {
             }
         } else if (equipment.equals("Pesticide")) {
             if (checkPurchasable(100, quantity)) {
-                player.getPlayer().getUserStorage().updateTotalPesticide(quantity);
+                player.getPlayer().getUserStorage().setTotalPesticide(
+                        player.getPlayer().getUserStorage().getTotalPesticide() + quantity);
                 PlayerModel curPlayer = player.getPlayer();
                 double money = calculateCropPrice(100,
                         player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
