@@ -19,6 +19,8 @@ public class StorageViewModel {
     private PlayerViewModel player;
     private PlayerSettingsService playerInfoDatabase;
     private PlayerInventoryService playerInventoryService;
+    private int totalFertilizer;
+    private int totalPesticide;
 
 
     /**
@@ -31,6 +33,8 @@ public class StorageViewModel {
         this.storageModel = player.getPlayer().getUserStorage();
         this.playerInfoDatabase = new PlayerSettingsService();
         this.playerInventoryService = new PlayerInventoryService();
+        this.totalFertilizer = 0;
+        this.totalPesticide = 0;
     }
 
     /**
@@ -58,6 +62,32 @@ public class StorageViewModel {
             playerInventoryService.adjustCropQuantity(crop.getCropName(),
                     quantity, player.getPlayer().getPlayerSettings().getPlayerName());
         }
+    }
+
+    /**
+     * Updating the total fertilizer variable
+     *
+     * @param difference difference to add to the total
+     */
+    public void updateTotalFertilizer(int difference) {
+        this.totalFertilizer += difference;
+    }
+
+    /**
+     * Updating the total pesticide variable
+     *
+     * @param difference difference to add to the total
+     */
+    public void updateTotalPesticide(int difference) {
+        this.totalPesticide += difference;
+    }
+
+    public int getTotalFertilizer() {
+        return totalFertilizer;
+    }
+
+    public int getTotalPesticide() {
+        return totalPesticide;
     }
 
     /**

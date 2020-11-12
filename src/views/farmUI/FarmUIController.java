@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.beans.binding.NumberBinding;
 import models.CropModel;
 import models.PlotModel;
 import viewmodels.EventViewModel;
@@ -379,21 +378,10 @@ public class FarmUIController {
     }
 
     private void updateFertilizerLevel(PlotModel plot, Text fertilizerLevel) {
-//        int additionalFertilizer = (
-//                plot.getFertilizerLevel() - Integer.parseInt(fertilizerLevel.getText())
-//        );
         if (plot.getFertilizerLevel() > 0) {
             String str = doubleDigitString(plot.getFertilizerLevel());
             fertilizerLevel.setText(str);
         }
-//        int newTotalFertilizer = (
-//                additionalFertilizer + Integer.parseInt(txtFertilizerCount.getText())
-//        );
-//        if (newTotalFertilizer >= 0) {
-//            txtFertilizerCount.setText(Integer.toString(newTotalFertilizer));
-//        } else {
-//            txtFertilizerCount.setText(Integer.toString(0));
-//        }
     }
 
     public void setAllInitialMaturity() {
@@ -566,6 +554,10 @@ public class FarmUIController {
         if (listPlots.get(plotNum) != null) {
             if (listPlots.get(plotNum).getFertilizerLevel() < 9) {
                 this.plotViewModel.fertilizePlot(listPlots.get(plotNum));
+                storageViewModel.updateTotalFertilizer(-2);
+                txtFertilizerCount.setText(
+                        doubleDigitString(storageViewModel.getTotalFertilizer())
+                );
                 listPlotFertilizerLevels.get(plotNum).setText(
                         doubleDigitString(listPlots.get(plotNum).getFertilizerLevel()));
             }
@@ -577,6 +569,10 @@ public class FarmUIController {
             if (listPlots.get(plotNum).getCropInPlot() != null
                     && !listPlots.get(plotNum).getCropInPlot().getHasPesticide()) {
                 this.plotViewModel.pesticidePlot(listPlots.get(plotNum));
+                storageViewModel.updateTotalPesticide(-1);
+                txtPesticideCount.setText(
+                        doubleDigitString(storageViewModel.getTotalPesticide())
+                );
                 listPlotNameImages.get(plotNum).setImage(
                         chooseCropImage(listPlots.get(plotNum).getCropInPlot()));
             }
