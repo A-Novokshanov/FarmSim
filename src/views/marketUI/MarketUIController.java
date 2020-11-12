@@ -281,7 +281,7 @@ public class MarketUIController {
      * @param count new total fertilizer
      */
     private void buyFertilizer(int count) {
-        this.storageViewModel.updateTotalFertilizer(count);
+        this.playerViewModel.getPlayer().getUserStorage().updateTotalFertilizer(count);
     }
 
     /**
@@ -290,7 +290,7 @@ public class MarketUIController {
      * @param count new total pesticide
      */
     private void buyPesticide(int count) {
-        this.storageViewModel.updateTotalPesticide(count);
+        this.playerViewModel.getPlayer().getUserStorage().updateTotalPesticide(count);
     }
 
     private void setActionLabel(String str) {

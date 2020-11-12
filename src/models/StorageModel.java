@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class StorageModel {
     private ArrayList<CropModel> cropInventory;
+    private int totalFertilizer;
+    private int totalPesticide;
 
     /**
      * Constructor for the cropInventory that creates the
@@ -31,6 +33,8 @@ public class StorageModel {
         cropInventory.add(cornPest);
         cropInventory.add(potatoPest);
         cropInventory.add(tomatoPest);
+        totalFertilizer = 1;
+        totalPesticide = 1;
     }
 
     /**
@@ -163,4 +167,39 @@ public class StorageModel {
         return 15;
     }
 
+    /**
+     * Updating the total fertilizer variable
+     *
+     * @param difference difference to add to the total
+     */
+    public void updateTotalFertilizer(int difference) {
+        this.totalFertilizer += difference;
+    }
+
+    /**
+     * Updating the total pesticide variable
+     *
+     * @param difference difference to add to the total
+     */
+    public void updateTotalPesticide(int difference) {
+        this.totalPesticide += difference;
+    }
+
+    /**
+     * Getter for the total fertilizer variable
+     *
+     * @return the total fertilizer count
+     */
+    public int getTotalFertilizer() {
+        return totalFertilizer;
+    }
+
+    /**
+     * Getter for the total pesticide variable
+     *
+     * @return the total pesticide count
+     */
+    public int getTotalPesticide() {
+        return totalPesticide;
+    }
 }
