@@ -82,10 +82,20 @@ public class StorageViewModel {
         this.totalPesticide += difference;
     }
 
+    /**
+     * Getter for the total fertilizer variable
+     *
+     * @return the total fertilizer count
+     */
     public int getTotalFertilizer() {
         return totalFertilizer;
     }
 
+    /**
+     * Getter for the total pesticide variable
+     *
+     * @return the total pesticide count
+     */
     public int getTotalPesticide() {
         return totalPesticide;
     }
