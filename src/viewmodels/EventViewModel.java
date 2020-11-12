@@ -53,6 +53,8 @@ public class EventViewModel {
                 return toReturn;
             }
             break;
+        default:
+            return -1;
         }
         return -1;
     }
@@ -110,8 +112,11 @@ public class EventViewModel {
                 return 1;
             }
             break;
+        default:
+            return 0;
         }
-        return 0; // If chooseEvent returns 2,
+        return 0;
+        // If chooseEvent returns 2,
         // have a variable set to 0 and call this method on each plot,
         // adding the return value to variable.
     }

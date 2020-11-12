@@ -39,6 +39,8 @@ public class WorkerViewModel {
             workerModel.setWorkerType(2);
             workerModel.setWorkerWage(20);
             break;
+        default:
+            break;
         }
     }
 
@@ -62,6 +64,8 @@ public class WorkerViewModel {
             break;
         case "Veteran":
             workerWageMulti = 1.2;
+            break;
+        default:
             break;
         }
         double workerWage = workerModel.getWorkerWage() * workerWageMulti;

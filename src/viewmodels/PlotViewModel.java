@@ -213,6 +213,8 @@ public class PlotViewModel {
         case ("Tomato") :
             plotToPlant.setCropInPlot(storage.getInventory().get(5));
             break;
+        default:
+            break;
         }
     }
 
