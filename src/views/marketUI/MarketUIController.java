@@ -123,7 +123,7 @@ public class MarketUIController {
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
     private WorkerViewModel workerViewModel;
-    private WorkerModel workerModel;
+    private WorkerModel workerModel = new WorkerModel();
     private ArrayList<Text> listPaneValues;
     private ArrayList<Text> listPanePrices;
     private ArrayList<Text> listPaneQuantities;
