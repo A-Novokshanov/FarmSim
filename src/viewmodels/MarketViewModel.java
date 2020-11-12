@@ -58,7 +58,7 @@ public class MarketViewModel {
      * @param crop     The crop to be added to the market.
      * @param quantity amount of crop.
      */
-    public void purchaseItems(CropModel crop, int quantity) {
+    public void purchaseCrops(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
             storageViewModel.addToInventory(crop, quantity);
             PlayerModel curPlayer = player.getPlayer();
@@ -121,7 +121,7 @@ public class MarketViewModel {
                 this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
                         .getPlayerSettings().getPlayerName());
             }
-        } else {
+        } else if (equipment.equals("Pesticide")) {
             if (checkPurchasable(100, quantity)) {
                 player.getPlayer().getUserStorage().updateTotalPesticide(quantity);
                 PlayerModel curPlayer = player.getPlayer();

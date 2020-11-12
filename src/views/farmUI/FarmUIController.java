@@ -146,6 +146,7 @@ public class FarmUIController {
     private Text textFertilizerLevel9;
     @FXML
     private Text textFertilizerLevel10;
+
     @FXML
     private Text txtFertilizerCount;
     @FXML
@@ -222,6 +223,10 @@ public class FarmUIController {
         this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
+        this.txtFertilizerCount.setText(doubleDigitString(
+                this.playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+        this.txtPesticideCount.setText(doubleDigitString(
+                this.playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
         setUpPlotImages();
         setUpPlotNameImages();
         setUpPlotWaterValues();
@@ -545,14 +550,12 @@ public class FarmUIController {
 
     public void fertilizePlot(int plotNum) {
         if (listPlots.get(plotNum) != null) {
-            if (listPlots.get(plotNum).getFertilizerLevel() < 9) {
+            if (listPlots.get(plotNum).getFertilizerLevel() < 9
+                    && playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() > 1) {
                 this.plotViewModel.fertilizePlot(listPlots.get(plotNum));
-                playerViewModel.getPlayer().getUserStorage().updateTotalFertilizer(-2);
-                txtFertilizerCount.setText(
-                        doubleDigitString(
-                                playerViewModel.getPlayer().getUserStorage().getTotalFertilizer()
-                        )
-                );
+                playerViewModel.getPlayer().getUserStorage().updateTotalFertilizer(-1);
+                txtFertilizerCount.setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
                 listPlotFertilizerLevels.get(plotNum).setText(
                         doubleDigitString(listPlots.get(plotNum).getFertilizerLevel()));
             }
@@ -562,14 +565,12 @@ public class FarmUIController {
     public void pesticidePlot(int plotNum) {
         if (listPlots.get(plotNum) != null) {
             if (listPlots.get(plotNum).getCropInPlot() != null
-                    && !listPlots.get(plotNum).getCropInPlot().getHasPesticide()) {
+                    && !listPlots.get(plotNum).getCropInPlot().getHasPesticide()
+                    && playerViewModel.getPlayer().getUserStorage().getTotalPesticide() > 1) {
                 this.plotViewModel.pesticidePlot(listPlots.get(plotNum));
                 playerViewModel.getPlayer().getUserStorage().updateTotalPesticide(-1);
-                txtPesticideCount.setText(
-                        doubleDigitString(
-                                playerViewModel.getPlayer().getUserStorage().getTotalPesticide()
-                        )
-                );
+                txtPesticideCount.setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
                 listPlotNameImages.get(plotNum).setImage(
                         chooseCropImage(listPlots.get(plotNum).getCropInPlot()));
             }

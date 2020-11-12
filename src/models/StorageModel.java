@@ -33,8 +33,8 @@ public class StorageModel {
         cropInventory.add(cornPest);
         cropInventory.add(potatoPest);
         cropInventory.add(tomatoPest);
-        totalFertilizer = 1;
-        totalPesticide = 1;
+        totalFertilizer = 3;
+        totalPesticide = 3;
     }
 
     /**
@@ -129,22 +129,6 @@ public class StorageModel {
 
     public int getInventorySize() {
         return cropInventory.size();
-    }
-
-    /**
-     * Checks to see if the crop passed in is valid to sell.
-     *
-     * @param crop the crop we want to check is valid to sell.
-     * @return if its valid to sell or not.
-     */
-    public boolean upForSale(CropModel crop) {
-        String[] cropArray = new String[]{"Tomato", "Potato", "Corn"};
-        for (String i : cropArray) {
-            if (i.equals(crop.getCropName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

@@ -18,6 +18,7 @@ import views.farmUI.FarmUIController;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MarketUIController {
@@ -126,21 +127,26 @@ public class MarketUIController {
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
-
-        if (storage.userInventory().get(0) != null) {
-            setPrice(pane1Value, 0, pane1Price);
-            pane1Quantity.setText(doubleDigitString(
-                    storage.userInventory().get(0).getCropQuantity()));
-        }
-        if (storage.userInventory().get(1) != null) {
-            setPrice(pane2Value, 1, pane2Price);
-            pane2Quantity.setText(doubleDigitString(
-                    storage.userInventory().get(1).getCropQuantity()));
-        }
-        if (storage.userInventory().get(2) != null) {
-            setPrice(pane3Value, 2, pane3Price);
-            pane3Quantity.setText(doubleDigitString(
-                    storage.userInventory().get(2).getCropQuantity()));
+        listPaneValues = new ArrayList<>(Arrays.asList(pane1Value, pane2Value, pane3Value,
+                pane4Value, pane5Value, pane6Value));
+        listPanePrices = new ArrayList<>(Arrays.asList(pane1Price, pane2Price, pane3Price,
+                pane4Price, pane5Price, pane6Price));
+        listPaneQuantities = new ArrayList<>(Arrays.asList(pane1Quantity, pane2Quantity, pane3Quantity,
+                pane4Quantity, pane5Quantity, pane6Quantity));
+        for (int i = 0; i < 6; i++) {
+            if (storage.userInventory().get(i) != null) {
+                setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
+                if (i < 3) {
+                    listPaneQuantities.get(i).setText(doubleDigitString(
+                            storage.userInventory().get(i).getCropQuantity()));
+                } else if (i == 4) {
+                    listPaneQuantities.get(i).setText(doubleDigitString(
+                            player.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+                } else if (i== 5) {
+                    listPaneQuantities.get(i).setText(doubleDigitString(
+                            player.getPlayer().getUserStorage().getTotalPesticide() - 1));
+                }
+            }
         }
         pane6Action.setVisible(false);
         sellSwap(mouseEvent);
@@ -166,9 +172,21 @@ public class MarketUIController {
         setPrice(quantity, crop, price);
     }
 
-    private void setPrice(Text quantity, int crop, Text price) {
-        if (crop < 3) {
-            double basePrice = storageViewModel.userInventory().get(crop).getCropValue();
+    private void setPrice(Text quantity, int index, Text price) {
+        if (index < 3) {
+            double basePrice = storageViewModel.userInventory().get(index).getCropValue();
+            String curDifficulty =
+                    playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+            double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+            price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
+        } else if (!buyState && index < 6) {
+            double basePrice = storageViewModel.userInventory().get(index).getCropValue();
+            String curDifficulty =
+                    playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+            double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+            price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
+        } else if (buyState && index < 5) {
+            double basePrice = 100;
             String curDifficulty =
                     playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
             double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
@@ -176,24 +194,34 @@ public class MarketUIController {
         }
     }
 
-    private void buyQuantity(Text quantity, int crop, Text iQuantity) {
-        int num = Integer.parseInt(quantity.getText());
-        if (crop < 3) {
-            marketViewModel.purchaseItems(
-                    storageViewModel.userInventory().get(crop), num);
-            iQuantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(crop).getCropQuantity()));
+    private void buyQuantity(Text value, int index, Text quantity) {
+        int valueNum = Integer.parseInt(value.getText());
+        if (index < 3) {
+            marketViewModel.purchaseCrops(
+                    storageViewModel.userInventory().get(index), valueNum);
+            quantity.setText(doubleDigitString(
+                    storageViewModel.userInventory().get(index).getCropQuantity()));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        } else if (index == 3) {
+            buyFertilizer(valueNum);
+            quantity.setText(doubleDigitString(
+                    playerViewModel.getPlayer().getUserStorage().getTotalFertilizer()));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        } else if (index == 4) {
+            buyPesticide(valueNum);
+            quantity.setText(doubleDigitString(
+                    playerViewModel.getPlayer().getUserStorage().getTotalPesticide()));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
     }
 
-    private void sellQuantity(Text quantity, int crop, Text iQuantity) {
-        if (crop < 3) {
-            int num = Integer.parseInt(quantity.getText());
+    private void sellQuantity(Text value, int index, Text quantity) {
+        if (index < 6) {
+            int num = Integer.parseInt(value.getText());
             storageViewModel.sellItemFromInventory(
-                    storageViewModel.userInventory().get(crop), num);
-            iQuantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(crop).getCropQuantity()));
+                    storageViewModel.userInventory().get(index), num);
+            quantity.setText(doubleDigitString(
+                    storageViewModel.userInventory().get(index).getCropQuantity()));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
     }
@@ -247,7 +275,7 @@ public class MarketUIController {
     }
 
     public void upQuantity4() {
-        upQuantity(pane4Value, 3, pane4Quantity);
+        upQuantity(pane4Value, 3, pane4Price);
     }
 
     public void downQuantity4() {
@@ -302,7 +330,7 @@ public class MarketUIController {
      * @param count new total fertilizer
      */
     private void buyFertilizer(int count) {
-        this.playerViewModel.getPlayer().getUserStorage().updateTotalFertilizer(count);
+        this.marketViewModel.purchaseItems("Fertilizer", count);
     }
 
     /**
@@ -311,7 +339,7 @@ public class MarketUIController {
      * @param count new total pesticide
      */
     private void buyPesticide(int count) {
-        this.playerViewModel.getPlayer().getUserStorage().updateTotalPesticide(count);
+        this.marketViewModel.purchaseItems("Pesticide", count);
     }
 
     private void setActionLabel(String str) {
@@ -333,9 +361,27 @@ public class MarketUIController {
     }
 
     private void resetPrices() {
-        setPrice(pane1Value, 0, pane1Price);
-        setPrice(pane2Value, 1, pane2Price);
-        setPrice(pane3Value, 2, pane3Price);
+        for (int i = 0; i < 6; i++) {
+            setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
+        }
+    }
+
+    private void resetQuantities() {
+        for (int i = 0; i < 6; i++) {
+            if (i < 3) {
+                listPaneQuantities.get(i).setText(doubleDigitString(
+                        storageViewModel.userInventory().get(i).getCropQuantity()));
+            } else if (!buyState) {
+                listPaneQuantities.get(i).setText(doubleDigitString(
+                        storageViewModel.userInventory().get(i).getCropQuantity()));
+            }else if (i == 3) {
+                listPaneQuantities.get(i).setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+            } else if (i == 4) {
+                listPaneQuantities.get(i).setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
+            }
+        }
     }
 
     private String doubleDigitString(int num) {
@@ -352,6 +398,8 @@ public class MarketUIController {
         buyState = false;
         setActionLabel("Sell");
         resetValues();
+        resetPrices();
+        resetQuantities();
         btnSwap.setText("Buy Crops");
         pane4Img.setImage(cornPesticideImg);
         pane5Img.setImage(potatoPesticideImg);
@@ -361,7 +409,6 @@ public class MarketUIController {
         tierPane.setVisible(false);
         fireButton.setVisible(false);
         upgradeButton.setVisible(false);
-        resetPrices();
         btnSwap.setOnMouseClicked(this::sellSwap);
     }
 
@@ -369,6 +416,8 @@ public class MarketUIController {
         buyState = true;
         setActionLabel("Buy");
         resetValues();
+        resetPrices();
+        resetQuantities();
         btnSwap.setText("Sell Crops");
         pane4Img.setImage(fertilizerImg);
         pane5Img.setImage(pesticideImg);
@@ -378,7 +427,6 @@ public class MarketUIController {
         tierPane.setVisible(true);
         fireButton.setVisible(true);
         upgradeButton.setVisible(true);
-        resetPrices();
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
