@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.beans.binding.NumberBinding;
 import models.CropModel;
 import models.PlotModel;
 import viewmodels.EventViewModel;
@@ -146,6 +147,10 @@ public class FarmUIController {
     private Text textFertilizerLevel9;
     @FXML
     private Text textFertilizerLevel10;
+    @FXML
+    private Text txtFertilizerCount;
+    @FXML
+    private Text txtPesticideCount;
 
     private ArrayList<PlotModel> listPlots = new ArrayList<>();
     private ArrayList<ImageView> listPlotImages = new ArrayList<>();
@@ -374,10 +379,21 @@ public class FarmUIController {
     }
 
     private void updateFertilizerLevel(PlotModel plot, Text fertilizerLevel) {
+//        int additionalFertilizer = (
+//                plot.getFertilizerLevel() - Integer.parseInt(fertilizerLevel.getText())
+//        );
         if (plot.getFertilizerLevel() > 0) {
             String str = doubleDigitString(plot.getFertilizerLevel());
             fertilizerLevel.setText(str);
         }
+//        int newTotalFertilizer = (
+//                additionalFertilizer + Integer.parseInt(txtFertilizerCount.getText())
+//        );
+//        if (newTotalFertilizer >= 0) {
+//            txtFertilizerCount.setText(Integer.toString(newTotalFertilizer));
+//        } else {
+//            txtFertilizerCount.setText(Integer.toString(0));
+//        }
     }
 
     public void setAllInitialMaturity() {

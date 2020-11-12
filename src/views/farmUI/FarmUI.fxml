@@ -515,17 +515,27 @@
                </font>
             </JFXButton>
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
-            <Text layoutX="1155.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fertilizers: 00" textAlignment="RIGHT">
+            <Text layoutX="1155.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fertilizers:" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
-            <Text layoutX="1160.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesticide: 00" textAlignment="RIGHT">
+            <Text layoutX="1157.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesticide:" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
             <Text fx:id="textEvent" layoutX="1075.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normal" underline="true">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtFertilizerCount" layoutX="1252.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="RIGHT">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtPesticideCount" layoutX="1252.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>
