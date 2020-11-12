@@ -175,18 +175,12 @@ public class PlotViewModel {
         switch (plotToPlant.getCropInPlot().getCropName()) {
         case ("Corn") :
             plotToPlant.setCropInPlot(storage.getInventory().get(3));
-            storage.setNewCropAmount(-1, 0);
-            storage.setNewCropAmount(1, 3);
             break;
         case ("Potato") :
             plotToPlant.setCropInPlot(storage.getInventory().get(4));
-            storage.setNewCropAmount(-1, 1);
-            storage.setNewCropAmount(1, 4);
             break;
         case ("Tomato") :
             plotToPlant.setCropInPlot(storage.getInventory().get(5));
-            storage.setNewCropAmount(-1, 2);
-            storage.setNewCropAmount(1, 5);
             break;
         }
     }
