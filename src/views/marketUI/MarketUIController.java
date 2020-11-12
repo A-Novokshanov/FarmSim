@@ -221,54 +221,73 @@ public class MarketUIController {
         }
     }
 
+    public void upQuantity4() {
+        upQuantity(panel4Value, 3, panel4Quantity);
+    }
+
+    public void downQuantity4() {
+        downQuantity(panel4Value, 3, panel4Price);
+    }
+
+    public void panel4BuySell() {
+        if (buyState) {
+            buyQuantity(panel4Value, 3, panel4Quantity);
+            buyFertilizer(Integer.parseInt(panel4Quantity.getText()));
+        } else {
+            sellQuantity(panel4Value, 3, panel4Quantity);
+        }
+    }
+
     public void upQuantity5() {
-        // upQuantity(panel5Value, 4, panel5Price);
+        upQuantity(panel5Value, 4, panel5Price);
     }
 
     public void downQuantity5() {
-        downQuantity(panel4Value, 4, panel4Price);
+        downQuantity(panel5Value, 4, panel5Price);
     }
 
     public void panel5BuySell() {
         if (buyState) {
-            buyQuantity(panel4Value, 4, panel4Quantity);
+            buyQuantity(panel5Value, 4, panel5Quantity);
+            buyPesticide(Integer.parseInt(panel5Quantity.getText()));
         } else {
-            sellQuantity(panel4Value, 4, panel4Quantity);
+            sellQuantity(panel5Value, 4, panel5Quantity);
         }
     }
 
     public void upQuantity6() {
-        upQuantity(panel5Value, 5, panel5Price);
+        upQuantity(panel6Value, 5, panel6Price);
     }
 
     public void downQuantity6() {
-        downQuantity(panel5Value, 5, panel5Price);
+        downQuantity(panel6Value, 5, panel6Price);
     }
 
     public void panel6BuySell() {
         if (buyState) {
-            buyQuantity(panel5Value, 5, panel5Quantity);
+            buyQuantity(panel6Value, 5, panel6Quantity);
         } else {
-            sellQuantity(panel5Value, 5, panel5Quantity);
+            sellQuantity(panel6Value, 5, panel6Quantity);
         }
     }
 
-    public void upQuantity7() {
-        upQuantity(panel6Value, 6, panel6Price);
+    /**
+     * Updating the total fertilizer count after buying
+     *
+     * @param count new total fertilizer
+     */
+    private void buyFertilizer(int count) {
+        this.storageViewModel.updateTotalFertilizer(count);
     }
 
-    public void downQuantity7() {
-        downQuantity(panel6Value, 6, panel6Price);
+    /**
+     * Updating the total pesticide count after buying
+     *
+     * @param count new total pesticide
+     */
+    private void buyPesticide(int count) {
+        this.storageViewModel.updateTotalPesticide(count);
     }
-
-    public void panel7BuySell() {
-        if (buyState) {
-            buyQuantity(panel6Value, 6, panel6Quantity);
-        } else {
-            sellQuantity(panel6Value, 6, panel6Quantity);
-        }
-    }
-
 
     private void setActionLabel(String str) {
         panel1Action.setText(str);
