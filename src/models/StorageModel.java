@@ -154,19 +154,19 @@ public class StorageModel {
     /**
      * Updating the total fertilizer variable
      *
-     * @param difference difference to add to the total
+     * @param totalFertilizer new totalFertilizer value to set
      */
-    public void updateTotalFertilizer(int difference) {
-        this.totalFertilizer += difference;
+    public void setTotalFertilizer(int totalFertilizer) {
+        this.totalFertilizer = totalFertilizer;
     }
 
     /**
      * Updating the total pesticide variable
      *
-     * @param difference difference to add to the total
+     * @param totalPesticide new totalPesticide value to set
      */
-    public void updateTotalPesticide(int difference) {
-        this.totalPesticide += difference;
+    public void setTotalPesticide(int totalPesticide) {
+        this.totalPesticide = totalPesticide;
     }
 
     /**
