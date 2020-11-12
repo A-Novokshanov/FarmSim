@@ -14,6 +14,7 @@ public class PlotModel {
     private int daysOld;
     private int daysSinceWater;
     private int waterValue;
+    private int fertilizerLevel;
     private int plotIdentifier;
     private String plotStage;
 
@@ -45,6 +46,7 @@ public class PlotModel {
         this.cropInPlot = cropInPlot;
         this.daysOld = daysOld;
         this.waterValue = 3;
+        this.fertilizerLevel = 0;
         Random randomID = new Random();
         this.plotIdentifier = randomID.nextInt(100000);
     }
@@ -133,5 +135,21 @@ public class PlotModel {
      */
     public void setWaterValue(int waterValue) {
         this.waterValue = waterValue;
+    }
+
+    /**
+     * @return Gets and returns the fertilizer level in a PlotModel object.
+     */
+    public int getFertilizerLevel() {
+        return this.fertilizerLevel;
+    }
+
+    /**
+     * Sets the type of crop in a PlotModel object.
+     *
+     * @param fertilizerLevel is the new fertilizer lever of a PlotModel object.
+     */
+    public void setFertilizerLevel(int fertilizerLevel) {
+        this.fertilizerLevel = fertilizerLevel;
     }
 }

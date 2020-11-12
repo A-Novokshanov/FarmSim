@@ -18,10 +18,6 @@ import java.io.IOException;
 
 public class MarketUIController {
     @FXML
-    private JFXButton btnSeeds;
-    @FXML
-    private JFXButton btnAnimals;
-    @FXML
     private JFXButton btnSwap;
     @FXML
     private JFXButton btnFarm;
@@ -62,6 +58,7 @@ public class MarketUIController {
     @FXML
     private Text panel3Quantity;
 
+
     @FXML
     private ImageView panel4Img;
     @FXML
@@ -95,27 +92,6 @@ public class MarketUIController {
     @FXML
     private Text panel6Quantity;
 
-    @FXML
-    private ImageView panel7Img;
-    @FXML
-    private JFXButton panel7Action;
-    @FXML
-    private Text panel7Value;
-    @FXML
-    private Text panel7Price;
-    @FXML
-    private Text panel7Quantity;
-
-    @FXML
-    private ImageView panel8Img;
-    @FXML
-    private JFXButton panel8Action;
-    @FXML
-    private Text panel8Value;
-    @FXML
-    private Text panel8Price;
-    @FXML
-    private Text panel8Quantity;
 
     private boolean buyState = true;
     private MarketViewModel marketViewModel;
@@ -245,85 +221,54 @@ public class MarketUIController {
         }
     }
 
-    public void upQuantity4() {
-        upQuantity(panel4Value, 3, panel4Price);
-    }
-
-    public void downQuantity4() {
-        downQuantity(panel4Value, 3, panel4Price);
-    }
-
-    public void panel4BuySell() {
-        if (buyState) {
-            buyQuantity(panel4Value, 3, panel4Quantity);
-        } else {
-            sellQuantity(panel4Value, 3, panel4Quantity);
-        }
-    }
-
     public void upQuantity5() {
         // upQuantity(panel5Value, 4, panel5Price);
     }
 
     public void downQuantity5() {
-        downQuantity(panel5Value, 4, panel5Price);
+        downQuantity(panel4Value, 4, panel4Price);
     }
 
     public void panel5BuySell() {
         if (buyState) {
-            buyQuantity(panel5Value, 4, panel5Quantity);
+            buyQuantity(panel4Value, 4, panel4Quantity);
         } else {
-            sellQuantity(panel5Value, 4, panel5Quantity);
+            sellQuantity(panel4Value, 4, panel4Quantity);
         }
     }
 
     public void upQuantity6() {
-        upQuantity(panel6Value, 5, panel6Price);
+        upQuantity(panel5Value, 5, panel5Price);
     }
 
     public void downQuantity6() {
-        downQuantity(panel6Value, 5, panel6Price);
+        downQuantity(panel5Value, 5, panel5Price);
     }
 
     public void panel6BuySell() {
         if (buyState) {
-            buyQuantity(panel6Value, 5, panel6Quantity);
+            buyQuantity(panel5Value, 5, panel5Quantity);
         } else {
-            sellQuantity(panel6Value, 5, panel6Quantity);
+            sellQuantity(panel5Value, 5, panel5Quantity);
         }
     }
 
     public void upQuantity7() {
-        upQuantity(panel7Value, 6, panel7Price);
+        upQuantity(panel6Value, 6, panel6Price);
     }
 
     public void downQuantity7() {
-        downQuantity(panel7Value, 6, panel7Price);
+        downQuantity(panel6Value, 6, panel6Price);
     }
 
     public void panel7BuySell() {
         if (buyState) {
-            buyQuantity(panel7Value, 6, panel7Quantity);
+            buyQuantity(panel6Value, 6, panel6Quantity);
         } else {
-            sellQuantity(panel7Value, 6, panel7Quantity);
+            sellQuantity(panel6Value, 6, panel6Quantity);
         }
     }
 
-    public void upQuantity8() {
-        upQuantity(panel8Value, 7, panel8Price);
-    }
-
-    public void downQuantity8() {
-        downQuantity(panel8Value, 7, panel8Price);
-    }
-
-    public void panel8BuySell() {
-        if (buyState) {
-            buyQuantity(panel8Value, 7, panel8Quantity);
-        } else {
-            sellQuantity(panel8Value, 7, panel8Quantity);
-        }
-    }
 
     private void setActionLabel(String str) {
         panel1Action.setText(str);
@@ -332,8 +277,6 @@ public class MarketUIController {
         panel4Action.setText(str);
         panel5Action.setText(str);
         panel6Action.setText(str);
-        panel7Action.setText(str);
-        panel8Action.setText(str);
     }
 
     private void resetValues() {
@@ -343,8 +286,6 @@ public class MarketUIController {
         panel4Value.setText("01");
         panel5Value.setText("01");
         panel6Value.setText("01");
-        panel7Value.setText("01");
-        panel8Value.setText("01");
     }
 
     private void resetPrices() {
@@ -365,8 +306,6 @@ public class MarketUIController {
 
     public void buySwap(MouseEvent mouseEvent) {
         buyState = false;
-        btnAnimals.setVisible(false);
-        btnSeeds.setVisible(false);
         setActionLabel("Sell");
         resetValues();
         btnSwap.setText("Buy Crops");
@@ -376,8 +315,6 @@ public class MarketUIController {
 
     public void sellSwap(MouseEvent mouseEvent) {
         buyState = true;
-        btnAnimals.setVisible(true);
-        btnSeeds.setVisible(true);
         setActionLabel("Buy");
         resetValues();
         btnSwap.setText("Sell Crops");

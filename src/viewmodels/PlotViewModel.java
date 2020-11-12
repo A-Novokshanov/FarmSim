@@ -1,8 +1,7 @@
 package viewmodels;
 
-import models.CropModel;
-import models.PlayerModel;
-import models.PlotModel;
+
+import models.*;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -20,6 +19,9 @@ public class PlotViewModel {
     private PlayerPlotService playerPlotService = new PlayerPlotService();
     private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
     private PlayerModel playerModel;
+
+    private WorkerModel worker = new WorkerModel();
+    private WorkerViewModel workerViewModel = new WorkerViewModel(worker, playerModel);
 
     /**
      * Constructor for plot view model/
@@ -46,18 +48,58 @@ public class PlotViewModel {
         */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
-                    player.getPlayer().getPlayerSettings().getPlayerName());
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+                    harvestedPlot.getPlotIdentifier(), player.getPlayer()
+                            .getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
-            while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
-                storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
-                toAdd++;
+            if (harvestedPlot.getFertilizerLevel() > 0) {
+                Random rand = new Random();
+                int chanceIncrease = rand.nextInt(2);
+                int newYield = 3;
+                if (chanceIncrease > 0) {
+                    newYield = 5;
+                }
+                while ((toAdd < newYield) && (player.getPlayer()
+                        .getUserStorage().getTotalCropAmount() < 15)) {
+                    storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
+                    toAdd++;
+                }
+            } else {
+                while ((toAdd < 3) && (player.getPlayer()
+                        .getUserStorage().getTotalCropAmount() < 15)) {
+                    storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
+                    toAdd++;
+                }
             }
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+                    harvestedPlot.getPlotIdentifier(),
                     player.getPlayer().getPlayerSettings().getPlayerName());
+        }
+    }
+
+    /**
+     * Responsibilities for a worker
+     *
+     * @param harvestedPlot The plot to be harvested.
+     * @param player        The player harvesting the plot.
+     * @param worker The worker that will be responsible for doing work
+     */
+    public void workerWork(PlotModel harvestedPlot, PlayerViewModel player, WorkerModel worker) {
+        StorageViewModel storageVM = new StorageViewModel(player);
+        CropModel crop = harvestedPlot.getCropInPlot();
+        int workerType = worker.getWorkerType();
+        if (workerType == 0) {
+            return;
+        } else if (workerType == 1) {
+            harvestPlot(harvestedPlot, player);
+        } else if (workerType == 2) {
+            harvestPlot(harvestedPlot, player);
+            if (crop.getCropQuantity() > 2) {
+                storageVM.sellItemFromInventory(crop, 2);
+            }
         }
     }
 
@@ -110,13 +152,23 @@ public class PlotViewModel {
      * Increments the daysOld of a PlotModel.
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
+     * @param player the player.
      */
-    public void incrementPlotDaysOld(PlotModel plotToIncrement) {
-        plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
+    public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
+        if (plotToIncrement.getFertilizerLevel() > 0) {
+            plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
+        } else {
+            plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
+        }
         //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
         if ((plotToIncrement.getWaterValue() > 0) && (plotToIncrement.getWaterValue() <= 6)) {
             plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
         }
+        if (plotToIncrement.getFertilizerLevel() > 0) {
+            plotToIncrement.setFertilizerLevel(plotToIncrement.getFertilizerLevel() - 1);
+        }
+        workerViewModel.payWorker(worker);
+        workerWork(plotToIncrement, player, worker);
     }
 
     /**
@@ -126,9 +178,44 @@ public class PlotViewModel {
      * @param cropToPlant the crop to plant in the plot.
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
-
         plotToPlant.setCropInPlot(cropToPlant);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Uses fertilizer on a plot.
+     *
+     * @param plotToPlant the plot which to plant a crop to.
+     */
+    public void fertilizePlot(PlotModel plotToPlant) {
+        if (plotToPlant.getFertilizerLevel() < 9) {
+            plotToPlant.setFertilizerLevel(plotToPlant.getFertilizerLevel() + 2);
+        }
+    }
+
+    /**
+     * Uses pesticide on a plot.
+     *
+     * @param plotToPlant the plot which to plant a crop to.
+     */
+    public void pesticidePlot(PlotModel plotToPlant) {
+        if (plotToPlant.getCropInPlot() == null) {
+            return;
+        }
+        StorageModel storage = playerModel.getUserStorage();
+        switch (plotToPlant.getCropInPlot().getCropName()) {
+        case ("Corn") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(3));
+            break;
+        case ("Potato") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(4));
+            break;
+        case ("Tomato") :
+            plotToPlant.setCropInPlot(storage.getInventory().get(5));
+            break;
+        default:
+            break;
+        }
     }
 
     /**

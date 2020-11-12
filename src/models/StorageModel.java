@@ -22,6 +22,15 @@ public class StorageModel {
         cropInventory.add(new CropModel("Corn", 3, 100.00));
         cropInventory.add(new CropModel("Potato", 3, 80.00));
         cropInventory.add(new CropModel("Tomato", 3, 60.00));
+        CropModel cornPest = new CropModel("Corn with Pesticide", 0, 70.00);
+        cornPest.setHasPesticide(true);
+        CropModel potatoPest = new CropModel("Potato with Pesticide", 0, 50.00);
+        potatoPest.setHasPesticide(true);
+        CropModel tomatoPest = new CropModel("Tomato with Pesticide", 0, 30.00);
+        tomatoPest.setHasPesticide(true);
+        cropInventory.add(cornPest);
+        cropInventory.add(potatoPest);
+        cropInventory.add(tomatoPest);
     }
 
     /**

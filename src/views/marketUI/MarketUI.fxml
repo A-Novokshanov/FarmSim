@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.marketUI.MarketUIController">
    <children>
-      <Pane layoutX="125.0" layoutY="125.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="218.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -66,7 +66,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="400.0" layoutY="125.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="540.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -121,7 +121,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="675.0" layoutY="125.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="850.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -176,7 +176,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="950.0" layoutY="125.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="218.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -199,7 +199,7 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -213,21 +213,21 @@
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downQuantity4" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="panel4Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel4BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel4Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel5BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="125.0" layoutY="400.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="540.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -250,7 +250,7 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -264,21 +264,21 @@
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downQuantity5" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
+                  <JFXButton onMouseClicked="#downQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="panel5Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel5BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel5Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="400.0" layoutY="400.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -301,7 +301,7 @@
             </Pane>
             <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
+                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -315,57 +315,6 @@
                         </Text>
                      </children>
                   </Pane>
-                  <JFXButton onMouseClicked="#downQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <JFXButton fx:id="panel6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </Pane>
-      <Pane layoutX="675.0" layoutY="400.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
-         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
-               <children>
-                  <ImageView fx:id="panel7Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="panel7Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
-                     <children>
-                        <Text fx:id="panel7Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-            <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
-               <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
-                     <children>
-                        <Text fx:id="panel7Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
                   <JFXButton onMouseClicked="#downQuantity7" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
                      <font>
                         <Font name="System Bold" size="16.0" />
@@ -373,74 +322,13 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="panel7Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel7BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
+            <JFXButton fx:id="panel6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel7BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="950.0" layoutY="400.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
-         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
-               <children>
-                  <ImageView fx:id="panel8Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text fx:id="panel8Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
-                     <children>
-                        <Text fx:id="panel8Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-            <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
-               <children>
-                  <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </JFXButton>
-                  <Pane prefHeight="34.0" prefWidth="40.0" style="-fx-border-color: Black;">
-                     <children>
-                        <Text fx:id="panel8Value" layoutX="12.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <JFXButton onMouseClicked="#downQuantity8" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="-">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </HBox>
-            <JFXButton fx:id="panel8Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel8BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
-      </Pane>
-      <JFXButton fx:id="btnSeeds" layoutX="350.0" layoutY="35.0" prefWidth="250.0" style="-fx-border-color: Black;" text="Seeds" textAlignment="CENTER">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnAnimals" layoutX="675.0" layoutY="35.0" prefWidth="250.0" style="-fx-border-color: Black;" text="Animals" textAlignment="CENTER">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </JFXButton>
       <JFXButton fx:id="btnFarm" layoutX="15.0" layoutY="655.0" onMouseClicked="#returnFarm" prefHeight="45.0" prefWidth="80.0" style="-fx-border-color: Black;" text="Return" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
