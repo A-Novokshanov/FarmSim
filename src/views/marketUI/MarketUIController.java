@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -79,8 +80,6 @@ public class MarketUIController {
     @FXML
     private Pane pane6;
     @FXML
-    private ImageView pane6Img;
-    @FXML
     private JFXButton pane6Action;
     @FXML
     private Text pane6Value;
@@ -89,6 +88,14 @@ public class MarketUIController {
     @FXML
     private Text pane6Quantity;
 
+    private final Image fertilizerImg = new Image("@../../dependencies/images/Fertilizer_Market.png",
+            198.0, 198.0, true, false);
+    private final Image pesticideImg = new Image("@../../dependencies/images/Pesticide_Market.png",
+            198.0, 198.0, true, false);
+    private final Image cornPesticideImg = new Image("@../../dependencies/images/market_corn_pesticide.png",
+            198.0, 198.0, true, false);
+    private final Image potatoPesticideImg = new Image("@../../dependencies/images/market_potato_pesticide.png",
+            198.0, 198.0, true, false);
 
     private boolean buyState = true;
     private MarketViewModel marketViewModel;
@@ -325,6 +332,9 @@ public class MarketUIController {
         setActionLabel("Sell");
         resetValues();
         btnSwap.setText("Buy Crops");
+        pane4Img.setImage(cornPesticideImg);
+        pane5Img.setImage(potatoPesticideImg);
+        pane6.setVisible(true);
         resetPrices();
         btnSwap.setOnMouseClicked(this::sellSwap);
     }
@@ -334,6 +344,9 @@ public class MarketUIController {
         setActionLabel("Buy");
         resetValues();
         btnSwap.setText("Sell Crops");
+        pane4Img.setImage(fertilizerImg);
+        pane5Img.setImage(pesticideImg);
+        pane6.setVisible(false);
         resetPrices();
         btnSwap.setOnMouseClicked(this::buySwap);
     }

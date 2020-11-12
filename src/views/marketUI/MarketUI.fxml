@@ -17,7 +17,7 @@
                <children>
                   <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_corn_PL.png" />
+                        <Image url="@../../dependencies/images/market_corn.png" />
                      </image>
                   </ImageView>
                   <Text fx:id="pane1Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
@@ -72,7 +72,7 @@
                <children>
                   <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_potato_PL.png" />
+                        <Image url="@../../dependencies/images/market_potato.png" />
                      </image>
                   </ImageView>
                   <Text fx:id="pane2Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
@@ -127,7 +127,7 @@
                <children>
                   <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_tomato_PL.png" />
+                        <Image url="@../../dependencies/images/market_tomato.png" />
                      </image>
                   </ImageView>
                   <Text fx:id="pane3Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
@@ -182,7 +182,7 @@
                <children>
                   <ImageView fx:id="pane4Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_corn_pesticide_PL.png" />
+                        <Image url="@../../dependencies/images/Fertilizer_Market.png" />
                      </image></ImageView>
                   <Text fx:id="pane4Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
@@ -236,7 +236,7 @@
                <children>
                   <ImageView fx:id="pane5Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_potato_pesticide_PL.png" />
+                        <Image url="@../../dependencies/images/Pesticide_Market.png" />
                      </image></ImageView>
                   <Text fx:id="pane5Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
@@ -284,13 +284,13 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="Pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black; visibility: false;">
+      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black; visibility: false;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fx:id="pane6Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/market_tomato_pesticide_PL.png" />
+                        <Image url="@../../dependencies/images/market_tomato_pesticide.png" />
                      </image></ImageView>
                   <Text fx:id="pane6Price" layoutX="5.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$0">
                      <font>
