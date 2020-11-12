@@ -127,8 +127,7 @@ public class PlotViewModel {
     public void waterPlot(PlotModel plotToWater) {
         if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
-            playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName(),
-                    plotToWater.getPlotIdentifier());
+            updateWaterValue(plotToWater.getWaterValue(), plotToWater.getPlotIdentifier());
         }
     }
 
