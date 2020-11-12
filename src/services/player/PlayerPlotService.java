@@ -17,8 +17,8 @@ import java.util.List;
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
     private static final String ADD_PLOTS_QUERY =
-            "INSERT INTO plot(days, water, crop, player, identifier, watervalue, stage) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plot(days, water, crop, player, identifier, watervalue, stage, fert) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY =
             "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY =
@@ -152,6 +152,7 @@ public class PlayerPlotService {
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());
                 preparedStatement.setString(7, plot.getPlotStage());
+                preparedStatement.setInt(8, plot.getFertilizerLevel());
                 preparedStatement.execute();
             }
         } catch (SQLException throwables) {
