@@ -11,9 +11,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.WorkerModel;
 import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
+import viewmodels.WorkerViewModel;
 import views.farmUI.FarmUIController;
 
 import java.io.IOException;
@@ -85,6 +87,8 @@ public class MarketUIController {
     @FXML
     private Pane tierPane;
     @FXML
+    private Text tierNum;
+    @FXML
     private Pane pane6QuantityPane;
     @FXML
     private HBox pane6HBox;
@@ -118,6 +122,8 @@ public class MarketUIController {
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
+    private WorkerViewModel workerViewModel;
+    private WorkerModel workerModel;
     private ArrayList<Text> listPaneValues;
     private ArrayList<Text> listPanePrices;
     private ArrayList<Text> listPaneQuantities;
@@ -126,6 +132,8 @@ public class MarketUIController {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
+        this.workerViewModel = new WorkerViewModel(player.getPlayer());
+        this.workerModel = this.workerViewModel.
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         listPaneValues = new ArrayList<>(Arrays.asList(pane1Value, pane2Value, pane3Value,
                 pane4Value, pane5Value, pane6Value));
@@ -138,7 +146,7 @@ public class MarketUIController {
                 setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
                 if (i < 3) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            storage.userInventory().get(i).getCropQuantity()));
+                            storage.userInventory().get(i).getCropQuantity() - 2));
                 } else if (i == 4) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
                             player.getPlayer().getUserStorage().getTotalFertilizer() - 1));
@@ -191,6 +199,12 @@ public class MarketUIController {
                     playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
             double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
             price.setText("$" + (calPrice * Integer.parseInt(quantity.getText())));
+        } else {
+            double basePrice = workerViewModel.upgradePrice(workerModel);
+            String curDifficulty =
+                    playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+            double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+            price.setText("$" + (calPrice)));
         }
     }
 
@@ -224,6 +238,23 @@ public class MarketUIController {
                     storageViewModel.userInventory().get(index).getCropQuantity()));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
+    }
+
+    public void upgradeWorker() {
+        if (workerViewModel.checkPurchasableUpgrade(workerViewModel.upgradePrice(workerModel))) {
+            tierNum.setText(String.valueOf(workerModel.getWorkerType()));
+            setPrice(pane6Value, 5, pane6Price);
+            workerViewModel.updateWorkerTypeDatabase(workerModel);
+            workerViewModel.updateWorkerWageDatabase(workerModel);
+        }
+    }
+
+    public void fireWorker() {
+        workerViewModel.workerLeaves(workerModel);
+        tierNum.setText(String.valueOf(workerModel.getWorkerType()));
+        setPrice(pane6Value, 5, pane6Price);
+        workerViewModel.updateWorkerTypeDatabase(workerModel);
+        workerViewModel.updateWorkerWageDatabase(workerModel);
     }
 
     public void upQuantity1() {

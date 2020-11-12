@@ -13,10 +13,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.CropModel;
 import models.PlotModel;
-import viewmodels.EventViewModel;
-import viewmodels.PlayerViewModel;
-import viewmodels.PlotViewModel;
-import viewmodels.StorageViewModel;
+import models.WorkerModel;
+import viewmodels.*;
 import views.marketUI.MarketUIController;
 
 import java.io.IOException;
@@ -204,6 +202,9 @@ public class FarmUIController {
         setUpData(playerViewModel);
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
+        WorkerModel workerModel = new WorkerModel();
+        WorkerViewModel workerViewModel = new WorkerViewModel(playerViewModel.getPlayer());
+        workerViewModel.addWorkerDatabase(workerModel);
     }
 
     public void initSaveData(PlayerViewModel playerViewModel) {

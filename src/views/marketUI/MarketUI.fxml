@@ -308,7 +308,7 @@
                   </Pane>
                   <Pane fx:id="tierPane" layoutX="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-border-color: Black;">
                      <children>
-                        <Text fx:id="pane6Quantity1" layoutX="62.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0/2" textAlignment="CENTER">
+                        <Text fx:id="pane6Quantity1" layoutX="76.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/2" textAlignment="CENTER">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -316,6 +316,11 @@
                         <Text layoutX="13.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tier:">
                            <font>
                               <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="tierNum" layoutX="64.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                           <font>
+                              <Font size="22.0" />
                            </font>
                         </Text>
                      </children>

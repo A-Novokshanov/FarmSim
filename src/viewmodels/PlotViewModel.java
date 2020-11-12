@@ -25,7 +25,7 @@ public class PlotViewModel {
     private PlayerModel playerModel;
 
     private WorkerModel worker = new WorkerModel();
-    private WorkerViewModel workerViewModel = new WorkerViewModel(worker, playerModel);
+    private WorkerViewModel workerViewModel = new WorkerViewModel(playerModel);
 
     /**
      * Constructor for plot view model/

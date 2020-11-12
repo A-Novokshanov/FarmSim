@@ -1,5 +1,6 @@
 package viewmodels;
 
+import javafx.concurrent.Worker;
 import models.PlayerModel;
 import models.WorkerModel;
 import services.WorkerService;
@@ -14,17 +15,14 @@ import services.WorkerService;
 public class WorkerViewModel {
 
     private PlayerModel player;
-    private WorkerModel workerModel;
     private WorkerService workerService;
 
     /**
      * Constructor for worker view model/
      *
-     * @param workerModel the worker model who uses these plots.
      * @param player      is the player.
      */
-    public WorkerViewModel(WorkerModel workerModel, PlayerModel player) {
-        this.workerModel = workerModel;
+    public WorkerViewModel(PlayerModel player) {
         this.workerService = new WorkerService();
         this.player = player;
     }
@@ -54,14 +52,14 @@ public class WorkerViewModel {
         if (!checkPurchasableUpgrade(upgradePrice)) {
             return;
         }
-        switch (workerModel.getWorkerType()) {
+        switch (worker.getWorkerType()) {
         case 0:
-            workerModel.setWorkerType(1);
-            workerModel.setWorkerWage(10);
+            worker.setWorkerType(1);
+            worker.setWorkerWage(10);
             break;
         case 1:
-            workerModel.setWorkerType(2);
-            workerModel.setWorkerWage(20);
+            worker.setWorkerType(2);
+            worker.setWorkerWage(20);
             break;
         default:
             break;
@@ -95,7 +93,7 @@ public class WorkerViewModel {
         }
         double workerWage = workerModel.getWorkerWage() * workerWageMulti;
         if (currMoney < workerWage) {
-            workerLeaves();
+            workerLeaves(workerModel);
             return;
         } else {
             player.setUserCurrentMoney(currMoney - workerWage);
@@ -105,7 +103,7 @@ public class WorkerViewModel {
     /**
      * Method to make the worker leave
      */
-    public void workerLeaves() {
+    public void workerLeaves(WorkerModel workerModel) {
         workerModel.setWorkerType(0);
         workerModel.setWorkerWage(0);
     }
