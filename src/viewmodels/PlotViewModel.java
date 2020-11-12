@@ -288,5 +288,17 @@ public class PlotViewModel {
                 playerModel.getPlayerSettings().getPlayerName());
     }
 
+    /**
+     * Updates the crop in the plot database.
+     *
+     * @param playerModel The player model that contains the player information.
+     * @param plotModel   The plotmodel that contains the new crop.
+     */
+    public void updateCropInPlotDatabase(PlayerModel playerModel, PlotModel plotModel) {
+        playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
+                plotModel.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
+    }
+
 
 }
