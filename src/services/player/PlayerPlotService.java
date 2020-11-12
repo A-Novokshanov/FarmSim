@@ -184,6 +184,8 @@ public class PlayerPlotService {
                 while (resultSet.next()) {
                     int days = resultSet.getInt("days");
                     int water = resultSet.getInt("water");
+                    int waterValue = resultSet.getInt("watervalue");
+                    int fertilizer = resultSet.getInt("fert");
                     String cropName = resultSet.getString("crop");
                     double cropValue = 0;
                     CropModel crop = null;
@@ -203,6 +205,8 @@ public class PlayerPlotService {
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);
                     plotModel.setPlotStage(stage);
+                    plotModel.setWaterValue(waterValue);
+                    plotModel.setFertilizerLevel(fertilizer);
                     myList.add(plotModel);
                 }
 
