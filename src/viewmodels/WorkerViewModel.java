@@ -35,11 +35,11 @@ public class WorkerViewModel {
         switch (workerModel.getWorkerType()) {
             case 0:
                 workerModel.setWorkerType(1);
-                workerModel.setWorkerWage(500);
+                workerModel.setWorkerWage(10);
                 break;
             case 1:
                 workerModel.setWorkerType(2);
-                workerModel.setWorkerWage(1000);
+                workerModel.setWorkerWage(20);
                 break;
         }
     }
