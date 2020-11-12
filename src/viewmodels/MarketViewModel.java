@@ -100,5 +100,38 @@ public class MarketViewModel {
         return currentPrice;
     }
 
-
+    /**
+     * Add equipment to inventory after checking it is eligible to be added.
+     *
+     * @param equipment     Name of the equipment
+     * @param quantity      amount of equipment.
+     */
+    public void purchaseItems(String equipment, int quantity) {
+        if (!equipment.equals("Fertilizer") && !equipment.equals("Pesticide")) {
+            return;
+        }
+        if (equipment.equals("Fertilizer")) {
+            if (checkPurchasable(100, quantity)) {
+                player.getPlayer().getUserStorage().updateTotalFertilizer(quantity);
+                PlayerModel curPlayer = player.getPlayer();
+                double money = calculateCropPrice(100,
+                        player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
+                player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                        - money);
+                this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
+                        .getPlayerSettings().getPlayerName());
+            }
+        } else {
+            if (checkPurchasable(100, quantity)) {
+                player.getPlayer().getUserStorage().updateTotalPesticide(quantity);
+                PlayerModel curPlayer = player.getPlayer();
+                double money = calculateCropPrice(100,
+                        player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
+                player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                        - money);
+                this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
+                        .getPlayerSettings().getPlayerName());
+            }
+        }
+    }
 }
