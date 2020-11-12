@@ -146,6 +146,10 @@ public class FarmUIController {
     private Text textFertilizerLevel9;
     @FXML
     private Text textFertilizerLevel10;
+    @FXML
+    private Text txtFertilizerCount;
+    @FXML
+    private Text txtPesticideCount;
 
     private ArrayList<PlotModel> listPlots = new ArrayList<>();
     private ArrayList<ImageView> listPlotImages = new ArrayList<>();
@@ -550,6 +554,10 @@ public class FarmUIController {
         if (listPlots.get(plotNum) != null) {
             if (listPlots.get(plotNum).getFertilizerLevel() < 9) {
                 this.plotViewModel.fertilizePlot(listPlots.get(plotNum));
+                storageViewModel.updateTotalFertilizer(-2);
+                txtFertilizerCount.setText(
+                        doubleDigitString(storageViewModel.getTotalFertilizer())
+                );
                 listPlotFertilizerLevels.get(plotNum).setText(
                         doubleDigitString(listPlots.get(plotNum).getFertilizerLevel()));
             }
@@ -561,6 +569,10 @@ public class FarmUIController {
             if (listPlots.get(plotNum).getCropInPlot() != null
                     && !listPlots.get(plotNum).getCropInPlot().getHasPesticide()) {
                 this.plotViewModel.pesticidePlot(listPlots.get(plotNum));
+                storageViewModel.updateTotalPesticide(-1);
+                txtPesticideCount.setText(
+                        doubleDigitString(storageViewModel.getTotalPesticide())
+                );
                 listPlotNameImages.get(plotNum).setImage(
                         chooseCropImage(listPlots.get(plotNum).getCropInPlot()));
             }
