@@ -1,6 +1,5 @@
 package tests.milestone5;
 
-import javafx.concurrent.Worker;
 import models.WorkerModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +10,9 @@ import static org.junit.Assert.assertEquals;
  * @version 1.0
  */
 public class WorkerModelMatthewFarias {
-    WorkerModel workerModel1 = new WorkerModel();
-    WorkerModel workerModel2 = new WorkerModel();
-    WorkerModel workerModel3 = new WorkerModel();
+    private WorkerModel workerModel1 = new WorkerModel();
+    private WorkerModel workerModel2 = new WorkerModel();
+    private WorkerModel workerModel3 = new WorkerModel();
 
     @Before
     public void setUp() {

@@ -96,13 +96,17 @@ public class MarketUIController {
     @FXML
     private Text pane6Quantity;
 
-    private final Image fertilizerImg = new Image("@../../dependencies/images/Fertilizer_Market.png",
+    private final Image fertilizerImg = new
+            Image("@../../dependencies/images/Fertilizer_Market.png",
             198.0, 198.0, true, false);
-    private final Image pesticideImg = new Image("@../../dependencies/images/Pesticide_Market.png",
+    private final Image pesticideImg = new
+            Image("@../../dependencies/images/Pesticide_Market.png",
             198.0, 198.0, true, false);
-    private final Image cornPesticideImg = new Image("@../../dependencies/images/market_corn_pesticide.png",
+    private final Image cornPesticideImg = new
+            Image("@../../dependencies/images/market_corn_pesticide.png",
             198.0, 198.0, true, false);
-    private final Image potatoPesticideImg = new Image("@../../dependencies/images/market_potato_pesticide.png",
+    private final Image potatoPesticideImg = new
+            Image("@../../dependencies/images/market_potato_pesticide.png",
             198.0, 198.0, true, false);
 
     private boolean buyState = true;

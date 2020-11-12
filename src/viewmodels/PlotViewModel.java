@@ -208,20 +208,17 @@ public class PlotViewModel {
         }
         StorageModel storage = playerModel.getUserStorage();
         switch (plotToPlant.getCropInPlot().getCropName()) {
-            case ("Corn"):
-                plotToPlant.setCropInPlot(storage.getInventory().get(3));
-
-                break;
-            case ("Potato"):
-                plotToPlant.setCropInPlot(storage.getInventory().get(4));
-
-                break;
-            case ("Tomato"):
-                plotToPlant.setCropInPlot(storage.getInventory().get(5));
-
-                break;
-            default:
-                break;
+        case ("Corn"):
+            plotToPlant.setCropInPlot(storage.getInventory().get(3));
+            break;
+        case ("Potato"):
+            plotToPlant.setCropInPlot(storage.getInventory().get(4));
+            break;
+        case ("Tomato"):
+            plotToPlant.setCropInPlot(storage.getInventory().get(5));
+            break;
+        default:
+            break;
         }
     }
 

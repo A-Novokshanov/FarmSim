@@ -34,8 +34,10 @@ public class PlayerPlotService {
             "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
     private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = ? WHERE "
             + "identifier = ? AND player = ?";
-    private static final String UPDATE_PLOT_FERTILIZER = "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
-    private static final String QUERY_PLOT_FERTILIZER = "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
+    private static final String UPDATE_PLOT_FERTILIZER =
+            "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
+    private static final String QUERY_PLOT_FERTILIZER =
+            "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
 
 
     /**

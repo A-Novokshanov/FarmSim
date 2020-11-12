@@ -468,8 +468,10 @@ public class FarmUIController {
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
             this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
             harvestedPlot.setDaysOld(0);
-            this.plotViewModel.updatePlotStage(listPlots.get(plotNum), playerViewModel.getPlayer());
-            this.plotViewModel.updatePlotDaysDatabase(listPlots.get(plotNum), playerViewModel.getPlayer());
+            this.plotViewModel.updatePlotStage(listPlots.get(plotNum),
+                    playerViewModel.getPlayer());
+            this.plotViewModel.updatePlotDaysDatabase(listPlots.get(plotNum),
+                    playerViewModel.getPlayer());
             harvestedPlotImage.setImage(dirtImg);
             harvestedPlotNameImage.setImage(emptyNameImg);
             switchPlantHarvest(harvestedPlotImage, plotNum, false);
@@ -515,7 +517,8 @@ public class FarmUIController {
                         listPlotNameImages.get(i).setImage(emptyNameImg);
                         switchPlantHarvest(listPlotImages.get(i), i, false);
                         listPlotWaterValues.get(i).setVisible(false);
-                        this.plotViewModel.updatePlotStage(listPlots.get(i), playerViewModel.getPlayer());
+                        this.plotViewModel.updatePlotStage(listPlots.get(i),
+                                playerViewModel.getPlayer());
                     }
                 }
             }
