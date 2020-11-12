@@ -27,14 +27,14 @@ public class PlayerPlotService {
     private static final String HARVEST_PLOT_QUERY =
             "UPDATE plot SET crop = ? WHERE player = ? AND identifier = ?";
     private static final String UPDATE_WATER_VALUE =
-            "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
+            "UPDATE plot SET watervalue = ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
             "SELECT * FROM plot where player=?";
     private static final String UPDATE_PLOT_STAGE =
             "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
-    private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = days + ? WHERE "
+    private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = ? WHERE "
             + "identifier = ? AND player = ?";
-    private static final String UPDATE_PLOT_FERTILIZER = "UPDATE plot SET fert = fert + ? WHERE identifier = ? AND player = ?";
+    private static final String UPDATE_PLOT_FERTILIZER = "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
     private static final String QUERY_PLOT_FERTILIZER = "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
 
 
