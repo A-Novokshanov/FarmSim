@@ -1,11 +1,8 @@
 package viewmodels;
 
-import models.*;
-import services.player.PlayerPlotService;
-import services.player.PlayerSettingsService;
+import models.PlayerModel;
+import models.WorkerModel;
 
-import java.util.List;
-import java.util.Random;
 
 /**
  * This view-model class controls the logic and flow of workers on the farm.
@@ -22,6 +19,7 @@ public class WorkerViewModel {
      * Constructor for worker view model/
      *
      * @param workerModel the worker model who uses these plots.
+     * @param player      is the player.
      */
     public WorkerViewModel(WorkerModel workerModel, PlayerModel player) {
         this.workerModel = workerModel;
@@ -33,19 +31,20 @@ public class WorkerViewModel {
      */
     public void upgradeWorker() {
         switch (workerModel.getWorkerType()) {
-            case 0:
-                workerModel.setWorkerType(1);
-                workerModel.setWorkerWage(10);
-                break;
-            case 1:
-                workerModel.setWorkerType(2);
-                workerModel.setWorkerWage(20);
-                break;
+        case 0:
+            workerModel.setWorkerType(1);
+            workerModel.setWorkerWage(10);
+            break;
+        case 1:
+            workerModel.setWorkerType(2);
+            workerModel.setWorkerWage(20);
+            break;
         }
     }
 
     /**
      * Method to pay the wage of the worker
+     * @param workerModel the worker model
      */
     public void payWorker(WorkerModel workerModel) {
         if (workerModel.getWorkerType() == 0) {
@@ -55,15 +54,15 @@ public class WorkerViewModel {
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
         double workerWageMulti = 1.0;
         switch (difficulty) {
-            case "Casual":
-                workerWageMulti = 0.8;
-                break;
-            case "Normal":
-                workerWageMulti = 1.0;
-                break;
-            case "Veteran":
-                workerWageMulti = 1.2;
-                break;
+        case "Casual":
+            workerWageMulti = 0.8;
+            break;
+        case "Normal":
+            workerWageMulti = 1.0;
+            break;
+        case "Veteran":
+            workerWageMulti = 1.2;
+            break;
         }
         double workerWage = workerModel.getWorkerWage() * workerWageMulti;
         if (currMoney < workerWage) {

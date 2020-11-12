@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 
 public class PlotModelTestRohanKashiviswanathan {
     private PlotModel plotModel;
-    CropModel cropModel = new CropModel("corn", 2,  4);
-    CropModel cropModel2 = new CropModel("tomato", 1,  3);
+    private CropModel cropModel = new CropModel("corn", 2,  4);
+    private CropModel cropModel2 = new CropModel("tomato", 1,  3);
 
     @Before
     public void setUp() {

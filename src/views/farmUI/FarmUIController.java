@@ -400,7 +400,8 @@ public class FarmUIController {
         }
     }
 
-    public void checkMaturity(int plotNum, PlotModel plotModel, ImageView plotImg, Text waterValue) {
+    public void checkMaturity(int plotNum, PlotModel plotModel,
+                              ImageView plotImg, Text waterValue) {
         if (plotModel.getCropInPlot() != null) {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
@@ -513,7 +514,8 @@ public class FarmUIController {
                 if (listPlots.get(i).getCropInPlot() != null) {
                     int n = eventViewModel.performLocustEvent(listPlots.get(i));
                     if (n == 1) {
-                        String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
+                        String name = playerViewModel.getPlayer()
+                                .getPlayerSettings().getPlayerName();
                         this.plotViewModel.updatePlotStage(name, null,
                                 listPlots.get(i).getPlotIdentifier());
                         listPlots.get(i).setPlotStage(null);

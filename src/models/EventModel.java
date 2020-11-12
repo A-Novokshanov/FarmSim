@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class EventModel {
     private ArrayList<String> eventList;
 
-  /**
+    /**
      * Constructs an EventModel object.
      */
     public EventModel() {

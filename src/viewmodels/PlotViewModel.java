@@ -1,6 +1,6 @@
 package viewmodels;
 
-import javafx.concurrent.Worker;
+
 import models.*;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
@@ -48,8 +48,9 @@ public class PlotViewModel {
         */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
-                    player.getPlayer().getPlayerSettings().getPlayerName());
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+                    harvestedPlot.getPlotIdentifier(), player.getPlayer()
+                            .getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
             if (harvestedPlot.getFertilizerLevel() > 0) {
                 Random rand = new Random();
@@ -58,12 +59,14 @@ public class PlotViewModel {
                 if (chanceIncrease > 0) {
                     newYield = 5;
                 }
-                while ((toAdd < newYield) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
+                while ((toAdd < newYield) && (player.getPlayer()
+                        .getUserStorage().getTotalCropAmount() < 15)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }
             } else {
-                while ((toAdd < 3) && (player.getPlayer().getUserStorage().getTotalCropAmount() < 15)) {
+                while ((toAdd < 3) && (player.getPlayer()
+                        .getUserStorage().getTotalCropAmount() < 15)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }
@@ -71,7 +74,8 @@ public class PlotViewModel {
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(), harvestedPlot.getPlotIdentifier(),
+            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+                    harvestedPlot.getPlotIdentifier(),
                     player.getPlayer().getPlayerSettings().getPlayerName());
         }
     }
@@ -148,6 +152,7 @@ public class PlotViewModel {
      * Increments the daysOld of a PlotModel.
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
+     * @param player the player.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {

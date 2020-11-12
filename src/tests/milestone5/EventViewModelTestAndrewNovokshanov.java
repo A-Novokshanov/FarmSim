@@ -10,7 +10,6 @@ import viewmodels.PlotViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -69,7 +68,8 @@ public class EventViewModelTestAndrewNovokshanov {
     }
 
     @Test
-    //Test performLocustEvent method, ensuring that crops without pesticide were occasionally being eaten
+    //Test performLocustEvent method,
+    // ensuring that crops without pesticide were occasionally being eaten
     //during the event
     public void testPerformLocustEventNormal() {
         int wasCropEaten = eventViewModel.performLocustEvent(harvestedPlot);

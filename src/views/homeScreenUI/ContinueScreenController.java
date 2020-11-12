@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.stage.StageStyle;
 import viewmodels.PlayerViewModel;
 import views.farmUI.FarmUIController;
 
