@@ -261,13 +261,6 @@ public class FarmUIController {
         );
     }
 
-    public void pullDatabaseValues() {
-        for (int i = 0; i < 10; i++) {
-            listPlotWaterValues.get(i).setText(doubleDigitString(
-                    listPlots.get(i).getWaterValue()));
-        }
-    }
-
     public void setUpPlotModels(CropModel cropModel) {
         for (int i = 0; i < 10; i++) {
             listPlots.add(plotViewModel.populatePlot(cropModel));
@@ -502,12 +495,8 @@ public class FarmUIController {
                 if (listPlots.get(i).getCropInPlot() != null) {
                     if (listPlots.get(i).getWaterValue() > 0
                             && listPlots.get(i).getWaterValue() <= 6) {
-                        if (listPlots.get(i).getWaterValue() - waterDroughtChange < 0) {
-                            listPlots.get(i).setWaterValue(0);
-                        } else {
-                            listPlots.get(i).setWaterValue(
-                                    listPlots.get(i).getWaterValue() - waterDroughtChange);
-                        }
+                        listPlots.get(i).setWaterValue(
+                                Math.max(listPlots.get(i).getWaterValue() - waterDroughtChange, 0));
                     }
                 }
             }
