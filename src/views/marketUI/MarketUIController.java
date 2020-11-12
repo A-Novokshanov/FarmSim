@@ -80,7 +80,15 @@ public class MarketUIController {
     @FXML
     private Pane pane6;
     @FXML
+    private Pane tierPane;
+    @FXML
+    private Pane pane6QuantityPane;
+    @FXML
     private JFXButton pane6Action;
+    @FXML
+    private JFXButton fireButton;
+    @FXML
+    private JFXButton upgradeButton;
     @FXML
     private Text pane6Value;
     @FXML

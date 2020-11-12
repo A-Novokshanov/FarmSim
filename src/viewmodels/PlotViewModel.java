@@ -189,11 +189,12 @@ public class PlotViewModel {
     /**
      * Uses fertilizer on a plot.
      *
-     * @param plotToPlant the plot which to plant a crop to.
+     * @param plotToFertilize the plot which to plant a crop to.
      */
-    public void fertilizePlot(PlotModel plotToPlant) {
-        if (plotToPlant.getFertilizerLevel() < 9) {
-            plotToPlant.setFertilizerLevel(plotToPlant.getFertilizerLevel() + 2);
+    public void fertilizePlot(PlotModel plotToFertilize) {
+        if (plotToFertilize.getFertilizerLevel() < 9) {
+            plotToFertilize.setFertilizerLevel(plotToFertilize.getFertilizerLevel() + 2);
+            updatePlotFertilizerDatabase(plotToFertilize, playerModel);
         }
     }
 
@@ -210,12 +211,15 @@ public class PlotViewModel {
         switch (plotToPlant.getCropInPlot().getCropName()) {
             case ("Corn"):
                 plotToPlant.setCropInPlot(storage.getInventory().get(3));
+
                 break;
             case ("Potato"):
                 plotToPlant.setCropInPlot(storage.getInventory().get(4));
+
                 break;
             case ("Tomato"):
                 plotToPlant.setCropInPlot(storage.getInventory().get(5));
+
                 break;
             default:
                 break;
