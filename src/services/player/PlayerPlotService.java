@@ -38,6 +38,7 @@ public class PlayerPlotService {
             "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
     private static final String QUERY_PLOT_FERTILIZER =
             "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
+    private static final String UPDATE_CROP_PLOT = "UPDATE plot SET crop = ? WHERE identifier = ? AND player = ?";
 
 
     /**
@@ -280,6 +281,32 @@ public class PlayerPlotService {
                 preparedStatement.setString(1, plot.getCropInPlot().getCropName());
                 preparedStatement.setInt(2, playerId);
                 preparedStatement.setInt(3, plot.getPlotIdentifier());
+                preparedStatement.execute();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    public void adjustCropInPlot(String cropName, int plotIdentifier, String playerName) {
+
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_CROP_PLOT);
+                preparedStatement.setString(1, cropName);
+                preparedStatement.setInt(2, plotIdentifier);
+                preparedStatement.setInt(3, playerId);
                 preparedStatement.execute();
 
             } catch (SQLException throwables) {
