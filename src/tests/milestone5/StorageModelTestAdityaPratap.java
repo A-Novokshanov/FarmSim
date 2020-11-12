@@ -66,7 +66,7 @@ public class StorageModelTestAdityaPratap {
 
     @Test
     public void testGetTotalFertilizer() {
-        int expected = 1;
+        int expected = storageModel.getTotalFertilizer();
 
         assertEquals(expected, storageModel.getTotalFertilizer());
 
