@@ -34,6 +34,8 @@ public class PlayerPlotService {
             "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
     private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = days + ? WHERE "
             + "identifier = ? AND player = ?";
+    private static final String UPDATE_PLOT_FERTILIZER = "UPDATE plot SET fert = fert + ? WHERE identifier = ? AND player = ?";
+    private static final String QUERY_PLOT_FERTILIZER = "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
 
 
     /**
@@ -393,5 +395,53 @@ public class PlayerPlotService {
                 throwables.printStackTrace();
             }
         }
+    }
+
+    public void adjustPlotFertilizer(int fertilizerAmount, int plotIdentifer, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_FERTILIZER);
+            preparedStatement.setInt(1, fertilizerAmount);
+            preparedStatement.setInt(2, plotIdentifer);
+            preparedStatement.setInt(3, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public int queryPlotFertilizer(int plotIdentifier, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+
+                preparedStatement = dbConnection.prepareStatement(QUERY_PLOT_FERTILIZER);
+                preparedStatement.setInt(1, plotIdentifier);
+                preparedStatement.setInt(2, playerId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                return resultSet.getInt("fert");
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return -1;
     }
 }

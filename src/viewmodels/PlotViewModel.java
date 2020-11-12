@@ -260,7 +260,19 @@ public class PlotViewModel {
      * @param identifier The identifier of the plot.
      * @param playerName The name of the player.
      */
-    public void updatePlotDays(int days, int identifier, String playerName) {
+    public void updatePlotDaysDatabase(int days, int identifier, String playerName) {
         playerPlotService.adjustPlotDays(days, identifier, playerName);
     }
+
+
+    public void updatePlotFertilizerDatabase(int fertAmount, int plotIdentifier, String playerName) {
+        playerPlotService.adjustPlotFertilizer(fertAmount, plotIdentifier, playerName);
+
+    }
+
+    public void getPlotFertilizerDatabase(int plotIdentifier, String playerName) {
+        playerPlotService.queryPlotFertilizer(plotIdentifier, playerName);
+    }
+
+
 }
