@@ -203,14 +203,14 @@ public class MarketUIController {
                     storageViewModel.userInventory().get(index).getCropQuantity()));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         } else if (index == 3) {
-            buyFertilizer(valueNum);
+            this.marketViewModel.purchaseItems("Fertilizer", valueNum);
             quantity.setText(doubleDigitString(
-                    playerViewModel.getPlayer().getUserStorage().getTotalFertilizer()));
+                    playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         } else if (index == 4) {
-            buyPesticide(valueNum);
+            this.marketViewModel.purchaseItems("Pesticide", valueNum);
             quantity.setText(doubleDigitString(
-                    playerViewModel.getPlayer().getUserStorage().getTotalPesticide()));
+                    playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
     }
@@ -285,7 +285,6 @@ public class MarketUIController {
     public void panel4BuySell() {
         if (buyState) {
             buyQuantity(pane4Value, 3, pane4Quantity);
-            buyFertilizer(Integer.parseInt(pane4Quantity.getText()));
         } else {
             sellQuantity(pane4Value, 3, pane4Quantity);
         }
@@ -302,7 +301,6 @@ public class MarketUIController {
     public void panel5BuySell() {
         if (buyState) {
             buyQuantity(pane5Value, 4, pane5Quantity);
-            buyPesticide(Integer.parseInt(pane5Quantity.getText()));
         } else {
             sellQuantity(pane5Value, 4, pane5Quantity);
         }
@@ -322,24 +320,6 @@ public class MarketUIController {
         } else {
             sellQuantity(pane6Value, 5, pane6Quantity);
         }
-    }
-
-    /**
-     * Updating the total fertilizer count after buying
-     *
-     * @param count new total fertilizer
-     */
-    private void buyFertilizer(int count) {
-        this.marketViewModel.purchaseItems("Fertilizer", count);
-    }
-
-    /**
-     * Updating the total pesticide count after buying
-     *
-     * @param count new total pesticide
-     */
-    private void buyPesticide(int count) {
-        this.marketViewModel.purchaseItems("Pesticide", count);
     }
 
     private void setActionLabel(String str) {
