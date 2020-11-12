@@ -341,7 +341,7 @@ public class FarmUIController {
     private void incrementAllPlotDays() {
         for (int i = 0; i < 10; i++) {
             if (listPlots.get(i).getCropInPlot() != null) {
-                plotViewModel.incrementPlotDaysOld(listPlots.get(i));
+                plotViewModel.incrementPlotDaysOld(listPlots.get(i), playerViewModel);
                 plotViewModel.updatePlotMaturity(listPlots.get(i).getPlotIdentifier(),
                         playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
                 this.plotViewModel.updateWaterValue(-1,

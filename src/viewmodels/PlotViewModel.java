@@ -1,9 +1,7 @@
 package viewmodels;
 
-import models.CropModel;
-import models.PlayerModel;
-import models.PlotModel;
-import models.StorageModel;
+import javafx.concurrent.Worker;
+import models.*;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -21,6 +19,9 @@ public class PlotViewModel {
     private PlayerPlotService playerPlotService = new PlayerPlotService();
     private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
     private PlayerModel playerModel;
+
+    private WorkerModel worker = new WorkerModel();
+    private WorkerViewModel workerViewModel = new WorkerViewModel(worker, playerModel);
 
     /**
      * Constructor for plot view model/
@@ -76,6 +77,29 @@ public class PlotViewModel {
     }
 
     /**
+     * Responsibilities for a worker
+     *
+     * @param harvestedPlot The plot to be harvested.
+     * @param player        The player harvesting the plot.
+     * @param worker The worker that will be responsible for doing work
+     */
+    public void workerWork(PlotModel harvestedPlot, PlayerViewModel player, WorkerModel worker) {
+        StorageViewModel storageVM = new StorageViewModel(player);
+        CropModel crop = harvestedPlot.getCropInPlot();
+        int workerType = worker.getWorkerType();
+        if (workerType == 0) {
+            return;
+        } else if (workerType == 1) {
+            harvestPlot(harvestedPlot, player);
+        } else if (workerType == 2) {
+            harvestPlot(harvestedPlot, player);
+            if (crop.getCropQuantity() > 2) {
+                storageVM.sellItemFromInventory(crop, 2);
+            }
+        }
+    }
+
+    /**
      * Populates the plots with a chosen crop.
      *
      * @param cropInPlot The crop to plot.
@@ -125,7 +149,7 @@ public class PlotViewModel {
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
      */
-    public void incrementPlotDaysOld(PlotModel plotToIncrement) {
+    public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
         } else {
@@ -138,6 +162,8 @@ public class PlotViewModel {
         if (plotToIncrement.getFertilizerLevel() > 0) {
             plotToIncrement.setFertilizerLevel(plotToIncrement.getFertilizerLevel() - 1);
         }
+        workerViewModel.payWorker(worker);
+        workerWork(plotToIncrement, player, worker);
     }
 
     /**

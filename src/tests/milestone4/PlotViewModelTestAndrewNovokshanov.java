@@ -65,11 +65,11 @@ public class PlotViewModelTestAndrewNovokshanov {
     //and daysSinceWater were being incremented correctly
     public void testIncrementPlotDaysOld() {
         assertEquals(3, harvestedPlotAlive.getWaterValue());
-        plotViewModel.incrementPlotDaysOld(harvestedPlotAlive);
+        plotViewModel.incrementPlotDaysOld(harvestedPlotAlive, playerViewModel);
         assertEquals(5, harvestedPlotAlive.getDaysOld());
         assertEquals(2, harvestedPlotAlive.getWaterValue());
         assertEquals(3, harvestedPlotDead.getWaterValue());
-        plotViewModel.incrementPlotDaysOld(harvestedPlotDead);
+        plotViewModel.incrementPlotDaysOld(harvestedPlotDead, playerViewModel);
         assertEquals(11, harvestedPlotDead.getDaysOld());
         assertEquals(2, harvestedPlotDead.getWaterValue());
     }
