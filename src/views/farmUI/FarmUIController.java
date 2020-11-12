@@ -444,7 +444,7 @@ public class FarmUIController {
     }
 
     public void plantCrop(int cropNum, CropModel crop) {
-        if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 0) {
+        if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 2) {
             int plotNum = plantingPlotNum;
             storageViewModel.userInventory().get(cropNum).setCropQuantity(
                     storageViewModel.userInventory().get(cropNum).getCropQuantity() - 1);

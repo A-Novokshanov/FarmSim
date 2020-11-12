@@ -133,7 +133,6 @@ public class MarketUIController {
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.workerViewModel = new WorkerViewModel(player.getPlayer());
-        this.workerModel = this.workerViewModel.
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
         listPaneValues = new ArrayList<>(Arrays.asList(pane1Value, pane2Value, pane3Value,
                 pane4Value, pane5Value, pane6Value));
@@ -146,7 +145,7 @@ public class MarketUIController {
                 setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
                 if (i < 3) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            storage.userInventory().get(i).getCropQuantity() - 2));
+                            storage.userInventory().get(i).getCropQuantity()));
                 } else if (i == 4) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
                             player.getPlayer().getUserStorage().getTotalFertilizer() - 1));
@@ -204,7 +203,7 @@ public class MarketUIController {
             String curDifficulty =
                     playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
             double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
-            price.setText("$" + (calPrice)));
+            price.setText("$" + (calPrice));
         }
     }
 
@@ -231,12 +230,14 @@ public class MarketUIController {
 
     private void sellQuantity(Text value, int index, Text quantity) {
         if (index < 6) {
-            int num = Integer.parseInt(value.getText());
-            storageViewModel.sellItemFromInventory(
-                    storageViewModel.userInventory().get(index), num);
-            quantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(index).getCropQuantity()));
-            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+            if (Integer.parseInt(quantity.getText()) > 2) {
+                int num = Integer.parseInt(value.getText());
+                storageViewModel.sellItemFromInventory(
+                        storageViewModel.userInventory().get(index), num);
+                quantity.setText(doubleDigitString(
+                        storageViewModel.userInventory().get(index).getCropQuantity()));
+                this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+            }
         }
     }
 
