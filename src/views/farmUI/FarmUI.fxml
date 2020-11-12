@@ -449,17 +449,17 @@
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="125.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_corn_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="415.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_potato_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_potato_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="700.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <JFXButton fx:id="btnCornPlant" layoutX="165.0" layoutY="300.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
