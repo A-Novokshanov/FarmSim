@@ -52,7 +52,7 @@ public class PlotViewModel {
         */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+            playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(), player.getPlayer()
                             .getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
@@ -78,7 +78,7 @@ public class PlotViewModel {
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+            playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(),
                     player.getPlayer().getPlayerSettings().getPlayerName());
         }
@@ -200,22 +200,25 @@ public class PlotViewModel {
     /**
      * Uses pesticide on a plot.
      *
-     * @param plotToPlant the plot which to plant a crop to.
+     * @param plotToPesticide the plot which to plant a crop to.
      */
-    public void pesticidePlot(PlotModel plotToPlant) {
-        if (plotToPlant.getCropInPlot() == null) {
+    public void pesticidePlot(PlotModel plotToPesticide) {
+        if (plotToPesticide.getCropInPlot() == null) {
             return;
         }
         StorageModel storage = playerModel.getUserStorage();
-        switch (plotToPlant.getCropInPlot().getCropName()) {
+        switch (plotToPesticide.getCropInPlot().getCropName()) {
         case ("Corn"):
-            plotToPlant.setCropInPlot(storage.getInventory().get(3));
+            plotToPesticide.setCropInPlot(storage.getInventory().get(3));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
         case ("Potato"):
-            plotToPlant.setCropInPlot(storage.getInventory().get(4));
+            plotToPesticide.setCropInPlot(storage.getInventory().get(4));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
         case ("Tomato"):
-            plotToPlant.setCropInPlot(storage.getInventory().get(5));
+            plotToPesticide.setCropInPlot(storage.getInventory().get(5));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
         default:
             break;
@@ -294,11 +297,9 @@ public class PlotViewModel {
      * @param playerModel The player model that contains the player information.
      * @param plotModel   The plotmodel that contains the new crop.
      */
-    public void updateCropInPlotDatabase(PlayerModel playerModel, PlotModel plotModel) {
+    public void updateCropInPlotDatabase(PlotModel plotModel, PlayerModel playerModel) {
         playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
                 plotModel.getPlotIdentifier(),
                 playerModel.getPlayerSettings().getPlayerName());
     }
-
-
 }

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ import viewmodels.StorageViewModel;
 import views.farmUI.FarmUIController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class MarketUIController {
@@ -78,11 +80,13 @@ public class MarketUIController {
     private Text pane5Quantity;
 
     @FXML
-    private Pane pane6;
+    private ImageView pane6Img;
     @FXML
     private Pane tierPane;
     @FXML
     private Pane pane6QuantityPane;
+    @FXML
+    private HBox pane6HBox;
     @FXML
     private JFXButton pane6Action;
     @FXML
@@ -113,12 +117,16 @@ public class MarketUIController {
     private MarketViewModel marketViewModel;
     private StorageViewModel storageViewModel;
     private PlayerViewModel playerViewModel;
+    private ArrayList<Text> listPaneValues;
+    private ArrayList<Text> listPanePrices;
+    private ArrayList<Text> listPaneQuantities;
 
     public void initData(MouseEvent mouseEvent, PlayerViewModel player, StorageViewModel storage) {
         this.marketViewModel = new MarketViewModel(player);
         this.storageViewModel = storage;
         this.playerViewModel = player;
         this.txtBudget.setText("$" + (player.getPlayer().getUserCurrentMoney()));
+
         if (storage.userInventory().get(0) != null) {
             setPrice(pane1Value, 0, pane1Price);
             pane1Quantity.setText(doubleDigitString(
@@ -134,6 +142,7 @@ public class MarketUIController {
             pane3Quantity.setText(doubleDigitString(
                     storage.userInventory().get(2).getCropQuantity()));
         }
+        pane6Action.setVisible(false);
         sellSwap(mouseEvent);
     }
 
@@ -346,7 +355,12 @@ public class MarketUIController {
         btnSwap.setText("Buy Crops");
         pane4Img.setImage(cornPesticideImg);
         pane5Img.setImage(potatoPesticideImg);
-        pane6.setVisible(true);
+        pane6QuantityPane.setVisible(true);
+        pane6Action.setVisible(true);
+        pane6HBox.setVisible(true);
+        tierPane.setVisible(false);
+        fireButton.setVisible(false);
+        upgradeButton.setVisible(false);
         resetPrices();
         btnSwap.setOnMouseClicked(this::sellSwap);
     }
@@ -358,7 +372,12 @@ public class MarketUIController {
         btnSwap.setText("Sell Crops");
         pane4Img.setImage(fertilizerImg);
         pane5Img.setImage(pesticideImg);
-        pane6.setVisible(false);
+        pane6QuantityPane.setVisible(false);
+        pane6Action.setVisible(false);
+        pane6HBox.setVisible(false);
+        tierPane.setVisible(true);
+        fireButton.setVisible(true);
+        upgradeButton.setVisible(true);
         resetPrices();
         btnSwap.setOnMouseClicked(this::buySwap);
     }

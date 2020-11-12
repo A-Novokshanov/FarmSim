@@ -284,11 +284,11 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
-                  <ImageView fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="pane6Img" fitHeight="198.0" fitWidth="198.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dependencies/images/market_tomato_pesticide.png" />
                      </image></ImageView>
@@ -322,7 +322,7 @@
                   </Pane>
                </children>
             </Pane>
-            <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0" style="visibility: false;">
+            <HBox fx:id="pane6HBox" layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0" style="visibility: false;">
                <children>
                   <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
