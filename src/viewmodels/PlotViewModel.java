@@ -1,7 +1,11 @@
 package viewmodels;
 
 
-import models.*;
+import models.CropModel;
+import models.PlayerModel;
+import models.PlotModel;
+import models.StorageModel;
+import models.WorkerModel;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -21,7 +25,7 @@ public class PlotViewModel {
     private PlayerModel playerModel;
 
     private WorkerModel worker = new WorkerModel();
-    private WorkerViewModel workerViewModel = new WorkerViewModel(worker, playerModel);
+    private WorkerViewModel workerViewModel = new WorkerViewModel(playerModel);
 
     /**
      * Constructor for plot view model/
@@ -48,7 +52,7 @@ public class PlotViewModel {
         */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+            playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(), player.getPlayer()
                             .getPlayerSettings().getPlayerName());
         } else if (harvestedPlot.getDaysOld() >= 10) {
@@ -74,7 +78,7 @@ public class PlotViewModel {
             //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
             //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
-            playerPlotService.harvestPlot(-harvestedPlot.getWaterValue(),
+            playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(),
                     player.getPlayer().getPlayerSettings().getPlayerName());
         }
@@ -85,7 +89,7 @@ public class PlotViewModel {
      *
      * @param harvestedPlot The plot to be harvested.
      * @param player        The player harvesting the plot.
-     * @param worker The worker that will be responsible for doing work
+     * @param worker        The worker that will be responsible for doing work
      */
     public void workerWork(PlotModel harvestedPlot, PlayerViewModel player, WorkerModel worker) {
         StorageViewModel storageVM = new StorageViewModel(player);
@@ -123,8 +127,7 @@ public class PlotViewModel {
     public void waterPlot(PlotModel plotToWater) {
         if ((plotToWater.getWaterValue()) > 0 && (plotToWater.getWaterValue() <= 6)) {
             plotToWater.setWaterValue(plotToWater.getWaterValue() + 2);
-            playerPlotService.updateWaterValue(2, playerModel.getPlayerSettings().getPlayerName(),
-                    plotToWater.getPlotIdentifier());
+            updateWaterValue(plotToWater.getWaterValue(), plotToWater.getPlotIdentifier());
         }
     }
 
@@ -152,7 +155,7 @@ public class PlotViewModel {
      * Increments the daysOld of a PlotModel.
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
-     * @param player the player.
+     * @param player          the player.
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
@@ -185,33 +188,37 @@ public class PlotViewModel {
     /**
      * Uses fertilizer on a plot.
      *
-     * @param plotToPlant the plot which to plant a crop to.
+     * @param plotToFertilize the plot which to plant a crop to.
      */
-    public void fertilizePlot(PlotModel plotToPlant) {
-        if (plotToPlant.getFertilizerLevel() < 9) {
-            plotToPlant.setFertilizerLevel(plotToPlant.getFertilizerLevel() + 2);
+    public void fertilizePlot(PlotModel plotToFertilize) {
+        if (plotToFertilize.getFertilizerLevel() < 9) {
+            plotToFertilize.setFertilizerLevel(plotToFertilize.getFertilizerLevel() + 2);
+            updatePlotFertilizerDatabase(plotToFertilize, playerModel);
         }
     }
 
     /**
      * Uses pesticide on a plot.
      *
-     * @param plotToPlant the plot which to plant a crop to.
+     * @param plotToPesticide the plot which to plant a crop to.
      */
-    public void pesticidePlot(PlotModel plotToPlant) {
-        if (plotToPlant.getCropInPlot() == null) {
+    public void pesticidePlot(PlotModel plotToPesticide) {
+        if (plotToPesticide.getCropInPlot() == null) {
             return;
         }
         StorageModel storage = playerModel.getUserStorage();
-        switch (plotToPlant.getCropInPlot().getCropName()) {
-        case ("Corn") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(3));
+        switch (plotToPesticide.getCropInPlot().getCropName()) {
+        case ("Corn"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(3));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
-        case ("Potato") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(4));
+        case ("Potato"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(4));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
-        case ("Tomato") :
-            plotToPlant.setCropInPlot(storage.getInventory().get(5));
+        case ("Tomato"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(5));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
             break;
         default:
             break;
@@ -222,7 +229,7 @@ public class PlotViewModel {
      * Saves the plots from the users game when they click continue.
      *
      * @param plots      is list of all 8 plots the user has, each having a certain state.
-     * @param playerName the user name we are specifically pulling from the database for.
+     * @param playerName the user name we are specifically pulling from the database for.git
      */
     public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
         playerPlotService.addPlayerPlots(plots, playerName);
@@ -231,21 +238,68 @@ public class PlotViewModel {
     /**
      * Updates the plot maturity by the time since planted.
      *
-     * @param plotIdentifier is the identifier of the plot.
-     * @param playerName     is the name of the player.
+     * @param plot        The plotModel that contains the plotIdentifier.
+     * @param playerModel The playerModel containing the player information.
      */
-    public void updatePlotMaturity(int plotIdentifier, String playerName) {
-        playerPlotService.adjustPlotDaysOld(plotIdentifier, playerName);
+    public void updatePlotMaturity(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotMaturity(plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
      * Method that sets the plot to a new stage.
      *
-     * @param playerName     the player who owns it.
-     * @param plotStage      the stage the plot is at.
-     * @param plotIdentifier what plot we want.
+     * @param playerModel The playerModel containing the player information.
+     * @param plot        The plot model that contains the updated information.
      */
-    public void updatePlotStage(String playerName, String plotStage, int plotIdentifier) {
-        playerPlotService.updatePlotStage(plotIdentifier, plotStage, playerName);
+    public void updatePlotStage(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.updatePlotStage(plot.getPlotIdentifier(),
+                plot.getPlotStage(), playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Updates the days of the plot.
+     *
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
+     */
+    public void updatePlotDaysDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotDays(plot.getDaysOld(), plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Updates the fertilizer level of the plot.
+     *
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
+     */
+    public void updatePlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.adjustPlotFertilizer(plot.getFertilizerLevel(),
+                plot.getPlotIdentifier(), playerModel.getPlayerSettings().getPlayerName());
+
+    }
+
+    /**
+     * Gets the fertilizer level of the plot.
+     *
+     * @param plot        The plot that contains the updated information.
+     * @param playerModel The playerModel containing the player information.
+     */
+    public void getPlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
+        playerPlotService.queryPlotFertilizer(plot.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Updates the crop in the plot database.
+     *
+     * @param playerModel The player model that contains the player information.
+     * @param plotModel   The plotmodel that contains the new crop.
+     */
+    public void updateCropInPlotDatabase(PlotModel plotModel, PlayerModel playerModel) {
+        playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
+                plotModel.getPlotIdentifier(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 }

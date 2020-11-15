@@ -80,7 +80,7 @@ public class EventViewModelTestAndrewNovokshanov {
     @Test
     //Test performLocustEvent method, ensuring that crops with pesticide are never eaten
     public void testPerformLocustEventWithPesticide() {
-        plotViewModel.fertilizePlot(harvestedPlot);
+        plotViewModel.pesticidePlot(harvestedPlot);
         int wasCropEaten = eventViewModel.performLocustEvent(harvestedPlot);
         boolean inRange = (wasCropEaten == 0);
         assertTrue(inRange);

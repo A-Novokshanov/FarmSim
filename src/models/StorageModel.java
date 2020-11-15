@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class StorageModel {
     private ArrayList<CropModel> cropInventory;
+    private int totalFertilizer;
+    private int totalPesticide;
 
     /**
      * Constructor for the cropInventory that creates the
@@ -31,6 +33,8 @@ public class StorageModel {
         cropInventory.add(cornPest);
         cropInventory.add(potatoPest);
         cropInventory.add(tomatoPest);
+        totalFertilizer = 3;
+        totalPesticide = 3;
     }
 
     /**
@@ -123,24 +127,13 @@ public class StorageModel {
 
     }
 
+    /**
+     * BLANK
+     *
+     * @return blank.
+     */
     public int getInventorySize() {
         return cropInventory.size();
-    }
-
-    /**
-     * Checks to see if the crop passed in is valid to sell.
-     *
-     * @param crop the crop we want to check is valid to sell.
-     * @return if its valid to sell or not.
-     */
-    public boolean upForSale(CropModel crop) {
-        String[] cropArray = new String[]{"Tomato", "Potato", "Corn"};
-        for (String i : cropArray) {
-            if (i.equals(crop.getCropName())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -163,4 +156,39 @@ public class StorageModel {
         return 15;
     }
 
+    /**
+     * Updating the total fertilizer variable
+     *
+     * @param totalFertilizer new totalFertilizer value to set
+     */
+    public void setTotalFertilizer(int totalFertilizer) {
+        this.totalFertilizer = totalFertilizer;
+    }
+
+    /**
+     * Updating the total pesticide variable
+     *
+     * @param totalPesticide new totalPesticide value to set
+     */
+    public void setTotalPesticide(int totalPesticide) {
+        this.totalPesticide = totalPesticide;
+    }
+
+    /**
+     * Getter for the total fertilizer variable
+     *
+     * @return the total fertilizer count
+     */
+    public int getTotalFertilizer() {
+        return totalFertilizer;
+    }
+
+    /**
+     * Getter for the total pesticide variable
+     *
+     * @return the total pesticide count
+     */
+    public int getTotalPesticide() {
+        return totalPesticide;
+    }
 }

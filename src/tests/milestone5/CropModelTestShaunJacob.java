@@ -5,7 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class CropModelTest {
+/**
+ * @author Shaun Jacob sjacob31@gatech.edu
+ * @version 1.0
+ */
+public class CropModelTestShaunJacob {
     private CropModel cropModel;
 
     @Before

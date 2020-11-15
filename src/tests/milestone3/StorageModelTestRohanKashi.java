@@ -106,13 +106,6 @@ public class StorageModelTestRohanKashi {
         assertEquals(storageModelTest.getEnoughToRemove(2, 12), 3);
     }
 
-    @Test
-    public void testUpForSale() {
-        tomato = new CropModel("Tomato", 131, 55.0);
-        orange = new CropModel("Orange", 0, 1500.3);
-        assertTrue(storageModelTest.upForSale(tomato));
-        assertFalse(storageModelTest.upForSale(orange));
-    }
 
     @Test
     public void testGetInventorySize() {

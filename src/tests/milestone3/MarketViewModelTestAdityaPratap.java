@@ -72,7 +72,7 @@ public class MarketViewModelTestAdityaPratap {
     @Test
     public void testPurchaseItems() {
 
-        this.marketViewModel.purchaseItems(this.storageViewModel.userInventory().get(0), 4);
+        this.marketViewModel.purchaseCrops(this.storageViewModel.userInventory().get(0), 4);
         int expected = 5;
         int actual = this.storageViewModel.userInventory().get(0).getCropQuantity();
 

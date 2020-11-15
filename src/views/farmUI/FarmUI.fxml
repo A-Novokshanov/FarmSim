@@ -449,17 +449,17 @@
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="125.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_corn_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="415.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_potato_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_potato_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="700.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_pesticide_PL.png" />
                      </image>
                   </ImageView>
                   <JFXButton fx:id="btnCornPlant" layoutX="165.0" layoutY="300.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
@@ -515,17 +515,27 @@
                </font>
             </JFXButton>
             <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
-            <Text layoutX="1155.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fertilizers: 00" textAlignment="RIGHT">
+            <Text layoutX="1155.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fertilizers:" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
-            <Text layoutX="1160.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesticide: 00" textAlignment="RIGHT">
+            <Text layoutX="1157.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesticide:" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>
             </Text>
             <Text fx:id="textEvent" layoutX="1075.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normal" underline="true">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtFertilizerCount" layoutX="1252.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="RIGHT">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtPesticideCount" layoutX="1252.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
                </font>

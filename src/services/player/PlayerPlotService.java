@@ -17,8 +17,8 @@ import java.util.List;
 public class PlayerPlotService {
     private PreparedStatement preparedStatement;
     private static final String ADD_PLOTS_QUERY =
-            "INSERT INTO plot(days, water, crop, player, identifier, watervalue, stage) "
-                    + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO plot(days, water, crop, player, identifier, watervalue, stage, fert) "
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String GET_USER_ID_QUERY =
             "SELECT a.id FROM player a WHERE a.name = ?";
     private static final String UPDATE_PLOT_MATURITY =
@@ -27,11 +27,19 @@ public class PlayerPlotService {
     private static final String HARVEST_PLOT_QUERY =
             "UPDATE plot SET crop = ? WHERE player = ? AND identifier = ?";
     private static final String UPDATE_WATER_VALUE =
-            "UPDATE plot SET watervalue = watervalue + ? WHERE player = ? AND identifier = ?";
+            "UPDATE plot SET watervalue = ? WHERE player = ? AND identifier = ?";
     private static final String GET_USER_PLOTS =
             "SELECT * FROM plot where player=?";
     private static final String UPDATE_PLOT_STAGE =
             "UPDATE plot SET stage = ? WHERE player = ? AND identifier = ?";
+    private static final String UPDATE_PLOT_DAYS = "UPDATE plot SET days = ? WHERE "
+            + "identifier = ? AND player = ?";
+    private static final String UPDATE_PLOT_FERTILIZER =
+            "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
+    private static final String QUERY_PLOT_FERTILIZER =
+            "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
+    private static final String UPDATE_CROP_PLOT = "UPDATE plot SET crop = ? "
+            + "WHERE identifier = ? AND player = ?";
 
 
     /**
@@ -120,6 +128,15 @@ public class PlayerPlotService {
         }
     }
 
+
+    /**
+     * Gets the player water value.
+     *
+     *
+     *
+     */
+
+
     /**
      * Adds the player plots to the database.
      *
@@ -139,6 +156,7 @@ public class PlayerPlotService {
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());
                 preparedStatement.setString(7, plot.getPlotStage());
+                preparedStatement.setInt(8, plot.getFertilizerLevel());
                 preparedStatement.execute();
             }
         } catch (SQLException throwables) {
@@ -170,6 +188,8 @@ public class PlayerPlotService {
                 while (resultSet.next()) {
                     int days = resultSet.getInt("days");
                     int water = resultSet.getInt("water");
+                    int waterValue = resultSet.getInt("watervalue");
+                    int fertilizer = resultSet.getInt("fert");
                     String cropName = resultSet.getString("crop");
                     double cropValue = 0;
                     CropModel crop = null;
@@ -189,6 +209,8 @@ public class PlayerPlotService {
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);
                     plotModel.setPlotStage(stage);
+                    plotModel.setWaterValue(waterValue);
+                    plotModel.setFertilizerLevel(fertilizer);
                     myList.add(plotModel);
                 }
 
@@ -276,19 +298,67 @@ public class PlayerPlotService {
         }
     }
 
+    public void adjustCropInPlot(String cropName, int plotIdentifier, String playerName) {
+
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_CROP_PLOT);
+                preparedStatement.setString(1, cropName);
+                preparedStatement.setInt(2, plotIdentifier);
+                preparedStatement.setInt(3, playerId);
+                preparedStatement.execute();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+        }
+    }
+
     /**
      * Adjusts the days old the plot is as days pass by.
      *
      * @param plotIdentifier The identifier of the plot.
      * @param playerName     The player whose plots need to be updated.
      */
-    public void adjustPlotDaysOld(int plotIdentifier, String playerName) {
+    public void adjustPlotMaturity(int plotIdentifier, String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         int playerId = getPlayerId(playerName);
         try {
             preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_MATURITY);
             preparedStatement.setInt(1, plotIdentifier);
             preparedStatement.setInt(2, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public void adjustPlotDays(int days, int plotIdentifier, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_DAYS);
+            preparedStatement.setInt(1, days);
+            preparedStatement.setInt(2, plotIdentifier);
+            preparedStatement.setInt(3, playerId);
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
@@ -360,5 +430,53 @@ public class PlayerPlotService {
                 throwables.printStackTrace();
             }
         }
+    }
+
+    public void adjustPlotFertilizer(int fertilizerAmount, int plotIdentifer, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        try {
+            preparedStatement = dbConnection.prepareStatement(UPDATE_PLOT_FERTILIZER);
+            preparedStatement.setInt(1, fertilizerAmount);
+            preparedStatement.setInt(2, plotIdentifer);
+            preparedStatement.setInt(3, playerId);
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+                dbConnection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public int queryPlotFertilizer(int plotIdentifier, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        int playerId = getPlayerId(playerName);
+        if (isDbConnected(dbConnection)) {
+            try {
+
+                preparedStatement = dbConnection.prepareStatement(QUERY_PLOT_FERTILIZER);
+                preparedStatement.setInt(1, plotIdentifier);
+                preparedStatement.setInt(2, playerId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                return resultSet.getInt("fert");
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        return -1;
     }
 }

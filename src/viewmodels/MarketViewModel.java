@@ -58,7 +58,7 @@ public class MarketViewModel {
      * @param crop     The crop to be added to the market.
      * @param quantity amount of crop.
      */
-    public void purchaseItems(CropModel crop, int quantity) {
+    public void purchaseCrops(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity)) {
             storageViewModel.addToInventory(crop, quantity);
             PlayerModel curPlayer = player.getPlayer();
@@ -100,5 +100,40 @@ public class MarketViewModel {
         return currentPrice;
     }
 
-
+    /**
+     * Add equipment to inventory after checking it is eligible to be added.
+     *
+     * @param equipment     Name of the equipment
+     * @param quantity      amount of equipment.
+     */
+    public void purchaseItems(String equipment, int quantity) {
+        if (!equipment.equals("Fertilizer") && !equipment.equals("Pesticide")) {
+            return;
+        }
+        if (equipment.equals("Fertilizer")) {
+            if (checkPurchasable(100, quantity)) {
+                player.getPlayer().getUserStorage().setTotalFertilizer(
+                        player.getPlayer().getUserStorage().getTotalFertilizer() + quantity);
+                PlayerModel curPlayer = player.getPlayer();
+                double money = calculateCropPrice(100,
+                        player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
+                player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                        - money);
+                this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
+                        .getPlayerSettings().getPlayerName());
+            }
+        } else if (equipment.equals("Pesticide")) {
+            if (checkPurchasable(100, quantity)) {
+                player.getPlayer().getUserStorage().setTotalPesticide(
+                        player.getPlayer().getUserStorage().getTotalPesticide() + quantity);
+                PlayerModel curPlayer = player.getPlayer();
+                double money = calculateCropPrice(100,
+                        player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
+                player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                        - money);
+                this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
+                        .getPlayerSettings().getPlayerName());
+            }
+        }
+    }
 }
