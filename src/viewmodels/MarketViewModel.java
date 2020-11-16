@@ -168,4 +168,24 @@ public class MarketViewModel {
     public int calculatePlotPrice(int farmSize) {
         return (farmSize / (farmSize + 1)) * 100;
     }
+
+    /**
+     * Purchases a tractor to help with harvesting.
+     *
+     * @param priceOfTractor Thr price of the tractor.
+     */
+    public void purchaseTractor(int priceOfTractor) {
+        player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfTractor);
+        player.increaseMaxHarvest();
+    }
+
+    /**
+     * Purchases an irrigation to help with watering.
+     *
+     * @param priceOfIrrigation The price of the irrigation.
+     */
+    public void purchaseIrrigation(int priceOfIrrigation) {
+        player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
+        player.increaseMaxWater();
+    }
 }

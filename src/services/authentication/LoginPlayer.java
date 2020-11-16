@@ -112,6 +112,8 @@ public class LoginPlayer {
                 int days = resultSet.getInt("days");
                 int harvestCounter = resultSet.getInt("harvest");
                 int waterCounter = resultSet.getInt("water");
+                int maxHarvest = resultSet.getInt("maxharvest");
+                int maxWater = resultSet.getInt("maxwater");
                 preparedStatement = dbConnection.prepareStatement(GET_USER_SETTINGS);
                 preparedStatement.setInt(1, playerId);
                 resultSet = preparedStatement.executeQuery();
@@ -132,6 +134,8 @@ public class LoginPlayer {
                 playerModel.setDays(days);
                 playerModel.setCurrentHarvestCounter(harvestCounter);
                 playerModel.setCurrentWaterCounter(waterCounter);
+                playerModel.setMaxHarvestsPerDay(maxHarvest);
+                playerModel.setMaxWateringPerDay(maxWater);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } finally {

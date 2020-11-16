@@ -12,8 +12,10 @@ public class PlayerModel {
     private SettingModel playerSettings;
     private StorageModel storageModel;
     private int days;
-    private final int maxHarvestsPerDay;
-    private final int maxWateringPerDay;
+
+
+    private int maxHarvestsPerDay;
+    private int maxWateringPerDay;
     private int currentHarvestCounter;
     private int currentWaterCounter;
 
@@ -146,5 +148,24 @@ public class PlayerModel {
     public int getCurrentWaterCounter() {
         return this.currentWaterCounter;
     }
+
+    /**
+     * Sets the current max harvest of the player.
+     *
+     * @param maxHarvestsPerDay The new, updated max harvest
+     */
+    public void setMaxHarvestsPerDay(int maxHarvestsPerDay) {
+        this.maxHarvestsPerDay = maxHarvestsPerDay;
+    }
+
+    /**
+     * Sets the current max water of the player
+     *
+     * @param maxWateringPerDay The new updated max water.
+     */
+    public void setMaxWateringPerDay(int maxWateringPerDay) {
+        this.maxWateringPerDay = maxWateringPerDay;
+    }
+
 }
 

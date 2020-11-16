@@ -349,6 +349,8 @@ public class FarmUIController {
         this.playerViewModel.updatePlayerDay(
                 this.playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
         incrementAllPlotDays();
+        playerViewModel.zeroCurrentHarvestCounter();
+        playerViewModel.zeroCurrentWaterCounter();
     }
 
     private void incrementAllPlotDays() {

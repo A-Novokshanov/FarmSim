@@ -137,4 +137,23 @@ public class PlayerViewModel {
 
     }
 
+    /**
+     * Updates the player's max harvest amount based on purchases.
+     */
+    public void increaseMaxHarvest() {
+        playerModel.setMaxHarvestsPerDay(playerModel.getMaxHarvestsPerDay() + 2);
+        playerSettingsService.updatePlayerMaxHarvest(playerModel.getMaxHarvestsPerDay(),
+                playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    /**
+     * Updates the players max water based on purchases.
+     */
+    public void increaseMaxWater() {
+        playerModel.setMaxWateringPerDay(playerModel.getMaxWateringPerDay() + 2);
+        playerSettingsService.updatePlayerMaxWater(playerModel.getMaxWateringPerDay(),
+                playerModel.getPlayerSettings().getPlayerName());
+
+    }
+
 }

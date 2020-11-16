@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CreatePlayer {
     private final Connection dbConnection;
     private static final String CREATE_PLAYER_QUERY =
-            "INSERT INTO player(name, money, days, harvest, water) VALUES(? ,?, 1, 0, 0)";
+            "INSERT INTO player(name, money, days, harvest, water, maxharvest, maxwater) VALUES(? ,?, 1, 0, 0, ?, ?)";
     private static final String GET_PLAYER_ID =
             "SELECT a.id FROM player a WHERE a.name = ";
     private static final String CREATE_PLAYER_SETTINGS =
@@ -60,6 +60,8 @@ public class CreatePlayer {
                         playerDetails.getPlayerSettings().getPlayerName());
                 preparedStatement.setDouble(2,
                         playerDetails.getUserCurrentMoney());
+                preparedStatement.setInt(3, playerDetails.getMaxHarvestsPerDay());
+                preparedStatement.setInt(4, playerDetails.getMaxWateringPerDay());
                 preparedStatement.executeUpdate();
 
                 //Get player id first

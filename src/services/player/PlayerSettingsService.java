@@ -18,6 +18,8 @@ public class PlayerSettingsService {
             "UPDATE player SET days = days + ? WHERE name = ?";
     private static final String UPDATE_PLAYER_HARVEST = "UPDATE player SET harvest = ? WHERE name = ? ";
     private static final String UPDATE_PLAYER_WATER = "UPDATE player SET water = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_MAX_HARVEST = "UPDATE player SET maxharvest = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_MAX_WATER = "UPDATE player SET maxwater = ? WHERE name = ?";
     private PreparedStatement preparedStatement;
 
     /**
@@ -86,7 +88,7 @@ public class PlayerSettingsService {
         if (isDbConnected(dbConnection)) {
             try {
                 preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_DAY);
-                preparedStatement.setDouble(1, day);
+                preparedStatement.setInt(1, day);
                 preparedStatement.setString(2, playerName);
                 preparedStatement.executeUpdate();
 
@@ -114,7 +116,7 @@ public class PlayerSettingsService {
         if (isDbConnected(dbConnection)) {
             try {
                 preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_HARVEST);
-                preparedStatement.setDouble(1, harvest);
+                preparedStatement.setInt(1, harvest);
                 preparedStatement.setString(2, playerName);
                 preparedStatement.executeUpdate();
 
@@ -142,7 +144,63 @@ public class PlayerSettingsService {
         if (isDbConnected(dbConnection)) {
             try {
                 preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_WATER);
-                preparedStatement.setDouble(1, water);
+                preparedStatement.setInt(1, water);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the max harvest of the player in the database.
+     *
+     * @param maxHarvest The updated max harvest amount.
+     * @param playerName The name of the player.
+     */
+    public void updatePlayerMaxHarvest(int maxHarvest, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_MAX_HARVEST);
+                preparedStatement.setInt(1, maxHarvest);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the max water of a am player in the database.
+     *
+     * @param maxWater   The updated max water amount.
+     * @param playerName The name of the player.
+     */
+    public void updatePlayerMaxWater(int maxWater, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_MAX_WATER);
+                preparedStatement.setInt(1, maxWater);
                 preparedStatement.setString(2, playerName);
                 preparedStatement.executeUpdate();
 
