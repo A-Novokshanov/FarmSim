@@ -156,8 +156,12 @@ public class PlotViewModel {
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
      * @param player          the player.
+     * @return 0 if game is not over, 1 if game is over based on presence of crop in current plot
      */
-    public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
+    public int incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
+        if (checkGameOver(plotToIncrement, player)) {
+            return 1;
+        }
         if (plotToIncrement.getFertilizerLevel() > 0) {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
         } else {
@@ -172,7 +176,19 @@ public class PlotViewModel {
         }
         workerViewModel.payWorker(worker);
         workerWork(plotToIncrement, player, worker);
+        return 0;
     }
+
+    /*
+    For Matthew:
+    In the same method where you call incrementPlotDaysOld on, setup something akin to the following pseudocode:
+    int gameOverTotal = 0;
+    gameOverTotal += <incrementPlotDaysOld on each plot>
+    if (gameOverTotal == Total # of Plots available (I assume there will be a way to track this since you can
+    purchase more plots) then present game over screen, present button that a) deleted player info from database and
+    b) sends players back to HomeScreen
+    else (e.g. gameOverTotal < total # of plots) do nothing
+     */
 
     /**
      * Plants a crop into PlotModel.
@@ -223,6 +239,18 @@ public class PlotViewModel {
             default:
                 break;
         }
+    }
+
+    /**
+     * Checks to see if the game is over.
+     *
+     * @param plot the current plot being checked.
+     * @param player the player whose balance and storage to check.
+     * @return if conditions for game over are true and plot is empty
+     */
+    public boolean checkGameOver(PlotModel plot, PlayerViewModel player) {
+        return (plot.getCropInPlot() == null) && (player.getPlayer().getUserCurrentMoney() <= 0) &&
+                (player.getPlayer().getUserStorage().getTotalCropAmount() <= 0);
     }
 
     /**
