@@ -175,8 +175,10 @@ public class MarketViewModel {
      * @param priceOfTractor Thr price of the tractor.
      */
     public void purchaseTractor(int priceOfTractor) {
-        player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfTractor);
-        player.increaseMaxHarvest();
+        if (player.getPlayer().getUserCurrentMoney() > priceOfTractor) {
+            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfTractor);
+            player.increaseMaxHarvest();
+        }
     }
 
     /**
@@ -185,7 +187,9 @@ public class MarketViewModel {
      * @param priceOfIrrigation The price of the irrigation.
      */
     public void purchaseIrrigation(int priceOfIrrigation) {
-        player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
-        player.increaseMaxWater();
+        if (player.getPlayer().getUserCurrentMoney() > priceOfIrrigation) {
+            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
+            player.increaseMaxWater();
+        }
     }
 }
