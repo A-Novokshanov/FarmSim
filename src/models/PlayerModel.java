@@ -12,6 +12,10 @@ public class PlayerModel {
     private SettingModel playerSettings;
     private StorageModel storageModel;
     private int days;
+    private final int maxHarvestsPerDay;
+    private final int maxWateringPerDay;
+    private int currentHarvestCounter;
+    private int currentWaterCounter;
 
     /**
      * Constructs a PlayerModel object.
@@ -25,6 +29,8 @@ public class PlayerModel {
         this.playerSettings = settingModel;
         this.storageModel = storageModel;
         this.days = 1;
+        this.maxHarvestsPerDay = 5;
+        this.maxWateringPerDay = 10;
     }
 
     public void setDays(int days) {
@@ -85,6 +91,60 @@ public class PlayerModel {
      */
     public StorageModel getUserStorage() {
         return this.storageModel;
+    }
+
+    /**
+     * Gets the max harvest number per day for the farmer.
+     *
+     * @return The maximum number of harvests.
+     */
+    public int getMaxHarvestsPerDay() {
+        return this.maxHarvestsPerDay;
+    }
+
+    /**
+     * Gets the max watering cycles per day for the framer.
+     *
+     * @return The maximum number of watering cycles.
+     */
+    public int getMaxWateringPerDay() {
+        return this.maxWateringPerDay;
+    }
+
+    /**
+     * Sets the current harvest counter of the player.
+     *
+     * @param harvest The amount to increase the harvest counter by.
+     */
+    public void setCurrentHarvestCounter(int harvest) {
+        this.currentHarvestCounter = harvest;
+    }
+
+    /**
+     * Sets the current water counter of the player.
+     *
+     * @param water The amount to increase the water counter by.
+     */
+    public void setCurrentWaterCounter(int water) {
+        this.currentWaterCounter = water;
+    }
+
+    /**
+     * Gets the current harvest counter of the player.
+     *
+     * @return The current harvest counter.
+     */
+    public int getCurrentHarvestCounter() {
+        return this.currentHarvestCounter;
+    }
+
+    /**
+     * Gets the current water counter of the player.
+     *
+     * @return The current water counter.
+     */
+    public int getCurrentWaterCounter() {
+        return this.currentWaterCounter;
     }
 }
 

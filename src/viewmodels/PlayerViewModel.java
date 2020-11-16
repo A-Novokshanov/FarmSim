@@ -93,10 +93,41 @@ public class PlayerViewModel {
 
     /**
      * Updates player day by 1.
+     *
      * @param playerName Name of the current user.
      */
     public void updatePlayerDay(String playerName) {
         playerSettingsService.updatePlayerDay(1, playerName);
+    }
+
+    /**
+     * Increases the current harvest counter of the player by 1.
+     */
+    public void increasePlayerHarvestCounter() {
+        playerModel.setCurrentHarvestCounter(playerModel.getCurrentHarvestCounter() + 1);
+    }
+
+    /**
+     * Increases the current water counter of the player by 1.
+     */
+    public void increasePlayerWaterCounter() {
+        playerModel.setCurrentWaterCounter(playerModel.getCurrentWaterCounter() + 1);
+    }
+
+    /**
+     * Zeros the current harvest counter of the player.
+     */
+    public void zeroCurrentHarvestCounter() {
+        playerModel.setCurrentHarvestCounter(0);
+
+    }
+
+    /**
+     * Zeros the current water counter of the player.
+     */
+    public void zeroCurrentWaterCounter() {
+        playerModel.setCurrentWaterCounter(0);
+
     }
 
 }
