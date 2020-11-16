@@ -2,9 +2,12 @@ package viewmodels;
 
 import models.CropModel;
 import models.PlayerModel;
+import models.PlotModel;
 import models.StorageModel;
 import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
+
+import java.util.Random;
 
 /**
  * This view-model class controls operations for the market
@@ -18,6 +21,7 @@ public class MarketViewModel {
     private StorageViewModel storageViewModel;
     private PlayerSettingsService playerInfoDatabase;
     private PlayerInventoryService playerInventoryService;
+    private PlotViewModel plotViewModel;
 
     /**
      * This methods constructs a new instance of MarketViewModel
@@ -30,6 +34,7 @@ public class MarketViewModel {
         this.storageViewModel = new StorageViewModel(player);
         this.playerInfoDatabase = new PlayerSettingsService();
         this.playerInventoryService = new PlayerInventoryService();
+        this.plotViewModel = new PlotViewModel(this.player.getPlayer());
     }
 
     /**
@@ -83,18 +88,18 @@ public class MarketViewModel {
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
-        case "Casual":
-            difficultyMod = 0.8;
-            break;
-        case "Normal":
-            difficultyMod = 1.0;
-            break;
-        case "Veteran":
-            difficultyMod = 1.2;
-            break;
-        default:
-            difficultyMod = 0.0;
-            break;
+            case "Casual":
+                difficultyMod = 0.8;
+                break;
+            case "Normal":
+                difficultyMod = 1.0;
+                break;
+            case "Veteran":
+                difficultyMod = 1.2;
+                break;
+            default:
+                difficultyMod = 0.0;
+                break;
         }
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;
@@ -103,8 +108,8 @@ public class MarketViewModel {
     /**
      * Add equipment to inventory after checking it is eligible to be added.
      *
-     * @param equipment     Name of the equipment
-     * @param quantity      amount of equipment.
+     * @param equipment Name of the equipment
+     * @param quantity  amount of equipment.
      */
     public void purchaseItems(String equipment, int quantity) {
         if (!equipment.equals("Fertilizer") && !equipment.equals("Pesticide")) {
@@ -135,5 +140,32 @@ public class MarketViewModel {
                         .getPlayerSettings().getPlayerName());
             }
         }
+    }
+
+    /**
+     * Purchases a plot and adds to the player's plot storage.
+     *
+     * @param purchasedPlot The plot that was purchased.
+     */
+    public void purchasePlot(PlotModel purchasedPlot) {
+        if (player.getPlayer().getUserCurrentMoney() > purchasedPlot.getPrice()
+                && storage.getPlotInventory().size() < 10) {
+
+            purchasedPlot.setPlotIdentifier(new Random().nextInt(1000000));
+            storage.addPlotToStorage(purchasedPlot);
+            plotViewModel.addPlotDatabase(purchasedPlot, player.getPlayer());
+            this.player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
+                    - purchasedPlot.getPrice());
+        }
+    }
+
+    /**
+     * Calculates the price of the plot based on the farm size.
+     *
+     * @param farmSize The size of the current farm.
+     * @return The calculated price.
+     */
+    public int calculatePlotPrice(int farmSize) {
+        return (farmSize / (farmSize + 1)) * 100;
     }
 }

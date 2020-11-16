@@ -16,24 +16,25 @@ public class PlotModel {
     private int waterValue;
     private int fertilizerLevel;
     private int plotIdentifier;
-    private String plotStage;
+    private String stage;
+    private int price;
 
     /**
      * This method gets the plot's current stage.
      *
      * @return the plot stage.
      */
-    public String getPlotStage() {
-        return plotStage;
+    public String getStage() {
+        return stage;
     }
 
     /**
      * This method sets the current plot's stage.
      *
-     * @param plotStage is the stage that the plot is at currently.
+     * @param stage is the stage that the plot is at currently.
      */
-    public void setPlotStage(String plotStage) {
-        this.plotStage = plotStage;
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 
     /**
@@ -151,5 +152,23 @@ public class PlotModel {
      */
     public void setFertilizerLevel(int fertilizerLevel) {
         this.fertilizerLevel = fertilizerLevel;
+    }
+
+    /**
+     * Sets the price of the plot;
+     *
+     * @param plotPrice The price of the plot.
+     */
+    public void setPrice(int plotPrice) {
+        this.price = plotPrice;
+    }
+
+    /**
+     * Gets the price of the plot.
+     *
+     * @return The price of the plot.
+     */
+    public int getPrice() {
+        return this.price;
     }
 }

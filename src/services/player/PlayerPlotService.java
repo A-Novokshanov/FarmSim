@@ -155,7 +155,7 @@ public class PlayerPlotService {
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());
-                preparedStatement.setString(7, plot.getPlotStage());
+                preparedStatement.setString(7, plot.getStage());
                 preparedStatement.setInt(8, plot.getFertilizerLevel());
                 preparedStatement.execute();
             }
@@ -208,7 +208,7 @@ public class PlayerPlotService {
                     PlotModel plotModel = new PlotModel(crop, days);
                     plotModel.setDaysSinceWater(water);
                     plotModel.setPlotIdentifier(plotIdentifier);
-                    plotModel.setPlotStage(stage);
+                    plotModel.setStage(stage);
                     plotModel.setWaterValue(waterValue);
                     plotModel.setFertilizerLevel(fertilizer);
                     myList.add(plotModel);

@@ -387,13 +387,13 @@ public class FarmUIController {
     public void setAllInitialMaturity() {
         for (int i = 0; i < 10; i++) {
             if (listPlots.get(i).getDaysOld() < 2) {
-                listPlots.get(i).setPlotStage("Seed");
+                listPlots.get(i).setStage("Seed");
             } else if (listPlots.get(i).getDaysOld() < 6) {
-                listPlots.get(i).setPlotStage("Immature 1");
+                listPlots.get(i).setStage("Immature 1");
             } else if (listPlots.get(i).getDaysOld() < 10) {
-                listPlots.get(i).setPlotStage("Immature 2");
+                listPlots.get(i).setStage("Immature 2");
             } else {
-                listPlots.get(i).setPlotStage("Mature");
+                listPlots.get(i).setStage("Mature");
             }
         }
     }
@@ -410,23 +410,23 @@ public class FarmUIController {
             String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
             if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
                 plotImg.setImage(witheredImg);
-                plotModel.setPlotStage("Withered");
+                plotModel.setStage("Withered");
                 plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
                 waterValue.setVisible(false);
             } else if (plotModel.getDaysOld() < 2) {
                 plotImg.setImage(seedImg);
-                plotModel.setPlotStage("Seed");
+                plotModel.setStage("Seed");
                 plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
             } else if (plotModel.getDaysOld() < 6) {
                 plotImg.setImage(immature1Img);
-                plotModel.setPlotStage("Immature 1");
+                plotModel.setStage("Immature 1");
                 plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
             } else if (plotModel.getDaysOld() < 10) {
-                plotModel.setPlotStage("Immature 2");
+                plotModel.setStage("Immature 2");
                 plotImg.setImage(immature2Img);
                 plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
             } else {
-                plotModel.setPlotStage("Mature");
+                plotModel.setStage("Mature");
                 plotImg.setImage(matureImg);
                 plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
             }
@@ -519,7 +519,7 @@ public class FarmUIController {
                 if (listPlots.get(i).getCropInPlot() != null) {
                     int n = eventViewModel.performLocustEvent(listPlots.get(i));
                     if (n == 1) {
-                        listPlots.get(i).setPlotStage(null);
+                        listPlots.get(i).setStage(null);
                         listPlotImages.get(i).setImage(dirtImg);
                         listPlotNameImages.get(i).setImage(emptyNameImg);
                         switchPlantHarvest(listPlotImages.get(i), i, false);

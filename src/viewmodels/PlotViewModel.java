@@ -208,20 +208,20 @@ public class PlotViewModel {
         }
         StorageModel storage = playerModel.getUserStorage();
         switch (plotToPesticide.getCropInPlot().getCropName()) {
-        case ("Corn"):
-            plotToPesticide.setCropInPlot(storage.getInventory().get(3));
-            updateCropInPlotDatabase(plotToPesticide, playerModel);
-            break;
-        case ("Potato"):
-            plotToPesticide.setCropInPlot(storage.getInventory().get(4));
-            updateCropInPlotDatabase(plotToPesticide, playerModel);
-            break;
-        case ("Tomato"):
-            plotToPesticide.setCropInPlot(storage.getInventory().get(5));
-            updateCropInPlotDatabase(plotToPesticide, playerModel);
-            break;
-        default:
-            break;
+            case ("Corn"):
+                plotToPesticide.setCropInPlot(storage.getInventory().get(3));
+                updateCropInPlotDatabase(plotToPesticide, playerModel);
+                break;
+            case ("Potato"):
+                plotToPesticide.setCropInPlot(storage.getInventory().get(4));
+                updateCropInPlotDatabase(plotToPesticide, playerModel);
+                break;
+            case ("Tomato"):
+                plotToPesticide.setCropInPlot(storage.getInventory().get(5));
+                updateCropInPlotDatabase(plotToPesticide, playerModel);
+                break;
+            default:
+                break;
         }
     }
 
@@ -254,7 +254,7 @@ public class PlotViewModel {
      */
     public void updatePlotStage(PlotModel plot, PlayerModel playerModel) {
         playerPlotService.updatePlotStage(plot.getPlotIdentifier(),
-                plot.getPlotStage(), playerModel.getPlayerSettings().getPlayerName());
+                plot.getStage(), playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
@@ -301,5 +301,9 @@ public class PlotViewModel {
         playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
                 plotModel.getPlotIdentifier(),
                 playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    public void addPlotDatabase(PlotModel plot, PlayerModel player) {
+        playerPlotService.addPlot(plot, player.getPlayerSettings().getPlayerName());
     }
 }

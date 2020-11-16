@@ -12,6 +12,9 @@ import java.util.ArrayList;
  */
 public class StorageModel {
     private ArrayList<CropModel> cropInventory;
+
+
+    private ArrayList<PlotModel> plotInventory;
     private int totalFertilizer;
     private int totalPesticide;
 
@@ -35,6 +38,7 @@ public class StorageModel {
         cropInventory.add(tomatoPest);
         totalFertilizer = 3;
         totalPesticide = 3;
+        plotInventory = new ArrayList<>();
     }
 
     /**
@@ -190,5 +194,17 @@ public class StorageModel {
      */
     public int getTotalPesticide() {
         return totalPesticide;
+    }
+
+    public ArrayList<PlotModel> getPlotInventory() {
+        return plotInventory;
+    }
+
+    public void setPlotInventory(ArrayList<PlotModel> plotInventory) {
+        this.plotInventory = plotInventory;
+    }
+
+    public void addPlotToStorage(PlotModel purchasedPlot) {
+        plotInventory.add(purchasedPlot);
     }
 }
