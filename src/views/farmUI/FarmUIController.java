@@ -14,7 +14,11 @@ import javafx.stage.Stage;
 import models.CropModel;
 import models.PlotModel;
 import models.WorkerModel;
-import viewmodels.*;
+import viewmodels.EventViewModel;
+import viewmodels.PlayerViewModel;
+import viewmodels.PlotViewModel;
+import viewmodels.StorageViewModel;
+import viewmodels.WorkerViewModel;
 import views.marketUI.MarketUIController;
 
 import java.io.IOException;
@@ -149,6 +153,10 @@ public class FarmUIController {
     private Text txtFertilizerCount;
     @FXML
     private Text txtPesticideCount;
+
+    @FXML
+    private Text txtPopUp;
+
 
     private ArrayList<PlotModel> listPlots = new ArrayList<>();
     private ArrayList<ImageView> listPlotImages = new ArrayList<>();
@@ -462,90 +470,104 @@ public class FarmUIController {
     }
 
     /**
-     *
      * @param plotNum The harvested plot's number.
      */
     public void harvestCrop(int plotNum) {
-        PlotModel harvestedPlot = listPlots.get(plotNum);
-        ImageView harvestedPlotImage = listPlotImages.get(plotNum);
-        ImageView harvestedPlotNameImage = listPlotNameImages.get(plotNum);
-        Text waterValue = listPlotWaterValues.get(plotNum);
-        if (harvestedPlot.getDaysOld() >= 10
-                || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
-            this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
-            harvestedPlot.setWaterValue(0);
-            harvestedPlot.setDaysOld(0);
-            this.plotViewModel.updatePlotStage(listPlots.get(plotNum),
-                    playerViewModel.getPlayer());
-            this.plotViewModel.updatePlotDaysDatabase(listPlots.get(plotNum),
-                    playerViewModel.getPlayer());
-            harvestedPlotImage.setImage(dirtImg);
-            harvestedPlotNameImage.setImage(emptyNameImg);
-            switchPlantHarvest(harvestedPlotImage, plotNum, false);
-            waterValue.setVisible(false);
+        if (playerViewModel.getPlayer().getCurrentHarvestCounter()
+                < playerViewModel.getPlayer().getMaxHarvestsPerDay()) {
+            PlotModel harvestedPlot = listPlots.get(plotNum);
+            ImageView harvestedPlotImage = listPlotImages.get(plotNum);
+            ImageView harvestedPlotNameImage = listPlotNameImages.get(plotNum);
+            Text waterValue = listPlotWaterValues.get(plotNum);
+            if (harvestedPlot.getDaysOld() >= 10
+                    || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
+                this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
+                harvestedPlot.setWaterValue(0);
+                harvestedPlot.setDaysOld(0);
+                this.plotViewModel.updatePlotStage(listPlots.get(plotNum),
+                        playerViewModel.getPlayer());
+                this.plotViewModel.updatePlotDaysDatabase(listPlots.get(plotNum),
+                        playerViewModel.getPlayer());
+                harvestedPlotImage.setImage(dirtImg);
+                harvestedPlotNameImage.setImage(emptyNameImg);
+                switchPlantHarvest(harvestedPlotImage, plotNum, false);
+                waterValue.setVisible(false);
+                playerViewModel.increasePlayerHarvestCounter();
+                System.out.println("The current player max harvest is " + playerViewModel.getPlayer().getMaxHarvestsPerDay());
+                System.out.println("The current player harvest counter is " + playerViewModel.getPlayer().getCurrentHarvestCounter());
+            }
+        } else {
+            displayMaxHarvestPopUp();
         }
     }
 
     private void eventRoll() {
         switch (eventViewModel.chooseEvent()) {
-        case 0:
-            int waterRainChange = eventViewModel.performRainEvent();
-            for (int i = 0; i < 10; i++) {
-                if (listPlots.get(i).getCropInPlot() != null) {
-                    if (listPlots.get(i).getWaterValue() > 0
-                            && listPlots.get(i).getWaterValue() <= 6) {
-                        listPlots.get(i).setWaterValue(
-                                listPlots.get(i).getWaterValue() + waterRainChange);
+            case 0:
+                int waterRainChange = eventViewModel.performRainEvent();
+                for (int i = 0; i < 10; i++) {
+                    if (listPlots.get(i).getCropInPlot() != null) {
+                        if (listPlots.get(i).getWaterValue() > 0
+                                && listPlots.get(i).getWaterValue() <= 6) {
+                            listPlots.get(i).setWaterValue(
+                                    listPlots.get(i).getWaterValue() + waterRainChange);
+                        }
                     }
                 }
-            }
-            textEvent.setText("Rain");
-            break;
-        case 1:
-            int waterDroughtChange = eventViewModel.performDroughtEvent();
-            for (int i = 0; i < 10; i++) {
-                if (listPlots.get(i).getCropInPlot() != null) {
-                    if (listPlots.get(i).getWaterValue() > 0
-                            && listPlots.get(i).getWaterValue() <= 6) {
-                        listPlots.get(i).setWaterValue(
-                                Math.max(listPlots.get(i).getWaterValue() - waterDroughtChange, 0));
+                textEvent.setText("Rain");
+                break;
+            case 1:
+                int waterDroughtChange = eventViewModel.performDroughtEvent();
+                for (int i = 0; i < 10; i++) {
+                    if (listPlots.get(i).getCropInPlot() != null) {
+                        if (listPlots.get(i).getWaterValue() > 0
+                                && listPlots.get(i).getWaterValue() <= 6) {
+                            listPlots.get(i).setWaterValue(
+                                    Math.max(listPlots.get(i).getWaterValue() - waterDroughtChange, 0));
+                        }
                     }
                 }
-            }
-            textEvent.setText("Drought");
-            break;
-        case 2:
-            for (int i = 0; i < 10; i++) {
-                if (listPlots.get(i).getCropInPlot() != null) {
-                    int n = eventViewModel.performLocustEvent(listPlots.get(i));
-                    if (n == 1) {
-                        listPlots.get(i).setStage(null);
-                        listPlotImages.get(i).setImage(dirtImg);
-                        listPlotNameImages.get(i).setImage(emptyNameImg);
-                        switchPlantHarvest(listPlotImages.get(i), i, false);
-                        listPlotWaterValues.get(i).setVisible(false);
-                        this.plotViewModel.updatePlotStage(listPlots.get(i),
-                                playerViewModel.getPlayer());
+                textEvent.setText("Drought");
+                break;
+            case 2:
+                for (int i = 0; i < 10; i++) {
+                    if (listPlots.get(i).getCropInPlot() != null) {
+                        int n = eventViewModel.performLocustEvent(listPlots.get(i));
+                        if (n == 1) {
+                            listPlots.get(i).setStage(null);
+                            listPlotImages.get(i).setImage(dirtImg);
+                            listPlotNameImages.get(i).setImage(emptyNameImg);
+                            switchPlantHarvest(listPlotImages.get(i), i, false);
+                            listPlotWaterValues.get(i).setVisible(false);
+                            this.plotViewModel.updatePlotStage(listPlots.get(i),
+                                    playerViewModel.getPlayer());
+                        }
                     }
                 }
-            }
-            textEvent.setText("Locusts");
-            break;
-        default:
-            textEvent.setText("Normal");
+                textEvent.setText("Locusts");
+                break;
+            default:
+                textEvent.setText("Normal");
         }
     }
 
     public void waterCrop(int plotNum) {
-        if (listPlots.get(plotNum) != null) {
-            if (listPlots.get(plotNum).getWaterValue() > 0
-                    && listPlots.get(plotNum).getWaterValue() <= 6) {
-                this.plotViewModel.waterPlot(listPlots.get(plotNum));
-                listPlotWaterValues.get(plotNum).setText(
-                        doubleDigitString(listPlots.get(plotNum).getWaterValue()));
-                checkMaturity(plotNum, listPlots.get(plotNum), listPlotImages.get(plotNum),
-                        listPlotWaterValues.get(plotNum));
+        if (playerViewModel.getPlayer().getCurrentWaterCounter() < playerViewModel.getPlayer().getMaxWateringPerDay()) {
+            if (listPlots.get(plotNum) != null) {
+                if (listPlots.get(plotNum).getWaterValue() > 0
+                        && listPlots.get(plotNum).getWaterValue() <= 6) {
+                    this.plotViewModel.waterPlot(listPlots.get(plotNum));
+                    listPlotWaterValues.get(plotNum).setText(
+                            doubleDigitString(listPlots.get(plotNum).getWaterValue()));
+                    checkMaturity(plotNum, listPlots.get(plotNum), listPlotImages.get(plotNum),
+                            listPlotWaterValues.get(plotNum));
+                    playerViewModel.increasePlayerWaterCounter();
+                    System.out.println("The max water is " + playerViewModel.getPlayer().getMaxWateringPerDay());
+                    System.out.println("The current water counter is " + playerViewModel.getPlayer().getCurrentWaterCounter());
+                }
             }
+        } else {
+            displayMaxWaterPopUp();
         }
     }
 
@@ -582,97 +604,97 @@ public class FarmUIController {
 
     public Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-        case "Corn":
-            return this.cornNameImg;
-        case "Potato":
-            return this.potatoNameImg;
-        case "Tomato":
-            return this.tomatoNameImg;
-        case "Corn with Pesticide":
-            return this.cornPesticideNameImg;
-        case "Potato with Pesticide":
-            return this.potatoPesticideNameImg;
-        case "Tomato with Pesticide":
-            return this.tomatoPesticideNameImg;
-        default:
-            return this.emptyNameImg;
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            case "Corn with Pesticide":
+                return this.cornPesticideNameImg;
+            case "Potato with Pesticide":
+                return this.potatoPesticideNameImg;
+            case "Tomato with Pesticide":
+                return this.tomatoPesticideNameImg;
+            default:
+                return this.emptyNameImg;
         }
     }
 
     public void switchPlantHarvest(ImageView plotImg, int i, boolean isPlant) {
         switch (i) {
-        case 0:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot1);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot1);
-            }
-            break;
-        case 1:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot2);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot2);
-            }
-            break;
-        case 2:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot3);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot3);
-            }
-            break;
-        case 3:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot4);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot4);
-            }
-            break;
-        case 4:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot5);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot5);
-            }
-            break;
-        case 5:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot6);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot6);
-            }
-            break;
-        case 6:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot7);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot7);
-            }
-            break;
-        case 7:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot8);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot8);
-            }
-            break;
-        case 8:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot9);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot9);
-            }
-            break;
-        case 9:
-            if (isPlant) {
-                plotImg.setOnMouseClicked(this::harvestCropPlot10);
-            } else {
-                plotImg.setOnMouseClicked(this::plantCropPlot10);
-            }
-            break;
-        default:
-            break;
+            case 0:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot1);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot1);
+                }
+                break;
+            case 1:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot2);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot2);
+                }
+                break;
+            case 2:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot3);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot3);
+                }
+                break;
+            case 3:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot4);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot4);
+                }
+                break;
+            case 4:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot5);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot5);
+                }
+                break;
+            case 5:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot6);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot6);
+                }
+                break;
+            case 6:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot7);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot7);
+                }
+                break;
+            case 7:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot8);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot8);
+                }
+                break;
+            case 8:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot9);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot9);
+                }
+                break;
+            case 9:
+                if (isPlant) {
+                    plotImg.setOnMouseClicked(this::harvestCropPlot10);
+                } else {
+                    plotImg.setOnMouseClicked(this::plantCropPlot10);
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -922,6 +944,38 @@ public class FarmUIController {
             MarketUIController marketUIController = loader.getController();
             marketUIController.initData(mouseEvent, playerViewModel, storageViewModel);
             stage.setTitle("Market");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayMaxHarvestPopUp() {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("PopUp.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            PopUpController popUpController = loader.getController();
+            popUpController.initData("You are out of harvests for the day."
+                    + " Please wait until the next day or purchase tractors.");
+            stage.setTitle("Alert");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayMaxWaterPopUp() {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("PopUp.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            PopUpController popUpController = loader.getController();
+            popUpController.initData("You are out of watering for the day."
+                    + " Please wait until the next day or purchase irrigation.");
+            stage.setTitle("Alert");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

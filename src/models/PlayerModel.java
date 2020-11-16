@@ -29,7 +29,7 @@ public class PlayerModel {
         this.playerSettings = settingModel;
         this.storageModel = storageModel;
         this.days = 1;
-        this.maxHarvestsPerDay = 5;
+        this.maxHarvestsPerDay = 3;
         this.maxWateringPerDay = 10;
     }
 
