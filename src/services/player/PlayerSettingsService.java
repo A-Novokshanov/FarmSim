@@ -16,6 +16,8 @@ public class PlayerSettingsService {
             "UPDATE player SET money = money + ? WHERE name = ?";
     private static final String UPDATE_PLAYER_DAY =
             "UPDATE player SET days = days + ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_HARVEST = "UPDATE player SET harvest = ? WHERE name = ? ";
+    private static final String UPDATE_PLAYER_WATER = "UPDATE player SET water = ? WHERE name = ?";
     private PreparedStatement preparedStatement;
 
     /**
@@ -85,6 +87,62 @@ public class PlayerSettingsService {
             try {
                 preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_DAY);
                 preparedStatement.setDouble(1, day);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the player's harvest counter in the database.
+     *
+     * @param harvest    The updated harvest counter.
+     * @param playerName The name of the current player.
+     */
+    public void updatePlayerHarvest(int harvest, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_HARVEST);
+                preparedStatement.setDouble(1, harvest);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the player's water counter in the database.
+     *
+     * @param water      The updated water counter.
+     * @param playerName The name of the current player.
+     */
+    public void updatePlayerWater(int water, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_WATER);
+                preparedStatement.setDouble(1, water);
                 preparedStatement.setString(2, playerName);
                 preparedStatement.executeUpdate();
 

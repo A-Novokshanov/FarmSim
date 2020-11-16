@@ -105,6 +105,8 @@ public class PlayerViewModel {
      */
     public void increasePlayerHarvestCounter() {
         playerModel.setCurrentHarvestCounter(playerModel.getCurrentHarvestCounter() + 1);
+        playerSettingsService.updatePlayerHarvest(playerModel.getCurrentHarvestCounter(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
@@ -112,6 +114,8 @@ public class PlayerViewModel {
      */
     public void increasePlayerWaterCounter() {
         playerModel.setCurrentWaterCounter(playerModel.getCurrentWaterCounter() + 1);
+        playerSettingsService.updatePlayerWater(playerModel.getCurrentWaterCounter(),
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
@@ -119,7 +123,8 @@ public class PlayerViewModel {
      */
     public void zeroCurrentHarvestCounter() {
         playerModel.setCurrentHarvestCounter(0);
-
+        playerSettingsService.updatePlayerHarvest(0,
+                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**
@@ -127,6 +132,8 @@ public class PlayerViewModel {
      */
     public void zeroCurrentWaterCounter() {
         playerModel.setCurrentWaterCounter(0);
+        playerSettingsService.updatePlayerWater(0,
+                playerModel.getPlayerSettings().getPlayerName());
 
     }
 

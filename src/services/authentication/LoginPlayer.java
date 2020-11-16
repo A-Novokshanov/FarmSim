@@ -20,7 +20,7 @@ public class LoginPlayer {
             "SELECT id, money, days from player where name=?";
     private static final String GET_USER_SETTINGS =
             "SELECT difficulty, season, "
-            + "seed from setting where player = ?";
+                    + "seed from setting where player = ?";
     private static final String GET_PLAYER_CROPS =
             "SELECT * FROM crop WHERE player = ?";
     private PreparedStatement preparedStatement;
@@ -110,6 +110,8 @@ public class LoginPlayer {
                 int playerId = resultSet.getInt("id");
                 int currentMoney = resultSet.getInt("money");
                 int days = resultSet.getInt("days");
+                int harvestCounter = resultSet.getInt("harvest");
+                int waterCounter = resultSet.getInt("water");
                 preparedStatement = dbConnection.prepareStatement(GET_USER_SETTINGS);
                 preparedStatement.setInt(1, playerId);
                 resultSet = preparedStatement.executeQuery();
@@ -128,6 +130,8 @@ public class LoginPlayer {
                 playerModel = new PlayerModel(currentMoney, settingModel,
                         queryPlayerInventory(playerId));
                 playerModel.setDays(days);
+                playerModel.setCurrentHarvestCounter(harvestCounter);
+                playerModel.setCurrentWaterCounter(waterCounter);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } finally {
@@ -146,6 +150,12 @@ public class LoginPlayer {
         return playerModel;
     }
 
+    /**
+     * Queries the player's inventory from the database.
+     *
+     * @param playerId The player's id.
+     * @return A storage model object containing all of player's storage.
+     */
     public StorageModel queryPlayerInventory(int playerId) {
 
         Connection dbConnection = DatabaseConnection.getDbConnection();
