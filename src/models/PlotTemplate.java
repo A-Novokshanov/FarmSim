@@ -17,8 +17,12 @@ public class PlotTemplate {
     private String waterValue;
     private String fertilizerValue;
 
+
     private Image imgPlot;
     private Image imgName;
+    private Image imgWater;
+    private Image imgFertilizer;
+    private Image imgPesticide;
     private Text txtWaterValue;
     private Text txtFertilizerValue;
 
@@ -39,6 +43,9 @@ public class PlotTemplate {
 
         this.imgPlot = new Image(plotImagePath);
         this.imgName = new Image(nameImagePath);
+        this.imgWater = new Image("....\\dependencies\\images\\water_can.png");
+        this.imgFertilizer = new Image("....\\dependencies\\images\\Fertilizer.png");
+        this.imgPesticide = new Image("....\\dependencies\\images\\pesticide.png");
 
         this.txtWaterValue = new Text(waterValue);
         this.txtFertilizerValue = new Text(fertilizerValue);
@@ -82,6 +89,18 @@ public class PlotTemplate {
 
     public void setTxtFertilizerValue(Text txtFertilizerValue) {
         this.txtFertilizerValue = txtFertilizerValue;
+    }
+
+    public Image getImgWater() {
+        return imgWater;
+    }
+
+    public Image getImgFertilizer() {
+        return imgFertilizer;
+    }
+
+    public Image getImgPesticide() {
+        return imgPesticide;
     }
 }
 
