@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Andrew Novokshanov
  * @version 1.0
  */
-public class EventViewModel {
+public class EventViewModel implements Disaster {
 
     private PlayerModel player;
     private PlotViewModel plotView;
@@ -32,6 +32,7 @@ public class EventViewModel {
      *
      * @return the index of the chosen event
      */
+    @Override
     public int chooseEvent() {
         Random rand = new Random();
         String difficulty = player.getPlayerSettings().getStartingDifficulty();
@@ -64,6 +65,7 @@ public class EventViewModel {
      *
      * @return value to increase crop's waterLevel by
      */
+    @Override
     public int performRainEvent() { //if chooseEvent returns 0
         Random rand = new Random();
         return rand.nextInt(2) + 1;
@@ -74,6 +76,7 @@ public class EventViewModel {
      *
      * @return value to decrease crop's waterLevel by
      */
+    @Override
     public int performDroughtEvent() { //if chooseEvent returns 1
         Random rand = new Random();
         return rand.nextInt(2) + 1;
@@ -84,7 +87,6 @@ public class EventViewModel {
      *
      * @return binary boolean where 1 means crop was eaten, 0 where crop is fine
      * @param plot the plot
-     * @pa
      */
     public int performLocustEvent(PlotModel plot) { //if chooseEvent returns 2
         if (plot.getCropInPlot().getHasPesticide()) {
