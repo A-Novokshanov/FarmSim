@@ -12,10 +12,6 @@ import javafx.scene.text.Text;
 public class PlotTemplate {
 
     private PlotModel plotModel;
-    private String plotImagePath;
-    private String nameImagePath;
-    private String waterValue;
-    private String fertilizerValue;
 
 
     private Image imgPlot;
@@ -29,20 +25,16 @@ public class PlotTemplate {
     /***
      * Constructor for the plotmodel.
      * @param plotModel The plot model containing the plot information.
-     * @param plotImagePath The path to plot image.
-     * @param nameImagePath The path to the name image.
+     * @param plotImage The plot's image.
+     * @param plotNameImage The plot's image of its name.
      * @param waterValue The water value of the plot.
      * @param fertilizerValue The fertilizer value of the plot.
      */
-    public PlotTemplate(PlotModel plotModel, String plotImagePath, String nameImagePath, String waterValue, String fertilizerValue) {
+    public PlotTemplate(PlotModel plotModel, Image plotImage, Image plotNameImage, String waterValue, String fertilizerValue) {
         this.plotModel = plotModel;
-        this.plotImagePath = plotImagePath;
-        this.nameImagePath = nameImagePath;
-        this.waterValue = waterValue;
-        this.fertilizerValue = fertilizerValue;
 
-        this.imgPlot = new Image(plotImagePath);
-        this.imgName = new Image(nameImagePath);
+        this.imgPlot = plotImage;
+        this.imgName = plotNameImage;
         this.imgWater = new Image("....\\dependencies\\images\\water_can.png");
         this.imgFertilizer = new Image("....\\dependencies\\images\\Fertilizer.png");
         this.imgPesticide = new Image("....\\dependencies\\images\\pesticide.png");
@@ -59,36 +51,36 @@ public class PlotTemplate {
         this.plotModel = plotModel;
     }
 
-    public Image getImgPlot() {
+    public Image getPlotImage() {
         return imgPlot;
     }
 
-    public void setImgPlot(Image imgPlot) {
+    public void setPlotImage(Image imgPlot) {
         this.imgPlot = imgPlot;
     }
 
-    public Image getImgName() {
+    public Image getImageName() {
         return imgName;
     }
 
-    public void setImgName(Image imgName) {
+    public void setImageName(Image imgName) {
         this.imgName = imgName;
     }
 
-    public Text getTxtWaterValue() {
+    public Text getWaterValue() {
         return txtWaterValue;
     }
 
-    public void setTxtWaterValue(Text txtWaterValue) {
-        this.txtWaterValue = txtWaterValue;
+    public void setWaterValue(String waterValue) {
+        this.txtWaterValue.setText(waterValue);
     }
 
-    public Text getTxtFertilizerValue() {
+    public Text getFertilizerValue() {
         return txtFertilizerValue;
     }
 
-    public void setTxtFertilizerValue(Text txtFertilizerValue) {
-        this.txtFertilizerValue = txtFertilizerValue;
+    public void setFertilizerValue(String fertilizerValue) {
+        this.txtFertilizerValue.setText(fertilizerValue);
     }
 
     public Image getImgWater() {

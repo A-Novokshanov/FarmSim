@@ -1,4 +1,4 @@
-package views.homeScreenUI;
+package views.homeScreenView;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -9,14 +9,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import viewmodels.PlayerViewModel;
-import views.farmUI.FarmUIController;
+import views.farmView.FarmViewController;
 
 import java.io.IOException;
 
 /**
  * @author Aditya Varun Pratap
  */
-public class ContinueScreenController {
+public class ContinueScreenViewController {
 
     @FXML
     private JFXTextField txtFldUserName;
@@ -48,10 +48,10 @@ public class ContinueScreenController {
             try {
                 Stage stage = (Stage) txtFldUserName.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("../farmUI/FarmUI.fxml"));
+                        getClass().getResource("../farmView/FarmView.fxml"));
                 stage.setScene(new Scene(loader.load(), 1280, 720));
-                FarmUIController farmUIController = loader.getController();
-                farmUIController.initSaveData(playerViewModel);
+                FarmViewController farmViewController = loader.getController();
+                farmViewController.initSaveData(playerViewModel);
                 stage.setTitle("Farm");
                 stage.show();
             } catch (IOException e) {

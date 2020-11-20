@@ -1,0 +1,51 @@
+package viewmodels;
+
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import models.CropModel;
+import models.PlotTemplate;
+
+public class PlantView {
+    private final Image seedImg = new Image("@../../dependencies/images/Seed.png",
+            400.0, 300.0, true, false);
+    private final Image cornNameImg = new Image("@../../dependencies/images/Crop_Bar_Corn.png",
+            400.0, 300.0, true, false);
+    private final Image potatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Potato.png",
+            400.0, 300.0, true, false);
+    private final Image tomatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Tomato.png",
+            400.0, 300.0, true, false);
+    private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
+            400.0, 300.0, true, false);
+
+    private PlayerViewModel playerViewModel;
+    private PlotViewModel plotViewModel;
+
+    public PlantView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel) {
+        this.playerViewModel = playerViewModel;
+        this.plotViewModel = plotViewModel;
+    }
+
+    public void plantCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, CropModel crop) {
+        plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
+        plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
+        this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
+        plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
+                playerViewModel.getPlayer());
+        plotsObservableList.get(plotNum).setPlotImage(seedImg);
+        plotsObservableList.get(plotNum).setImageName(chooseCropImage(crop));
+
+    }
+
+    private Image chooseCropImage(CropModel crop) {
+        switch (crop.getCropName()) {
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            default:
+                return this.emptyNameImg;
+        }
+    }
+}

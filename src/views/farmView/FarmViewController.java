@@ -1,9 +1,12 @@
-package views.farmUI;
+package views.farmView;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,13 +16,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.CropModel;
 import models.PlotModel;
+import models.PlotTemplate;
 import models.WorkerModel;
-import viewmodels.EventViewModel;
-import viewmodels.PlayerViewModel;
-import viewmodels.PlotViewModel;
-import viewmodels.StorageViewModel;
-import viewmodels.WorkerViewModel;
+import viewmodels.*;
 import views.marketUI.MarketUIController;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.List;
  * @author Matthew Farias, Shaun Jacob
  * @version 0.4
  */
-public class FarmUIController {
+public class FarmViewController {
     @FXML
     private Text money;
     @FXML
@@ -157,24 +158,19 @@ public class FarmUIController {
     @FXML
     private Text txtPopUp;
 
+    @FXML
+    private ObservableList<PlotTemplate> plotsObservableList;
+    @FXML
+    private ListView<PlotTemplate> plotsListView;
 
     private ArrayList<PlotModel> listPlots = new ArrayList<>();
+
     private ArrayList<ImageView> listPlotImages = new ArrayList<>();
     private ArrayList<ImageView> listPlotNameImages = new ArrayList<>();
     private ArrayList<Text> listPlotWaterValues = new ArrayList<>();
     private ArrayList<Text> listPlotFertilizerLevels = new ArrayList<>();
 
     private final Image dirtImg = new Image("@../../dependencies/images/Dirt.png",
-            400.0, 300.0, true, false);
-    private final Image seedImg = new Image("@../../dependencies/images/Seed.png",
-            400.0, 300.0, true, false);
-    private final Image immature1Img = new Image("@../../dependencies/images/Immature_1.png",
-            400.0, 300.0, true, false);
-    private final Image immature2Img = new Image("@../../dependencies/images/Immature_2.png",
-            400.0, 300.0, true, false);
-    private final Image matureImg = new Image("@../../dependencies/images/Mature.png",
-            400.0, 300.0, true, false);
-    private final Image witheredImg = new Image("@../../dependencies/images/Withered.png",
             400.0, 300.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
             400.0, 300.0, true, false);
@@ -199,6 +195,12 @@ public class FarmUIController {
     private StorageViewModel storageViewModel;
     private PlotViewModel plotViewModel;
     private EventViewModel eventViewModel;
+    private MaturityView maturityView;
+    private PlantView plantView;
+    private HarvestView harvestView;
+    private WaterView waterView;
+    private FertilizeView fertilizeView;
+    private PesticideView pesticideView;
     private int plantingPlotNum;
 
     /**
@@ -226,11 +228,19 @@ public class FarmUIController {
     }
 
     public void setUpData(PlayerViewModel playerViewModel) {
-        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.playerViewModel = playerViewModel;
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
+
+        this.maturityView = new MaturityView(playerViewModel, plotViewModel);
+        this.plantView = new PlantView(playerViewModel, plotViewModel);
+        this.harvestView = new HarvestView(playerViewModel, plotViewModel);
+        this.waterView = new WaterView(playerViewModel, plotViewModel, maturityView);
+        this.fertilizeView = new FertilizeView(playerViewModel, plotViewModel);
+        this.pesticideView = new PesticideView(playerViewModel, plotViewModel);
+
+        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         this.txtFertilizerCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
@@ -276,10 +286,12 @@ public class FarmUIController {
     }
 
     public void setUpPlotModels(CropModel cropModel) {
+        this.plotsObservableList = FXCollections.observableArrayList();
         for (int i = 0; i < 10; i++) {
-            listPlots.add(plotViewModel.populatePlot(cropModel));
             setUpPlotName(i, cropModel.getCropName());
         }
+        this.plotsListView.setItems(this.plotsObservableList);
+        this.plotsListView.getSelectionModel();
         setAllInitialMaturity();
         checkAllMaturity();
         plotViewModel.addPlayerPlotsToDatabase(listPlots,
@@ -287,8 +299,8 @@ public class FarmUIController {
     }
 
     public void setUpPlotModels(List<PlotModel> plotModels) {
+        this.plotsObservableList = FXCollections.observableArrayList();
         for (int i = 0; i < 10; i++) {
-            listPlots.add(plotModels.get(i));
             if (plotModels.get(i).getCropInPlot() != null) {
                 listPlotNameImages.get(i).setImage(
                         chooseCropImage(plotModels.get(i).getCropInPlot()));
@@ -298,6 +310,8 @@ public class FarmUIController {
             listPlotFertilizerLevels.get(i).setText(
                     doubleDigitString(plotModels.get(i).getFertilizerLevel()));
         }
+        this.plotsListView.setItems(this.plotsObservableList);
+        this.plotsListView.getSelectionModel();
         checkAllMaturity();
     }
 
@@ -410,41 +424,12 @@ public class FarmUIController {
 
     public void checkAllMaturity() {
         for (int i = 0; i < 10; i++) {
-            checkMaturity(i, listPlots.get(i), listPlotImages.get(i), listPlotWaterValues.get(i));
+            checkMaturity(i, listPlotWaterValues.get(i));
         }
     }
 
-    public void checkMaturity(int plotNum, PlotModel plotModel,
-                              ImageView plotImg, Text waterValue) {
-        if (plotModel.getCropInPlot() != null) {
-            String name = playerViewModel.getPlayer().getPlayerSettings().getPlayerName();
-            if (plotModel.getWaterValue() > 6 || plotModel.getWaterValue() <= 0) {
-                plotImg.setImage(witheredImg);
-                plotModel.setStage("Withered");
-                plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
-                waterValue.setVisible(false);
-            } else if (plotModel.getDaysOld() < 2) {
-                plotImg.setImage(seedImg);
-                plotModel.setStage("Seed");
-                plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
-            } else if (plotModel.getDaysOld() < 6) {
-                plotImg.setImage(immature1Img);
-                plotModel.setStage("Immature 1");
-                plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
-            } else if (plotModel.getDaysOld() < 10) {
-                plotModel.setStage("Immature 2");
-                plotImg.setImage(immature2Img);
-                plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
-            } else {
-                plotModel.setStage("Mature");
-                plotImg.setImage(matureImg);
-                plotViewModel.updatePlotStage(plotModel, playerViewModel.getPlayer());
-            }
-        } else {
-            plotImg.setImage(dirtImg);
-            waterValue.setVisible(false);
-            switchPlantHarvest(plotImg, plotNum, false);
-        }
+    public void checkMaturity(int plotNum, Text waterValue) {
+        maturityView.checkMaturity(plotsObservableList, plotNum, waterValue);
     }
 
     public void plantingInventory(int plotNum) {
@@ -455,19 +440,13 @@ public class FarmUIController {
 
     public void plantCrop(int cropNum, CropModel crop) {
         if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 2) {
-            int plotNum = plantingPlotNum;
             storageViewModel.userInventory().get(cropNum).setCropQuantity(
                     storageViewModel.userInventory().get(cropNum).getCropQuantity() - 1);
             toggleInventoryScreenVisibility();
-            listPlots.get(plotNum).setWaterValue(3);
-            listPlots.get(plotNum).setDaysOld(0);
-            this.plotViewModel.plantPlot(listPlots.get(plotNum), crop);
-            plotViewModel.updatePlotStage(listPlots.get(plotNum), playerViewModel.getPlayer());
-            listPlotImages.get(plotNum).setImage(seedImg);
-            listPlotNameImages.get(plotNum).setImage(chooseCropImage(crop));
-            updateWaterValue(listPlots.get(plotNum), listPlotWaterValues.get(plotNum));
-            listPlotWaterValues.get(plotNum).setVisible(true);
-            switchPlantHarvest(listPlotImages.get(plotNum), plotNum, true);
+            plantView.plantCrop(plotsObservableList, cropNum, crop);
+            updateWaterValue(listPlots.get(cropNum), listPlotWaterValues.get(cropNum));
+            listPlotWaterValues.get(cropNum).setVisible(true);
+            switchPlantHarvest(listPlotImages.get(cropNum), cropNum, true);
         }
     }
 
@@ -477,27 +456,7 @@ public class FarmUIController {
     public void harvestCrop(int plotNum) {
         if (playerViewModel.getPlayer().getCurrentHarvestCounter()
                 < playerViewModel.getPlayer().getMaxHarvestsPerDay()) {
-            PlotModel harvestedPlot = listPlots.get(plotNum);
-            ImageView harvestedPlotImage = listPlotImages.get(plotNum);
-            ImageView harvestedPlotNameImage = listPlotNameImages.get(plotNum);
-            Text waterValue = listPlotWaterValues.get(plotNum);
-            if (harvestedPlot.getDaysOld() >= 10
-                    || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
-                this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
-                harvestedPlot.setWaterValue(0);
-                harvestedPlot.setDaysOld(0);
-                this.plotViewModel.updatePlotStage(listPlots.get(plotNum),
-                        playerViewModel.getPlayer());
-                this.plotViewModel.updatePlotDaysDatabase(listPlots.get(plotNum),
-                        playerViewModel.getPlayer());
-                harvestedPlotImage.setImage(dirtImg);
-                harvestedPlotNameImage.setImage(emptyNameImg);
-                switchPlantHarvest(harvestedPlotImage, plotNum, false);
-                waterValue.setVisible(false);
-                playerViewModel.increasePlayerHarvestCounter();
-                System.out.println("The current player max harvest is " + playerViewModel.getPlayer().getMaxHarvestsPerDay());
-                System.out.println("The current player harvest counter is " + playerViewModel.getPlayer().getCurrentHarvestCounter());
-            }
+            harvestView.harvestCrop(plotsObservableList, plotNum, listPlotWaterValues.get(plotNum));
         } else {
             displayMaxHarvestPopUp();
         }
@@ -555,56 +514,25 @@ public class FarmUIController {
 
     public void waterCrop(int plotNum) {
         if (playerViewModel.getPlayer().getCurrentWaterCounter() < playerViewModel.getPlayer().getMaxWateringPerDay()) {
-            if (listPlots.get(plotNum) != null) {
-                if (listPlots.get(plotNum).getWaterValue() > 0
-                        && listPlots.get(plotNum).getWaterValue() <= 6) {
-                    this.plotViewModel.waterPlot(listPlots.get(plotNum));
-                    listPlotWaterValues.get(plotNum).setText(
-                            doubleDigitString(listPlots.get(plotNum).getWaterValue()));
-                    checkMaturity(plotNum, listPlots.get(plotNum), listPlotImages.get(plotNum),
-                            listPlotWaterValues.get(plotNum));
-                    playerViewModel.increasePlayerWaterCounter();
-                    System.out.println("The max water is " + playerViewModel.getPlayer().getMaxWateringPerDay());
-                    System.out.println("The current water counter is " + playerViewModel.getPlayer().getCurrentWaterCounter());
-                }
-            }
+            waterView.waterCrop(plotsObservableList, plotNum, listPlotWaterValues.get(plotNum));
         } else {
             displayMaxWaterPopUp();
         }
     }
 
     public void fertilizePlot(int plotNum) {
-        if (listPlots.get(plotNum) != null) {
-            if (listPlots.get(plotNum).getFertilizerLevel() < 9
-                    && playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() > 1) {
-                this.plotViewModel.fertilizePlot(listPlots.get(plotNum));
-                playerViewModel.getPlayer().getUserStorage().setTotalFertilizer(
-                        playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1);
-                txtFertilizerCount.setText(doubleDigitString(
-                        playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
-                listPlotFertilizerLevels.get(plotNum).setText(
-                        doubleDigitString(listPlots.get(plotNum).getFertilizerLevel()));
-            }
-        }
+        fertilizeView.fertilizePlot(plotsObservableList, plotNum);
+        txtFertilizerCount.setText(doubleDigitString(
+                playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
     }
 
     public void pesticidePlot(int plotNum) {
-        if (listPlots.get(plotNum) != null) {
-            if (listPlots.get(plotNum).getCropInPlot() != null
-                    && !listPlots.get(plotNum).getCropInPlot().getHasPesticide()
-                    && playerViewModel.getPlayer().getUserStorage().getTotalPesticide() > 1) {
-                this.plotViewModel.pesticidePlot(listPlots.get(plotNum));
-                playerViewModel.getPlayer().getUserStorage().setTotalPesticide(
-                        playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1);
-                txtPesticideCount.setText(doubleDigitString(
-                        playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
-                listPlotNameImages.get(plotNum).setImage(
-                        chooseCropImage(listPlots.get(plotNum).getCropInPlot()));
-            }
-        }
+        pesticideView.pesticidePlot(plotsObservableList, plotNum);
+        txtPesticideCount.setText(doubleDigitString(
+                playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
     }
 
-    public Image chooseCropImage(CropModel crop) {
+    private Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
             case "Corn":
                 return this.cornNameImg;
@@ -956,10 +884,10 @@ public class FarmUIController {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("PopUp.fxml"));
+                    getClass().getResource("PopUpView.fxml"));
             stage.setScene(new Scene(loader.load()));
-            PopUpController popUpController = loader.getController();
-            popUpController.initData("You are out of harvests for the day."
+            PopUpViewController popUpViewController = loader.getController();
+            popUpViewController.initData("You are out of harvests for the day."
                     + " Please wait until the next day or purchase tractors.");
             stage.setTitle("Alert");
             stage.show();
@@ -972,10 +900,10 @@ public class FarmUIController {
         try {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("PopUp.fxml"));
+                    getClass().getResource("PopUpView.fxml"));
             stage.setScene(new Scene(loader.load()));
-            PopUpController popUpController = loader.getController();
-            popUpController.initData("You are out of watering for the day."
+            PopUpViewController popUpViewController = loader.getController();
+            popUpViewController.initData("You are out of watering for the day."
                     + " Please wait until the next day or purchase irrigation.");
             stage.setTitle("Alert");
             stage.show();

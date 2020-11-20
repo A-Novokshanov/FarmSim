@@ -16,7 +16,7 @@ import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
 import viewmodels.WorkerViewModel;
-import views.farmUI.FarmUIController;
+import views.farmView.FarmViewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -445,11 +445,11 @@ public class MarketUIController {
 
     public void returnFarm() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmView/FarmView.fxml"));
             Stage stage = (Stage) btnFarm.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
-            FarmUIController farmUIController = loader.getController();
-            farmUIController.initDataFromMarket(this.playerViewModel);
+            FarmViewController farmViewController = loader.getController();
+            farmViewController.initDataFromMarket(this.playerViewModel);
             stage.setTitle("Farm");
             stage.show();
         } catch (IOException e) {

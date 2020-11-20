@@ -1,9 +1,9 @@
-package views.farmUI;
+package views.farmView;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 
-public class PopUpController {
+public class PopUpViewController {
     @FXML
     private Text txtPopUp;
 
