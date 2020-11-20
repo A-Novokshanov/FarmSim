@@ -1,6 +1,7 @@
 package viewmodels;
 
 import models.CropModel;
+import models.PlotModel;
 import models.StorageModel;
 import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
@@ -116,6 +117,33 @@ public class StorageViewModel {
      */
     public int userPesticide() {
         return storageModel.getTotalPesticide();
+    }
+
+    /**
+     * Gets and returns the user's max harvest.
+     *
+     * @return The max harvest total of the user.
+     */
+    public int userHarvestMax() {
+        return player.getPlayer().getMaxHarvestsPerDay();
+    }
+
+    /**
+     * Gets and returns the user's max water.
+     *
+     * @return The max water total of the user.
+     */
+    public int userWaterMax() {
+        return player.getPlayer().getMaxWateringPerDay();
+    }
+
+    /**
+     * Gets and returns the user's plot inventory.
+     *
+     * @return The plot inventory of the user.
+     */
+    public ArrayList<PlotModel> userPlotInventory() {
+        return storageModel.getPlotInventory();
     }
 
     /**
