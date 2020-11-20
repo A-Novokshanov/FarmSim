@@ -65,7 +65,7 @@ public class MarketViewModelTestAdityaPratap {
     public void testCheckPurchasable() {
         int cropBasePrice = 2;
         int quantity = 4;
-        assertTrue(this.marketViewModel.checkPurchasable(cropBasePrice, quantity));
+        assertTrue(this.marketViewModel.checkPurchasable(cropBasePrice, quantity, true));
 
     }
 

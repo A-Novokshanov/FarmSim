@@ -65,7 +65,7 @@ public class MarketViewModelTestAndrewNovokshanov {
     public void testCheckPurchasable() {
         int cropBasePrice = 2;
         int quantity = 4;
-        assertTrue(this.marketViewModel.checkPurchasable(cropBasePrice, quantity));
+        assertTrue(this.marketViewModel.checkPurchasable(cropBasePrice, quantity, true));
 
     }
 
@@ -73,7 +73,7 @@ public class MarketViewModelTestAndrewNovokshanov {
     public void testPurchaseCropItems() {
 
         this.marketViewModel.purchaseCrops(this.storageViewModel.userInventory().get(0), 4);
-        int expected = 5;
+        int expected = 7;
         int actual = this.storageViewModel.userInventory().get(0).getCropQuantity();
 
         assertEquals(expected, actual);
@@ -91,13 +91,19 @@ public class MarketViewModelTestAndrewNovokshanov {
 
     @Test
     public void testPurchaseEquipmentItems() {
-
-        this.marketViewModel.purchaseItems("Fertilizer", 5);
+        playerViewModel.getPlayer().setUserCurrentMoney(10000);
         int expected = 8;
+
+        int pre1 = this.storageViewModel.userFertilizer();
+        assertEquals(3, pre1);
+        this.marketViewModel.purchaseItems("Fertilizer", 5);
         int actual = this.storageViewModel.userFertilizer();
+        assertEquals(expected, actual);
+
+        int pre2 = this.storageViewModel.userPesticide();
+        assertEquals(3, pre2);
         this.marketViewModel.purchaseItems("Pesticide", 5);
         int actual2 = this.storageViewModel.userPesticide();
-        assertEquals(actual, actual2);
-        assertEquals(expected, actual);
+        assertEquals(expected, actual2);
     }
 }
