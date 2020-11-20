@@ -101,6 +101,24 @@ public class StorageViewModel {
     }
 
     /**
+     * Gets and returns the user's fertilizer total.
+     *
+     * @return The fertilizer total of the user.
+     */
+    public int userFertilizer() {
+        return storageModel.getTotalFertilizer();
+    }
+
+    /**
+     * Gets and returns the user's pesticide total.
+     *
+     * @return The pesticide total of the user.
+     */
+    public int userPesticide() {
+        return storageModel.getTotalPesticide();
+    }
+
+    /**
      * Get price of crop after taking account difficulty
      *
      * @param cropBasePrice Base price of a crop without taking into account the difficulty
