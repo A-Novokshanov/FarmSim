@@ -46,15 +46,19 @@ public class MarketViewModel {
      *
      * @param cropBasePrice price of crop
      * @param quantity      amount of crop
+     * @param isCrop        is the item you are checking a crop
      * @return A boolean representing if a user can purchase an item.
      */
-    public boolean checkPurchasable(double cropBasePrice, int quantity) {
+    public boolean checkPurchasable(double cropBasePrice, int quantity, boolean isCrop) {
         String difficulty = player.getPlayer().getPlayerSettings()
                 .getStartingDifficulty();
         double currentPriceIndividual = calculateCropPrice(cropBasePrice, difficulty);
         double currentPriceTotal = currentPriceIndividual * quantity;
-        return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))
-                && ((quantity + storage.getTotalCropAmount()) <= storage.getCapacity());
+        if (isCrop) {
+            return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal))
+                    && ((quantity + storage.getTotalCropAmount()) <= storage.getCapacity());
+        }
+        return (!(player.getPlayer().getUserCurrentMoney() < currentPriceTotal));
     }
 
     /**
@@ -64,7 +68,7 @@ public class MarketViewModel {
      * @param quantity amount of crop.
      */
     public void purchaseCrops(CropModel crop, int quantity) {
-        if (checkPurchasable(crop.getCropValue(), quantity)) {
+        if (checkPurchasable(crop.getCropValue(), quantity, true)) {
             storageViewModel.addToInventory(crop, quantity);
             PlayerModel curPlayer = player.getPlayer();
             double money = calculateCropPrice(crop.getCropValue(),
@@ -116,7 +120,7 @@ public class MarketViewModel {
             return;
         }
         if (equipment.equals("Fertilizer")) {
-            if (checkPurchasable(100, quantity)) {
+            if (checkPurchasable(100, quantity, false)) {
                 player.getPlayer().getUserStorage().setTotalFertilizer(
                         player.getPlayer().getUserStorage().getTotalFertilizer() + quantity);
                 PlayerModel curPlayer = player.getPlayer();
@@ -128,7 +132,7 @@ public class MarketViewModel {
                         .getPlayerSettings().getPlayerName());
             }
         } else if (equipment.equals("Pesticide")) {
-            if (checkPurchasable(100, quantity)) {
+            if (checkPurchasable(100, quantity, false)) {
                 player.getPlayer().getUserStorage().setTotalPesticide(
                         player.getPlayer().getUserStorage().getTotalPesticide() + quantity);
                 PlayerModel curPlayer = player.getPlayer();

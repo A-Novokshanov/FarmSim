@@ -1,11 +1,6 @@
-package tests.milestone3;
+package tests.milestone6;
 
-import models.AnimalModel;
-import models.CropModel;
-import models.PlayerModel;
-import models.SeasonModel;
-import models.SettingModel;
-import models.StorageModel;
+import models.*;
 import org.junit.Before;
 import org.junit.Test;
 import viewmodels.MarketViewModel;
@@ -21,10 +16,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Junit tests for MarketViewModel
  *
- * @author Aditya Varun Pratap
+ * @author Andrew Novokshanov
  * @version 1.0
  */
-public class MarketViewModelTestAdityaPratap {
+public class MarketViewModelTestAndrewNovokshanov {
 
     private MarketViewModel marketViewModel;
     private PlayerViewModel playerViewModel;
@@ -70,10 +65,10 @@ public class MarketViewModelTestAdityaPratap {
     }
 
     @Test
-    public void testPurchaseItems() {
+    public void testPurchaseCropItems() {
 
         this.marketViewModel.purchaseCrops(this.storageViewModel.userInventory().get(0), 4);
-        int expected = 5;
+        int expected = 7;
         int actual = this.storageViewModel.userInventory().get(0).getCropQuantity();
 
         assertEquals(expected, actual);
@@ -89,4 +84,56 @@ public class MarketViewModelTestAdityaPratap {
 
     }
 
+    @Test
+    public void testPurchaseEquipmentItems() {
+        playerViewModel.getPlayer().setUserCurrentMoney(10000);
+        int expected = 8;
+
+        int pre1 = this.storageViewModel.userFertilizer();
+        assertEquals(3, pre1);
+        this.marketViewModel.purchaseItems("Fertilizer", 5);
+        int actual = this.storageViewModel.userFertilizer();
+        assertEquals(expected, actual);
+
+        int pre2 = this.storageViewModel.userPesticide();
+        assertEquals(3, pre2);
+        this.marketViewModel.purchaseItems("Pesticide", 5);
+        int actual2 = this.storageViewModel.userPesticide();
+        assertEquals(expected, actual2);
+    }
+
+    @Test
+    public void testPurchasePlotItems() {
+        playerViewModel.getPlayer().setUserCurrentMoney(10000);
+
+        int pre1 = this.storageViewModel.userPlotInventory().size();
+        assertEquals(0, pre1);
+        CropModel corn = new CropModel("corn", 1, 123);
+        PlotModel newPlot = new PlotModel(corn, 0);
+        this.marketViewModel.purchasePlot(newPlot);
+        int actual = this.storageViewModel.userPlotInventory().size();
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void testPurchaseHarvestMax() {
+        playerViewModel.getPlayer().setUserCurrentMoney(10000);
+
+        int pre1 = this.playerViewModel.getPlayer().getMaxHarvestsPerDay();
+        assertEquals(5, pre1);
+        this.marketViewModel.purchaseTractor(1);
+        int actual = this.playerViewModel.getPlayer().getMaxHarvestsPerDay();
+        assertEquals(7, actual);
+    }
+
+    @Test
+    public void testPurchaseWaterMax() {
+        playerViewModel.getPlayer().setUserCurrentMoney(10000);
+
+        int pre1 = this.playerViewModel.getPlayer().getMaxWateringPerDay();
+        assertEquals(5, pre1);
+        this.marketViewModel.purchaseIrrigation(1);
+        int actual = this.playerViewModel.getPlayer().getMaxWateringPerDay();
+        assertEquals(7, actual);
+    }
 }
