@@ -10,9 +10,9 @@ import viewmodels.PlotViewModel;
 
 public class HarvestView {
     private final Image dirtImg = new Image("@../../dependencies/images/Dirt.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
 
     private PlayerViewModel playerViewModel;
     private PlotViewModel plotViewModel;
@@ -22,7 +22,7 @@ public class HarvestView {
         this.plotViewModel = plotViewModel;
     }
 
-    public void harvestCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, Text waterCounter) {
+    public void harvestCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         PlotModel harvestedPlot = plotsObservableList.get(plotNum).getPlotModel();
         if (harvestedPlot.getDaysOld() >= 10
                 || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
@@ -38,7 +38,7 @@ public class HarvestView {
             this.plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(plotNum).getPlotModel(),
                     playerViewModel.getPlayer());
             //switchPlantHarvest(harvestedPlotImage, plotNum, false);
-            waterCounter.setVisible(false);
+            plotsObservableList.get(plotNum).setWaterValueVisibility(false);
             playerViewModel.increasePlayerHarvestCounter();
             System.out.println("The current player max harvest is " + playerViewModel.getPlayer().getMaxHarvestsPerDay());
             System.out.println("The current player harvest counter is " + playerViewModel.getPlayer().getCurrentHarvestCounter());

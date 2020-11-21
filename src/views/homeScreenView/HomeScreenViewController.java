@@ -109,7 +109,7 @@ public class HomeScreenViewController {
         Parent root;
         try {
             root = FXMLLoader.load(
-                    getClass().getResource("/ContinueScreenView.fxml"));
+                    getClass().getResource("ContinueScreenView.fxml"));
             stage.setTitle("Login");
             stage.setScene(new Scene(root, 600, 344));
             stage.show();

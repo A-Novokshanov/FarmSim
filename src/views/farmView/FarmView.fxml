@@ -4,408 +4,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.farmView.FarmViewController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
             <Circle fx:id="dayCounter" fill="DODGERBLUE" layoutX="1215.0" layoutY="68.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Pane fx:id="pane1" layoutX="245.0" layoutY="125.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot1Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot1" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName1Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue1" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot1" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot1" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot1" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel1" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane2" layoutX="890.0" layoutY="125.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot2Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot2" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName2Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot2" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue2" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot2" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot2" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel2" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane3" layoutX="245.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot3Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot3" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName3Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot3" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue3" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot3" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot3" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel3" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane4" layoutX="460.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot4Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot4" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName4Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot4" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue4" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot4" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot4" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel4" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane5" layoutX="675.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot5Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot5" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName5Img" fitHeight="50.0" fitWidth="150.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot5" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue5" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot5" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot5" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel5" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane6" layoutX="890.0" layoutY="300.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot6Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot6" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName6Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot6" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue6" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot6" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot6" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel6" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane7" layoutX="245.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot7Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot7" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName7Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot7" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue7" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot7" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot7" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel7" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane8" layoutX="460.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot8Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot8" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName8Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot8" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue8" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot8" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot8" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel8" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane9" layoutX="675.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot9Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot9" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName9Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot9" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue9" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot9" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot9" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel9" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane fx:id="pane10" layoutX="890.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
-               <children>
-                  <ImageView fx:id="plot10Img" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#harvestCropPlot10" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Dirt.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="plotName10Img" fitHeight="50.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" y="100.0">
-                     <image>
-                        <Image url="@../../dependencies/images/Crop_Bar_Empty.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="10.0" onMouseClicked="#waterPlot10" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/water_can.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="txtWaterValue10" layoutX="124.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="03">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="7.0" layoutY="38.0" onMouseClicked="#fertilizePlot10" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/Fertilizer.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="10.0" layoutY="66.0" onMouseClicked="#pesticidePlot10" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/pesticide.png" />
-                     </image>
-                  </ImageView>
-                  <Text fx:id="textFertilizerLevel10" layoutX="124.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <ImageView fitHeight="215.0" fitWidth="244.0" layoutX="533.0" layoutY="52.0" onMouseClicked="#toggleInventoryScreenVisibility" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="157.0" fitWidth="183.0" layoutX="575.0" layoutY="50.0" onMouseClicked="#toggleInventoryScreenVisibility" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../dependencies/images/85249200-stock-vector-barn-house-icon-or-sign-isolated-on-white-background-vector-illustration-of-red-farm-house-.jpg" />
                </image>
@@ -420,101 +33,11 @@
                   <Font size="26.0" />
                </font>
             </Text>
-            <Pane fx:id="inventoryScreen" layoutX="150.0" layoutY="45.0" prefHeight="640.0" prefWidth="1000.0" style="visibility: false; -fx-background-color: gray;">
-               <children>
-                  <Text layoutX="380.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Text>
-                  <JFXButton fx:id="exitButton" layoutX="14.0" layoutY="14.0" onMouseClicked="#toggleInventoryScreenVisibility" prefHeight="46.0" prefWidth="111.0" style="-fx-background-color: #1e90ff#1e90ff;" text="Exit">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </JFXButton>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="125.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="415.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_potato_PL.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="700.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="125.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_corn_pesticide_PL.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="415.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_potato_pesticide_PL.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="700.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_pesticide_PL.png" />
-                     </image>
-                  </ImageView>
-                  <JFXButton fx:id="btnCornPlant" layoutX="165.0" layoutY="300.0" onMouseClicked="#chooseCorn" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="btnPotatoPlant" layoutX="460.0" layoutY="300.0" onMouseClicked="#choosePotato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="btnTomatoPlant" layoutX="745.0" layoutY="300.0" onMouseClicked="#chooseTomato" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <Text fx:id="numCorn" layoutX="300.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="numPotatoes" layoutX="590.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="numTomatoes" layoutX="875.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="numPesticideCorn" layoutX="300.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="numPesticidePotatoes" layoutX="590.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="numPesticideTomatoes" layoutX="875.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
             <JFXButton fx:id="btnMarket" layoutX="39.0" layoutY="625.0" onMouseClicked="#goToMarket" prefHeight="60.0" prefWidth="100.0" style="-fx-border-color: Black;" text="Market">
                <font>
                   <Font size="20.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="35.0" fitWidth="32.0" layoutX="187.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
             <Text layoutX="1155.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fertilizers:" textAlignment="RIGHT">
                <font>
                   <Font size="21.0" />
@@ -540,6 +63,117 @@
                   <Font size="21.0" />
                </font>
             </Text>
+            <GridPane fx:id="gridPane" layoutX="105.0" layoutY="50.0" prefHeight="620.0" prefWidth="1100.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Pane fx:id="inventoryScreen" layoutX="105.0" layoutY="50.0" prefHeight="630.0" prefWidth="1110.0" style="visibility: false; -fx-background-color: gray;">
+               <children>
+                  <Text layoutX="410.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory">
+                     <font>
+                        <Font size="64.0" />
+                     </font>
+                  </Text>
+                  <JFXButton fx:id="exitButton" layoutX="14.0" layoutY="14.0" onMouseClicked="#toggleInventoryScreenVisibility" prefHeight="46.0" prefWidth="111.0" style="-fx-background-color: #1e90ff#1e90ff;" text="Exit">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="130.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_corn_PL.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="440.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_potato_PL.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="750.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_PL.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="130.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_corn_pesticide_PL.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="440.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_potato_pesticide_PL.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="750.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dependencies/images/placeholders/inventory_tomato_pesticide_PL.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="btnCornPlant" layoutX="175.0" layoutY="300.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnPotatoPlant" layoutX="485.0" layoutY="300.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnTomatoPlant" layoutX="795.0" layoutY="300.0" prefHeight="35.0" prefWidth="111.0" style="-fx-border-color: black;" text="Plant">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <Text fx:id="numCorn" layoutX="310.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="numPotatoes" layoutX="620.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="numTomatoes" layoutX="930.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="numPesticideCorn" layoutX="310.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="numPesticidePotatoes" layoutX="620.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="numPesticideTomatoes" layoutX="930.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <JFXButton fx:id="btnAddPlot" layoutX="1136.0" layoutY="625.0" onMouseClicked="#addPlot" prefHeight="60.0" prefWidth="111.0" style="-fx-border-color: Black;" text="Add Plot">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </JFXButton>
          </children>
     </AnchorPane>
   </children>

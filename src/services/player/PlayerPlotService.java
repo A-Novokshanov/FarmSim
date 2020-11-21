@@ -245,7 +245,11 @@ public class PlayerPlotService {
                 preparedStatement = dbConnection.prepareStatement(ADD_PLOTS_QUERY);
                 preparedStatement.setInt(1, plot.getDaysOld());
                 preparedStatement.setInt(2, plot.getDaysSinceWater());
-                preparedStatement.setString(3, plot.getCropInPlot().getCropName());
+                if (!(plot.getCropInPlot() == null)) {
+                    preparedStatement.setString(3, plot.getCropInPlot().getCropName());
+                } else {
+                    preparedStatement.setString(3, null);
+                }
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());

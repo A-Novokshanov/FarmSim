@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
  * @version 1.0
  */
 public class PlotTemplate {
-
     private PlotModel plotModel;
     private ImageView imgViewPlot;
     private ImageView imgViewName;
@@ -28,10 +27,8 @@ public class PlotTemplate {
      */
     public PlotTemplate(PlotModel plotModel, Image plotImage, Image plotNameImage, String waterValue, String fertilizerValue) {
         this.plotModel = plotModel;
-
         this.imgViewPlot = new ImageView(plotImage);
         this.imgViewName = new ImageView(plotNameImage);
-
         this.txtWaterValue = new Text(waterValue);
         this.txtFertilizerValue = new Text(fertilizerValue);
     }
@@ -66,6 +63,10 @@ public class PlotTemplate {
 
     public void setWaterValue(String waterValue) {
         this.txtWaterValue.setText(waterValue);
+    }
+
+    public void setWaterValueVisibility(Boolean bool) {
+        this.txtWaterValue.setVisible(bool);
     }
 
     public Text getFertilizerValue() {

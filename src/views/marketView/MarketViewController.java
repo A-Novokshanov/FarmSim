@@ -1,4 +1,4 @@
-package views.marketUI;
+package views.marketView;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class MarketUIController {
+public class MarketViewController {
     @FXML
     private JFXButton btnSwap;
     @FXML
@@ -449,7 +449,7 @@ public class MarketUIController {
             Stage stage = (Stage) btnFarm.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             FarmViewController farmViewController = loader.getController();
-            farmViewController.initDataFromMarket(this.playerViewModel);
+            farmViewController.initSaveData(this.playerViewModel);
             stage.setTitle("Farm");
             stage.show();
         } catch (IOException e) {

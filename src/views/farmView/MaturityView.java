@@ -83,4 +83,16 @@ public class MaturityView {
             return matureImg;
         }
     }
+
+    public Image getMaturityImage(PlotModel plotModel) {
+        if (plotModel.getDaysOld() < 2) {
+            return seedImg;
+        } else if (plotModel.getDaysOld() < 6) {
+            return immature1Img;
+        } else if (plotModel.getDaysOld() < 10) {
+            return immature2Img;
+        } else {
+            return matureImg;
+        }
+    }
 }

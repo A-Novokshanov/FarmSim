@@ -9,15 +9,15 @@ import viewmodels.PlotViewModel;
 
 public class PlantView {
     private final Image seedImg = new Image("@../../dependencies/images/Seed.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image cornNameImg = new Image("@../../dependencies/images/Crop_Bar_Corn.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image potatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Potato.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image tomatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Tomato.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
 
     private PlayerViewModel playerViewModel;
     private PlotViewModel plotViewModel;
@@ -35,7 +35,6 @@ public class PlantView {
                 playerViewModel.getPlayer());
         plotsObservableList.get(plotNum).setPlotImageView(seedImg);
         plotsObservableList.get(plotNum).setNameImageView(chooseCropImage(crop));
-
     }
 
     private Image chooseCropImage(CropModel crop) {
