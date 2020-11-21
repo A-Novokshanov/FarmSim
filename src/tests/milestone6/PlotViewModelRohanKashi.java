@@ -9,8 +9,7 @@ import viewmodels.PlotViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 public class PlotViewModelRohanKashi {
@@ -143,6 +142,11 @@ public class PlotViewModelRohanKashi {
                 playerViewModel.getPlayer().getUserStorage().getInventory().get(1).getCropQuantity()
         );
         assertNull(harvestedPlotDead.getCropInPlot());
+    }
+
+    @Test
+    public void testGameOver() {
+        assertFalse(plotViewModel.checkGameOver(plotModel, playerViewModel));
     }
 
 }
