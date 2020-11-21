@@ -36,7 +36,7 @@ public class PesticideView {
                 this.plotViewModel.pesticidePlot(plotsObservableList.get(plotNum).getPlotModel());
                 playerViewModel.getPlayer().getUserStorage().setTotalPesticide(
                         playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1);
-                plotsObservableList.get(plotNum).setImageName(
+                plotsObservableList.get(plotNum).setNameImageView(
                         chooseCropImage(plotsObservableList.get(plotNum).getPlotModel().getCropInPlot()));
             }
         }

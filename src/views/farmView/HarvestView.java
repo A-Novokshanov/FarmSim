@@ -30,8 +30,8 @@ public class HarvestView {
             harvestedPlot.setWaterValue(0);
             harvestedPlot.setDaysOld(0);
             plotsObservableList.get(plotNum).setPlotModel(harvestedPlot);
-            plotsObservableList.get(plotNum).setPlotImage(dirtImg);
-            plotsObservableList.get(plotNum).setImageName(emptyNameImg);
+            plotsObservableList.get(plotNum).setPlotImageView(dirtImg);
+            plotsObservableList.get(plotNum).setNameImageView(emptyNameImg);
             plotsObservableList.get(plotNum).getPlotModel().setStage(null);
             this.plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
                     playerViewModel.getPlayer());

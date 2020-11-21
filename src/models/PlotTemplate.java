@@ -1,6 +1,7 @@
 package models;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -12,13 +13,8 @@ import javafx.scene.text.Text;
 public class PlotTemplate {
 
     private PlotModel plotModel;
-
-
-    private Image imgPlot;
-    private Image imgName;
-    private Image imgWater;
-    private Image imgFertilizer;
-    private Image imgPesticide;
+    private ImageView imgViewPlot;
+    private ImageView imgViewName;
     private Text txtWaterValue;
     private Text txtFertilizerValue;
 
@@ -33,11 +29,8 @@ public class PlotTemplate {
     public PlotTemplate(PlotModel plotModel, Image plotImage, Image plotNameImage, String waterValue, String fertilizerValue) {
         this.plotModel = plotModel;
 
-        this.imgPlot = plotImage;
-        this.imgName = plotNameImage;
-        this.imgWater = new Image("....\\dependencies\\images\\water_can.png");
-        this.imgFertilizer = new Image("....\\dependencies\\images\\Fertilizer.png");
-        this.imgPesticide = new Image("....\\dependencies\\images\\pesticide.png");
+        this.imgViewPlot = new ImageView(plotImage);
+        this.imgViewName = new ImageView(plotNameImage);
 
         this.txtWaterValue = new Text(waterValue);
         this.txtFertilizerValue = new Text(fertilizerValue);
@@ -51,20 +44,20 @@ public class PlotTemplate {
         this.plotModel = plotModel;
     }
 
-    public Image getPlotImage() {
-        return imgPlot;
+    public ImageView getPlotImageView() {
+        return imgViewPlot;
     }
 
-    public void setPlotImage(Image imgPlot) {
-        this.imgPlot = imgPlot;
+    public void setPlotImageView(Image imgPlot) {
+        this.imgViewPlot.setImage(imgPlot);
     }
 
-    public Image getImageName() {
-        return imgName;
+    public ImageView getNameImageView() {
+        return imgViewName;
     }
 
-    public void setImageName(Image imgName) {
-        this.imgName = imgName;
+    public void setNameImageView(Image imgName) {
+        this.imgViewName.setImage(imgName);
     }
 
     public Text getWaterValue() {
@@ -81,18 +74,6 @@ public class PlotTemplate {
 
     public void setFertilizerValue(String fertilizerValue) {
         this.txtFertilizerValue.setText(fertilizerValue);
-    }
-
-    public Image getImgWater() {
-        return imgWater;
-    }
-
-    public Image getImgFertilizer() {
-        return imgFertilizer;
-    }
-
-    public Image getImgPesticide() {
-        return imgPesticide;
     }
 }
 

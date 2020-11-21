@@ -217,7 +217,7 @@ public class InitialConfigViewController {
             Stage stage = (Stage) btnCreateGame.getScene().getWindow();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().
-                        getResource("../farmView/FarmView.fxml"));
+                        getResource("../farmView/FarmViewAlt.fxml"));
                 stage.setTitle("Farm Screen");
                 stage.setScene(new Scene(loader.load()));
                 this.setMoney();

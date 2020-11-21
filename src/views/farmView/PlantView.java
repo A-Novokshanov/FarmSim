@@ -33,8 +33,8 @@ public class PlantView {
         this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
         plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
                 playerViewModel.getPlayer());
-        plotsObservableList.get(plotNum).setPlotImage(seedImg);
-        plotsObservableList.get(plotNum).setImageName(chooseCropImage(crop));
+        plotsObservableList.get(plotNum).setPlotImageView(seedImg);
+        plotsObservableList.get(plotNum).setNameImageView(chooseCropImage(crop));
 
     }
 

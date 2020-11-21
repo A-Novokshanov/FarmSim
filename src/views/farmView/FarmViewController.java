@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -23,6 +24,7 @@ import views.marketUI.MarketUIController;
 
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,48 +60,9 @@ public class FarmViewController {
     private Text textEvent;
     @FXML
     private JFXButton btnMarket;
+    @FXML
+    private GridPane gridPane;
 
-    @FXML
-    private ImageView plot1Img;
-    @FXML
-    private ImageView plot2Img;
-    @FXML
-    private ImageView plot3Img;
-    @FXML
-    private ImageView plot4Img;
-    @FXML
-    private ImageView plot5Img;
-    @FXML
-    private ImageView plot6Img;
-    @FXML
-    private ImageView plot7Img;
-    @FXML
-    private ImageView plot8Img;
-    @FXML
-    private ImageView plot9Img;
-    @FXML
-    private ImageView plot10Img;
-
-    @FXML
-    private ImageView plotName1Img;
-    @FXML
-    private ImageView plotName2Img;
-    @FXML
-    private ImageView plotName3Img;
-    @FXML
-    private ImageView plotName4Img;
-    @FXML
-    private ImageView plotName5Img;
-    @FXML
-    private ImageView plotName6Img;
-    @FXML
-    private ImageView plotName7Img;
-    @FXML
-    private ImageView plotName8Img;
-    @FXML
-    private ImageView plotName9Img;
-    @FXML
-    private ImageView plotName10Img;
 
     @FXML
     private JFXButton btnCornPlant;
@@ -107,48 +70,6 @@ public class FarmViewController {
     private JFXButton btnPotatoPlant;
     @FXML
     private JFXButton btnTomatoPlant;
-
-    @FXML
-    private Text txtWaterValue1;
-    @FXML
-    private Text txtWaterValue2;
-    @FXML
-    private Text txtWaterValue3;
-    @FXML
-    private Text txtWaterValue4;
-    @FXML
-    private Text txtWaterValue5;
-    @FXML
-    private Text txtWaterValue6;
-    @FXML
-    private Text txtWaterValue7;
-    @FXML
-    private Text txtWaterValue8;
-    @FXML
-    private Text txtWaterValue9;
-    @FXML
-    private Text txtWaterValue10;
-
-    @FXML
-    private Text textFertilizerLevel1;
-    @FXML
-    private Text textFertilizerLevel2;
-    @FXML
-    private Text textFertilizerLevel3;
-    @FXML
-    private Text textFertilizerLevel4;
-    @FXML
-    private Text textFertilizerLevel5;
-    @FXML
-    private Text textFertilizerLevel6;
-    @FXML
-    private Text textFertilizerLevel7;
-    @FXML
-    private Text textFertilizerLevel8;
-    @FXML
-    private Text textFertilizerLevel9;
-    @FXML
-    private Text textFertilizerLevel10;
 
     @FXML
     private Text txtFertilizerCount;
@@ -160,36 +81,47 @@ public class FarmViewController {
 
     @FXML
     private ObservableList<PlotTemplate> plotsObservableList;
-    @FXML
-    private ListView<PlotTemplate> plotsListView;
+
+    private ArrayDeque<int[]> gridPositionDeque = new ArrayDeque<>(Arrays.asList(
+            new int[]{1, 1}, new int[]{2, 1}, new int[]{3, 1}, new int[]{4, 1}, new int[]{5, 1},
+            new int[]{1, 2}, new int[]{2, 2}, new int[]{3, 2}, new int[]{4, 2}, new int[]{5, 2},
+            new int[]{0, 1}, new int[]{0, 2}, new int[]{6, 1}, new int[]{6, 2},
+            new int[]{1, 3}, new int[]{2, 3}, new int[]{3, 3}, new int[]{4, 3}, new int[]{5, 3}));
 
     private ArrayList<PlotModel> listPlots = new ArrayList<>();
-
     private ArrayList<ImageView> listPlotImages = new ArrayList<>();
     private ArrayList<ImageView> listPlotNameImages = new ArrayList<>();
     private ArrayList<Text> listPlotWaterValues = new ArrayList<>();
     private ArrayList<Text> listPlotFertilizerLevels = new ArrayList<>();
 
     private final Image dirtImg = new Image("@../../dependencies/images/Dirt.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image cornNameImg = new Image("@../../dependencies/images/Crop_Bar_Corn.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image potatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Potato.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image tomatoNameImg = new Image("@../../dependencies/images/Crop_Bar_Tomato.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image cornPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Corn_Pesticide.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image potatoPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Potato_Pesticide.png",
-            400.0, 300.0, true, false);
+            150.0, 50.0, true, false);
     private final Image tomatoPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Tomato_Pesticide.png",
-            400.0, 300.0, true, false);
-
+            150.0, 50.0, true, false);
+    private final Image waterImage = new Image(
+            "@../../dependencies/images/water_can.png",
+            25.0, 25.0, true, false);
+    private final Image fertilizerImage = new Image(
+            "@../../dependencies/images/Fertilizer.png",
+            25.0, 25.0, true, false);
+    private final Image pesticideImage = new Image(
+            "@../../dependencies/images/pesticide.png",
+            25.0, 25.0, true, false);
 
     private PlayerViewModel playerViewModel;
     private StorageViewModel storageViewModel;
@@ -212,9 +144,6 @@ public class FarmViewController {
         setUpData(playerViewModel);
         setUpPlotModels(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
-        WorkerModel workerModel = new WorkerModel();
-        WorkerViewModel workerViewModel = new WorkerViewModel(playerViewModel.getPlayer());
-        workerViewModel.addWorkerDatabase(workerModel);
     }
 
     public void initSaveData(PlayerViewModel playerViewModel) {
@@ -232,70 +161,62 @@ public class FarmViewController {
         this.storageViewModel = new StorageViewModel(playerViewModel);
         this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
         this.plotViewModel = new PlotViewModel(playerViewModel.getPlayer());
-
         this.maturityView = new MaturityView(playerViewModel, plotViewModel);
         this.plantView = new PlantView(playerViewModel, plotViewModel);
         this.harvestView = new HarvestView(playerViewModel, plotViewModel);
         this.waterView = new WaterView(playerViewModel, plotViewModel, maturityView);
         this.fertilizeView = new FertilizeView(playerViewModel, plotViewModel);
         this.pesticideView = new PesticideView(playerViewModel, plotViewModel);
-
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         this.txtFertilizerCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
         this.txtPesticideCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
-        setUpPlotImages();
-        setUpPlotNameImages();
-        setUpPlotWaterValues();
-        setUpPlotFertilizerLevels();
     }
 
-    public void setUpPlotImages() {
-        this.listPlotImages = new ArrayList<>(
-                Arrays.asList(plot1Img, plot2Img, plot3Img,
-                        plot4Img, plot5Img, plot6Img, plot7Img,
-                        plot8Img, plot9Img, plot10Img)
-        );
-    }
-
-    public void setUpPlotNameImages() {
-        this.listPlotNameImages = new ArrayList<>(
-                Arrays.asList(plotName1Img, plotName2Img, plotName3Img,
-                        plotName4Img, plotName5Img, plotName6Img, plotName7Img,
-                        plotName8Img, plotName9Img, plotName10Img)
-        );
-    }
-
-    public void setUpPlotWaterValues() {
-        this.listPlotWaterValues = new ArrayList<>(
-                Arrays.asList(txtWaterValue1, txtWaterValue2, txtWaterValue3,
-                        txtWaterValue4, txtWaterValue5, txtWaterValue6, txtWaterValue7,
-                        txtWaterValue8, txtWaterValue9, txtWaterValue10)
-        );
-    }
-
-    public void setUpPlotFertilizerLevels() {
-        this.listPlotFertilizerLevels = new ArrayList<>(
-                Arrays.asList(textFertilizerLevel1, textFertilizerLevel2, textFertilizerLevel3,
-                        textFertilizerLevel4, textFertilizerLevel5, textFertilizerLevel6,
-                        textFertilizerLevel7, textFertilizerLevel8, textFertilizerLevel9,
-                        textFertilizerLevel10)
-        );
-    }
-
-    public void setUpPlotModels(CropModel cropModel) {
+    private void setUpPlotModels(CropModel cropModel) {
         this.plotsObservableList = FXCollections.observableArrayList();
         for (int i = 0; i < 10; i++) {
-            setUpPlotName(i, cropModel.getCropName());
+            PlotModel plot = plotViewModel.populatePlot(cropModel);
+            Image plotImage = maturityView.setInitialMaturity(plot);
+            PlotTemplate plotTemplate = new PlotTemplate(plot, plotImage, chooseCropImage(cropModel), "03", "00");
+            plotsObservableList.add(plotTemplate);
+            Pane pane = createPane(i);
+            int[] gridPosition = gridPositionDeque.remove();
+            gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
-        this.plotsListView.setItems(this.plotsObservableList);
-        this.plotsListView.getSelectionModel();
-        setAllInitialMaturity();
-        checkAllMaturity();
-        plotViewModel.addPlayerPlotsToDatabase(listPlots,
-                playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
+    }
+
+    private Pane createPane(int i) {
+        Pane pane = new Pane();
+        pane.getChildren().add(plotsObservableList.get(i).getPlotImageView());
+        ImageView plotNameImage = plotsObservableList.get(i).getNameImageView();
+        plotNameImage.setLayoutY(100);
+        pane.getChildren().add(plotNameImage);
+        ImageView waterImageView = new ImageView(waterImage);
+        waterImageView.setLayoutX(7);
+        waterImageView.setLayoutY(10);
+        pane.getChildren().add(waterImageView);
+        ImageView fertilizerImageView = new ImageView(fertilizerImage);
+        fertilizerImageView.setLayoutX(7);
+        fertilizerImageView.setLayoutY(38);
+        pane.getChildren().add(fertilizerImageView);
+        ImageView pesticideImageView = new ImageView(pesticideImage);
+        pesticideImageView.setLayoutX(10);
+        pesticideImageView.setLayoutY(66);
+        pane.getChildren().add(pesticideImageView);
+        Text waterValueText = plotsObservableList.get(i).getWaterValue();
+        waterValueText.setStyle("-fx-font: 18 System");
+        waterValueText.setLayoutX(124);
+        waterValueText.setLayoutY(28);
+        pane.getChildren().add(waterValueText);
+        Text fertilizerValueText = plotsObservableList.get(i).getFertilizerValue();
+        fertilizerValueText.setStyle("-fx-font: 18 System");
+        fertilizerValueText.setLayoutX(124);
+        fertilizerValueText.setLayoutY(50);
+        pane.getChildren().add(fertilizerValueText);
+        return pane;
     }
 
     public void setUpPlotModels(List<PlotModel> plotModels) {
@@ -310,8 +231,6 @@ public class FarmViewController {
             listPlotFertilizerLevels.get(i).setText(
                     doubleDigitString(plotModels.get(i).getFertilizerLevel()));
         }
-        this.plotsListView.setItems(this.plotsObservableList);
-        this.plotsListView.getSelectionModel();
         checkAllMaturity();
     }
 
@@ -718,126 +637,6 @@ public class FarmViewController {
 
     public void harvestCropPlot10(MouseEvent mouseEvent) {
         harvestCrop(9);
-    }
-
-    public void waterPlot1() {
-        waterCrop(0);
-    }
-
-    public void waterPlot2() {
-        waterCrop(1);
-    }
-
-    public void waterPlot3() {
-        waterCrop(2);
-    }
-
-    public void waterPlot4() {
-        waterCrop(3);
-    }
-
-    public void waterPlot5() {
-        waterCrop(4);
-    }
-
-    public void waterPlot6() {
-        waterCrop(5);
-    }
-
-    public void waterPlot7() {
-        waterCrop(6);
-    }
-
-    public void waterPlot8() {
-        waterCrop(7);
-    }
-
-    public void waterPlot9() {
-        waterCrop(8);
-    }
-
-    public void waterPlot10() {
-        waterCrop(9);
-    }
-
-    public void fertilizePlot1() {
-        fertilizePlot(0);
-    }
-
-    public void fertilizePlot2() {
-        fertilizePlot(1);
-    }
-
-    public void fertilizePlot3() {
-        fertilizePlot(2);
-    }
-
-    public void fertilizePlot4() {
-        fertilizePlot(3);
-    }
-
-    public void fertilizePlot5() {
-        fertilizePlot(4);
-    }
-
-    public void fertilizePlot6() {
-        fertilizePlot(5);
-    }
-
-    public void fertilizePlot7() {
-        fertilizePlot(6);
-    }
-
-    public void fertilizePlot8() {
-        fertilizePlot(7);
-    }
-
-    public void fertilizePlot9() {
-        fertilizePlot(8);
-    }
-
-    public void fertilizePlot10() {
-        fertilizePlot(9);
-    }
-
-    public void pesticidePlot1() {
-        pesticidePlot(0);
-    }
-
-    public void pesticidePlot2() {
-        pesticidePlot(1);
-    }
-
-    public void pesticidePlot3() {
-        pesticidePlot(2);
-    }
-
-    public void pesticidePlot4() {
-        pesticidePlot(3);
-    }
-
-    public void pesticidePlot5() {
-        pesticidePlot(4);
-    }
-
-    public void pesticidePlot6() {
-        pesticidePlot(5);
-    }
-
-    public void pesticidePlot7() {
-        pesticidePlot(6);
-    }
-
-    public void pesticidePlot8() {
-        pesticidePlot(7);
-    }
-
-    public void pesticidePlot9() {
-        pesticidePlot(8);
-    }
-
-    public void pesticidePlot10() {
-        pesticidePlot(9);
     }
 
     public void setUpPlotName(int plotNum, String str) {
