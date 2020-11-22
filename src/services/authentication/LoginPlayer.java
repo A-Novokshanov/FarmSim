@@ -17,7 +17,7 @@ public class LoginPlayer {
     private static final String USER_EXISTS_QUERY =
             "SELECT name from player where name=?";
     private static final String GET_USER_ID_MONEY =
-            "SELECT id, money, days from player where name=?";
+            "SELECT id, money, days, harvest, water, maxharvest, maxwater from player where name=?";
     private static final String GET_USER_SETTINGS =
             "SELECT difficulty, season, "
                     + "seed from setting where player = ?";
