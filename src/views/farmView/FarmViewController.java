@@ -578,7 +578,7 @@ public class FarmViewController {
         gameOverScreen.setVisible(true);
     }
 
-    private void deleteGame(MouseEvent mouseEvent) {
+    public void deleteGame(MouseEvent mouseEvent) {
 
     }
 }
