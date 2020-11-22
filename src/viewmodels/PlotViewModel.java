@@ -167,7 +167,6 @@ public class PlotViewModel {
         } else {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
         }
-        //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
         if ((plotToIncrement.getWaterValue() > 0) && (plotToIncrement.getWaterValue() <= 6)) {
             plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
         }
@@ -254,16 +253,6 @@ public class PlotViewModel {
     }
 
     /**
-     * Saves the plots from the users game when they click continue.
-     *
-     * @param plots      is list of all 8 plots the user has, each having a certain state.
-     * @param playerName the user name we are specifically pulling from the database for.git
-     */
-    public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
-        playerPlotService.addPlayerPlots(plots, playerName);
-    }
-
-    /**
      * Updates the plot maturity by the time since planted.
      *
      * @param plot        The plotModel that contains the plotIdentifier.
@@ -306,17 +295,6 @@ public class PlotViewModel {
         playerPlotService.adjustPlotFertilizer(plot.getFertilizerLevel(),
                 plot.getPlotIdentifier(), playerModel.getPlayerSettings().getPlayerName());
 
-    }
-
-    /**
-     * Gets the fertilizer level of the plot.
-     *
-     * @param plot        The plot that contains the updated information.
-     * @param playerModel The playerModel containing the player information.
-     */
-    public void getPlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
-        playerPlotService.queryPlotFertilizer(plot.getPlotIdentifier(),
-                playerModel.getPlayerSettings().getPlayerName());
     }
 
     /**

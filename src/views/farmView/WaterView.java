@@ -1,7 +1,6 @@
 package views.farmView;
 
 import javafx.collections.ObservableList;
-import javafx.scene.text.Text;
 import models.PlotTemplate;
 import viewmodels.PlayerViewModel;
 import viewmodels.PlotViewModel;
@@ -17,18 +16,25 @@ public class WaterView {
         this.maturityView = maturityView;
     }
 
-    public void waterCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, Text waterCounter) {
+    public boolean waterCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         if (plotsObservableList.get(plotNum).getPlotModel() != null) {
             int waterValue = plotsObservableList.get(plotNum).getPlotModel().getWaterValue();
             if (waterValue > 0 && waterValue <= 6) {
                 this.plotViewModel.waterPlot(plotsObservableList.get(plotNum).getPlotModel());
                 plotsObservableList.get(plotNum).setWaterValue(
                         doubleDigitString(plotsObservableList.get(plotNum).getPlotModel().getWaterValue()));
-                maturityView.checkMaturity(plotsObservableList, plotNum, waterCounter);
+                maturityView.checkMaturity(plotsObservableList, plotNum);
+                plotViewModel.updateWaterValue(plotsObservableList.get(plotNum).getWaterValue(),
+                        plotsObservableList.get(plotNum).getPlotModel().getPlotIdentifier());
                 playerViewModel.increasePlayerWaterCounter();
                 System.out.println("The max water is " + playerViewModel.getPlayer().getMaxWateringPerDay());
                 System.out.println("The current water counter is " + playerViewModel.getPlayer().getCurrentWaterCounter());
+                return true;
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
     }
 

@@ -30,7 +30,7 @@ public class MaturityView {
         this.plotViewModel = plotViewModel;
     }
 
-    public void checkMaturity(ObservableList<PlotTemplate> plotsObservableList, int plotNum, Text waterCounter) {
+    public void checkMaturity(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         int waterValue = plotsObservableList.get(plotNum).getPlotModel().getWaterValue();
         if (plotsObservableList.get(plotNum).getPlotModel().getCropInPlot() != null) {
             if (waterValue > 6 || waterValue <= 0) {
@@ -38,7 +38,7 @@ public class MaturityView {
                 plotsObservableList.get(plotNum).getPlotModel().setStage("Withered");
                 plotViewModel.updatePlotStage(
                         plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
-                waterCounter.setVisible(false);
+                plotsObservableList.get(plotNum).getWaterValueText().setVisible(false);
             } else if (plotsObservableList.get(plotNum).getPlotModel().getDaysOld() < 2) {
                 plotsObservableList.get(plotNum).setPlotImageView(seedImg);
                 plotsObservableList.get(plotNum).getPlotModel().setStage("Seed");
@@ -63,8 +63,7 @@ public class MaturityView {
         } else {
             plotsObservableList.get(plotNum).setPlotImageView(dirtImg);
             plotsObservableList.get(plotNum).getPlotModel().setStage(null);
-            waterCounter.setVisible(false);
-            //switchPlantHarvest(plotImg, plotNum, false);
+            plotsObservableList.get(plotNum).getWaterValueText().setVisible(false);
         }
     }
 

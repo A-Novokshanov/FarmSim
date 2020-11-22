@@ -2,9 +2,7 @@ package views.farmView;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.WeakListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +24,6 @@ import views.marketView.MarketViewController;
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -65,13 +62,12 @@ public class FarmViewController {
     @FXML
     private GridPane gridPane;
 
-
     @FXML
-    private JFXButton btnCornPlant;
+    private JFXButton btnPlant0;
     @FXML
-    private JFXButton btnPotatoPlant;
+    private JFXButton btnPlant1;
     @FXML
-    private JFXButton btnTomatoPlant;
+    private JFXButton btnPlant2;
 
     @FXML
     private Text txtFertilizerCount;
@@ -89,7 +85,6 @@ public class FarmViewController {
             new int[]{1, 2}, new int[]{2, 2}, new int[]{3, 2}, new int[]{4, 2}, new int[]{5, 2},
             new int[]{0, 1}, new int[]{0, 2}, new int[]{6, 1}, new int[]{6, 2},
             new int[]{1, 3}, new int[]{2, 3}, new int[]{3, 3}, new int[]{4, 3}, new int[]{5, 3}));
-    private HashMap<Integer, int[]> gridPositionMap = new HashMap<>();
 
     private final Image dirtImg = new Image("@../../dependencies/images/Dirt.png",
             150.0, 150.0, true, false);
@@ -139,13 +134,13 @@ public class FarmViewController {
      */
     public void initConfigData(PlayerViewModel playerViewModel) {
         setUpData(playerViewModel);
-        setUpPlotObservableList(
+        setUpPlots(
                 playerViewModel.getPlayer().getPlayerSettings().getStartingCropType());
     }
 
     public void initSaveData(PlayerViewModel playerViewModel) {
         setUpData(playerViewModel);
-        setUpPlotObservableList(plotViewModel.getPlotsFromDatabase());
+        setUpPlots(plotViewModel.getPlotsFromDatabase());
     }
 
     public void setUpData(PlayerViewModel playerViewModel) {
@@ -165,9 +160,12 @@ public class FarmViewController {
                 this.playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
         this.txtPesticideCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
+        this.btnPlant0.setId("btnPlant0");
+        this.btnPlant1.setId("btnPlant1");
+        this.btnPlant2.setId("btnPlant2");
     }
 
-    private void setUpPlotObservableList(CropModel cropModel) {
+    private void setUpPlots(CropModel cropModel) {
         this.plotsObservableList = FXCollections.observableArrayList();
         for (int i = 0; i < 10; i++) {
             PlotModel plot = plotViewModel.populatePlot(cropModel);
@@ -180,12 +178,11 @@ public class FarmViewController {
             plotsObservableList.add(plotTemplate);
             Pane pane = createPane(plotTemplate, i);
             int[] gridPosition = gridPositionDeque.remove();
-            gridPositionMap.put(i, gridPosition);
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
     }
 
-    public void setUpPlotObservableList(List<PlotModel> listPlots) {
+    public void setUpPlots(List<PlotModel> listPlots) {
         this.plotsObservableList = FXCollections.observableArrayList();
         for (int i = 0; i < listPlots.size(); i++) {
             PlotTemplate plotTemplate = new PlotTemplate(listPlots.get(i),
@@ -196,44 +193,63 @@ public class FarmViewController {
             plotsObservableList.add(plotTemplate);
             Pane pane = createPane(plotsObservableList.get(i), i);
             int[] gridPosition = gridPositionDeque.remove();
-            gridPositionMap.put(i, gridPosition);
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
     }
 
+    /**
+     * Method to create a pane to be added to gridPane.
+     * @param plotTemplate The plot template used to create a new pane
+     * @param iD The pane's given id number, used to when calling a method for a given pane.
+     * @return The created pane for gridPane.
+     */
     private Pane createPane(PlotTemplate plotTemplate, int iD) {
-        Pane pane = new Pane();
-        pane.getChildren().add(plotTemplate.getPlotImageView());
+        ImageView plotImage = plotTemplate.getPlotImageView();
+        plotImage.setId("Plot" + iD);
+        if (plotTemplate.getPlotModel().getCropInPlot() == null) {
+            plotImage.setOnMouseClicked(this::plantCrop);
+        } else {
+            plotImage.setOnMouseClicked(this::harvestCrop);
+        }
+
         ImageView plotNameImage = plotTemplate.getNameImageView();
         plotNameImage.setLayoutY(100);
-        pane.getChildren().add(plotNameImage);
+
         ImageView waterImageView = new ImageView(waterImage);
         waterImageView.setId("Water" + iD);
         waterImageView.setOnMouseClicked(this::waterCrop);
         waterImageView.setLayoutX(7);
         waterImageView.setLayoutY(10);
-        pane.getChildren().add(waterImageView);
+
         ImageView fertilizerImageView = new ImageView(fertilizerImage);
         fertilizerImageView.setId("Fertilizer" + iD);
         fertilizerImageView.setOnMouseClicked(this::fertilizePlot);
         fertilizerImageView.setLayoutX(7);
         fertilizerImageView.setLayoutY(38);
-        pane.getChildren().add(fertilizerImageView);
+
         ImageView pesticideImageView = new ImageView(pesticideImage);
         pesticideImageView.setId("Pesticide" + iD);
         pesticideImageView.setOnMouseClicked(this::pesticidePlot);
         pesticideImageView.setLayoutX(10);
         pesticideImageView.setLayoutY(66);
-        pane.getChildren().add(pesticideImageView);
-        Text waterValueText = plotTemplate.getWaterValue();
+
+        Text waterValueText = plotTemplate.getWaterValueText();
         waterValueText.setStyle("-fx-font: 18 System");
         waterValueText.setLayoutX(124);
         waterValueText.setLayoutY(28);
-        pane.getChildren().add(waterValueText);
-        Text fertilizerValueText = plotTemplate.getFertilizerValue();
+
+        Text fertilizerValueText = plotTemplate.getFertilizerValueText();
         fertilizerValueText.setStyle("-fx-font: 18 System");
         fertilizerValueText.setLayoutX(124);
         fertilizerValueText.setLayoutY(50);
+
+        Pane pane = new Pane();
+        pane.getChildren().add(plotImage);
+        pane.getChildren().add(plotNameImage);
+        pane.getChildren().add(waterImageView);
+        pane.getChildren().add(fertilizerImageView);
+        pane.getChildren().add(pesticideImageView);
+        pane.getChildren().add(waterValueText);
         pane.getChildren().add(fertilizerValueText);
         return pane;
     }
@@ -283,18 +299,18 @@ public class FarmViewController {
      * Makes "Plant" buttons on Inventory screen visible.
      */
     public void turnOnPlantBtnVisibility() {
-        btnCornPlant.setVisible(true);
-        btnPotatoPlant.setVisible(true);
-        btnTomatoPlant.setVisible(true);
+        btnPlant0.setVisible(true);
+        btnPlant1.setVisible(true);
+        btnPlant2.setVisible(true);
     }
 
     /**
      * Makes "Plant" buttons on Inventory screen visible.
      */
     public void turnOffPlantBtnVisibility() {
-        btnCornPlant.setVisible(false);
-        btnPotatoPlant.setVisible(false);
-        btnTomatoPlant.setVisible(false);
+        btnPlant0.setVisible(false);
+        btnPlant1.setVisible(false);
+        btnPlant2.setVisible(false);
     }
 
     public void updateDay() {
@@ -304,70 +320,47 @@ public class FarmViewController {
         this.playerViewModel.updatePlayerDay(
                 this.playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
         incrementAllPlotDays();
+        eventRoll();
         playerViewModel.zeroCurrentHarvestCounter();
         playerViewModel.zeroCurrentWaterCounter();
     }
 
     private void incrementAllPlotDays() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < plotsObservableList.size(); i++) {
             if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
                 plotViewModel.incrementPlotDaysOld(plotsObservableList.get(i).getPlotModel(), playerViewModel);
+                plotsObservableList.get(i).setWaterValue(doubleDigitString(
+                        plotsObservableList.get(i).getPlotModel().getWaterValue()));
+                plotsObservableList.get(i).setFertilizerValue(doubleDigitString(
+                        plotsObservableList.get(i).getPlotModel().getFertilizerLevel()));
+                maturityView.checkMaturity(plotsObservableList, i);
                 plotViewModel.updatePlotMaturity(plotsObservableList.get(i).getPlotModel(), playerViewModel.getPlayer());
                 this.plotViewModel.updateWaterValue(plotsObservableList.get(i).getPlotModel().getWaterValue(),
                         plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
+                Pane pane = (Pane) gridPane.getChildren().get(i);
+                ImageView plotImageView = (ImageView) pane.getChildren().get(0);
+                plotImageView.setImage(plotsObservableList.get(i).getPlotImage());
+                pane.getChildren().set(5, plotsObservableList.get(i).getWaterValueText());
+                pane.getChildren().set(6, plotsObservableList.get(i).getFertilizerValueText());
             }
         }
-        eventRoll();
     }
 
-//    private void updateWaterValueAll() {
-//        for (int i = 0; i < 10; i++) {
-//            updateWaterValue(plotsObservableList.get(i).getPlotModel(),
-//                    plotsObservableList.get(i).getPlotModel().getWaterValue());
-//        }
-//    }
-//
-//    private void updateWaterValue(PlotModel plot, Text waterValue) {
-//        if (plot.getCropInPlot() != null) {
-//            String str = doubleDigitString(plot.getWaterValue());
-//            waterValue.setText(str);
-//        }
-//    }
-
-//    private void updateFertilizerLevelAll() {
-//        for (int i = 0; i < 10; i++) {
-//            updateFertilizerLevel(listPlots.get(i), listPlotFertilizerLevels.get(i));
-//        }
-//    }
-//
-//    private void updateFertilizerLevel(PlotModel plot, Text fertilizerLevel) {
-//        if (plot.getFertilizerLevel() > 0) {
-//            String str = doubleDigitString(plot.getFertilizerLevel());
-//            fertilizerLevel.setText(str);
-//        }
-//    }
-
-    public void checkMaturity(int plotNum, Text waterValue) {
-        maturityView.checkMaturity(plotsObservableList, plotNum, waterValue);
-    }
-
-    public void plantingInventory(int plotNum) {
+    public void plantCrop(MouseEvent mouseEvent) {
+        ImageView imageView = (ImageView) mouseEvent.getSource();
+        this.plantingPlotNum = Character.getNumericValue(
+                imageView.getId().charAt(imageView.getId().length() - 1));
         toggleInventoryScreenVisibility();
         turnOnPlantBtnVisibility();
-        this.plantingPlotNum = plotNum;
     }
 
-//    public void plantCrop(int cropNum, CropModel crop) {
-//        if (storageViewModel.userInventory().get(cropNum).getCropQuantity() > 2) {
-//            storageViewModel.userInventory().get(cropNum).setCropQuantity(
-//                    storageViewModel.userInventory().get(cropNum).getCropQuantity() - 1);
-//            toggleInventoryScreenVisibility();
-//            plantView.plantCrop(plotsObservableList, cropNum, crop);
-//            updateWaterValue(listPlots.get(cropNum), listPlotWaterValues.get(cropNum));
-//            listPlotWaterValues.get(cropNum).setVisible(true);
-//            switchPlantHarvest(listPlotImages.get(cropNum), cropNum, true);
-//        }
-//    }
+    public void plantCropFromInventory(MouseEvent mouseEvent) {
+        JFXButton button = (JFXButton) mouseEvent.getSource();
+        int cropNum = Character.getNumericValue(
+                button.getId().charAt(button.getId().length() - 1));
+        plantView.plantCrop(plotsObservableList, plantingPlotNum,
+                playerViewModel.getPlayer().getUserStorage().getInventory().get(cropNum));
+    }
 
     public void harvestCrop(MouseEvent mouseEvent) {
         ImageView imageView = (ImageView) mouseEvent.getSource();
@@ -375,41 +368,71 @@ public class FarmViewController {
                 imageView.getId().charAt(imageView.getId().length() - 1));
         if (playerViewModel.getPlayer().getCurrentHarvestCounter()
                 < playerViewModel.getPlayer().getMaxHarvestsPerDay()) {
-            harvestView.harvestCrop(plotsObservableList, plotNum);
+            PlotModel harvestedPlot = plotsObservableList.get(plotNum).getPlotModel();
+            if (harvestedPlot.getDaysOld() >= 10
+                    || harvestedPlot.getWaterValue() > 6 || harvestedPlot.getWaterValue() <= 0) {
+                harvestView.harvestCrop(plotsObservableList, plotNum);
+                Pane pane = (Pane) gridPane.getChildren().get(plotNum);
+                ImageView plotImageView = (ImageView) pane.getChildren().get(0);
+                plotImageView.setImage(plotsObservableList.get(plotNum).getPlotImage());
+                plotImageView.setOnMouseClicked(this::plantCrop);
+                ImageView plotNameImageView = (ImageView) pane.getChildren().get(1);
+                plotNameImageView.setImage(plotsObservableList.get(plotNum).getNameImage());
+                pane.getChildren().set(5, plotsObservableList.get(plotNum).getWaterValueText());
+            }
         } else {
             displayMaxHarvestPopUp();
         }
     }
 
-    private void eventRoll() {
-
-    }
-
     public void waterCrop(MouseEvent mouseEvent) {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        int plotNum = Character.getNumericValue(
-                imageView.getId().charAt(imageView.getId().length() - 1));
-        waterView.waterCrop(plotsObservableList, plotNum, plotsObservableList.get(plotNum).getWaterValue());
-        txtFertilizerCount.setText(doubleDigitString(
-                playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+        if (playerViewModel.getPlayer().getCurrentWaterCounter()
+                < playerViewModel.getPlayer().getMaxWateringPerDay()) {
+            ImageView imageView = (ImageView) mouseEvent.getSource();
+            int plotNum = Character.getNumericValue(
+                    imageView.getId().charAt(imageView.getId().length() - 1));
+            boolean changed = waterView.waterCrop(plotsObservableList, plotNum);
+            if (changed) {
+                Pane pane = (Pane) gridPane.getChildren().get(plotNum);
+                pane.getChildren().set(5, plotsObservableList.get(plotNum).getWaterValueText());
+            }
+        } else {
+            displayMaxWaterPopUp();
+        }
     }
 
     public void fertilizePlot(MouseEvent mouseEvent) {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        int plotNum = Character.getNumericValue(
-                imageView.getId().charAt(imageView.getId().length() - 1));
-        fertilizeView.fertilizePlot(plotsObservableList, plotNum);
-        txtFertilizerCount.setText(doubleDigitString(
-                playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+        if ((playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1) > 0) {
+            ImageView imageView = (ImageView) mouseEvent.getSource();
+            int plotNum = Character.getNumericValue(
+                    imageView.getId().charAt(imageView.getId().length() - 1));
+            boolean changed = fertilizeView.fertilizePlot(plotsObservableList, plotNum);
+            if (changed) {
+                txtFertilizerCount.setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+                Pane pane = (Pane) gridPane.getChildren().get(plotNum);
+                pane.getChildren().set(6, plotsObservableList.get(plotNum).getFertilizerValueText());
+            }
+        }
     }
 
     public void pesticidePlot(MouseEvent mouseEvent) {
-        ImageView imageView = (ImageView) mouseEvent.getSource();
-        int plotNum = Character.getNumericValue(
-                imageView.getId().charAt(imageView.getId().length() - 1));
-        pesticideView.pesticidePlot(plotsObservableList, plotNum);
-        txtPesticideCount.setText(doubleDigitString(
-                playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
+        if ((playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1) > 0) {
+            ImageView imageView = (ImageView) mouseEvent.getSource();
+            int plotNum = Character.getNumericValue(
+                    imageView.getId().charAt(imageView.getId().length() - 1));
+            boolean changed = pesticideView.pesticidePlot(plotsObservableList, plotNum);
+            if (changed) {
+                txtPesticideCount.setText(doubleDigitString(
+                        playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
+                Pane pane = (Pane) gridPane.getChildren().get(plotNum);
+                pane.getChildren().set(1, plotsObservableList.get(plotNum).getNameImageView());
+            }
+        }
+    }
+
+    private void eventRoll() {
+
     }
 
     private Image chooseCropImage(CropModel crop) {
@@ -430,96 +453,6 @@ public class FarmViewController {
                 return this.emptyNameImg;
         }
     }
-
-//    public void switchPlantHarvest(ImageView plotImg, int i, boolean isPlant) {
-//        switch (i) {
-//            case 0:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot1);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot1);
-//                }
-//                break;
-//            case 1:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot2);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot2);
-//                }
-//                break;
-//            case 2:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot3);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot3);
-//                }
-//                break;
-//            case 3:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot4);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot4);
-//                }
-//                break;
-//            case 4:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot5);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot5);
-//                }
-//                break;
-//            case 5:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot6);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot6);
-//                }
-//                break;
-//            case 6:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot7);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot7);
-//                }
-//                break;
-//            case 7:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot8);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot8);
-//                }
-//                break;
-//            case 8:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot9);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot9);
-//                }
-//                break;
-//            case 9:
-//                if (isPlant) {
-//                    plotImg.setOnMouseClicked(this::harvestCropPlot10);
-//                } else {
-//                    plotImg.setOnMouseClicked(this::plantCropPlot10);
-//                }
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-
-//    public void chooseCorn() {
-//        plantCrop(0, storageViewModel.userInventory().get(0));
-//    }
-//
-//    public void choosePotato() {
-//        plantCrop(1, storageViewModel.userInventory().get(1));
-//    }
-//
-//    public void chooseTomato() {
-//        plantCrop(2, storageViewModel.userInventory().get(2));
-//    }
-
 
     private String doubleDigitString(int num) {
         String str;

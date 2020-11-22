@@ -14,7 +14,7 @@ public class FertilizeView {
         this.plotViewModel = plotViewModel;
     }
 
-    public void fertilizePlot(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
+    public boolean fertilizePlot(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         if (plotsObservableList.get(plotNum) != null) {
             if (plotsObservableList.get(plotNum).getPlotModel().getFertilizerLevel() < 9
                     && playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() > 1) {
@@ -23,7 +23,14 @@ public class FertilizeView {
                         playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1);
                 plotsObservableList.get(plotNum).setFertilizerValue(doubleDigitString(
                         plotsObservableList.get(plotNum).getPlotModel().getFertilizerLevel()));
+                plotViewModel.updatePlotFertilizerDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                        playerViewModel.getPlayer());
+                return true;
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
     }
 

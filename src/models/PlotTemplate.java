@@ -45,6 +45,10 @@ public class PlotTemplate {
         return imgViewPlot;
     }
 
+    public Image getPlotImage() {
+        return  imgViewPlot.getImage();
+    }
+
     public void setPlotImageView(Image imgPlot) {
         this.imgViewPlot.setImage(imgPlot);
     }
@@ -53,12 +57,20 @@ public class PlotTemplate {
         return imgViewName;
     }
 
+    public Image getNameImage() {
+        return imgViewName.getImage();
+    }
+
     public void setNameImageView(Image imgName) {
         this.imgViewName.setImage(imgName);
     }
 
-    public Text getWaterValue() {
+    public Text getWaterValueText() {
         return txtWaterValue;
+    }
+
+    public int getWaterValue() {
+        return Integer.parseInt(txtWaterValue.getText());
     }
 
     public void setWaterValue(String waterValue) {
@@ -69,7 +81,7 @@ public class PlotTemplate {
         this.txtWaterValue.setVisible(bool);
     }
 
-    public Text getFertilizerValue() {
+    public Text getFertilizerValueText() {
         return txtFertilizerValue;
     }
 

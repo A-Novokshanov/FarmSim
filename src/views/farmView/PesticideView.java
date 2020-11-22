@@ -10,15 +10,15 @@ import viewmodels.PlotViewModel;
 public class PesticideView {
     private final Image cornPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Corn_Pesticide.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image potatoPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Potato_Pesticide.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image tomatoPesticideNameImg = new Image(
             "@../../dependencies/images/Crop_Bar_Tomato_Pesticide.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
     private final Image emptyNameImg = new Image("@../../dependencies/images/Crop_Bar_Empty.png",
-            400.0, 300.0, true, false);
+            150.0, 150.0, true, false);
 
     private PlayerViewModel playerViewModel;
     private PlotViewModel plotViewModel;
@@ -28,7 +28,7 @@ public class PesticideView {
         this.plotViewModel = plotViewModel;
     }
 
-    public void pesticidePlot(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
+    public boolean pesticidePlot(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         if (plotsObservableList.get(plotNum) != null) {
             if (plotsObservableList.get(plotNum).getPlotModel().getCropInPlot() != null
                     && !plotsObservableList.get(plotNum).getPlotModel().getCropInPlot().getHasPesticide()
@@ -38,7 +38,14 @@ public class PesticideView {
                         playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1);
                 plotsObservableList.get(plotNum).setNameImageView(
                         chooseCropImage(plotsObservableList.get(plotNum).getPlotModel().getCropInPlot()));
+                plotViewModel.updateCropInPlotDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                        playerViewModel.getPlayer());
+                return true;
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
     }
 
