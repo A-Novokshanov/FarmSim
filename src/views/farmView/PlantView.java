@@ -30,6 +30,8 @@ public class PlantView {
     public void plantCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, CropModel crop) {
         plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
         plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
+        plotsObservableList.get(plotNum).setWaterValue("03");
+        plotsObservableList.get(plotNum).getWaterValueText().setVisible(true);
         this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
         plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
                 playerViewModel.getPlayer());

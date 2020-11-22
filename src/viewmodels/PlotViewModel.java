@@ -1,6 +1,8 @@
 package viewmodels;
 
 
+import com.sun.scenario.effect.Crop;
+import javafx.scene.image.Image;
 import models.CropModel;
 import models.PlayerModel;
 import models.PlotModel;
@@ -45,11 +47,6 @@ public class PlotViewModel {
     public void harvestPlot(PlotModel harvestedPlot, PlayerViewModel player) {
         StorageViewModel storageVM = new StorageViewModel(player);
         int toAdd = 0;
-        /*
-        if (harvestedPlot.getDaysSinceWater() > 5) {
-            harvestedPlot.setCropInPlot(null);
-        }
-        */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
             playerPlotService.harvestPlot(0,
@@ -75,8 +72,6 @@ public class PlotViewModel {
                     toAdd++;
                 }
             }
-            //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
-            //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
             playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(),
@@ -197,7 +192,22 @@ public class PlotViewModel {
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
         plotToPlant.setCropInPlot(cropToPlant);
+        playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).setCropQuantity(
+                playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).getCropQuantity() - 1);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    private int cropNumber(CropModel cropModel) {
+        switch (cropModel.getCropName()) {
+            case "Corn":
+                return 0;
+            case "Potato":
+                return 1;
+            case "Tomato":
+                return 2;
+            default:
+                return -1;
+        }
     }
 
     /**
@@ -304,9 +314,15 @@ public class PlotViewModel {
      * @param plotModel   The plotmodel that contains the new crop.
      */
     public void updateCropInPlotDatabase(PlotModel plotModel, PlayerModel playerModel) {
-        playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
-                plotModel.getPlotIdentifier(),
-                playerModel.getPlayerSettings().getPlayerName());
+        if (plotModel.getCropInPlot() != null) {
+            playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
+                    plotModel.getPlotIdentifier(),
+                    playerModel.getPlayerSettings().getPlayerName());
+        } else {
+            playerPlotService.adjustCropInPlot(null,
+                    plotModel.getPlotIdentifier(),
+                    playerModel.getPlayerSettings().getPlayerName());
+        }
     }
 
     public void addPlotDatabase(PlotModel plot, PlayerModel player) {

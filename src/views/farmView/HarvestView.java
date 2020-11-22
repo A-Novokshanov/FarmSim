@@ -23,17 +23,18 @@ public class HarvestView {
     }
 
     public void harvestCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
-        PlotModel harvestedPlot = plotsObservableList.get(plotNum).getPlotModel();
-        this.plotViewModel.harvestPlot(harvestedPlot, this.playerViewModel);
-        harvestedPlot.setWaterValue(0);
-        harvestedPlot.setDaysOld(0);
-        plotsObservableList.get(plotNum).setPlotModel(harvestedPlot);
+        this.plotViewModel.harvestPlot(plotsObservableList.get(plotNum).getPlotModel(), this.playerViewModel);
+        plotsObservableList.get(plotNum).getPlotModel().setWaterValue(0);
+        plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
         plotsObservableList.get(plotNum).setPlotImageView(dirtImg);
         plotsObservableList.get(plotNum).setNameImageView(emptyNameImg);
         plotsObservableList.get(plotNum).getPlotModel().setStage(null);
+        plotsObservableList.get(plotNum).getPlotModel().setCropInPlot(null);
         this.plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
                 playerViewModel.getPlayer());
         this.plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                playerViewModel.getPlayer());
+        this.plotViewModel.updateCropInPlotDatabase(plotsObservableList.get(plotNum).getPlotModel(),
                 playerViewModel.getPlayer());
         plotsObservableList.get(plotNum).setWaterValueVisibility(false);
         playerViewModel.increasePlayerHarvestCounter();

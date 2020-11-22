@@ -64,6 +64,8 @@ public class MaturityView {
             plotsObservableList.get(plotNum).setPlotImageView(dirtImg);
             plotsObservableList.get(plotNum).getPlotModel().setStage(null);
             plotsObservableList.get(plotNum).getWaterValueText().setVisible(false);
+            plotViewModel.updatePlotStage(
+                    plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
         }
     }
 
@@ -84,14 +86,18 @@ public class MaturityView {
     }
 
     public Image getMaturityImage(PlotModel plotModel) {
-        if (plotModel.getDaysOld() < 2) {
-            return seedImg;
-        } else if (plotModel.getDaysOld() < 6) {
-            return immature1Img;
-        } else if (plotModel.getDaysOld() < 10) {
-            return immature2Img;
+        if (plotModel.getStage() == null) {
+            return dirtImg;
         } else {
-            return matureImg;
+            if (plotModel.getDaysOld() < 2) {
+                return seedImg;
+            } else if (plotModel.getDaysOld() < 6) {
+                return immature1Img;
+            } else if (plotModel.getDaysOld() < 10) {
+                return immature2Img;
+            } else {
+                return matureImg;
+            }
         }
     }
 }
