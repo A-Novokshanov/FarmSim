@@ -174,14 +174,14 @@
                   <Font size="20.0" />
                </font>
             </JFXButton>
-            <Pane fx:id="gameOverScreen" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: maroon; -fx-border-color: gold; -fx-border-width: 5; visibility: false;">
+            <Pane fx:id="gameOverScreen" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: maroon; -fx-border-color: gold; -fx-border-width: 5; visibility: true;">
                <children>
                   <Text layoutX="459.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over">
                      <font>
                         <Font size="73.0" />
                      </font>
                   </Text>
-                  <JFXButton layoutX="495.0" layoutY="503.0" onMouseClicked="#deleteGame" prefHeight="128.0" prefWidth="290.0" style="-fx-font-style: black;" text="Return To Home Screen">
+                  <JFXButton layoutX="495.0" layoutY="503.0" onMouseClicked="#deleteGame" prefHeight="128.0" prefWidth="290.0" style="-fx-font-style: black; -fx-text-fill: black;" text="Return To Home Screen">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
