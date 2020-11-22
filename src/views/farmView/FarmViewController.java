@@ -60,6 +60,8 @@ public class FarmViewController {
     private JFXButton btnAddPlot;
     @FXML
     private GridPane gridPane;
+    @FXML
+    private Pane gameOverScreen;
 
     @FXML
     private JFXButton btnPlant00;
@@ -72,7 +74,6 @@ public class FarmViewController {
     private Text txtFertilizerCount;
     @FXML
     private Text txtPesticideCount;
-
     @FXML
     private Text txtPopUp;
 
@@ -124,9 +125,9 @@ public class FarmViewController {
     private WaterView waterView;
     private FertilizeView fertilizeView;
     private PesticideView pesticideView;
-    private EventViewModel eventViewModel;
     private EventView eventView;
     private int plantingPlotNum;
+    private int emptyPlotCounter;
 
     /**
      * Initializes data from the Initial Configuration screen.
@@ -155,8 +156,7 @@ public class FarmViewController {
         this.waterView = new WaterView(playerViewModel, plotViewModel, maturityView);
         this.fertilizeView = new FertilizeView(playerViewModel, plotViewModel);
         this.pesticideView = new PesticideView(playerViewModel, plotViewModel);
-        this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
-        this.eventView = new EventView(playerViewModel, plotViewModel, eventViewModel, maturityView);
+        this.eventView = new EventView(playerViewModel, plotViewModel, maturityView);
         this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         this.txtFertilizerCount.setText(doubleDigitString(
@@ -329,9 +329,21 @@ public class FarmViewController {
         this.playerViewModel.updatePlayerDay(
                 this.playerViewModel.getPlayer().getPlayerSettings().getPlayerName());
         eventRoll();
+        emptyPlotCounter = 0;
         incrementAllPlotDays();
         playerViewModel.zeroCurrentHarvestCounter();
         playerViewModel.zeroCurrentWaterCounter();
+        if (emptyPlotCounter == plotsObservableList.size()) {
+            if (playerViewModel.getPlayer().getUserStorage().getTotalCropAmount() <= 0) {
+                double basePrice = storageViewModel.userInventory().get(2).getCropValue();
+                String curDifficulty =
+                        playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+                double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+                if (playerViewModel.getPlayer().getUserCurrentMoney() < calPrice) {
+
+                }
+            }
+        }
     }
 
     private void incrementAllPlotDays() {
@@ -343,6 +355,10 @@ public class FarmViewController {
                 plotsObservableList.get(i).setFertilizerValue(doubleDigitString(
                         plotsObservableList.get(i).getPlotModel().getFertilizerLevel()));
                 maturityView.checkMaturity(plotsObservableList, i);
+                if (plotsObservableList.get(i).getPlotModel().getStage() == null
+                        || plotsObservableList.get(i).getPlotModel().getStage().equals("Withered")) {
+                    emptyPlotCounter++;
+                }
                 this.plotViewModel.updatePlotMaturity(plotsObservableList.get(i).getPlotModel(),
                         playerViewModel.getPlayer());
                 this.plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(i).getPlotModel(),
@@ -556,5 +572,13 @@ public class FarmViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void displayGameOverScreen() {
+        gameOverScreen.setVisible(true);
+    }
+
+    private void deleteGame(MouseEvent mouseEvent) {
+
     }
 }

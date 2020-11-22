@@ -17,11 +17,10 @@ public class EventView {
     private EventViewModel eventViewModel;
     private MaturityView maturityView;
 
-    public EventView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel,
-                     EventViewModel eventViewModel, MaturityView maturityView) {
+    public EventView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel, MaturityView maturityView) {
         this.playerViewModel = playerViewModel;
         this.plotViewModel = plotViewModel;
-        this.eventViewModel = eventViewModel;
+        this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
         this.maturityView = maturityView;
     }
 
