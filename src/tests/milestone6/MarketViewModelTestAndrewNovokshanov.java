@@ -110,7 +110,7 @@ public class MarketViewModelTestAndrewNovokshanov {
         assertEquals(0, pre1);
         CropModel corn = new CropModel("corn", 1, 123);
         PlotModel newPlot = new PlotModel(corn, 0);
-        this.marketViewModel.purchasePlot(newPlot);
+        this.marketViewModel.purchasePlot(newPlot, 0);
         int actual = this.storageViewModel.userPlotInventory().size();
         assertEquals(1, actual);
     }

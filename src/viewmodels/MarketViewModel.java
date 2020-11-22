@@ -151,15 +151,15 @@ public class MarketViewModel {
      *
      * @param purchasedPlot The plot that was purchased.
      */
-    public void purchasePlot(PlotModel purchasedPlot) {
-        if (player.getPlayer().getUserCurrentMoney() > purchasedPlot.getPrice()
+    public void purchasePlot(PlotModel purchasedPlot, int farmSize) {
+        if (player.getPlayer().getUserCurrentMoney() > calculatePlotPrice(farmSize)
                 && storage.getPlotInventory().size() < 10) {
 
             purchasedPlot.setPlotIdentifier(new Random().nextInt(1000000));
             storage.addPlotToStorage(purchasedPlot);
             plotViewModel.addPlotDatabase(purchasedPlot, player.getPlayer());
             this.player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
-                    - purchasedPlot.getPrice());
+                    - calculatePlotPrice(farmSize));
         }
     }
 
