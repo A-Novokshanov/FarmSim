@@ -20,3 +20,4 @@ Setup of the SQLite Database will require the jar file for:
 
 6. To ensure that the connection to the data source is successful, click Test Connection.
  
+If you are missing runtime components, make sure you have set your VM Options as such: --module-path %Path to JavaFX Lib folder% --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED
