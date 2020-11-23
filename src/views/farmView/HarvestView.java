@@ -38,7 +38,5 @@ public class HarvestView {
                 playerViewModel.getPlayer());
         plotsObservableList.get(plotNum).setWaterValueVisibility(false);
         playerViewModel.increasePlayerHarvestCounter();
-        System.out.println("The current player max harvest is " + playerViewModel.getPlayer().getMaxHarvestsPerDay());
-        System.out.println("The current player harvest counter is " + playerViewModel.getPlayer().getCurrentHarvestCounter());
     }
 }

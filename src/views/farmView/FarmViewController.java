@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class FarmViewController {
     @FXML
-    private Text money;
+    private Text budget;
     @FXML
     private Text dayNum;
     @FXML
@@ -57,7 +57,9 @@ public class FarmViewController {
     @FXML
     private JFXButton btnMarket;
     @FXML
-    private JFXButton btnAddPlot;
+    private Pane btnAddPlot;
+    @FXML
+    private Text plotPrice;
     @FXML
     private GridPane gridPane;
     @FXML
@@ -75,7 +77,9 @@ public class FarmViewController {
     @FXML
     private Text txtPesticideCount;
     @FXML
-    private Text txtPopUp;
+    private Text txtDailyWaterCount;
+    @FXML
+    private Text txtDailyHarvestCount;
 
     @FXML
     private ObservableList<PlotTemplate> plotsObservableList;
@@ -157,12 +161,18 @@ public class FarmViewController {
         this.fertilizeView = new FertilizeView(playerViewModel, plotViewModel);
         this.pesticideView = new PesticideView(playerViewModel, plotViewModel);
         this.eventView = new EventView(playerViewModel, plotViewModel, maturityView);
-        this.money.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
+        this.budget.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
         this.dayNum.setText("Day " + doubleDigitString(this.playerViewModel.getPlayer().getDays()));
         this.txtFertilizerCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
         this.txtPesticideCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
+        this.txtDailyWaterCount.setText(String.valueOf(
+                this.playerViewModel.getPlayer().getMaxWateringPerDay() -
+                this.playerViewModel.getPlayer().getCurrentWaterCounter()));
+        this.txtDailyHarvestCount.setText(String.valueOf(
+                this.playerViewModel.getPlayer().getMaxHarvestsPerDay() -
+                this.playerViewModel.getPlayer().getCurrentHarvestCounter()));
         this.btnPlant00.setId("btnPlant00");
         this.btnPlant01.setId("btnPlant01");
         this.btnPlant02.setId("btnPlant02");
@@ -183,6 +193,7 @@ public class FarmViewController {
             int[] gridPosition = gridPositionDeque.remove();
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
+        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
     }
 
     public void setUpPlots(List<PlotModel> listPlots) {
@@ -198,6 +209,7 @@ public class FarmViewController {
             int[] gridPosition = gridPositionDeque.remove();
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
+        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
     }
 
     /**
@@ -268,6 +280,7 @@ public class FarmViewController {
         dayCounter.setVisible(!dayCounter.isVisible());
         dayNum.setVisible(!dayNum.isVisible());
         btnMarket.setVisible(!btnMarket.isVisible());
+        btnAddPlot.setVisible(!btnAddPlot.isVisible());
         numCorn.setText(
                 String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
         numPotatoes.setText(
@@ -291,7 +304,6 @@ public class FarmViewController {
             PlotModel plot = new PlotModel(null, 0);
             PlotTemplate plotTemplate = new PlotTemplate(plot, dirtImg, emptyNameImg,
                     "03", "00");
-            //plotViewModel.addPlotDatabase(plot, playerViewModel.getPlayer());
             boolean bought = marketViewModel.purchasePlot(plot, plotsObservableList.size());
             if (bought) {
                 plotViewModel.updatePlotStage(plot, playerViewModel.getPlayer());
@@ -300,6 +312,9 @@ public class FarmViewController {
                 Pane pane = createPane(plotTemplate, plotsObservableList.size() - 1);
                 int[] gridPosition = gridPositionDeque.remove();
                 gridPane.add(pane, gridPosition[0], gridPosition[1]);
+                this.budget.setText("$ " + playerViewModel.getPlayer().getUserCurrentMoney());
+                this.plotPrice.setText(
+                        "$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
             }
         }
     }
@@ -333,6 +348,10 @@ public class FarmViewController {
         incrementAllPlotDays();
         playerViewModel.zeroCurrentHarvestCounter();
         playerViewModel.zeroCurrentWaterCounter();
+        this.txtDailyWaterCount.setText(String.valueOf(
+                this.playerViewModel.getPlayer().getMaxWateringPerDay()));
+        this.txtDailyHarvestCount.setText(String.valueOf(
+                this.playerViewModel.getPlayer().getMaxHarvestsPerDay()));
         if (emptyPlotCounter == plotsObservableList.size()) {
             if (playerViewModel.getPlayer().getUserStorage().getTotalCropAmount() <= 0) {
                 double basePrice = storageViewModel.userInventory().get(2).getCropValue();
@@ -340,7 +359,7 @@ public class FarmViewController {
                         playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
                 double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
                 if (playerViewModel.getPlayer().getUserCurrentMoney() < calPrice) {
-
+                    displayGameOverScreen();
                 }
             }
         }
@@ -408,6 +427,9 @@ public class FarmViewController {
                 ImageView plotNameImageView = (ImageView) pane.getChildren().get(1);
                 plotNameImageView.setImage(plotsObservableList.get(plotNum).getNameImage());
                 pane.getChildren().set(5, plotsObservableList.get(plotNum).getWaterValueText());
+                txtDailyHarvestCount.setText(
+                        String.valueOf(playerViewModel.getPlayer().getMaxHarvestsPerDay()
+                                        - playerViewModel.getPlayer().getCurrentHarvestCounter()));
             }
         } else {
             displayMaxHarvestPopUp();
@@ -423,6 +445,9 @@ public class FarmViewController {
             if (changed) {
                 Pane pane = (Pane) gridPane.getChildren().get(plotNum);
                 pane.getChildren().set(5, plotsObservableList.get(plotNum).getWaterValueText());
+                txtDailyWaterCount.setText(
+                        String.valueOf(playerViewModel.getPlayer().getMaxWateringPerDay()
+                                - playerViewModel.getPlayer().getCurrentWaterCounter()));
             }
         } else {
             displayMaxWaterPopUp();
@@ -579,6 +604,15 @@ public class FarmViewController {
     }
 
     public void deleteGame(MouseEvent mouseEvent) {
-
+        try {
+            Stage stage = (Stage) mouseEvent.getSource();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("../homeScreenView/HomeScreenView.fxml"));
+            stage.setScene(new Scene(loader.load()));
+            stage.setTitle("Home Screen");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -153,10 +153,7 @@ public class PlotViewModel {
      * @param player          the player.
      * @return 0 if game is not over, 1 if game is over based on presence of crop in current plot
      */
-    public int incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
-        if (checkGameOver(plotToIncrement, player)) {
-            return 1;
-        }
+    public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
         } else {
@@ -170,7 +167,6 @@ public class PlotViewModel {
         }
         workerViewModel.payWorker(worker);
         workerWork(plotToIncrement, player, worker);
-        return 0;
     }
 
     /*
@@ -248,18 +244,6 @@ public class PlotViewModel {
             default:
                 break;
         }
-    }
-
-    /**
-     * Checks to see if the game is over.
-     *
-     * @param plot the current plot being checked.
-     * @param player the player whose balance and storage to check.
-     * @return if conditions for game over are true and plot is empty
-     */
-    public boolean checkGameOver(PlotModel plot, PlayerViewModel player) {
-        return (plot.getCropInPlot() == null) && (player.getPlayer().getUserCurrentMoney() <= 0) &&
-                (player.getPlayer().getUserStorage().getTotalCropAmount() <= 0);
     }
 
     /**

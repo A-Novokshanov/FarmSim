@@ -173,7 +173,7 @@ public class MarketViewModel {
      * @return The calculated price.
      */
     public int calculatePlotPrice(int farmSize) {
-        return (farmSize / (farmSize + 1)) * 100;
+        return (farmSize - 9) * 100;
     }
 
     /**

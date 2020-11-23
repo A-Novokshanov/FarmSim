@@ -30,6 +30,14 @@ public class MarketViewController {
     private JFXButton btnFarm;
     @FXML
     private Text txtBudget;
+    @FXML
+    private Pane tractorPane;
+    @FXML
+    private Pane irrigationPane;
+    @FXML
+    private Text tractorAmount;
+    @FXML
+    private Text irrigationAmount;
 
 
     @FXML
@@ -259,6 +267,24 @@ public class MarketViewController {
         workerViewModel.updateWorkerWageDatabase(workerModel);
     }
 
+    public void buyTractors() {
+        if (!(playerViewModel.getPlayer().getMaxHarvestsPerDay() == 19)) {
+            marketViewModel.purchaseTractor(100);
+            tractorAmount.setText(String.valueOf(
+                    (playerViewModel.getPlayer().getMaxHarvestsPerDay() - 5) / 2));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        }
+    }
+
+    public void buyIrrigation() {
+        if (!(playerViewModel.getPlayer().getMaxWateringPerDay() == 19)) {
+            marketViewModel.purchaseIrrigation(100);
+            irrigationAmount.setText(String.valueOf(
+                    (playerViewModel.getPlayer().getMaxWateringPerDay() - 5) / 2));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        }
+    }
+
     public void upQuantity1() {
         upQuantity(pane1Value, 0, pane1Price);
     }
@@ -397,16 +423,6 @@ public class MarketViewController {
         }
     }
 
-    private String doubleDigitString(int num) {
-        String str;
-        if (num < 10) {
-            str = "0" + num;
-        } else {
-            str = String.valueOf(num);
-        }
-        return str;
-    }
-
     public void buySwap(MouseEvent mouseEvent) {
         buyState = false;
         setActionLabel("Sell");
@@ -422,6 +438,8 @@ public class MarketViewController {
         tierPane.setVisible(false);
         fireButton.setVisible(false);
         upgradeButton.setVisible(false);
+        tractorPane.setVisible(false);
+        irrigationPane.setVisible(false);
         btnSwap.setOnMouseClicked(this::sellSwap);
     }
 
@@ -440,6 +458,12 @@ public class MarketViewController {
         tierPane.setVisible(true);
         fireButton.setVisible(true);
         upgradeButton.setVisible(true);
+        tractorPane.setVisible(true);
+        tractorAmount.setText(doubleDigitString(
+                (playerViewModel.getPlayer().getMaxHarvestsPerDay() - 5) / 2));
+        irrigationPane.setVisible(true);
+        irrigationAmount.setText(doubleDigitString(
+                (playerViewModel.getPlayer().getMaxWateringPerDay() - 5) / 2));
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
@@ -455,6 +479,16 @@ public class MarketViewController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String doubleDigitString(int num) {
+        String str;
+        if (num < 10) {
+            str = "0" + num;
+        } else {
+            str = String.valueOf(num);
+        }
+        return str;
     }
 }
 

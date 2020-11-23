@@ -89,11 +89,13 @@ public class MaturityView {
         if (plotModel.getStage() == null) {
             return dirtImg;
         } else {
-            if (plotModel.getDaysOld() < 2) {
+            if (plotModel.getStage().equals("Withered")) {
+                return witheredImg;
+            } else if (plotModel.getStage().equals("Seed")) {
                 return seedImg;
-            } else if (plotModel.getDaysOld() < 6) {
+            } else if (plotModel.getStage().equals("Immature 1")) {
                 return immature1Img;
-            } else if (plotModel.getDaysOld() < 10) {
+            } else if (plotModel.getStage().equals("Immature 2")) {
                 return immature2Img;
             } else {
                 return matureImg;

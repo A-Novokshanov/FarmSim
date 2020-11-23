@@ -27,8 +27,6 @@ public class WaterView {
                 plotViewModel.updateWaterValue(plotsObservableList.get(plotNum).getWaterValue(),
                         plotsObservableList.get(plotNum).getPlotModel().getPlotIdentifier());
                 playerViewModel.increasePlayerWaterCounter();
-                System.out.println("The max water is " + playerViewModel.getPlayer().getMaxWateringPerDay());
-                System.out.println("The current water counter is " + playerViewModel.getPlayer().getCurrentWaterCounter());
                 return true;
             } else {
                 return false;

@@ -28,12 +28,19 @@ public class PlantView {
     }
 
     public void plantCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, CropModel crop) {
+        this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
         plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
         plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
         plotsObservableList.get(plotNum).setWaterValue("03");
         plotsObservableList.get(plotNum).getWaterValueText().setVisible(true);
-        this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
+        plotsObservableList.get(plotNum).getPlotModel().setStage("Seed");
         plotViewModel.updatePlotStage(plotsObservableList.get(plotNum).getPlotModel(),
+                playerViewModel.getPlayer());
+        plotViewModel.updateCropInPlotDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                playerViewModel.getPlayer());
+        plotViewModel.updateWaterValue(plotsObservableList.get(plotNum).getWaterValue(),
+                plotsObservableList.get(plotNum).getPlotModel().getPlotIdentifier());
+        plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(plotNum).getPlotModel(),
                 playerViewModel.getPlayer());
         plotsObservableList.get(plotNum).setPlotImageView(seedImg);
         plotsObservableList.get(plotNum).setNameImageView(chooseCropImage(crop));

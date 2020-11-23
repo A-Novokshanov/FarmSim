@@ -382,5 +382,43 @@
             <Font size="28.0" />
          </font>
       </Text>
+      <Pane fx:id="tractorPane" layoutX="327.0" layoutY="655.0" prefHeight="45.0" prefWidth="240.0" style="-fx-border-color: black;">
+         <children>
+            <JFXButton onMouseClicked="#buyTractors" prefHeight="45.0" prefWidth="181.0" style="-fx-border-color: black;" text="Buy Tractors ($100)">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="207.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="tractorAmount" layoutX="196.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="irrigationPane" layoutX="639.0" layoutY="653.0" prefHeight="45.0" prefWidth="247.0" style="-fx-border-color: black;">
+         <children>
+            <JFXButton onMouseClicked="#buyIrrigation" prefHeight="45.0" prefWidth="190.0" style="-fx-border-color: black;" text="Buy Irrigation ($100)">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="214.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="irrigationAmount" layoutX="203.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
