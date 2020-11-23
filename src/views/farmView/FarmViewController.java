@@ -289,17 +289,17 @@ public class FarmViewController {
         btnMarket.setVisible(!btnMarket.isVisible());
         btnAddPlot.setVisible(!btnAddPlot.isVisible());
         numCorn.setText(
-                String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(0).getCropQuantity() - 2));
         numPotatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(1).getCropQuantity() - 2));
         numTomatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(2).getCropQuantity() - 2));
         numPesticideCorn.setText(
-                String.valueOf(storageViewModel.userInventory().get(3).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(3).getCropQuantity() - 2));
         numPesticidePotatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(4).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(4).getCropQuantity() - 2));
         numPesticideTomatoes.setText(
-                String.valueOf(storageViewModel.userInventory().get(5).getCropQuantity()));
+                String.valueOf(storageViewModel.userInventory().get(5).getCropQuantity() - 2));
         turnOffPlantBtnVisibility();
     }
 
