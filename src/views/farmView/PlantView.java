@@ -30,7 +30,7 @@ public class PlantView {
     public boolean plantCrop(ObservableList<PlotTemplate> plotsObservableList,
                              int plotNum, CropModel crop) {
         if (playerViewModel.getPlayer().getUserStorage().
-                getInventory().get(cropNumber(crop)).getCropQuantity() > 2) {
+                getInventory().get(cropNumber(crop)).getCropQuantity() > 0) {
             this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
             plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
             plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
