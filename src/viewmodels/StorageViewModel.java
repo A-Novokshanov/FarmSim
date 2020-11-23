@@ -64,19 +64,15 @@ public class StorageViewModel {
         if (storageModel.getTotalCropAmount() > 0) {
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 if (storageModel.checkIfNameCorrect(i, crop)) {
-                    if (storageModel.getEnoughToRemove(i, amount) == 1) {
+                    if (storageModel.getEnoughToRemove(i, amount)) {
                         storageModel.removeCropAmount(amount, i);
-
                         double money = amount * (calculateCropPrice(crop.getCropValue(),
                                 player.getPlayer().getPlayerSettings()
                                         .getStartingDifficulty()));
-
                         player.getPlayer().setUserCurrentMoney((int) (
                                 player.getPlayer().getUserCurrentMoney() + money));
-
                         this.playerInfoDatabase.updatePlayerMoney(money, this.player.getPlayer()
                                 .getPlayerSettings().getPlayerName());
-
                         this.playerInventoryService.adjustCropQuantity(crop.getCropName(), -amount,
                                 this.player.getPlayer().getPlayerSettings().getPlayerName());
                     }

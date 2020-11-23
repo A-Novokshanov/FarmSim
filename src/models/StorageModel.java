@@ -108,13 +108,11 @@ public class StorageModel {
      * @param quantity amount to remove.
      * @return what scenario to go with.
      */
-    public int getEnoughToRemove(int i, int quantity) {
-        if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
-            return 1;
-        } else if (cropInventory.get(i).getCropQuantity() - quantity == 0) {
-            return 2;
+    public boolean getEnoughToRemove(int i, int quantity) {
+        if (cropInventory.get(i).getCropQuantity() - quantity >= 0) {
+            return true;
         }
-        return 3;
+        return false;
     }
 
     /**
@@ -128,7 +126,6 @@ public class StorageModel {
             count += crop.getCropQuantity();
         }
         return count;
-
     }
 
     /**
