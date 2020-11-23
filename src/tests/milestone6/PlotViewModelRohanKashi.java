@@ -144,9 +144,5 @@ public class PlotViewModelRohanKashi {
         assertNull(harvestedPlotDead.getCropInPlot());
     }
 
-    @Test
-    public void testGameOver() {
-        assertFalse(plotViewModel.checkGameOver(plotModel, playerViewModel));
-    }
 
 }
