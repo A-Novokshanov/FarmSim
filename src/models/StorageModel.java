@@ -127,6 +127,7 @@ public class StorageModel {
         for (CropModel crop : cropInventory) {
             count += crop.getCropQuantity();
         }
+        count -= 12;
         return count;
 
     }
@@ -157,7 +158,7 @@ public class StorageModel {
      * @return the capacity.
      */
     public int getCapacity() {
-        return 27;
+        return 15;
     }
 
     /**
