@@ -459,10 +459,10 @@ public class MarketViewController {
         fireButton.setVisible(true);
         upgradeButton.setVisible(true);
         tractorPane.setVisible(true);
-        tractorAmount.setText(doubleDigitString(
+        tractorAmount.setText(String.valueOf(
                 (playerViewModel.getPlayer().getMaxHarvestsPerDay() - 5) / 2));
         irrigationPane.setVisible(true);
-        irrigationAmount.setText(doubleDigitString(
+        irrigationAmount.setText(String.valueOf(
                 (playerViewModel.getPlayer().getMaxWateringPerDay() - 5) / 2));
         btnSwap.setOnMouseClicked(this::buySwap);
     }

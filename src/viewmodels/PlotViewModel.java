@@ -8,6 +8,7 @@ import models.PlayerModel;
 import models.PlotModel;
 import models.StorageModel;
 import models.WorkerModel;
+import services.player.PlayerInventoryService;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -24,6 +25,7 @@ public class PlotViewModel {
 
     private PlayerPlotService playerPlotService = new PlayerPlotService();
     private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
+    private PlayerInventoryService playerInventoryService = new PlayerInventoryService();
     private PlayerModel playerModel;
 
     private WorkerModel worker = new WorkerModel();
@@ -169,17 +171,6 @@ public class PlotViewModel {
         workerWork(plotToIncrement, player, worker);
     }
 
-    /*
-    For Matthew:
-    In the same method where you call incrementPlotDaysOld on, setup something akin to the following pseudocode:
-    int gameOverTotal = 0;
-    gameOverTotal += <incrementPlotDaysOld on each plot>
-    if (gameOverTotal == Total # of Plots available (I assume there will be a way to track this since you can
-    purchase more plots) then present game over screen, present button that a) deleted player info from database and
-    b) sends players back to HomeScreen
-    else (e.g. gameOverTotal < total # of plots) do nothing
-     */
-
     /**
      * Plants a crop into PlotModel.
      *
@@ -191,6 +182,7 @@ public class PlotViewModel {
         playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).setCropQuantity(
                 playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).getCropQuantity() - 1);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+        playerInventoryService.adjustCropQuantity(cropToPlant.getCropName(), -1, playerModel.getPlayerSettings().getPlayerName());
     }
 
     private int cropNumber(CropModel cropModel) {

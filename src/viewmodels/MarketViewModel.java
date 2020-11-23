@@ -70,15 +70,12 @@ public class MarketViewModel {
     public void purchaseCrops(CropModel crop, int quantity) {
         if (checkPurchasable(crop.getCropValue(), quantity, true)) {
             storageViewModel.addToInventory(crop, quantity);
-            PlayerModel curPlayer = player.getPlayer();
             double money = calculateCropPrice(crop.getCropValue(),
                     player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
             player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
                     - money);
-
             this.playerInfoDatabase.updatePlayerMoney(-money, this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());
-
         }
     }
 
@@ -123,7 +120,6 @@ public class MarketViewModel {
             if (checkPurchasable(100, quantity, false)) {
                 player.getPlayer().getUserStorage().setTotalFertilizer(
                         player.getPlayer().getUserStorage().getTotalFertilizer() + quantity);
-                PlayerModel curPlayer = player.getPlayer();
                 double money = calculateCropPrice(100,
                         player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
                 player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
@@ -135,7 +131,6 @@ public class MarketViewModel {
             if (checkPurchasable(100, quantity, false)) {
                 player.getPlayer().getUserStorage().setTotalPesticide(
                         player.getPlayer().getUserStorage().getTotalPesticide() + quantity);
-                PlayerModel curPlayer = player.getPlayer();
                 double money = calculateCropPrice(100,
                         player.getPlayer().getPlayerSettings().getStartingDifficulty()) * quantity;
                 player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
@@ -160,6 +155,8 @@ public class MarketViewModel {
             plotViewModel.addPlotDatabase(purchasedPlot, player.getPlayer());
             this.player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
                     - calculatePlotPrice(farmSize));
+            this.playerInfoDatabase.updatePlayerMoney(-calculatePlotPrice(farmSize), this.player.getPlayer()
+                    .getPlayerSettings().getPlayerName());
             return true;
         } else {
             return false;
@@ -185,6 +182,8 @@ public class MarketViewModel {
         if (player.getPlayer().getUserCurrentMoney() > priceOfTractor) {
             player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfTractor);
             player.increaseMaxHarvest();
+            this.playerInfoDatabase.updatePlayerMoney(-priceOfTractor, this.player.getPlayer()
+                    .getPlayerSettings().getPlayerName());
         }
     }
 
@@ -197,6 +196,8 @@ public class MarketViewModel {
         if (player.getPlayer().getUserCurrentMoney() > priceOfIrrigation) {
             player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
             player.increaseMaxWater();
+            this.playerInfoDatabase.updatePlayerMoney(-priceOfIrrigation, this.player.getPlayer()
+                    .getPlayerSettings().getPlayerName());
         }
     }
 }
