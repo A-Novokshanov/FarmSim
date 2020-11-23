@@ -7,7 +7,6 @@ import services.player.PlayerInventoryService;
 import services.player.PlayerSettingsService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This view-model class keeps controls the logic flow of adding to a user's inventory.

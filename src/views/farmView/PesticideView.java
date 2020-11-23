@@ -31,14 +31,18 @@ public class PesticideView {
     public boolean pesticidePlot(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
         if (plotsObservableList.get(plotNum) != null) {
             if (plotsObservableList.get(plotNum).getPlotModel().getCropInPlot() != null
-                    && !plotsObservableList.get(plotNum).getPlotModel().getCropInPlot().getHasPesticide()
-                    && playerViewModel.getPlayer().getUserStorage().getTotalPesticide() > 1) {
+                    && !plotsObservableList.get(plotNum).
+                    getPlotModel().getCropInPlot().getHasPesticide()
+                    && playerViewModel.getPlayer().
+                    getUserStorage().getTotalPesticide() > 1) {
                 this.plotViewModel.pesticidePlot(plotsObservableList.get(plotNum).getPlotModel());
                 playerViewModel.getPlayer().getUserStorage().setTotalPesticide(
                         playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1);
                 plotsObservableList.get(plotNum).setNameImageView(
-                        chooseCropImage(plotsObservableList.get(plotNum).getPlotModel().getCropInPlot()));
-                plotViewModel.updateCropInPlotDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                        chooseCropImage(
+                                plotsObservableList.get(plotNum).getPlotModel().getCropInPlot()));
+                plotViewModel.updateCropInPlotDatabase(
+                        plotsObservableList.get(plotNum).getPlotModel(),
                         playerViewModel.getPlayer());
                 return true;
             } else {
@@ -51,14 +55,14 @@ public class PesticideView {
 
     private Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-            case "Corn with Pesticide":
-                return this.cornPesticideNameImg;
-            case "Potato with Pesticide":
-                return this.potatoPesticideNameImg;
-            case "Tomato with Pesticide":
-                return this.tomatoPesticideNameImg;
-            default:
-                return this.emptyNameImg;
+        case "Corn with Pesticide":
+            return this.cornPesticideNameImg;
+        case "Potato with Pesticide":
+            return this.potatoPesticideNameImg;
+        case "Tomato with Pesticide":
+            return this.tomatoPesticideNameImg;
+        default:
+            return this.emptyNameImg;
         }
     }
 }

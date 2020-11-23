@@ -23,7 +23,8 @@ public class FertilizeView {
                         playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1);
                 plotsObservableList.get(plotNum).setFertilizerValue(doubleDigitString(
                         plotsObservableList.get(plotNum).getPlotModel().getFertilizerLevel()));
-                plotViewModel.updatePlotFertilizerDatabase(plotsObservableList.get(plotNum).getPlotModel(),
+                plotViewModel.updatePlotFertilizerDatabase(
+                        plotsObservableList.get(plotNum).getPlotModel(),
                         playerViewModel.getPlayer());
                 return true;
             } else {

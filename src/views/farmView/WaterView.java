@@ -10,7 +10,8 @@ public class WaterView {
     private PlotViewModel plotViewModel;
     private MaturityView maturityView;
 
-    public WaterView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel, MaturityView maturityView) {
+    public WaterView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel,
+                     MaturityView maturityView) {
         this.playerViewModel = playerViewModel;
         this.plotViewModel = plotViewModel;
         this.maturityView = maturityView;
@@ -21,8 +22,8 @@ public class WaterView {
             int waterValue = plotsObservableList.get(plotNum).getPlotModel().getWaterValue();
             if (waterValue > 0 && waterValue <= 6) {
                 this.plotViewModel.waterPlot(plotsObservableList.get(plotNum).getPlotModel());
-                plotsObservableList.get(plotNum).setWaterValue(
-                        doubleDigitString(plotsObservableList.get(plotNum).getPlotModel().getWaterValue()));
+                plotsObservableList.get(plotNum).setWaterValue(doubleDigitString(
+                        plotsObservableList.get(plotNum).getPlotModel().getWaterValue()));
                 maturityView.checkMaturity(plotsObservableList, plotNum);
                 plotViewModel.updateWaterValue(plotsObservableList.get(plotNum).getWaterValue(),
                         plotsObservableList.get(plotNum).getPlotModel().getPlotIdentifier());

@@ -25,7 +25,8 @@ public class PlotTemplate {
      * @param waterValue The water value of the plot.
      * @param fertilizerValue The fertilizer value of the plot.
      */
-    public PlotTemplate(PlotModel plotModel, Image plotImage, Image plotNameImage, String waterValue, String fertilizerValue) {
+    public PlotTemplate(PlotModel plotModel, Image plotImage,
+                        Image plotNameImage, String waterValue, String fertilizerValue) {
         this.plotModel = plotModel;
         this.imgViewPlot = new ImageView(plotImage);
         this.imgViewName = new ImageView(plotNameImage);

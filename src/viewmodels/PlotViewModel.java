@@ -1,8 +1,6 @@
 package viewmodels;
 
 
-import com.sun.scenario.effect.Crop;
-import javafx.scene.image.Image;
 import models.CropModel;
 import models.PlayerModel;
 import models.PlotModel;
@@ -153,7 +151,6 @@ public class PlotViewModel {
      *
      * @param plotToIncrement The plot whose daysOld to increment, and waterValue to decrement.
      * @param player          the player.
-     * @return 0 if game is not over, 1 if game is over based on presence of crop in current plot
      */
     public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
@@ -180,21 +177,23 @@ public class PlotViewModel {
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
         plotToPlant.setCropInPlot(cropToPlant);
         playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).setCropQuantity(
-                playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).getCropQuantity() - 1);
+                playerModel.getUserStorage().getInventory().
+                        get(cropNumber(cropToPlant)).getCropQuantity() - 1);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
-        playerInventoryService.adjustCropQuantity(cropToPlant.getCropName(), -1, playerModel.getPlayerSettings().getPlayerName());
+        playerInventoryService.adjustCropQuantity(cropToPlant.getCropName(),
+                -1, playerModel.getPlayerSettings().getPlayerName());
     }
 
     private int cropNumber(CropModel cropModel) {
         switch (cropModel.getCropName()) {
-            case "Corn":
-                return 0;
-            case "Potato":
-                return 1;
-            case "Tomato":
-                return 2;
-            default:
-                return -1;
+        case "Corn":
+            return 0;
+        case "Potato":
+            return 1;
+        case "Tomato":
+            return 2;
+        default:
+            return -1;
         }
     }
 
@@ -221,20 +220,20 @@ public class PlotViewModel {
         }
         StorageModel storage = playerModel.getUserStorage();
         switch (plotToPesticide.getCropInPlot().getCropName()) {
-            case ("Corn"):
-                plotToPesticide.setCropInPlot(storage.getInventory().get(3));
-                updateCropInPlotDatabase(plotToPesticide, playerModel);
-                break;
-            case ("Potato"):
-                plotToPesticide.setCropInPlot(storage.getInventory().get(4));
-                updateCropInPlotDatabase(plotToPesticide, playerModel);
-                break;
-            case ("Tomato"):
-                plotToPesticide.setCropInPlot(storage.getInventory().get(5));
-                updateCropInPlotDatabase(plotToPesticide, playerModel);
-                break;
-            default:
-                break;
+        case ("Corn"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(3));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
+            break;
+        case ("Potato"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(4));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
+            break;
+        case ("Tomato"):
+            plotToPesticide.setCropInPlot(storage.getInventory().get(5));
+            updateCropInPlotDatabase(plotToPesticide, playerModel);
+            break;
+        default:
+            break;
         }
     }
 

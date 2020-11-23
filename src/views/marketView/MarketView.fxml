@@ -11,7 +11,12 @@
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.marketView.MarketViewController">
    <children>
-      <Pane layoutX="218.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../dependencies/images/Inventory.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="218.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -66,7 +71,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="540.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="540.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -121,7 +126,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="850.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="850.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -176,7 +181,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="218.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="218.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -230,7 +235,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="540.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane layoutX="540.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -284,7 +289,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-background-color: gray;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -338,12 +343,12 @@
             </JFXButton>
          </children>
       </Pane>
-      <JFXButton fx:id="btnFarm" layoutX="15.0" layoutY="655.0" onMouseClicked="#returnFarm" prefHeight="45.0" prefWidth="80.0" style="-fx-border-color: Black;" text="Return" textAlignment="CENTER">
+      <JFXButton fx:id="btnFarm" layoutX="15.0" layoutY="655.0" onMouseClicked="#returnFarm" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: gray;" text="Return" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnSwap" layoutX="1163.0" layoutY="655.0" onMouseClicked="#buySwap" style="-fx-border-color: Black;" text="Sell Crops">
+      <JFXButton fx:id="btnSwap" layoutX="1163.0" layoutY="655.0" onMouseClicked="#buySwap" style="-fx-background-color: gray;" text="Sell Crops">
          <font>
             <Font size="18.0" />
          </font>
@@ -353,7 +358,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <Pane fx:id="tractorPane" layoutX="327.0" layoutY="655.0" prefHeight="45.0" prefWidth="240.0" style="-fx-border-color: black;">
+      <Pane fx:id="tractorPane" layoutX="327.0" layoutY="655.0" prefHeight="45.0" prefWidth="240.0" style="-fx-background-color: gray; -fx-border-color: black;">
          <children>
             <JFXButton onMouseClicked="#buyTractors" prefHeight="45.0" prefWidth="181.0" style="-fx-border-color: black;" text="Buy Tractors ($100)">
                <font>
@@ -372,7 +377,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="irrigationPane" layoutX="639.0" layoutY="653.0" prefHeight="45.0" prefWidth="247.0" style="-fx-border-color: black;">
+      <Pane fx:id="irrigationPane" layoutX="639.0" layoutY="653.0" prefHeight="45.0" prefWidth="247.0" style="-fx-background-color: gray; -fx-border-color: black;">
          <children>
             <JFXButton onMouseClicked="#buyIrrigation" prefHeight="45.0" prefWidth="190.0" style="-fx-border-color: black;" text="Buy Irrigation ($100)">
                <font>

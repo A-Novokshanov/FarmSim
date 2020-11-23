@@ -17,7 +17,8 @@ public class EventView {
     private EventViewModel eventViewModel;
     private MaturityView maturityView;
 
-    public EventView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel, MaturityView maturityView) {
+    public EventView(PlayerViewModel playerViewModel, PlotViewModel plotViewModel,
+                     MaturityView maturityView) {
         this.playerViewModel = playerViewModel;
         this.plotViewModel = plotViewModel;
         this.eventViewModel = new EventViewModel(playerViewModel.getPlayer());
@@ -26,71 +27,73 @@ public class EventView {
 
     public String eventRoll(ObservableList<PlotTemplate> plotsObservableList) {
         switch (eventViewModel.chooseEvent()) {
-            case 0:
-                int waterRainChange = eventViewModel.performRainEvent();
-                for (int i = 0; i < plotsObservableList.size(); i++) {
-                    if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
-                        if (plotsObservableList.get(i).getWaterValue() > 0
-                                && plotsObservableList.get(i).getWaterValue() <= 6) {
-                            int newWaterValue = plotsObservableList.get(i).getWaterValue() + waterRainChange;
-                            plotsObservableList.get(i).getPlotModel().setWaterValue(newWaterValue);
-                            plotsObservableList.get(i).setWaterValue(doubleDigitString(
-                                    plotsObservableList.get(i).getPlotModel().getWaterValue()));
-                            plotViewModel.updateWaterValue(plotsObservableList.get(i).getWaterValue(),
-                                    plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
-                            if (newWaterValue > 6) {
-                                maturityView.checkMaturity(plotsObservableList, i);
-                            }
+        case 0:
+            int waterRainChange = eventViewModel.performRainEvent();
+            for (int i = 0; i < plotsObservableList.size(); i++) {
+                if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
+                    if (plotsObservableList.get(i).getWaterValue() > 0
+                            && plotsObservableList.get(i).getWaterValue() <= 6) {
+                        int newWaterValue =
+                                plotsObservableList.get(i).getWaterValue() + waterRainChange;
+                        plotsObservableList.get(i).getPlotModel().setWaterValue(newWaterValue);
+                        plotsObservableList.get(i).setWaterValue(doubleDigitString(
+                                plotsObservableList.get(i).getPlotModel().getWaterValue()));
+                        plotViewModel.updateWaterValue(plotsObservableList.get(i).getWaterValue(),
+                                plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
+                        if (newWaterValue > 6) {
+                            maturityView.checkMaturity(plotsObservableList, i);
                         }
                     }
                 }
-                return "Rain";
-            case 1:
-                int waterDroughtChange = eventViewModel.performDroughtEvent();
-                for (int i = 0; i < plotsObservableList.size(); i++) {
-                    if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
-                        if (plotsObservableList.get(i).getWaterValue() > 0
-                                && plotsObservableList.get(i).getWaterValue() <= 6) {
-                            int newWaterValue =
-                                    Math.max(plotsObservableList.get(i).getWaterValue() - waterDroughtChange, 0);
-                            plotsObservableList.get(i).getPlotModel().setWaterValue(newWaterValue);
-                            plotsObservableList.get(i).setWaterValue(doubleDigitString(
-                                    plotsObservableList.get(i).getPlotModel().getWaterValue()));
-                            plotViewModel.updateWaterValue(plotsObservableList.get(i).getWaterValue(),
-                                    plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
-                            if (newWaterValue <= 0) {
-                                maturityView.checkMaturity(plotsObservableList, i);
-                            }
+            }
+            return "Rain";
+        case 1:
+            int waterDroughtChange = eventViewModel.performDroughtEvent();
+            for (int i = 0; i < plotsObservableList.size(); i++) {
+                if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
+                    if (plotsObservableList.get(i).getWaterValue() > 0
+                            && plotsObservableList.get(i).getWaterValue() <= 6) {
+                        int newWaterValue =
+                                Math.max(plotsObservableList.get(i).getWaterValue()
+                                                - waterDroughtChange, 0);
+                        plotsObservableList.get(i).getPlotModel().setWaterValue(newWaterValue);
+                        plotsObservableList.get(i).setWaterValue(doubleDigitString(
+                                plotsObservableList.get(i).getPlotModel().getWaterValue()));
+                        plotViewModel.updateWaterValue(plotsObservableList.get(i).getWaterValue(),
+                                plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
+                        if (newWaterValue <= 0) {
+                            maturityView.checkMaturity(plotsObservableList, i);
                         }
                     }
                 }
-                return "Drought";
-            case 2:
-                for (PlotTemplate plotTemplate : plotsObservableList) {
-                    if (plotTemplate.getPlotModel().getCropInPlot() != null) {
-                        int n = eventViewModel.performLocustEvent(plotTemplate.getPlotModel());
-                        if (n == 1) {
-                            plotTemplate.getPlotModel().setStage(null);
-                            plotTemplate.getPlotModel().setCropInPlot(null);
-                            plotTemplate.getPlotModel().setWaterValue(0);
-                            plotTemplate.getPlotModel().setDaysOld(0);
-                            plotTemplate.setPlotImageView(dirtImg);
-                            plotTemplate.setNameImageView(emptyNameImg);
-                            plotTemplate.getWaterValueText().setVisible(false);
-                            this.plotViewModel.updatePlotStage(plotTemplate.getPlotModel(),
-                                    playerViewModel.getPlayer());
-                            this.plotViewModel.updateWaterValue(plotTemplate.getWaterValue(),
-                                    plotTemplate.getPlotModel().getPlotIdentifier());
-                            this.plotViewModel.updatePlotDaysDatabase(plotTemplate.getPlotModel(),
-                                    playerViewModel.getPlayer());
-                            this.plotViewModel.updateCropInPlotDatabase(plotTemplate.getPlotModel(),
-                                    playerViewModel.getPlayer());
-                        }
+            }
+            return "Drought";
+        case 2:
+            for (PlotTemplate plotTemplate : plotsObservableList) {
+                if (plotTemplate.getPlotModel().getCropInPlot() != null) {
+                    int n = eventViewModel.performLocustEvent(plotTemplate.getPlotModel());
+                    if (n == 1) {
+                        plotTemplate.getPlotModel().setStage(null);
+                        plotTemplate.getPlotModel().setCropInPlot(null);
+                        plotTemplate.getPlotModel().setWaterValue(0);
+                        plotTemplate.getPlotModel().setDaysOld(0);
+                        plotTemplate.setPlotImageView(dirtImg);
+                        plotTemplate.setNameImageView(emptyNameImg);
+                        plotTemplate.getWaterValueText().setVisible(false);
+                        this.plotViewModel.updatePlotStage(plotTemplate.getPlotModel(),
+                                playerViewModel.getPlayer());
+                        this.plotViewModel.updateWaterValue(plotTemplate.getWaterValue(),
+                                plotTemplate.getPlotModel().getPlotIdentifier());
+                        this.plotViewModel.updatePlotDaysDatabase(plotTemplate.getPlotModel(),
+                                playerViewModel.getPlayer());
+                        this.plotViewModel.updateCropInPlotDatabase(plotTemplate.getPlotModel(),
+                                playerViewModel.getPlayer());
                     }
                 }
-                return "Locusts";
-            default:
-                return "Normal";
+            }
+            return "Locusts";
+        default:
+            return "Normal";
         }
     }
 

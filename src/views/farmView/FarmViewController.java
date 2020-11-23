@@ -171,11 +171,11 @@ public class FarmViewController {
         this.txtPesticideCount.setText(doubleDigitString(
                 this.playerViewModel.getPlayer().getUserStorage().getTotalPesticide() - 1));
         this.txtDailyWaterCount.setText(String.valueOf(
-                this.playerViewModel.getPlayer().getMaxWateringPerDay() -
-                this.playerViewModel.getPlayer().getCurrentWaterCounter()));
+                this.playerViewModel.getPlayer().getMaxWateringPerDay()
+                        - this.playerViewModel.getPlayer().getCurrentWaterCounter()));
         this.txtDailyHarvestCount.setText(String.valueOf(
-                this.playerViewModel.getPlayer().getMaxHarvestsPerDay() -
-                this.playerViewModel.getPlayer().getCurrentHarvestCounter()));
+                this.playerViewModel.getPlayer().getMaxHarvestsPerDay()
+                - this.playerViewModel.getPlayer().getCurrentHarvestCounter()));
         this.btnPlant00.setId("btnPlant00");
         this.btnPlant01.setId("btnPlant01");
         this.btnPlant02.setId("btnPlant02");
@@ -186,7 +186,8 @@ public class FarmViewController {
         for (int i = 0; i < 10; i++) {
             PlotModel plot = plotViewModel.populatePlot(cropModel);
             Image plotImage = maturityView.setInitialMaturity(plot);
-            PlotTemplate plotTemplate = new PlotTemplate(plot, plotImage, chooseCropImage(cropModel),
+            PlotTemplate plotTemplate = new PlotTemplate(plot, plotImage,
+                    chooseCropImage(cropModel),
                     "03", "00");
             plotViewModel.addPlotDatabase(plot, playerViewModel.getPlayer());
             plotViewModel.updatePlotStage(plot, playerViewModel.getPlayer());
@@ -196,7 +197,8 @@ public class FarmViewController {
             int[] gridPosition = gridPositionDeque.remove();
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
         }
-        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
+        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(
+                plotsObservableList.size()));
     }
 
     public void setUpPlots(List<PlotModel> listPlots) {
@@ -204,10 +206,10 @@ public class FarmViewController {
         emptyPlotCounter = 0;
         for (int i = 0; i < listPlots.size(); i++) {
             PlotTemplate plotTemplate = new PlotTemplate(listPlots.get(i),
-            maturityView.getMaturityImage(listPlots.get(i)),
-            chooseCropImage(listPlots.get(i).getCropInPlot()),
-            doubleDigitString(listPlots.get(i).getWaterValue()),
-            doubleDigitString(listPlots.get(i).getFertilizerLevel()));
+                maturityView.getMaturityImage(listPlots.get(i)),
+                chooseCropImage(listPlots.get(i).getCropInPlot()),
+                doubleDigitString(listPlots.get(i).getWaterValue()),
+                doubleDigitString(listPlots.get(i).getFertilizerLevel()));
             plotsObservableList.add(plotTemplate);
             Pane pane = createPane(plotsObservableList.get(i), i);
             int[] gridPosition = gridPositionDeque.remove();
@@ -216,7 +218,8 @@ public class FarmViewController {
                 emptyPlotCounter++;
             }
         }
-        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
+        this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(
+                plotsObservableList.size()));
     }
 
     /**
@@ -259,7 +262,8 @@ public class FarmViewController {
         waterValueText.setStyle("-fx-font: 18 System");
         waterValueText.setLayoutX(124);
         waterValueText.setLayoutY(28);
-        if (plotTemplate.getPlotModel().getCropInPlot() == null) {
+        if (plotTemplate.getPlotModel().getCropInPlot() == null
+                || plotTemplate.getPlotModel().getStage().equals("Withered")) {
             waterValueText.setVisible(false);
         }
 
@@ -375,7 +379,8 @@ public class FarmViewController {
     private void incrementAllPlotDays() {
         for (int i = 0; i < plotsObservableList.size(); i++) {
             if (plotsObservableList.get(i).getPlotModel().getCropInPlot() != null) {
-                plotViewModel.incrementPlotDaysOld(plotsObservableList.get(i).getPlotModel(), playerViewModel);
+                plotViewModel.incrementPlotDaysOld(
+                        plotsObservableList.get(i).getPlotModel(), playerViewModel);
                 plotsObservableList.get(i).setWaterValue(doubleDigitString(
                         plotsObservableList.get(i).getPlotModel().getWaterValue()));
                 plotsObservableList.get(i).setFertilizerValue(doubleDigitString(
@@ -385,7 +390,8 @@ public class FarmViewController {
                         playerViewModel.getPlayer());
                 this.plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(i).getPlotModel(),
                         playerViewModel.getPlayer());
-                this.plotViewModel.updateWaterValue(plotsObservableList.get(i).getPlotModel().getWaterValue(),
+                this.plotViewModel.updateWaterValue(
+                        plotsObservableList.get(i).getPlotModel().getWaterValue(),
                         plotsObservableList.get(i).getPlotModel().getPlotIdentifier());
                 Pane pane = (Pane) gridPane.getChildren().get(i);
                 ImageView plotImageView = (ImageView) pane.getChildren().get(0);
@@ -470,7 +476,8 @@ public class FarmViewController {
                 txtFertilizerCount.setText(doubleDigitString(
                         playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
                 Pane pane = (Pane) gridPane.getChildren().get(plotNum);
-                pane.getChildren().set(6, plotsObservableList.get(plotNum).getFertilizerValueText());
+                pane.getChildren().set(6,
+                        plotsObservableList.get(plotNum).getFertilizerValueText());
             }
         }
     }
@@ -519,20 +526,20 @@ public class FarmViewController {
             return this.emptyNameImg;
         } else {
             switch (crop.getCropName()) {
-                case "Corn":
-                    return this.cornNameImg;
-                case "Potato":
-                    return this.potatoNameImg;
-                case "Tomato":
-                    return this.tomatoNameImg;
-                case "Corn with Pesticide":
-                    return this.cornPesticideNameImg;
-                case "Potato with Pesticide":
-                    return this.potatoPesticideNameImg;
-                case "Tomato with Pesticide":
-                    return this.tomatoPesticideNameImg;
-                default:
-                    return this.emptyNameImg;
+            case "Corn":
+                return this.cornNameImg;
+            case "Potato":
+                return this.potatoNameImg;
+            case "Tomato":
+                return this.tomatoNameImg;
+            case "Corn with Pesticide":
+                return this.cornPesticideNameImg;
+            case "Potato with Pesticide":
+                return this.potatoPesticideNameImg;
+            case "Tomato with Pesticide":
+                return this.tomatoPesticideNameImg;
+            default:
+                return this.emptyNameImg;
             }
         }
     }
