@@ -16,6 +16,8 @@ Install "sqlite-jdbc-3.32.3.2.jar"
 
 Add this jar file as a library in project structure.
 
+To setup the database configuration:
+
 1. In the Database tool window (View | Tool Windows | Database), click the Data Source Properties icon The Data Source Properties icon.
 
 2. In the Data Sources and Drivers dialog, click the Add icon (The Add icon) and select SQLite.
