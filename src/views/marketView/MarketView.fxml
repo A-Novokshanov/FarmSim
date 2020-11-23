@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.marketUI.MarketUIController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.marketView.MarketViewController">
    <children>
       <Pane layoutX="218.0" layoutY="98.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
@@ -284,7 +284,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>
@@ -297,7 +297,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Pane fx:id="pane6QuantityPane" layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black; visibility: false;">
+                  <Pane layoutX="140.0" prefHeight="40.0" prefWidth="60.0" style="-fx-border-color: Black;">
                      <children>
                         <Text fx:id="pane6Quantity" layoutX="17.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00" textAlignment="CENTER">
                            <font>
@@ -306,28 +306,9 @@
                         </Text>
                      </children>
                   </Pane>
-                  <Pane fx:id="tierPane" layoutX="100.0" prefHeight="40.0" prefWidth="100.0" style="-fx-border-color: Black;">
-                     <children>
-                        <Text fx:id="pane6Quantity1" layoutX="76.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/2" textAlignment="CENTER">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="13.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tier:">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="tierNum" layoutX="64.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
                </children>
             </Pane>
-            <HBox fx:id="pane6HBox" layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0" style="visibility: false;">
+            <HBox layoutX="5.0" layoutY="205.0" prefHeight="38.0" prefWidth="120.0">
                <children>
                   <JFXButton maxHeight="40.0" maxWidth="40.0" onMouseClicked="#upQuantity6" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: Black;" text="+">
                      <font>
@@ -350,17 +331,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <JFXButton fx:id="pane6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black; visibility: false;" text="Buy">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="fireButton" layoutX="14.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Fire">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="upgradeButton" layoutX="112.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="80.0" style="-fx-border-color: Black;" text="Upgrade">
+            <JFXButton fx:id="pane6Action" layoutX="132.0" layoutY="206.0" onMouseClicked="#panel6BuySell" prefHeight="36.0" prefWidth="60.0" style="-fx-border-color: Black;" text="Buy">
                <font>
                   <Font size="14.0" />
                </font>
@@ -382,5 +353,43 @@
             <Font size="28.0" />
          </font>
       </Text>
+      <Pane fx:id="tractorPane" layoutX="327.0" layoutY="655.0" prefHeight="45.0" prefWidth="240.0" style="-fx-border-color: black;">
+         <children>
+            <JFXButton onMouseClicked="#buyTractors" prefHeight="45.0" prefWidth="181.0" style="-fx-border-color: black;" text="Buy Tractors ($100)">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="207.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="tractorAmount" layoutX="196.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="irrigationPane" layoutX="639.0" layoutY="653.0" prefHeight="45.0" prefWidth="247.0" style="-fx-border-color: black;">
+         <children>
+            <JFXButton onMouseClicked="#buyIrrigation" prefHeight="45.0" prefWidth="190.0" style="-fx-border-color: black;" text="Buy Irrigation ($100)">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <Text layoutX="214.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/7">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="irrigationAmount" layoutX="203.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

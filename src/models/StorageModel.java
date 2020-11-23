@@ -23,7 +23,7 @@ public class StorageModel {
      * structure of the cropInventory and initializes it with starter crops.
      */
     public StorageModel() {
-        cropInventory = new ArrayList<>(15);
+        cropInventory = new ArrayList<>();
         cropInventory.add(new CropModel("Corn", 3, 100.00));
         cropInventory.add(new CropModel("Potato", 3, 80.00));
         cropInventory.add(new CropModel("Tomato", 3, 60.00));
@@ -108,13 +108,11 @@ public class StorageModel {
      * @param quantity amount to remove.
      * @return what scenario to go with.
      */
-    public int getEnoughToRemove(int i, int quantity) {
-        if (cropInventory.get(i).getCropQuantity() - quantity > 0) {
-            return 1;
-        } else if (cropInventory.get(i).getCropQuantity() - quantity == 0) {
-            return 2;
+    public boolean getEnoughToRemove(int i, int quantity) {
+        if (cropInventory.get(i).getCropQuantity() - quantity >= 0) {
+            return true;
         }
-        return 3;
+        return false;
     }
 
     /**
@@ -128,7 +126,6 @@ public class StorageModel {
             count += crop.getCropQuantity();
         }
         return count;
-
     }
 
     /**

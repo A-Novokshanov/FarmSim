@@ -20,6 +20,9 @@ public class PlayerSettingsService {
     private static final String UPDATE_PLAYER_WATER = "UPDATE player SET water = ? WHERE name = ?";
     private static final String UPDATE_PLAYER_MAX_HARVEST = "UPDATE player SET maxharvest = ? WHERE name = ?";
     private static final String UPDATE_PLAYER_MAX_WATER = "UPDATE player SET maxwater = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_PEST = "UPDATE player SET pest = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_FERT = "UPDATE player SET fert = ? WHERE name = ?";
+
     private PreparedStatement preparedStatement;
 
     /**
@@ -216,4 +219,62 @@ public class PlayerSettingsService {
             }
         }
     }
+
+    /**
+     * Updates the player fertilizer level
+     *
+     * @param fert the fertilizer amount
+     * @param playerName name of player
+     */
+    public void updatePlayerFert(int fert, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_FERT);
+                preparedStatement.setInt(1, fert);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Updates player pesticide level
+     *
+     * @param pest pesticide amount
+     * @param playerName name of player
+     */
+    public void updatePlayerpest(int pest, String playerName) {
+        Connection dbConnection = DatabaseConnection.getDbConnection();
+        if (isDbConnected(dbConnection)) {
+            try {
+                preparedStatement = dbConnection.prepareStatement(UPDATE_PLAYER_PEST);
+                preparedStatement.setInt(1, pest);
+                preparedStatement.setString(2, playerName);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    preparedStatement.close();
+                    dbConnection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
 }

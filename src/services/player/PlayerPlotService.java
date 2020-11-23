@@ -36,8 +36,6 @@ public class PlayerPlotService {
             + "identifier = ? AND player = ?";
     private static final String UPDATE_PLOT_FERTILIZER =
             "UPDATE plot SET fert = ? WHERE identifier = ? AND player = ?";
-    private static final String QUERY_PLOT_FERTILIZER =
-            "SELECT a.fert FROM plot a WHERE a.identifier = ? AND a.player = ?";
     private static final String UPDATE_CROP_PLOT = "UPDATE plot SET crop = ? "
             + "WHERE identifier = ? AND player = ?";
 
@@ -129,49 +127,6 @@ public class PlayerPlotService {
     }
 
 
-    /**
-     * Gets the player water value.
-     *
-     *
-     *
-     */
-
-
-    /**
-     * Adds the player plots to the database.
-     *
-     * @param playerPlots the list of player plots.
-     * @param playerName  the name of the player.
-     */
-    public void addPlayerPlots(List<PlotModel> playerPlots, String playerName) {
-        Connection dbConnection = DatabaseConnection.getDbConnection();
-        int playerId = getPlayerId(playerName);
-        try {
-            preparedStatement = dbConnection.prepareStatement(ADD_PLOTS_QUERY);
-            for (PlotModel plot : playerPlots) {
-                preparedStatement.setInt(1, plot.getDaysOld());
-                preparedStatement.setInt(2, plot.getDaysSinceWater());
-                preparedStatement.setString(3, plot.getCropInPlot().getCropName());
-                preparedStatement.setInt(4, playerId);
-                preparedStatement.setInt(5, plot.getPlotIdentifier());
-                preparedStatement.setInt(6, plot.getWaterValue());
-                preparedStatement.setString(7, plot.getStage());
-                preparedStatement.setInt(8, plot.getFertilizerLevel());
-                preparedStatement.execute();
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-                dbConnection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-
-    }
-
     public List<PlotModel> queryPlayerPlots(String playerName) {
         Connection dbConnection = DatabaseConnection.getDbConnection();
         List<PlotModel> myList = new java.util.ArrayList<>();
@@ -245,7 +200,11 @@ public class PlayerPlotService {
                 preparedStatement = dbConnection.prepareStatement(ADD_PLOTS_QUERY);
                 preparedStatement.setInt(1, plot.getDaysOld());
                 preparedStatement.setInt(2, plot.getDaysSinceWater());
-                preparedStatement.setString(3, plot.getCropInPlot().getCropName());
+                if (!(plot.getCropInPlot() == null)) {
+                    preparedStatement.setString(3, plot.getCropInPlot().getCropName());
+                } else {
+                    preparedStatement.setString(3, null);
+                }
                 preparedStatement.setInt(4, playerId);
                 preparedStatement.setInt(5, plot.getPlotIdentifier());
                 preparedStatement.setInt(6, plot.getWaterValue());
@@ -452,31 +411,5 @@ public class PlayerPlotService {
                 throwables.printStackTrace();
             }
         }
-    }
-
-    public int queryPlotFertilizer(int plotIdentifier, String playerName) {
-        Connection dbConnection = DatabaseConnection.getDbConnection();
-        int playerId = getPlayerId(playerName);
-        if (isDbConnected(dbConnection)) {
-            try {
-
-                preparedStatement = dbConnection.prepareStatement(QUERY_PLOT_FERTILIZER);
-                preparedStatement.setInt(1, plotIdentifier);
-                preparedStatement.setInt(2, playerId);
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                return resultSet.getInt("fert");
-
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                try {
-                    dbConnection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        }
-        return -1;
     }
 }

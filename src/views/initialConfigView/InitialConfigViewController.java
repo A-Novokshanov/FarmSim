@@ -1,4 +1,4 @@
-package views.initialConfigUI;
+package views.initialConfigView;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -19,13 +19,13 @@ import models.CropModel;
 import models.SeasonModel;
 import models.StorageModel;
 import viewmodels.PlayerViewModel;
-import views.farmUI.FarmUIController;
+import views.farmView.FarmViewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitialConfigUIController {
+public class InitialConfigViewController {
     private final Image springImage = new Image("@../../dependencies/images/SpringBig.png",
             400.0, 300.0, true, false);
     private final Image summerImage = new Image("@../../dependencies/images/SummerBig.jpg",
@@ -217,7 +217,7 @@ public class InitialConfigUIController {
             Stage stage = (Stage) btnCreateGame.getScene().getWindow();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().
-                        getResource("../farmUI/FarmUI.fxml"));
+                        getResource("../farmView/FarmView.fxml"));
                 stage.setTitle("Farm Screen");
                 stage.setScene(new Scene(loader.load()));
                 this.setMoney();
@@ -226,8 +226,8 @@ public class InitialConfigUIController {
                         txtFldName.textProperty().getValue(), userStorage,
                         curDifficulty, currentMoney);
                 playerViewModel.getPlayer().setPlayerStorage(userStorage);
-                FarmUIController farmUIController = loader.getController();
-                farmUIController.initConfigData(playerViewModel);
+                FarmViewController farmViewController = loader.getController();
+                farmViewController.initConfigData(playerViewModel);
                 stage.show();
             } catch (IOException e) {
                 System.out.println("Create game loader error.");

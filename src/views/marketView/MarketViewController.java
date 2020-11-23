@@ -1,4 +1,4 @@
-package views.marketUI;
+package views.marketView;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -16,20 +15,28 @@ import viewmodels.MarketViewModel;
 import viewmodels.PlayerViewModel;
 import viewmodels.StorageViewModel;
 import viewmodels.WorkerViewModel;
-import views.farmUI.FarmUIController;
+import views.farmView.FarmViewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class MarketUIController {
+public class MarketViewController {
     @FXML
     private JFXButton btnSwap;
     @FXML
     private JFXButton btnFarm;
     @FXML
     private Text txtBudget;
+    @FXML
+    private Pane tractorPane;
+    @FXML
+    private Pane irrigationPane;
+    @FXML
+    private Text tractorAmount;
+    @FXML
+    private Text irrigationAmount;
 
 
     @FXML
@@ -83,21 +90,9 @@ public class MarketUIController {
     private Text pane5Quantity;
 
     @FXML
-    private ImageView pane6Img;
-    @FXML
-    private Pane tierPane;
-    @FXML
-    private Text tierNum;
-    @FXML
-    private Pane pane6QuantityPane;
-    @FXML
-    private HBox pane6HBox;
+    private Pane pane6;
     @FXML
     private JFXButton pane6Action;
-    @FXML
-    private JFXButton fireButton;
-    @FXML
-    private JFXButton upgradeButton;
     @FXML
     private Text pane6Value;
     @FXML
@@ -149,10 +144,10 @@ public class MarketUIController {
                             storage.userInventory().get(i).getCropQuantity()));
                 } else if (i == 4) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            player.getPlayer().getUserStorage().getTotalFertilizer() - 1));
+                            player.getPlayer().getUserStorage().getTotalFertilizer()));
                 } else if (i == 5) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            player.getPlayer().getUserStorage().getTotalPesticide() - 1));
+                            player.getPlayer().getUserStorage().getTotalPesticide()));
                 }
             }
         }
@@ -231,7 +226,7 @@ public class MarketUIController {
 
     private void sellQuantity(Text value, int index, Text quantity) {
         if (index < 6) {
-            if (Integer.parseInt(quantity.getText()) > 2) {
+            if (playerViewModel.getPlayer().getUserStorage().getInventory().get(index).getCropQuantity() > 0) {
                 int num = Integer.parseInt(value.getText());
                 storageViewModel.sellItemFromInventory(
                         storageViewModel.userInventory().get(index), num);
@@ -242,21 +237,37 @@ public class MarketUIController {
         }
     }
 
-    public void upgradeWorker() {
-        if (workerViewModel.checkPurchasableUpgrade(workerViewModel.upgradePrice(workerModel))) {
-            tierNum.setText(String.valueOf(workerModel.getWorkerType()));
-            setPrice(pane6Value, 5, pane6Price);
-            workerViewModel.updateWorkerTypeDatabase(workerModel);
-            workerViewModel.updateWorkerWageDatabase(workerModel);
+//    public void upgradeWorker() {
+//        if (workerViewModel.checkPurchasableUpgrade(workerViewModel.upgradePrice(workerModel))) {
+//            setPrice(pane6Value, 5, pane6Price);
+//            workerViewModel.updateWorkerTypeDatabase(workerModel);
+//            workerViewModel.updateWorkerWageDatabase(workerModel);
+//        }
+//    }
+//
+//    public void fireWorker() {
+//        workerViewModel.workerLeaves(workerModel);
+//        setPrice(pane6Value, 5, pane6Price);
+//        workerViewModel.updateWorkerTypeDatabase(workerModel);
+//        workerViewModel.updateWorkerWageDatabase(workerModel);
+//    }
+
+    public void buyTractors() {
+        if (!(playerViewModel.getPlayer().getMaxHarvestsPerDay() == 19)) {
+            marketViewModel.purchaseTractor(100);
+            tractorAmount.setText(String.valueOf(
+                    (playerViewModel.getPlayer().getMaxHarvestsPerDay() - 5) / 2));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         }
     }
 
-    public void fireWorker() {
-        workerViewModel.workerLeaves(workerModel);
-        tierNum.setText(String.valueOf(workerModel.getWorkerType()));
-        setPrice(pane6Value, 5, pane6Price);
-        workerViewModel.updateWorkerTypeDatabase(workerModel);
-        workerViewModel.updateWorkerWageDatabase(workerModel);
+    public void buyIrrigation() {
+        if (!(playerViewModel.getPlayer().getMaxWateringPerDay() == 19)) {
+            marketViewModel.purchaseIrrigation(100);
+            irrigationAmount.setText(String.valueOf(
+                    (playerViewModel.getPlayer().getMaxWateringPerDay() - 5) / 2));
+            this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
+        }
     }
 
     public void upQuantity1() {
@@ -397,16 +408,6 @@ public class MarketUIController {
         }
     }
 
-    private String doubleDigitString(int num) {
-        String str;
-        if (num < 10) {
-            str = "0" + num;
-        } else {
-            str = String.valueOf(num);
-        }
-        return str;
-    }
-
     public void buySwap(MouseEvent mouseEvent) {
         buyState = false;
         setActionLabel("Sell");
@@ -416,12 +417,10 @@ public class MarketUIController {
         btnSwap.setText("Buy Crops");
         pane4Img.setImage(cornPesticideImg);
         pane5Img.setImage(potatoPesticideImg);
-        pane6QuantityPane.setVisible(true);
+        pane6.setVisible(true);
         pane6Action.setVisible(true);
-        pane6HBox.setVisible(true);
-        tierPane.setVisible(false);
-        fireButton.setVisible(false);
-        upgradeButton.setVisible(false);
+        tractorPane.setVisible(false);
+        irrigationPane.setVisible(false);
         btnSwap.setOnMouseClicked(this::sellSwap);
     }
 
@@ -434,27 +433,39 @@ public class MarketUIController {
         btnSwap.setText("Sell Crops");
         pane4Img.setImage(fertilizerImg);
         pane5Img.setImage(pesticideImg);
-        pane6QuantityPane.setVisible(false);
+        pane6.setVisible(false);
         pane6Action.setVisible(false);
-        pane6HBox.setVisible(false);
-        tierPane.setVisible(true);
-        fireButton.setVisible(true);
-        upgradeButton.setVisible(true);
+        tractorPane.setVisible(true);
+        tractorAmount.setText(String.valueOf(
+                (playerViewModel.getPlayer().getMaxHarvestsPerDay() - 5) / 2));
+        irrigationPane.setVisible(true);
+        irrigationAmount.setText(String.valueOf(
+                (playerViewModel.getPlayer().getMaxWateringPerDay() - 5) / 2));
         btnSwap.setOnMouseClicked(this::buySwap);
     }
 
     public void returnFarm() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmUI/FarmUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../farmView/FarmView.fxml"));
             Stage stage = (Stage) btnFarm.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
-            FarmUIController farmUIController = loader.getController();
-            farmUIController.initDataFromMarket(this.playerViewModel);
+            FarmViewController farmViewController = loader.getController();
+            farmViewController.initSaveData(this.playerViewModel);
             stage.setTitle("Farm");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String doubleDigitString(int num) {
+        String str;
+        if (num < 10) {
+            str = "0" + num;
+        } else {
+            str = String.valueOf(num);
+        }
+        return str;
     }
 }
 

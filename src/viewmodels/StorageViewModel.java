@@ -49,13 +49,6 @@ public class StorageViewModel {
                     storageModel.setNewCropAmount(quantity, i);
                 }
             }
-            if (count == storageModel.getTotalCropAmount()) {
-                storageModel.setNewCrop(crop, quantity);
-                List<CropModel> crops = new ArrayList<>();
-                crops.add(crop);
-                playerInventoryService.addPlayerCrops(
-                        player.getPlayer().getPlayerSettings().getPlayerName(), crops);
-            }
             playerInventoryService.adjustCropQuantity(crop.getCropName(),
                     quantity, player.getPlayer().getPlayerSettings().getPlayerName());
         }
@@ -71,19 +64,15 @@ public class StorageViewModel {
         if (storageModel.getTotalCropAmount() > 0) {
             for (int i = 0; i < storageModel.getInventorySize(); i++) {
                 if (storageModel.checkIfNameCorrect(i, crop)) {
-                    if (storageModel.getEnoughToRemove(i, amount) == 1) {
+                    if (storageModel.getEnoughToRemove(i, amount)) {
                         storageModel.removeCropAmount(amount, i);
-
                         double money = amount * (calculateCropPrice(crop.getCropValue(),
                                 player.getPlayer().getPlayerSettings()
                                         .getStartingDifficulty()));
-
                         player.getPlayer().setUserCurrentMoney((int) (
                                 player.getPlayer().getUserCurrentMoney() + money));
-
                         this.playerInfoDatabase.updatePlayerMoney(money, this.player.getPlayer()
                                 .getPlayerSettings().getPlayerName());
-
                         this.playerInventoryService.adjustCropQuantity(crop.getCropName(), -amount,
                                 this.player.getPlayer().getPlayerSettings().getPlayerName());
                     }

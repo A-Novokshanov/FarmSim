@@ -1,11 +1,14 @@
 package viewmodels;
 
 
+import com.sun.scenario.effect.Crop;
+import javafx.scene.image.Image;
 import models.CropModel;
 import models.PlayerModel;
 import models.PlotModel;
 import models.StorageModel;
 import models.WorkerModel;
+import services.player.PlayerInventoryService;
 import services.player.PlayerPlotService;
 import services.player.PlayerSettingsService;
 
@@ -22,6 +25,7 @@ public class PlotViewModel {
 
     private PlayerPlotService playerPlotService = new PlayerPlotService();
     private PlayerSettingsService playerSettingsService = new PlayerSettingsService();
+    private PlayerInventoryService playerInventoryService = new PlayerInventoryService();
     private PlayerModel playerModel;
 
     private WorkerModel worker = new WorkerModel();
@@ -45,11 +49,6 @@ public class PlotViewModel {
     public void harvestPlot(PlotModel harvestedPlot, PlayerViewModel player) {
         StorageViewModel storageVM = new StorageViewModel(player);
         int toAdd = 0;
-        /*
-        if (harvestedPlot.getDaysSinceWater() > 5) {
-            harvestedPlot.setCropInPlot(null);
-        }
-        */
         if ((harvestedPlot.getWaterValue() > 6) || (harvestedPlot.getWaterValue() <= 0)) {
             harvestedPlot.setCropInPlot(null);
             playerPlotService.harvestPlot(0,
@@ -64,19 +63,17 @@ public class PlotViewModel {
                     newYield = 5;
                 }
                 while ((toAdd < newYield) && (player.getPlayer()
-                        .getUserStorage().getTotalCropAmount() < 15)) {
+                        .getUserStorage().getTotalCropAmount() < 27)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }
             } else {
                 while ((toAdd < 3) && (player.getPlayer()
-                        .getUserStorage().getTotalCropAmount() < 15)) {
+                        .getUserStorage().getTotalCropAmount() < 27)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }
             }
-            //playerPlotService.deletePlot(harvestedPlot.getPlotIdentifier(),
-            //        player.getPlayer().getPlayerSettings().getPlayerName());
             harvestedPlot.setCropInPlot(null);
             playerPlotService.harvestPlot(0,
                     harvestedPlot.getPlotIdentifier(),
@@ -158,16 +155,12 @@ public class PlotViewModel {
      * @param player          the player.
      * @return 0 if game is not over, 1 if game is over based on presence of crop in current plot
      */
-    public int incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
-        if (checkGameOver(plotToIncrement, player)) {
-            return 1;
-        }
+    public void incrementPlotDaysOld(PlotModel plotToIncrement, PlayerViewModel player) {
         if (plotToIncrement.getFertilizerLevel() > 0) {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 2);
         } else {
             plotToIncrement.setDaysOld(plotToIncrement.getDaysOld() + 1);
         }
-        //plotToIncrement.setDaysSinceWater(plotToIncrement.getDaysSinceWater() + 1);
         if ((plotToIncrement.getWaterValue() > 0) && (plotToIncrement.getWaterValue() <= 6)) {
             plotToIncrement.setWaterValue(plotToIncrement.getWaterValue() - 1);
         }
@@ -176,19 +169,7 @@ public class PlotViewModel {
         }
         workerViewModel.payWorker(worker);
         workerWork(plotToIncrement, player, worker);
-        return 0;
     }
-
-    /*
-    For Matthew:
-    In the same method where you call incrementPlotDaysOld on, setup something akin to the following pseudocode:
-    int gameOverTotal = 0;
-    gameOverTotal += <incrementPlotDaysOld on each plot>
-    if (gameOverTotal == Total # of Plots available (I assume there will be a way to track this since you can
-    purchase more plots) then present game over screen, present button that a) deleted player info from database and
-    b) sends players back to HomeScreen
-    else (e.g. gameOverTotal < total # of plots) do nothing
-     */
 
     /**
      * Plants a crop into PlotModel.
@@ -198,7 +179,23 @@ public class PlotViewModel {
      */
     public void plantPlot(PlotModel plotToPlant, CropModel cropToPlant) {
         plotToPlant.setCropInPlot(cropToPlant);
+        playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).setCropQuantity(
+                playerModel.getUserStorage().getInventory().get(cropNumber(cropToPlant)).getCropQuantity() - 1);
         playerPlotService.plantCrop(plotToPlant, playerModel.getPlayerSettings().getPlayerName());
+        playerInventoryService.adjustCropQuantity(cropToPlant.getCropName(), -1, playerModel.getPlayerSettings().getPlayerName());
+    }
+
+    private int cropNumber(CropModel cropModel) {
+        switch (cropModel.getCropName()) {
+            case "Corn":
+                return 0;
+            case "Potato":
+                return 1;
+            case "Tomato":
+                return 2;
+            default:
+                return -1;
+        }
     }
 
     /**
@@ -239,28 +236,6 @@ public class PlotViewModel {
             default:
                 break;
         }
-    }
-
-    /**
-     * Checks to see if the game is over.
-     *
-     * @param plot the current plot being checked.
-     * @param player the player whose balance and storage to check.
-     * @return if conditions for game over are true and plot is empty
-     */
-    public boolean checkGameOver(PlotModel plot, PlayerViewModel player) {
-        return (plot.getCropInPlot() == null) && (player.getPlayer().getUserCurrentMoney() <= 0) &&
-                (player.getPlayer().getUserStorage().getTotalCropAmount() <= 0);
-    }
-
-    /**
-     * Saves the plots from the users game when they click continue.
-     *
-     * @param plots      is list of all 8 plots the user has, each having a certain state.
-     * @param playerName the user name we are specifically pulling from the database for.git
-     */
-    public void addPlayerPlotsToDatabase(List<PlotModel> plots, String playerName) {
-        playerPlotService.addPlayerPlots(plots, playerName);
     }
 
     /**
@@ -309,26 +284,21 @@ public class PlotViewModel {
     }
 
     /**
-     * Gets the fertilizer level of the plot.
-     *
-     * @param plot        The plot that contains the updated information.
-     * @param playerModel The playerModel containing the player information.
-     */
-    public void getPlotFertilizerDatabase(PlotModel plot, PlayerModel playerModel) {
-        playerPlotService.queryPlotFertilizer(plot.getPlotIdentifier(),
-                playerModel.getPlayerSettings().getPlayerName());
-    }
-
-    /**
      * Updates the crop in the plot database.
      *
      * @param playerModel The player model that contains the player information.
      * @param plotModel   The plotmodel that contains the new crop.
      */
     public void updateCropInPlotDatabase(PlotModel plotModel, PlayerModel playerModel) {
-        playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
-                plotModel.getPlotIdentifier(),
-                playerModel.getPlayerSettings().getPlayerName());
+        if (plotModel.getCropInPlot() != null) {
+            playerPlotService.adjustCropInPlot(plotModel.getCropInPlot().getCropName(),
+                    plotModel.getPlotIdentifier(),
+                    playerModel.getPlayerSettings().getPlayerName());
+        } else {
+            playerPlotService.adjustCropInPlot(null,
+                    plotModel.getPlotIdentifier(),
+                    playerModel.getPlayerSettings().getPlayerName());
+        }
     }
 
     public void addPlotDatabase(PlotModel plot, PlayerModel player) {
