@@ -10,7 +10,8 @@ the JFoenix jar, which can be downloaded at https://github.com/jfoenixadmin/JFoe
 
 Add this JFoenix jar file as a library in the project structure.
 
-Setup of the SQLite Database will require the jar file for: https://github.com/xerial/sqlite-jdbc/releases
+Setup of the SQLite Database will require the jar file for: https://github.com/xerial/sqlite-jdbc/releases 
+
 Install "sqlite-jdbc-3.32.3.2.jar"
 
 Add this jar file as a library in project structure.
