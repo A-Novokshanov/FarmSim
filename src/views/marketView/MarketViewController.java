@@ -141,13 +141,13 @@ public class MarketViewController {
                 setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
                 if (i < 3) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            storage.userInventory().get(i).getCropQuantity() - 2));
+                            storage.userInventory().get(i).getCropQuantity()));
                 } else if (i == 4) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            player.getPlayer().getUserStorage().getTotalFertilizer() - 2));
+                            player.getPlayer().getUserStorage().getTotalFertilizer()));
                 } else if (i == 5) {
                     listPaneQuantities.get(i).setText(doubleDigitString(
-                            player.getPlayer().getUserStorage().getTotalPesticide() - 2));
+                            player.getPlayer().getUserStorage().getTotalPesticide()));
                 }
             }
         }
@@ -204,13 +204,12 @@ public class MarketViewController {
     }
 
     private void buyQuantity(Text value, int index, Text quantity) {
-        System.out.println(Integer.parseInt(value.getText()));
         int valueNum = Integer.parseInt(value.getText());
         if (index < 3) {
             marketViewModel.purchaseCrops(
                     storageViewModel.userInventory().get(index), valueNum);
             quantity.setText(doubleDigitString(
-                    storageViewModel.userInventory().get(index).getCropQuantity() - 2));
+                    storageViewModel.userInventory().get(index).getCropQuantity()));
             this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
         } else if (index == 3) {
             this.marketViewModel.purchaseItems("Fertilizer", valueNum);
@@ -227,12 +226,12 @@ public class MarketViewController {
 
     private void sellQuantity(Text value, int index, Text quantity) {
         if (index < 6) {
-            if (playerViewModel.getPlayer().getUserStorage().getInventory().get(index).getCropQuantity() > 2) {
+            if (playerViewModel.getPlayer().getUserStorage().getInventory().get(index).getCropQuantity() > 0) {
                 int num = Integer.parseInt(value.getText());
                 storageViewModel.sellItemFromInventory(
                         storageViewModel.userInventory().get(index), num);
                 quantity.setText(doubleDigitString(
-                        storageViewModel.userInventory().get(index).getCropQuantity() - 2));
+                        storageViewModel.userInventory().get(index).getCropQuantity()));
                 this.txtBudget.setText("$" + (playerViewModel.getPlayer().getUserCurrentMoney()));
             }
         }
@@ -395,10 +394,10 @@ public class MarketViewController {
         for (int i = 0; i < 6; i++) {
             if (i < 3) {
                 listPaneQuantities.get(i).setText(doubleDigitString(
-                        storageViewModel.userInventory().get(i).getCropQuantity() - 2));
+                        storageViewModel.userInventory().get(i).getCropQuantity()));
             } else if (!buyState) {
                 listPaneQuantities.get(i).setText(doubleDigitString(
-                        storageViewModel.userInventory().get(i).getCropQuantity() - 2));
+                        storageViewModel.userInventory().get(i).getCropQuantity()));
             } else if (i == 3) {
                 listPaneQuantities.get(i).setText(doubleDigitString(
                         playerViewModel.getPlayer().getUserStorage().getTotalFertilizer() - 1));
