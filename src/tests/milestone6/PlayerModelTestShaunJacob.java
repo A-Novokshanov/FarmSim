@@ -58,11 +58,17 @@ public class PlayerModelTestShaunJacob {
         playerModel = new PlayerModel(currentMoney, settingModel, storageModel);
     }
 
+    /**
+     * Testing getDays method
+     */
     @Test
     public void testGetDays() {
         assertEquals(1, playerModel.getDays());
     }
 
+    /**
+     * Testing setDays method
+     */
     @Test
     public void testSetDays() {
         int days = 60;
@@ -70,11 +76,17 @@ public class PlayerModelTestShaunJacob {
         assertEquals(days, playerModel.getDays());
     }
 
+    /**
+     * Testing getUserCurrentMoney method
+     */
     @Test
     public void testGetUserCurrentMoney() {
         assertEquals(currentMoney, playerModel.getUserCurrentMoney(), 0);
     }
 
+    /**
+     * Testing setUserCurrentMoney method
+     */
     @Test
     public void testSetUserCurrentMoney() {
         double newCurrMoney = 62.3;
@@ -82,11 +94,17 @@ public class PlayerModelTestShaunJacob {
         assertEquals(newCurrMoney, playerModel.getUserCurrentMoney(), 0);
     }
 
+    /**
+     * Testing getPlayerSettings method
+     */
     @Test
     public void testGetUserCurrentSettings() {
         assertEquals(settingModel, playerModel.getPlayerSettings());
     }
 
+    /**
+     * Testing setPlayerSettings method
+     */
     @Test
     public void testSetPlayerSettings() {
         SettingModel newSettings = new SettingModel(seasonModel, cropModel, "Easy", "Shaun");
@@ -94,11 +112,17 @@ public class PlayerModelTestShaunJacob {
         assertEquals(newSettings, playerModel.getPlayerSettings());
     }
 
+    /**
+     * Testing getUserStorage method
+     */
     @Test
     public void testGetUserCurrentStorage() {
         assertEquals(storageModel, playerModel.getUserStorage());
     }
 
+    /**
+     * Testing setPlayerStorage method
+     */
     @Test
     public void testSetUserCurrentStorage() {
         StorageModel newStorageModel = new StorageModel();
@@ -107,44 +131,68 @@ public class PlayerModelTestShaunJacob {
         assertEquals(newStorageModel, playerModel.getUserStorage());
     }
 
+    /**
+     * Testing getMaxHarvestsPerDay method
+     */
     @Test
     public void testGetMaxHarvestsPerDay() {
         assertEquals(5, playerModel.getMaxHarvestsPerDay());
     }
 
+    /**
+     * Testing setMaxHarvestsPerDay method
+     */
     @Test
     public void testSetMaxHarvestsPerDay() {
         playerModel.setMaxHarvestsPerDay(69);
         assertEquals(69, playerModel.getMaxHarvestsPerDay());
     }
 
+    /**
+     * Testing getMaxWateringPerDay method
+     */
     @Test
     public void testGetMaxWaterPerDay() {
         assertEquals(5, playerModel.getMaxWateringPerDay());
     }
 
+    /**
+     * Testing setMaxWateringPerDay method
+     */
     @Test
     public void testSetMaxWateringPerDay() {
         playerModel.setMaxWateringPerDay(69);
         assertEquals(69, playerModel.getMaxWateringPerDay());
     }
 
+    /**
+     * Testing getCurrentHarvestCounter method
+     */
     @Test
     public void testGetCurrentHarvestCounter() {
         assertEquals(0, playerModel.getCurrentHarvestCounter());
     }
 
+    /**
+     * Testing setCurrentHarvestCounter method
+     */
     @Test
     public void testSetCurrentHarvestCounter() {
         playerModel.setCurrentHarvestCounter(42);
         assertEquals(42, playerModel.getCurrentHarvestCounter());
     }
 
+    /**
+     * Testing getCurrentWaterCounter method
+     */
     @Test
     public void testGetCurrentWaterCounter() {
         assertEquals(0, playerModel.getCurrentWaterCounter());
     }
 
+    /**
+     * Testing setCurrentWaterCounter method
+     */
     @Test
     public void testSetCurrentWaterCounter() {
         playerModel.setCurrentWaterCounter(96);
