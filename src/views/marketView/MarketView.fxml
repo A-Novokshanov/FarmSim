@@ -284,7 +284,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
+      <Pane fx:id="pane6" layoutX="850.0" layoutY="373.0" prefHeight="250.0" prefWidth="200.0" style="-fx-border-color: black;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: Black;">
                <children>

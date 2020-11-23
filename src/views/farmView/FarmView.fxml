@@ -210,7 +210,7 @@
                         <Font size="73.0" />
                      </font>
                   </Text>
-                  <JFXButton layoutX="495.0" layoutY="503.0" onMouseClicked="#deleteGame" prefHeight="128.0" prefWidth="290.0" style="-fx-font-style: black; -fx-text-fill: black;" text="Return To Home Screen">
+                  <JFXButton fx:id="btnHome" layoutX="495.0" layoutY="503.0" onMouseClicked="#returnHomeScreen" prefHeight="128.0" prefWidth="290.0" style="-fx-font-style: black; -fx-text-fill: black; -fx-border-color: black;" text="Return To Home Screen">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>

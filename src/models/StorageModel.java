@@ -23,15 +23,15 @@ public class StorageModel {
      * structure of the cropInventory and initializes it with starter crops.
      */
     public StorageModel() {
-        cropInventory = new ArrayList<>(15);
-        cropInventory.add(new CropModel("Corn", 3, 100.00));
-        cropInventory.add(new CropModel("Potato", 3, 80.00));
-        cropInventory.add(new CropModel("Tomato", 3, 60.00));
-        CropModel cornPest = new CropModel("Corn with Pesticide", 0, 70.00);
+        cropInventory = new ArrayList<>();
+        cropInventory.add(new CropModel("Corn", 5, 100.00));
+        cropInventory.add(new CropModel("Potato", 5, 80.00));
+        cropInventory.add(new CropModel("Tomato", 5, 60.00));
+        CropModel cornPest = new CropModel("Corn with Pesticide", 2, 70.00);
         cornPest.setHasPesticide(true);
-        CropModel potatoPest = new CropModel("Potato with Pesticide", 0, 50.00);
+        CropModel potatoPest = new CropModel("Potato with Pesticide", 2, 50.00);
         potatoPest.setHasPesticide(true);
-        CropModel tomatoPest = new CropModel("Tomato with Pesticide", 0, 30.00);
+        CropModel tomatoPest = new CropModel("Tomato with Pesticide", 2, 30.00);
         tomatoPest.setHasPesticide(true);
         cropInventory.add(cornPest);
         cropInventory.add(potatoPest);
@@ -157,7 +157,7 @@ public class StorageModel {
      * @return the capacity.
      */
     public int getCapacity() {
-        return 15;
+        return 27;
     }
 
     /**

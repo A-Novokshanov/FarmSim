@@ -63,13 +63,13 @@ public class PlotViewModel {
                     newYield = 5;
                 }
                 while ((toAdd < newYield) && (player.getPlayer()
-                        .getUserStorage().getTotalCropAmount() < 15)) {
+                        .getUserStorage().getTotalCropAmount() < 27)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }
             } else {
                 while ((toAdd < 3) && (player.getPlayer()
-                        .getUserStorage().getTotalCropAmount() < 15)) {
+                        .getUserStorage().getTotalCropAmount() < 27)) {
                     storageVM.addToInventory(harvestedPlot.getCropInPlot(), 1);
                     toAdd++;
                 }

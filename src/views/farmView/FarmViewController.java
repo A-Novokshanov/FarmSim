@@ -59,6 +59,8 @@ public class FarmViewController {
     @FXML
     private Pane btnAddPlot;
     @FXML
+    private JFXButton btnHome;
+    @FXML
     private Text plotPrice;
     @FXML
     private GridPane gridPane;
@@ -147,6 +149,7 @@ public class FarmViewController {
     public void initSaveData(PlayerViewModel playerViewModel) {
         setUpData(playerViewModel);
         setUpPlots(plotViewModel.getPlotsFromDatabase());
+        checkGameOver();
     }
 
     public void setUpData(PlayerViewModel playerViewModel) {
@@ -198,6 +201,7 @@ public class FarmViewController {
 
     public void setUpPlots(List<PlotModel> listPlots) {
         this.plotsObservableList = FXCollections.observableArrayList();
+        emptyPlotCounter = 0;
         for (int i = 0; i < listPlots.size(); i++) {
             PlotTemplate plotTemplate = new PlotTemplate(listPlots.get(i),
             maturityView.getMaturityImage(listPlots.get(i)),
@@ -208,6 +212,9 @@ public class FarmViewController {
             Pane pane = createPane(plotsObservableList.get(i), i);
             int[] gridPosition = gridPositionDeque.remove();
             gridPane.add(pane, gridPosition[0], gridPosition[1]);
+            if (listPlots.get(i).getCropInPlot() == null) {
+                emptyPlotCounter++;
+            }
         }
         this.plotPrice.setText("$" + marketViewModel.calculatePlotPrice(plotsObservableList.size()));
     }
@@ -374,10 +381,6 @@ public class FarmViewController {
                 plotsObservableList.get(i).setFertilizerValue(doubleDigitString(
                         plotsObservableList.get(i).getPlotModel().getFertilizerLevel()));
                 maturityView.checkMaturity(plotsObservableList, i);
-                if (plotsObservableList.get(i).getPlotModel().getStage() == null
-                        || plotsObservableList.get(i).getPlotModel().getStage().equals("Withered")) {
-                    emptyPlotCounter++;
-                }
                 this.plotViewModel.updatePlotMaturity(plotsObservableList.get(i).getPlotModel(),
                         playerViewModel.getPlayer());
                 this.plotViewModel.updatePlotDaysDatabase(plotsObservableList.get(i).getPlotModel(),
@@ -389,6 +392,8 @@ public class FarmViewController {
                 plotImageView.setImage(plotsObservableList.get(i).getPlotImage());
                 pane.getChildren().set(5, plotsObservableList.get(i).getWaterValueText());
                 pane.getChildren().set(6, plotsObservableList.get(i).getFertilizerValueText());
+            } else {
+                emptyPlotCounter++;
             }
         }
     }
@@ -403,12 +408,14 @@ public class FarmViewController {
     public void plantCropFromInventory(MouseEvent mouseEvent) {
         JFXButton button = (JFXButton) mouseEvent.getSource();
         int cropNum = getIdString(button.getId());
-        plantView.plantCrop(plotsObservableList, plantingPlotNum,
+        boolean changed = plantView.plantCrop(plotsObservableList, plantingPlotNum,
                 playerViewModel.getPlayer().getUserStorage().getInventory().get(cropNum));
-        Pane pane = (Pane) gridPane.getChildren().get(plantingPlotNum);
-        pane.getChildren().get(0).setOnMouseClicked(this::harvestCrop);
-        pane.getChildren().set(5, plotsObservableList.get(plantingPlotNum).getWaterValueText());
-        toggleInventoryScreenVisibility();
+        if (changed) {
+            Pane pane = (Pane) gridPane.getChildren().get(plantingPlotNum);
+            pane.getChildren().get(0).setOnMouseClicked(this::harvestCrop);
+            pane.getChildren().set(5, plotsObservableList.get(plantingPlotNum).getWaterValueText());
+            toggleInventoryScreenVisibility();
+        }
     }
 
     public void harvestCrop(MouseEvent mouseEvent) {
@@ -603,9 +610,10 @@ public class FarmViewController {
         gameOverScreen.setVisible(true);
     }
 
-    public void deleteGame(MouseEvent mouseEvent) {
+    public void returnHomeScreen(MouseEvent mouseEvent) {
         try {
-            Stage stage = (Stage) mouseEvent.getSource();
+            JFXButton button = (JFXButton) mouseEvent.getSource();
+            Stage stage = (Stage) button.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("../homeScreenView/HomeScreenView.fxml"));
             stage.setScene(new Scene(loader.load()));
@@ -613,6 +621,20 @@ public class FarmViewController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void checkGameOver() {
+        if (emptyPlotCounter == plotViewModel.getPlotsFromDatabase().size()) {
+            if (playerViewModel.getPlayer().getUserStorage().getTotalCropAmount() <= 0) {
+                double basePrice = storageViewModel.userInventory().get(2).getCropValue();
+                String curDifficulty =
+                        playerViewModel.getPlayer().getPlayerSettings().getStartingDifficulty();
+                double calPrice = marketViewModel.calculateCropPrice(basePrice, curDifficulty);
+                if (playerViewModel.getPlayer().getUserCurrentMoney() < calPrice) {
+                    displayGameOverScreen();
+                }
+            }
         }
     }
 }

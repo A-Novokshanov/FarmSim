@@ -97,6 +97,8 @@ public class MarketViewController {
     @FXML
     private Text tierNum;
     @FXML
+    private Pane pane6;
+    @FXML
     private Pane pane6QuantityPane;
     @FXML
     private HBox pane6HBox;
@@ -432,6 +434,7 @@ public class MarketViewController {
         btnSwap.setText("Buy Crops");
         pane4Img.setImage(cornPesticideImg);
         pane5Img.setImage(potatoPesticideImg);
+        pane6.setVisible(true);
         pane6QuantityPane.setVisible(true);
         pane6Action.setVisible(true);
         pane6HBox.setVisible(true);
@@ -452,6 +455,7 @@ public class MarketViewController {
         btnSwap.setText("Sell Crops");
         pane4Img.setImage(fertilizerImg);
         pane5Img.setImage(pesticideImg);
+        pane6.setVisible(false);
         pane6QuantityPane.setVisible(false);
         pane6Action.setVisible(false);
         pane6HBox.setVisible(false);
