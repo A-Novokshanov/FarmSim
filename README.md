@@ -8,7 +8,12 @@ view their crops in their inventory view and sell their harvested crops in the m
 This game relies on the JFoenix library and SQLite JDBC. This will require you to download
 the JFoenix jar, which can be downloaded at https://github.com/jfoenixadmin/JFoenix
 
-Setup of the SQLite Database will require the jar file for:
+Add this JFoenix jar file as a library in the project structure.
+
+Setup of the SQLite Database will require the jar file for: https://github.com/xerial/sqlite-jdbc/releases
+Install "sqlite-jdbc-3.32.3.2.jar"
+
+Add this jar file as a library in project structure.
 
 1. In the Database tool window (View | Tool Windows | Database), click the Data Source Properties icon The Data Source Properties icon.
 
