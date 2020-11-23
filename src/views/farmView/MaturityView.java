@@ -2,7 +2,6 @@ package views.farmView;
 
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
 import models.PlotModel;
 import models.PlotTemplate;
 import viewmodels.PlayerViewModel;
@@ -37,28 +36,37 @@ public class MaturityView {
                 plotsObservableList.get(plotNum).setPlotImageView(witheredImg);
                 plotsObservableList.get(plotNum).getPlotModel().setStage("Withered");
                 plotViewModel.updatePlotStage(
-                        plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
+                        plotsObservableList.get(plotNum).
+                                getPlotModel(), playerViewModel.getPlayer());
                 plotsObservableList.get(plotNum).getWaterValueText().setVisible(false);
-            } else if (plotsObservableList.get(plotNum).getPlotModel().getDaysOld() < 2) {
+            } else if (plotsObservableList.get(plotNum).
+                    getPlotModel().getDaysOld() < 2) {
                 plotsObservableList.get(plotNum).setPlotImageView(seedImg);
                 plotsObservableList.get(plotNum).getPlotModel().setStage("Seed");
                 plotViewModel.updatePlotStage(
-                        plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
+                        plotsObservableList.get(plotNum).getPlotModel(),
+                        playerViewModel.getPlayer());
             } else if (plotsObservableList.get(plotNum).getPlotModel().getDaysOld() < 6) {
                 plotsObservableList.get(plotNum).setPlotImageView(immature1Img);
-                plotsObservableList.get(plotNum).getPlotModel().setStage("Immature 1");
+                plotsObservableList.get(plotNum).
+                        getPlotModel().setStage("Immature 1");
                 plotViewModel.updatePlotStage(
-                        plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
+                        plotsObservableList.get(plotNum).getPlotModel(),
+                        playerViewModel.getPlayer());
             } else if (plotsObservableList.get(plotNum).getPlotModel().getDaysOld() < 10) {
                 plotsObservableList.get(plotNum).setPlotImageView(immature2Img);
-                plotsObservableList.get(plotNum).getPlotModel().setStage("Immature 2");
+                plotsObservableList.get(plotNum).
+                        getPlotModel().setStage("Immature 2");
                 plotViewModel.updatePlotStage(
-                        plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
+                        plotsObservableList.get(plotNum).
+                                getPlotModel(), playerViewModel.getPlayer());
             } else {
                 plotsObservableList.get(plotNum).setPlotImageView(matureImg);
-                plotsObservableList.get(plotNum).getPlotModel().setStage("Mature");
+                plotsObservableList.get(plotNum).
+                        getPlotModel().setStage("Mature");
                 plotViewModel.updatePlotStage(
-                        plotsObservableList.get(plotNum).getPlotModel(), playerViewModel.getPlayer());
+                        plotsObservableList.get(plotNum).
+                                getPlotModel(), playerViewModel.getPlayer());
             }
         } else {
             plotsObservableList.get(plotNum).setPlotImageView(dirtImg);

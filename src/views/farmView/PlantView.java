@@ -27,8 +27,10 @@ public class PlantView {
         this.plotViewModel = plotViewModel;
     }
 
-    public boolean plantCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, CropModel crop) {
-        if (playerViewModel.getPlayer().getUserStorage().getInventory().get(cropNumber(crop)).getCropQuantity() > 2) {
+    public boolean plantCrop(ObservableList<PlotTemplate> plotsObservableList,
+                             int plotNum, CropModel crop) {
+        if (playerViewModel.getPlayer().getUserStorage().
+                getInventory().get(cropNumber(crop)).getCropQuantity() > 2) {
             this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
             plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
             plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
@@ -53,27 +55,27 @@ public class PlantView {
 
     private Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-            case "Corn":
-                return this.cornNameImg;
-            case "Potato":
-                return this.potatoNameImg;
-            case "Tomato":
-                return this.tomatoNameImg;
-            default:
-                return this.emptyNameImg;
+        case "Corn":
+            return this.cornNameImg;
+        case "Potato":
+            return this.potatoNameImg;
+        case "Tomato":
+            return this.tomatoNameImg;
+        default:
+            return this.emptyNameImg;
         }
     }
 
     private int cropNumber(CropModel cropModel) {
         switch (cropModel.getCropName()) {
-            case "Corn":
-                return 0;
-            case "Potato":
-                return 1;
-            case "Tomato":
-                return 2;
-            default:
-                return -1;
+        case "Corn":
+            return 0;
+        case "Potato":
+            return 1;
+        case "Tomato":
+            return 2;
+        default:
+            return -1;
         }
     }
 }

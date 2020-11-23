@@ -1,7 +1,6 @@
 package viewmodels;
 
 import models.CropModel;
-import models.PlayerModel;
 import models.PlotModel;
 import models.StorageModel;
 import services.player.PlayerInventoryService;
@@ -89,18 +88,18 @@ public class MarketViewModel {
     public double calculateCropPrice(double cropBasePrice, String difficulty) {
         double difficultyMod;
         switch (difficulty) {
-            case "Casual":
-                difficultyMod = 0.8;
-                break;
-            case "Normal":
-                difficultyMod = 1.0;
-                break;
-            case "Veteran":
-                difficultyMod = 1.2;
-                break;
-            default:
-                difficultyMod = 0.0;
-                break;
+        case "Casual":
+            difficultyMod = 0.8;
+            break;
+        case "Normal":
+            difficultyMod = 1.0;
+            break;
+        case "Veteran":
+            difficultyMod = 1.2;
+            break;
+        default:
+            difficultyMod = 0.0;
+            break;
         }
         double currentPrice = difficultyMod * cropBasePrice;
         return currentPrice;
@@ -143,8 +142,9 @@ public class MarketViewModel {
 
     /**
      * Purchases a plot and adds to the player's plot storage.
-     *
      * @param purchasedPlot The plot that was purchased.
+     * @param farmSize Current number of plots on farm.
+     * @return Whether plot was purchased or not.
      */
     public boolean purchasePlot(PlotModel purchasedPlot, int farmSize) {
         if (player.getPlayer().getUserCurrentMoney() >= calculatePlotPrice(farmSize)
@@ -154,7 +154,8 @@ public class MarketViewModel {
             plotViewModel.addPlotDatabase(purchasedPlot, player.getPlayer());
             this.player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney()
                     - calculatePlotPrice(farmSize));
-            this.playerInfoDatabase.updatePlayerMoney(-calculatePlotPrice(farmSize), this.player.getPlayer()
+            this.playerInfoDatabase.updatePlayerMoney(
+                    -calculatePlotPrice(farmSize), this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());
             return true;
         } else {
@@ -179,7 +180,8 @@ public class MarketViewModel {
      */
     public void purchaseTractor(int priceOfTractor) {
         if (player.getPlayer().getUserCurrentMoney() > priceOfTractor) {
-            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfTractor);
+            player.getPlayer().setUserCurrentMoney(
+                    player.getPlayer().getUserCurrentMoney() - priceOfTractor);
             player.increaseMaxHarvest();
             this.playerInfoDatabase.updatePlayerMoney(-priceOfTractor, this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());
@@ -193,7 +195,8 @@ public class MarketViewModel {
      */
     public void purchaseIrrigation(int priceOfIrrigation) {
         if (player.getPlayer().getUserCurrentMoney() > priceOfIrrigation) {
-            player.getPlayer().setUserCurrentMoney(player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
+            player.getPlayer().setUserCurrentMoney(
+                    player.getPlayer().getUserCurrentMoney() - priceOfIrrigation);
             player.increaseMaxWater();
             this.playerInfoDatabase.updatePlayerMoney(-priceOfIrrigation, this.player.getPlayer()
                     .getPlayerSettings().getPlayerName());

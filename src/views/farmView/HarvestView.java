@@ -2,8 +2,6 @@ package views.farmView;
 
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
-import models.PlotModel;
 import models.PlotTemplate;
 import viewmodels.PlayerViewModel;
 import viewmodels.PlotViewModel;
@@ -23,7 +21,8 @@ public class HarvestView {
     }
 
     public void harvestCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum) {
-        this.plotViewModel.harvestPlot(plotsObservableList.get(plotNum).getPlotModel(), this.playerViewModel);
+        this.plotViewModel.harvestPlot(plotsObservableList.get(plotNum).
+                getPlotModel(), this.playerViewModel);
         plotsObservableList.get(plotNum).getPlotModel().setWaterValue(0);
         plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
         plotsObservableList.get(plotNum).setPlotImageView(dirtImg);

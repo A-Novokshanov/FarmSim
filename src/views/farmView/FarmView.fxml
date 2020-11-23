@@ -17,6 +17,11 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dependencies/images/farm_background.png" />
+               </image>
+            </ImageView>
             <GridPane fx:id="gridPane" layoutX="105.0" layoutY="50.0" prefHeight="620.0" prefWidth="1100.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -45,7 +50,7 @@
                   <Font size="26.0" />
                </font>
             </Text>
-            <JFXButton fx:id="btnMarket" layoutX="40.0" layoutY="625.0" onMouseClicked="#goToMarket" prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: Black;" text="Market">
+            <JFXButton fx:id="btnMarket" layoutX="40.0" layoutY="625.0" onMouseClicked="#goToMarket" prefHeight="50.0" prefWidth="100.0" style="-fx-border-color: Black; -fx-background-color: gray;" text="Market">
                <font>
                   <Font size="20.0" />
                </font>
@@ -75,24 +80,24 @@
                   <Font size="21.0" />
                </font>
             </Text>
-            <Text layoutX="355.0" layoutY="689.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Water Left:" textAlignment="RIGHT">
+            <Text layoutX="334.0" layoutY="690.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Water Left:" textAlignment="RIGHT">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Text layoutX="738.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Harvest Left:" textAlignment="RIGHT">
+            <Text layoutX="738.0" layoutY="690.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Harvest Left:" textAlignment="RIGHT">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Text fx:id="txtDailyWaterCount" layoutX="515.0" layoutY="689.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="RIGHT">
+            <Text fx:id="txtDailyWaterCount" layoutX="505.0" layoutY="690.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="RIGHT">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Text fx:id="txtDailyHarvestCount" layoutX="913.0" layoutY="688.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="RIGHT">
+            <Text fx:id="txtDailyHarvestCount" layoutX="922.0" layoutY="690.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" textAlignment="RIGHT">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Text>
             <ImageView fitHeight="157.0" fitWidth="183.0" layoutX="575.0" layoutY="45.0" onMouseClicked="#toggleInventoryScreenVisibility" pickOnBounds="true" preserveRatio="true">
@@ -100,7 +105,7 @@
                   <Image url="@../../dependencies/images/85249200-stock-vector-barn-house-icon-or-sign-isolated-on-white-background-vector-illustration-of-red-farm-house-.jpg" />
                </image>
             </ImageView>
-            <Pane fx:id="btnAddPlot" layoutX="1090.0" layoutY="625.0" onMouseClicked="#addPlot" prefHeight="50.0" prefWidth="157.0" style="-fx-border-color: black;">
+            <Pane fx:id="btnAddPlot" layoutX="1090.0" layoutY="625.0" onMouseClicked="#addPlot" prefHeight="50.0" prefWidth="157.0" style="-fx-border-color: black; -fx-background-color: gray;">
                <children>
                   <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Plot:">
                      <font>
@@ -203,7 +208,7 @@
                   </Text>
                </children>
             </Pane>
-            <Pane fx:id="gameOverScreen" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: maroon; -fx-border-color: gold; -fx-border-width: 5; visibility: true;">
+            <Pane fx:id="gameOverScreen" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: maroon; -fx-border-color: gold; -fx-border-width: 5; visibility: false;">
                <children>
                   <Text layoutX="459.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over">
                      <font>

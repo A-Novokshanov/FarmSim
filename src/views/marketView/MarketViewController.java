@@ -135,7 +135,7 @@ public class MarketViewController {
                 pane4Price, pane5Price, pane6Price));
         listPaneQuantities = new ArrayList<>(
                 Arrays.asList(pane1Quantity, pane2Quantity, pane3Quantity,
-                pane4Quantity, pane5Quantity, pane6Quantity));
+                        pane4Quantity, pane5Quantity, pane6Quantity));
         for (int i = 0; i < 6; i++) {
             if (storage.userInventory().get(i) != null) {
                 setPrice(listPaneValues.get(i), i, listPanePrices.get(i));
@@ -226,7 +226,8 @@ public class MarketViewController {
 
     private void sellQuantity(Text value, int index, Text quantity) {
         if (index < 6) {
-            if (playerViewModel.getPlayer().getUserStorage().getInventory().get(index).getCropQuantity() > 0) {
+            if (playerViewModel.getPlayer().getUserStorage().
+                    getInventory().get(index).getCropQuantity() > 0) {
                 int num = Integer.parseInt(value.getText());
                 storageViewModel.sellItemFromInventory(
                         storageViewModel.userInventory().get(index), num);
@@ -236,21 +237,6 @@ public class MarketViewController {
             }
         }
     }
-
-//    public void upgradeWorker() {
-//        if (workerViewModel.checkPurchasableUpgrade(workerViewModel.upgradePrice(workerModel))) {
-//            setPrice(pane6Value, 5, pane6Price);
-//            workerViewModel.updateWorkerTypeDatabase(workerModel);
-//            workerViewModel.updateWorkerWageDatabase(workerModel);
-//        }
-//    }
-//
-//    public void fireWorker() {
-//        workerViewModel.workerLeaves(workerModel);
-//        setPrice(pane6Value, 5, pane6Price);
-//        workerViewModel.updateWorkerTypeDatabase(workerModel);
-//        workerViewModel.updateWorkerWageDatabase(workerModel);
-//    }
 
     public void buyTractors() {
         if (!(playerViewModel.getPlayer().getMaxHarvestsPerDay() == 19)) {

@@ -35,7 +35,8 @@ public class PlayerViewModelTestAdityaPratap {
         storageModel = new StorageModel();
         playerModel = new PlayerModel(1000.0, settingModel, storageModel);
         playerViewModel = new PlayerViewModel();
-        playerViewModel.setPlayerDetails(cropModel, seasonModel, "Aditya", storageModel, "Hard", 1000);
+        playerViewModel.setPlayerDetails(
+                cropModel, seasonModel, "Aditya", storageModel, "Hard", 1000);
     }
 
 

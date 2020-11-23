@@ -25,7 +25,8 @@ public class PlantView {
         this.plotViewModel = plotViewModel;
     }
 
-    public void plantCrop(ObservableList<PlotTemplate> plotsObservableList, int plotNum, CropModel crop) {
+    public void plantCrop(ObservableList<PlotTemplate> plotsObservableList,
+                          int plotNum, CropModel crop) {
         plotsObservableList.get(plotNum).getPlotModel().setWaterValue(3);
         plotsObservableList.get(plotNum).getPlotModel().setDaysOld(0);
         this.plotViewModel.plantPlot(plotsObservableList.get(plotNum).getPlotModel(), crop);
@@ -38,14 +39,14 @@ public class PlantView {
 
     private Image chooseCropImage(CropModel crop) {
         switch (crop.getCropName()) {
-            case "Corn":
-                return this.cornNameImg;
-            case "Potato":
-                return this.potatoNameImg;
-            case "Tomato":
-                return this.tomatoNameImg;
-            default:
-                return this.emptyNameImg;
+        case "Corn":
+            return this.cornNameImg;
+        case "Potato":
+            return this.potatoNameImg;
+        case "Tomato":
+            return this.tomatoNameImg;
+        default:
+            return this.emptyNameImg;
         }
     }
 }

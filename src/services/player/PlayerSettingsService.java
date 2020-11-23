@@ -16,12 +16,18 @@ public class PlayerSettingsService {
             "UPDATE player SET money = money + ? WHERE name = ?";
     private static final String UPDATE_PLAYER_DAY =
             "UPDATE player SET days = days + ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_HARVEST = "UPDATE player SET harvest = ? WHERE name = ? ";
-    private static final String UPDATE_PLAYER_WATER = "UPDATE player SET water = ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_MAX_HARVEST = "UPDATE player SET maxharvest = ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_MAX_WATER = "UPDATE player SET maxwater = ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_PEST = "UPDATE player SET pest = ? WHERE name = ?";
-    private static final String UPDATE_PLAYER_FERT = "UPDATE player SET fert = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_HARVEST =
+            "UPDATE player SET harvest = ? WHERE name = ? ";
+    private static final String UPDATE_PLAYER_WATER =
+            "UPDATE player SET water = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_MAX_HARVEST =
+            "UPDATE player SET maxharvest = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_MAX_WATER =
+            "UPDATE player SET maxwater = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_PEST =
+            "UPDATE player SET pest = ? WHERE name = ?";
+    private static final String UPDATE_PLAYER_FERT =
+            "UPDATE player SET fert = ? WHERE name = ?";
 
     private PreparedStatement preparedStatement;
 
